@@ -100,7 +100,7 @@
   inset: 0;
   z-index: 3;
   background:
-    linear-gradient(to top, rgb(20 38 30 / 0.8), rgb(20 38 30 / 0.12) 55%, transparent),
+    linear-gradient(to top, rgb(20 38 30 / 0.88), rgb(20 38 30 / 0.45) 38%, rgb(20 38 30 / 0.1) 70%, transparent),
     linear-gradient(to right, rgb(20 38 30 / 0.5), transparent 62%);
   pointer-events: none;
 }

@@ -1,0 +1,100 @@
+.button {
+  position: fixed;
+  right: max(var(--gutter), env(safe-area-inset-right));
+  bottom: calc(1.25rem + env(safe-area-inset-bottom));
+  z-index: 45; /* above content, below the navigation */
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: 0;
+  background: var(--color-forest);
+  color: var(--color-text-on-dark);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: var(--shadow-lift);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.92);
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    visibility 0s linear var(--dur-base),
+    background-color var(--dur-fast) var(--ease-out);
+}
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+/* Pages with a fixed mobile action bar: sit above it. */
+:global(body:has([data-mobile-bar])) .button {
+  bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+@media (min-width: 62rem) {
+  :global(body:has([data-mobile-bar])) .button {
+    bottom: calc(1.25rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (hover: hover) {
+  .button:hover {
+    background: var(--color-forest-deep);
+  }
+  .button:hover .arrow {
+    transform: translateY(-2px);
+  }
+}
+.button:active {
+  transform: scale(0.94);
+}
+.arrow {
+  position: relative;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.track,
+.progress {
+  fill: none;
+  stroke-width: 2;
+}
+.track {
+  stroke: rgb(244 238 227 / 0.22);
+}
+.progress {
+  stroke: var(--color-gold);
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .progress {
+      animation: fill linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+@keyframes fill {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transform: none;
+  }
+  .progress {
+    stroke-dashoffset: 0;
+  }
+}

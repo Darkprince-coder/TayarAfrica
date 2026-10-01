@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
+    // In development, replaced photos show up straight away instead of after the cache expires.
+    minimumCacheTTL: process.env.NODE_ENV === "production" ? 14400 : 1,
     qualities: [60, 75, 85],
   },
   async headers() {

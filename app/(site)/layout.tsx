@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { BackToTop } from "@/components/layout/BackToTop";
 import { Footer } from "@/components/layout/Footer";
 import { IntroLoader } from "@/components/layout/IntroLoader";
 import { IntroScript } from "@/components/layout/IntroScript";
@@ -15,6 +16,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
       <Navigation phone={contact.phone} whatsapp={contact.whatsapp} />
       <main id="main">{children}</main>
       <Footer />
+      <BackToTop />
     </>
   );
 }

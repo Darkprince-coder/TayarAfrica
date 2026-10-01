@@ -55,3 +55,9 @@ Full spec: `docs/TAYARI_Africa_Tours_Coding_Agent_Specification.docx`.
 - Submissions go through server actions (`app/(site)/plan-your-journey/actions.ts`, `app/(site)/contact/actions.ts`): re-validate, honeypot + minimum-time trap, per-client rate limit, idempotency key (double sends return the same reference), slug existence checks. Status and other privileged fields are never read from the browser.
 - Storage is the `InquiryStore` adapter (`lib/inquiries/store.ts`): in-memory MOCK now, Supabase later. Prototype switch: env `MOCK_INQUIRY_MODE=slow|error`.
 - Copy rule: the success state says "request received", never "booking confirmed".
+
+## Photography
+- Placeholder photos come from Pexels (see `docs/image-credits.md`); replace with owned/licensed images before launch. Team portraits are intentionally left as placeholders (no stock people as staff).
+- Originals supplied by the client earlier are backed up in `assets-src/user-supplied-originals/`.
+- After swapping a photo in dev, clear `.next/dev/cache/images` (Next caches the optimised version). `next.config.ts` keeps that cache short in development.
+- `scripts/review-sheets.mjs` builds contact sheets of everything in `public/images` for a quick visual review.

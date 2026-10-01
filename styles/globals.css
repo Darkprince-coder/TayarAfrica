@@ -80,6 +80,11 @@ ol[role="list"] {
   border-radius: 2px;
 }
 
+/* The skip link and BackToTop move focus here; it is a landmark, so no ring is needed. */
+main:focus {
+  outline: none;
+}
+
 ::selection {
   background: var(--color-ember);
   color: #fff;
