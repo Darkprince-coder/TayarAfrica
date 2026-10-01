@@ -1,0 +1,71 @@
+.section {
+  padding-block: var(--section-pad);
+  padding-inline: var(--gutter);
+}
+.flush {
+  padding-block: 0;
+}
+.bone {
+  background: var(--color-bone);
+  color: var(--color-text);
+}
+.sand {
+  background: var(--color-sand);
+  color: var(--color-text);
+}
+.forest {
+  background: var(--color-forest);
+  color: var(--color-text-on-dark);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+}
+.narrow {
+  max-width: var(--container-narrow);
+}
+
+.heading {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: clamp(var(--space-6), 4vw, var(--space-8));
+  max-width: 40rem;
+}
+.center {
+  margin-inline: auto;
+  text-align: center;
+  justify-items: center;
+}
+
+.eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-ember);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.eyebrow::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+}
+.forest .eyebrow {
+  color: var(--color-gold);
+}
+
+.title {
+  font-size: var(--text-3xl);
+}
+.lead {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+}
+.forest .lead {
+  color: var(--color-text-on-dark-muted);
+}

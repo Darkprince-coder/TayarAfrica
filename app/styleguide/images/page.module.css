@@ -1,0 +1,50 @@
+.page {
+  padding: var(--section-pad) var(--gutter);
+  max-width: var(--container);
+  margin-inline: auto;
+  display: grid;
+  gap: var(--space-5);
+}
+.title {
+  font-size: var(--text-3xl);
+}
+.summary {
+  color: var(--color-text-muted);
+  max-width: 46rem;
+}
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-sand-deep);
+  border-radius: var(--radius-md);
+  background: #fff;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  min-width: 52rem;
+}
+.table th,
+.table td {
+  text-align: left;
+  vertical-align: top;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-sand);
+}
+.table th {
+  background: var(--color-sand);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.table small {
+  color: var(--color-text-muted);
+}
+.ok {
+  color: var(--color-success);
+  font-weight: 700;
+}
+.missing {
+  color: var(--color-error);
+  font-weight: 700;
+}

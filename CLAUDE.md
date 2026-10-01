@@ -30,7 +30,7 @@ Full spec: `docs/TAYARI_Africa_Tours_Coding_Agent_Specification.docx`.
 ## Design system — "Savanna Dusk"
 - Palette: bone/sand surfaces, deep acacia forest, warm charcoal ink, terracotta "ember" for CTAs, soft gold for detail. Chosen independent of the placeholder logo.
 - Type: Fraunces (display) + Manrope (body). Large, confident, spacious headings.
-- Review page: `/styleguide` (noindex).
+- Review pages (noindex): `/styleguide` (design system + UI kit), `/styleguide/images` (live checklist of every expected image path and whether the file exists).
 
 ## Images
 - User supplies photography in `public/images/**`; code references fixed paths (see `public/images/README.md`). Always use `next/image` with meaningful `alt`.

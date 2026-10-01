@@ -1,0 +1,26 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background: var(--color-sand-deep);
+}
+.rounded {
+  border-radius: var(--radius-lg);
+}
+.image {
+  object-fit: cover;
+}
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(120% 90% at 30% 10%, rgb(201 161 90 / 0.18), transparent 60%),
+    linear-gradient(160deg, var(--color-forest) 0%, var(--color-forest-deep) 100%);
+}
+.mark {
+  width: min(30%, 7.5rem);
+  height: auto;
+  opacity: 0.35;
+}

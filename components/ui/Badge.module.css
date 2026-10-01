@@ -1,0 +1,24 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.neutral {
+  background: var(--color-sand);
+  color: var(--color-forest);
+}
+.sample {
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px dashed currentColor;
+}
+.dark {
+  background: rgb(20 38 30 / 0.7);
+  color: var(--color-text-on-dark);
+  backdrop-filter: blur(6px);
+}

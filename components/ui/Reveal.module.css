@@ -1,0 +1,17 @@
+.reveal {
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+
+.reveal[data-state="armed"] {
+  opacity: 0;
+}
+.up[data-state="armed"] {
+  transform: translate3d(0, 28px, 0);
+}
+
+.reveal[data-state="shown"] {
+  opacity: 1;
+  transform: none;
+}
