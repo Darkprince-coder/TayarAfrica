@@ -73,3 +73,9 @@
     gap: var(--space-9);
   }
 }
+
+.right {
+  display: grid;
+  gap: var(--space-7);
+  min-width: 0;
+}

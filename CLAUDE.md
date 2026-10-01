@@ -48,3 +48,10 @@ Full spec: `docs/TAYARI_Africa_Tours_Coding_Agent_Specification.docx`.
 - Use `Reveal` (up / fade / clip) and `RevealText` (word mask) for scroll reveals; `SectionHeading` already uses them. Stagger with `delay`. Easing tokens: `--ease-cine`, `--ease-wipe`.
 - Hero (`components/hero/HeroSlider`): 6s autoplay driven by the CSS progress animation, pauses on hover / keyboard focus / off-screen / pause button, a different image transition and text effect per slide.
 - Content alignment: gutters live inside `Container` (and footer/hero inners) so everything lines up with the nav.
+
+## Inquiry flow (Phase 5)
+- `/plan-your-journey` is a 3-step form (`components/booking/InquiryForm`): The trip, The details, About you. Deep links: `?package=<slug>` and `?destination=<slug>` prefill it (unknown slugs are ignored).
+- Validation lives in `lib/validation/` (Zod, one schema per step, reused by the server). Choice lists are in `lib/validation/options.ts`.
+- Submissions go through server actions (`app/(site)/plan-your-journey/actions.ts`, `app/(site)/contact/actions.ts`): re-validate, honeypot + minimum-time trap, per-client rate limit, idempotency key (double sends return the same reference), slug existence checks. Status and other privileged fields are never read from the browser.
+- Storage is the `InquiryStore` adapter (`lib/inquiries/store.ts`): in-memory MOCK now, Supabase later. Prototype switch: env `MOCK_INQUIRY_MODE=slow|error`.
+- Copy rule: the success state says "request received", never "booking confirmed".

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ContactForm } from "@/components/booking/ContactForm";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
@@ -65,16 +66,19 @@ export default async function ContactPage() {
               </Reveal>
             </div>
 
-            <Reveal delay={200} className={styles.panel}>
-              <h2 className={styles.panelTitle}>Planning a trip?</h2>
-              <p>
-                The trip request form asks for your dates, group size and what you would like to see. It is the quickest way for us to come back
-                with a useful plan.
-              </p>
-              <Button href="/plan-your-journey" size="lg" arrow>
-                Plan Your Journey
-              </Button>
-            </Reveal>
+            <div className={styles.right}>
+              <Reveal delay={200}>
+                <h2 className={styles.h2}>Send us a message</h2>
+                <ContactForm whatsapp={contact.whatsapp} />
+              </Reveal>
+              <Reveal delay={300} className={styles.panel}>
+                <h2 className={styles.panelTitle}>Planning a trip?</h2>
+                <p>The trip request form asks for your dates, group size and what you would like to see. It is the quickest way for us to come back with a useful plan.</p>
+                <Button href="/plan-your-journey" size="lg" arrow>
+                  Plan Your Journey
+                </Button>
+              </Reveal>
+            </div>
           </div>
         </Container>
       </Section>

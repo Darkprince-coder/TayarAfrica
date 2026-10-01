@@ -1,0 +1,24 @@
+.layout {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+.done {
+  max-width: 48rem;
+}
+/* The live summary sits beside the form on wide screens only; on phones the steps are short enough without it. */
+.aside {
+  display: none;
+}
+
+@media (min-width: 62rem) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 20rem;
+    gap: var(--space-8);
+  }
+  .aside {
+    display: block;
+    position: sticky;
+    top: calc(var(--nav-height) + 1.5rem);
+  }
+}

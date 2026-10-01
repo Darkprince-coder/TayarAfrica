@@ -1,0 +1,116 @@
+.panel {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: #fff;
+  border: 1px solid var(--color-sand-deep);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.check {
+  color: var(--color-success);
+}
+.ring {
+  stroke-dasharray: 208;
+  stroke-dashoffset: 208;
+  animation: draw 1.1s var(--ease-wipe) 0.1s forwards;
+}
+.tick {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: draw 0.7s var(--ease-cine) 0.9s forwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.title {
+  font-size: var(--text-3xl);
+  outline: none;
+}
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.08em 0 0.16em;
+  margin: -0.08em 0 -0.16em;
+}
+.inner {
+  display: inline-block;
+  animation: rise 1.2s var(--ease-cine) calc(0.7s + var(--i) * 0.1s) both;
+}
+@keyframes rise {
+  from {
+    transform: translate3d(0, 112%, 0) rotate(3deg);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.body {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 36rem;
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  animation: fade-up 1.1s var(--ease-cine) 1.3s both;
+}
+.ref {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  padding: 0.4rem 0.9rem;
+  background: var(--color-sand);
+  border-radius: var(--radius-pill);
+  animation: fade-up 1s var(--ease-cine) 1.5s both;
+}
+.ref strong {
+  color: var(--color-text);
+  letter-spacing: 0.08em;
+}
+.steps {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 36rem;
+  animation: fade-up 1s var(--ease-cine) 1.7s both;
+}
+.steps li {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  font-size: var(--text-sm);
+}
+.steps li span {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--color-forest);
+  color: var(--color-text-on-dark);
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  animation: fade-up 1s var(--ease-cine) 1.9s both;
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

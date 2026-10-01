@@ -134,6 +134,8 @@ export function ChoiceChips({
   hint,
   error,
   defaultValue = [],
+  value,
+  onChange,
 }: {
   legend: string;
   name: string;
@@ -141,7 +143,11 @@ export function ChoiceChips({
   options: { value: string; label: string }[];
   hint?: string;
   error?: string;
+  /** Uncontrolled starting selection (demos). */
   defaultValue?: string[];
+  /** Controlled selection: pass with onChange. */
+  value?: string[];
+  onChange?: (next: string[]) => void;
 }) {
   const id = useId();
   const describedBy = [hint ? `${id}-hint` : null, error ? `${id}-error` : null].filter(Boolean).join(" ") || undefined;
@@ -152,7 +158,19 @@ export function ChoiceChips({
       <div className={styles.chips}>
         {options.map((o) => (
           <label key={o.value} className={styles.chip}>
-            <input type={type} name={name} value={o.value} defaultChecked={defaultValue.includes(o.value)} className={styles.chipInput} />
+            <input
+              type={type}
+              name={name}
+              value={o.value}
+              className={styles.chipInput}
+              {...(value
+                ? {
+                    checked: value.includes(o.value),
+                    onChange: () =>
+                      onChange?.(type === "radio" ? [o.value] : value.includes(o.value) ? value.filter((v) => v !== o.value) : [...value, o.value]),
+                  }
+                : { defaultChecked: defaultValue.includes(o.value) })}
+            />
             <span className={styles.chipLabel}>{o.label}</span>
           </label>
         ))}
@@ -175,11 +193,15 @@ export function CheckboxField({
   name,
   error,
   required,
+  checked,
+  onChange,
   children,
 }: {
   name: string;
   error?: string;
   required?: boolean;
+  checked?: boolean;
+  onChange?: (checked: boolean) => void;
   children: ReactNode;
 }) {
   const id = useId();
@@ -192,6 +214,7 @@ export function CheckboxField({
           required={required}
           aria-invalid={Boolean(error) || undefined}
           aria-describedby={error ? `${id}-error` : undefined}
+          {...(checked !== undefined ? { checked, onChange: (e: React.ChangeEvent<HTMLInputElement>) => onChange?.(e.target.checked) } : {})}
         />
         <span>{children}</span>
       </label>
