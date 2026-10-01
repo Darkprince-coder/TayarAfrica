@@ -1,0 +1,83 @@
+/*
+ * TAYARI design tokens — "Savanna Dusk".
+ * Deep acacia green + warm sand + charcoal, with a terracotta "ember" accent for action
+ * and a soft gold for fine detail. Independent of the (placeholder) logo colours so a
+ * logo change never forces a redesign: only these variables need to move.
+ */
+:root {
+  /* Surfaces */
+  --color-bone: #faf6ee; /* page background, lightest */
+  --color-sand: #efe6d6; /* alternate section background */
+  --color-sand-deep: #e2d5bd; /* borders / dividers on sand */
+  --color-forest: #1f3a2e; /* primary dark surface */
+  --color-forest-deep: #14261e; /* footer, loader, hero scrim */
+  --color-ink: #1b1a17; /* primary text (warm charcoal) */
+
+  /* Text */
+  --color-text: var(--color-ink);
+  --color-text-muted: #5e594f; /* >= 6:1 on bone */
+  --color-text-on-dark: #f4eee3;
+  --color-text-on-dark-muted: #b9c2b4;
+
+  /* Accents */
+  --color-ember: #b4501e; /* primary CTA — white text ~5:1 */
+  --color-ember-hover: #983f13;
+  --color-gold: #c9a15a; /* fine detail on dark surfaces */
+  --color-sage: #7d9380; /* quiet secondary on dark */
+
+  /* Feedback */
+  --color-success: #2f6b46;
+  --color-error: #a63227;
+  --color-focus: #d98a2b;
+
+  /* Typography */
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-body: var(--font-manrope), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --text-xs: clamp(0.75rem, 0.73rem + 0.1vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.85rem + 0.12vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --text-lg: clamp(1.125rem, 1.07rem + 0.28vw, 1.3125rem);
+  --text-xl: clamp(1.375rem, 1.25rem + 0.6vw, 1.75rem);
+  --text-2xl: clamp(1.75rem, 1.5rem + 1.2vw, 2.5rem);
+  --text-3xl: clamp(2.25rem, 1.8rem + 2.2vw, 3.75rem);
+  --text-hero: clamp(2.75rem, 1.9rem + 4.4vw, 6.5rem);
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+  --section-pad: clamp(4.5rem, 3rem + 7vw, 9rem);
+  --gutter: clamp(1.25rem, 0.8rem + 2.2vw, 3rem);
+  --container: 80rem;
+  --container-narrow: 46rem;
+
+  /* Shape & depth */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 999px;
+  --shadow-soft: 0 10px 30px -12px rgb(20 38 30 / 0.28);
+  --shadow-lift: 0 24px 60px -24px rgb(20 38 30 / 0.45);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur-base: 420ms;
+  --dur-slow: 900ms;
+
+  /* Layout */
+  --nav-height: 4.5rem;
+  --z-nav: 50;
+  --z-menu: 60;
+  --z-loader: 100;
+
+  color-scheme: light;
+}
