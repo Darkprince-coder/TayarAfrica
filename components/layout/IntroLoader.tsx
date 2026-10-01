@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Motif } from "@/components/ui/Motif";
 import { INTRO_END_EVENT, INTRO_HANDOFF_MS, INTRO_STORAGE_KEY } from "@/lib/motion-gate";
 import styles from "./IntroLoader.module.css";
 
@@ -41,6 +42,9 @@ export function IntroLoader() {
       <div className={styles.stack}>
         <Image src="/brand/logo-emblem-light.png" alt="" width={240} height={235} priority className={styles.emblem} />
         <p className={styles.word}>TAYARI Africa Tours</p>
+        <div className={styles.motif}>
+          <Motif size={12} />
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { Motif } from "@/components/ui/Motif";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
 import styles from "./PageHeader.module.css";
 
@@ -7,6 +8,9 @@ export function PageHeader({ eyebrow, title, lead }: { eyebrow?: string; title: 
     <Section tone="sand" className={styles.header} labelledBy="page-title">
       <Container>
         <SectionHeading as="h1" id="page-title" eyebrow={eyebrow} title={title} lead={lead} />
+        <div className={styles.ornament}>
+          <Motif size={12} />
+        </div>
       </Container>
     </Section>
   );

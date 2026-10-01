@@ -31,6 +31,23 @@
   animation: rise 700ms var(--ease-out) 600ms both;
 }
 
+.motif {
+  width: 8rem;
+  color: var(--color-gold);
+  opacity: 0.75;
+  animation: motif-in 900ms var(--ease-cine) 800ms both;
+}
+@keyframes motif-in {
+  from {
+    clip-path: inset(0 50% 0 50%);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 0.75;
+  }
+}
+
 @keyframes reveal {
   from {
     clip-path: circle(0% at 50% 50%);

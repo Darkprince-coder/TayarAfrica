@@ -20,7 +20,7 @@ export default async function ServicesPage() {
     <>
       <PageHeader
         eyebrow="Services"
-        title="What we arrange for you"
+        title="What we *arrange* for you"
         lead="TAYARI is a consultancy. We plan the trip and coordinate the people who deliver each part of it."
       />
       <Section tone="bone">

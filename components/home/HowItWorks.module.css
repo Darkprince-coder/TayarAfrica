@@ -12,11 +12,15 @@
   align-content: start;
 }
 
+/* Oversized outlined numerals: an editorial counterpoint to the solid headings. */
 .number {
   font-family: var(--font-display);
-  font-size: clamp(3.5rem, 2.5rem + 4vw, 6rem);
-  line-height: 1;
-  color: var(--color-ember);
+  font-size: clamp(5rem, 3rem + 8vw, 9.5rem);
+  line-height: 0.9;
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-ember);
+  letter-spacing: -0.04em;
 }
 .title {
   font-size: var(--text-xl);

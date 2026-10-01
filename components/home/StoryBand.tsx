@@ -35,7 +35,7 @@ export function StoryBand({ image }: { image: ImageRef }) {
             <Reveal variant="fade">
               <p className={styles.eyebrow}>Our approach</p>
             </Reveal>
-            <RevealText as="h2" id="story-title" className={styles.title} text="A good trip is mostly good planning." delay={120} />
+            <RevealText as="h2" id="story-title" className={styles.title} text="A good trip is mostly *good planning*." delay={120} />
             <Reveal delay={400}>
               <p className={styles.copy}>
                 The best moments on a trip usually come from small decisions made well in advance: which side of the park to stay on, when to

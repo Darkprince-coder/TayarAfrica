@@ -3,6 +3,7 @@ import { getSiteSettings } from "@/lib/content";
 import { flatNavLinks, legalLinks, primaryCta } from "@/lib/navigation";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui/Button";
+import { Motif } from "@/components/ui/Motif";
 import styles from "./Footer.module.css";
 
 export async function Footer() {
@@ -11,6 +12,9 @@ export async function Footer() {
 
   return (
     <footer className={styles.footer}>
+      <div className={styles.band}>
+        <Motif size={16} />
+      </div>
       <div className={styles.inner}>
         <div className={styles.brand}>
           <Logo tone="light" />

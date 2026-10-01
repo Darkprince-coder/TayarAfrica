@@ -98,3 +98,12 @@
     grid-column: auto;
   }
 }
+
+/* TAYARI pattern across the top of the footer. */
+.band {
+  max-width: var(--container);
+  margin: calc(clamp(3.5rem, 2rem + 6vw, 6rem) * -0.5) auto clamp(2.5rem, 2rem + 3vw, 4rem);
+  padding-inline: var(--gutter);
+  color: var(--color-gold);
+  opacity: 0.45;
+}

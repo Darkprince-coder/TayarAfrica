@@ -20,7 +20,7 @@ export default async function PlanYourJourneyPage({ searchParams }: Props) {
     <>
       <PageHeader
         eyebrow="Plan Your Journey"
-        title="Tell us about your trip"
+        title="Tell us about your *trip*"
         lead="Three short steps, about two minutes. This is a request, not a booking: nothing is confirmed until we agree a plan with you."
       />
       <Section tone="bone" labelledBy="page-title">

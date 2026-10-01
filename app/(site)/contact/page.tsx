@@ -27,7 +27,7 @@ export default async function ContactPage() {
     <>
       <PageHeader
         eyebrow="Contact"
-        title="Talk to us"
+        title="Talk to *us*"
         lead="Ask a question, or tell us about the trip you have in mind. A person reads every message."
       />
       <Section tone="bone" labelledBy="reach-title">

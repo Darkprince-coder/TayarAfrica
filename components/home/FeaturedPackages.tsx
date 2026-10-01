@@ -11,9 +11,10 @@ export function FeaturedPackages({ packages }: { packages: TravelPackage[] }) {
       <Container>
         <SectionHeading
           id="packages-title"
-          eyebrow="Experiences"
-          title="Trips we can plan for you"
+          eyebrow="02 / Experiences"
+          title="Trips we can *plan* for you"
           lead="Every trip below is a starting point. Dates, stays and pace can all be changed to suit you."
+          align="center"
         />
         <ul role="list" className={styles.grid}>
           {packages.slice(0, 3).map((p, i) => (

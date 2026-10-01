@@ -19,7 +19,7 @@ export default async function TeamPage() {
     <>
       <PageHeader
         eyebrow="The team"
-        title="The people behind your trip"
+        title="The people behind *your trip*"
         lead="When you send a request, one of us reads it, replies and stays in touch until you are home."
       />
       <Section tone="bone">

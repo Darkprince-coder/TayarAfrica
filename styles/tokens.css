@@ -23,7 +23,9 @@
   --color-ember: #b4501e; /* primary CTA — white text ~5:1 */
   --color-ember-hover: #983f13;
   --color-gold: #c9a15a; /* fine detail on dark surfaces */
+  --color-gold-bright: #ecd08f; /* gold for italic accents over photography */
   --color-sage: #7d9380; /* quiet secondary on dark */
+  --accent: var(--color-ember); /* italic accent words; sections on dark surfaces switch to gold */
 
   /* Feedback */
   --color-success: #2f6b46;
@@ -42,6 +44,8 @@
   --text-2xl: clamp(1.75rem, 1.5rem + 1.2vw, 2.5rem);
   --text-3xl: clamp(2.25rem, 1.8rem + 2.2vw, 3.75rem);
   --text-hero: clamp(2.75rem, 1.9rem + 4.4vw, 6.5rem);
+  /* Statement size: for the one big sentence in a section. */
+  --text-display: clamp(2.5rem, 1.5rem + 3.9vw, 5.25rem);
 
   /* Spacing */
   --space-1: 0.25rem;

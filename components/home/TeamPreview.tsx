@@ -13,7 +13,7 @@ export function TeamPreview({ team }: { team: TeamMember[] }) {
           <SectionHeading
             id="team-title"
             eyebrow="The team"
-            title="The people planning your trip"
+            title="The people planning *your trip*"
             lead="When you write to TAYARI, one of these people reads it."
           />
           <Reveal delay={300}>

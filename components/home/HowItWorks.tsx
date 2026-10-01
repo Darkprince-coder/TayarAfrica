@@ -21,7 +21,7 @@ export function HowItWorks({ id = "how-it-works" }: { id?: string }) {
   return (
     <Section tone="sand" labelledBy="process-title" id={id}>
       <Container>
-        <SectionHeading id="process-title" eyebrow="How it works" title="Three steps from idea to departure" />
+        <SectionHeading id="process-title" eyebrow="03 / How it works" title="Three steps from *idea* to departure" />
         <Reveal as="div" variant="fade" className={styles.steps}>
           <span className={styles.line} aria-hidden="true" />
           <ol role="list" className={styles.list}>

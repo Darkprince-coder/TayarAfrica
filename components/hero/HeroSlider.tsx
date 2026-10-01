@@ -6,6 +6,7 @@ import { ImageFrame } from "@/components/ui/ImageFrame";
 import { cn } from "@/lib/cn";
 import type { HeroSlide } from "@/lib/content/types";
 import { afterIntro } from "@/lib/motion-gate";
+import { parseAccents, plain } from "@/lib/text";
 import styles from "./HeroSlider.module.css";
 
 /** Progress-line duration. The line starts 1s after a slide arrives (letting the words land), so a slide stays about 6s. */
@@ -129,10 +130,10 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                 Kenya
               </p>
               <p className={styles.title}>
-                {slide.title.split(" ").map((word, w) => (
-                  <span key={`${word}-${w}`} className={styles.word}>
+                {parseAccents(slide.title).map((word, w) => (
+                  <span key={`${word.text}-${w}`} className={styles.word}>
                     <span className={styles.inner} style={{ "--i": w } as CSSProperties}>
-                      {word}
+                      {word.accent ? <em>{word.text}</em> : word.text}
                     </span>
                   </span>
                 ))}
@@ -162,7 +163,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                 <button
                   type="button"
                   className={cn(styles.dot, i === view.current && styles.dotActive)}
-                  aria-label={`Show slide ${i + 1}: ${slide.title}`}
+                  aria-label={`Show slide ${i + 1}: ${plain(slide.title)}`}
                   aria-current={i === view.current}
                   onClick={() => goTo(i)}
                 >

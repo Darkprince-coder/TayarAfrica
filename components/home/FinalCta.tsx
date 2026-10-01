@@ -9,14 +9,14 @@ import styles from "./FinalCta.module.css";
 /** Closing call to action: big words on forest green, with a tall photograph beside them (no text over the picture). */
 export function FinalCta({ image, whatsapp }: { image: ImageRef; whatsapp: string }) {
   return (
-    <Section tone="forest" labelledBy="final-cta-title" className={styles.section}>
+    <Section tone="forest" edge labelledBy="final-cta-title" className={styles.section}>
       <Container>
         <div className={styles.grid}>
           <div className={styles.copy}>
             <Reveal variant="fade">
               <p className={styles.eyebrow}>Ready when you are</p>
             </Reveal>
-            <RevealText as="h2" id="final-cta-title" className={styles.title} text="Tell us where you want to go." delay={120} />
+            <RevealText as="h2" id="final-cta-title" className={styles.title} text="Tell us where you *want to go*." delay={120} />
             <Reveal delay={450}>
               <p className={styles.text}>It takes a couple of minutes. Share your dates and ideas, and a TAYARI consultant will reply to plan the rest with you.</p>
             </Reveal>

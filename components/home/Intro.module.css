@@ -1,26 +1,22 @@
-.grid {
+.stage {
   display: grid;
-  gap: var(--space-7);
-  align-items: end;
+  justify-items: center;
+  gap: var(--space-6);
+  text-align: center;
+}
+.ornament {
+  width: 7.5rem;
+  color: var(--color-ember);
+  opacity: 0.75;
 }
 .statement {
-  font-size: var(--text-3xl);
-  max-width: 20ch;
-}
-.side {
-  display: grid;
-  gap: var(--space-5);
-  justify-items: start;
-  max-width: 28rem;
+  font-size: var(--text-display);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  max-width: 19ch;
 }
 .copy {
   font-size: var(--text-lg);
   color: var(--color-text-muted);
-}
-
-@media (min-width: 62rem) {
-  .grid {
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-    gap: var(--space-9);
-  }
+  max-width: 36rem;
 }

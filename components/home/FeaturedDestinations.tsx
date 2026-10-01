@@ -18,9 +18,15 @@ export function FeaturedDestinations({ destinations }: { destinations: Destinati
       <Container>
         <SectionHeading
           id="destinations-title"
-          eyebrow="Destinations"
-          title="Where in Kenya do you want to be?"
+          eyebrow="01 / Destinations"
+          title="Where in *Kenya* do you want to be?"
           lead="From open savannah to the Swahili coast. Start with a place, or tell us what you want to feel and we will suggest one."
+          align="split"
+          action={
+            <Button href="/destinations" variant="secondary" arrow>
+              See all destinations
+            </Button>
+          }
         />
         <ul role="list" className={styles.grid}>
           {destinations.slice(0, 4).map((destination, i) => (
@@ -29,13 +35,6 @@ export function FeaturedDestinations({ destinations }: { destinations: Destinati
             </Reveal>
           ))}
         </ul>
-        <div className={styles.more}>
-          <Reveal delay={200}>
-            <Button href="/destinations" variant="secondary" arrow>
-              See all destinations
-            </Button>
-          </Reveal>
-        </div>
       </Container>
     </Section>
   );

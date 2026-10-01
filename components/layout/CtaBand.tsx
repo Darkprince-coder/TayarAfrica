@@ -14,7 +14,7 @@ type Props = {
 /** Closing call to action for inner pages. */
 export function CtaBand({ title, text, primary, secondary }: Props) {
   return (
-    <Section tone="forest" labelledBy="cta-band-title" className={styles.band}>
+    <Section tone="forest" edge labelledBy="cta-band-title" className={styles.band}>
       <Container>
         <div className={styles.inner}>
           <RevealText as="h2" id="cta-band-title" text={title} className={styles.title} />

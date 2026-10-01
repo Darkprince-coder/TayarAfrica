@@ -6,3 +6,9 @@
   font-size: var(--text-hero);
   line-height: 1.02;
 }
+
+.ornament {
+  width: 8rem;
+  color: var(--color-ember);
+  opacity: 0.6;
+}

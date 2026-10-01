@@ -3,6 +3,7 @@
 import { Fragment, useEffect, useRef, type CSSProperties } from "react";
 import { cn } from "@/lib/cn";
 import { afterIntro } from "@/lib/motion-gate";
+import { parseAccents } from "@/lib/text";
 import styles from "./RevealText.module.css";
 
 type RevealTextProps = {
@@ -21,7 +22,7 @@ type RevealTextProps = {
  */
 export function RevealText({ text, as: Tag = "h2", id, className, delay = 0 }: RevealTextProps) {
   const ref = useRef<HTMLElement | null>(null);
-  const words = text.split(" ");
+  const words = parseAccents(text);
 
   useEffect(() => {
     const el = ref.current;
@@ -48,10 +49,10 @@ export function RevealText({ text, as: Tag = "h2", id, className, delay = 0 }: R
   return (
     <Tag ref={ref as never} id={id} className={cn(styles.text, className)} style={{ "--delay": `${delay}ms` } as CSSProperties}>
       {words.map((word, i) => (
-        <Fragment key={`${word}-${i}`}>
+        <Fragment key={`${word.text}-${i}`}>
           <span className={styles.word}>
             <span className={styles.inner} style={{ "--i": i } as CSSProperties}>
-              {word}
+              {word.accent ? <em>{word.text}</em> : word.text}
             </span>
           </span>
           {i < words.length - 1 && " "}

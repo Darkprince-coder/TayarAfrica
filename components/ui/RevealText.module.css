@@ -7,8 +7,9 @@
   overflow: hidden;
   vertical-align: top;
   /* Room for ascenders and descenders so the mask never clips letters. */
-  padding: 0.08em 0 0.16em;
-  margin: -0.08em 0 -0.16em;
+  /* The right-hand padding gives italic letters room to overhang without being clipped by the mask. */
+  padding: 0.08em 0.14em 0.16em 0;
+  margin: -0.08em -0.14em -0.16em 0;
 }
 
 .inner {
@@ -21,4 +22,11 @@
 :global(html[data-motion]) .text:not([data-state="shown"]) .inner {
   transform: translate3d(0, 112%, 0) rotate(3deg);
   opacity: 0;
+}
+
+/* Accent words: italic, in the section accent colour (ember on light, gold on dark). */
+.inner em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent, var(--color-ember));
 }

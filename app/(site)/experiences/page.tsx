@@ -20,7 +20,7 @@ export default async function ExperiencesPage() {
     <>
       <PageHeader
         eyebrow="Experiences"
-        title="Trips we can plan for you"
+        title="Trips we can *plan* for you"
         lead="Each one is a starting point. Change the dates, add a beach stay or take something out, and we will adjust the plan."
       />
       <Section tone="bone">

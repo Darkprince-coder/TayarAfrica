@@ -24,13 +24,13 @@ const reasons = [
 
 export function WhyTayari() {
   return (
-    <Section tone="forest" labelledBy="why-title">
+    <Section tone="forest" edge labelledBy="why-title">
       <Container>
         <div className={styles.grid}>
           <SectionHeading
             id="why-title"
-            eyebrow="Why TAYARI"
-            title="A trip is easier when one team looks after it"
+            eyebrow="04 / Why TAYARI"
+            title="A trip is easier when *one team* looks after it"
             lead="Kenya has a lot to offer and a lot of moving parts. We take care of the parts so you can enjoy the place."
           />
           <ul role="list" className={styles.list}>

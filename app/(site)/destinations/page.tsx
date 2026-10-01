@@ -20,7 +20,7 @@ export default async function DestinationsPage() {
     <>
       <PageHeader
         eyebrow="Destinations"
-        title="Where would you like to go?"
+        title="Where would you like to *go*?"
         lead="Seven places to start from. Each page covers what the place is like, the best time to visit and trips we can plan there."
       />
       <Section tone="bone">

@@ -23,7 +23,7 @@ export default async function AboutPage() {
     <>
       <PageHeader
         eyebrow="About TAYARI"
-        title="A travel consultancy for Kenya"
+        title="A travel consultancy for *Kenya*"
         lead="We help people turn a rough idea of a Kenya trip into a plan they can book with confidence."
       />
 

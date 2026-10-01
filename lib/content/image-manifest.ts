@@ -1,5 +1,6 @@
 import "server-only";
 import { getDestinations, getHeroSlides, getPackages, getSiteSettings, getTeam } from "./index";
+import { plain } from "@/lib/text";
 import type { ImageRef, ImageRole } from "./types";
 
 export const imageSpecs: Record<ImageRole, { label: string; size: string; note: string; minWidth: number }> = {
@@ -33,7 +34,7 @@ export async function getImageManifest(): Promise<ManifestEntry[]> {
     getSiteSettings(),
   ]);
 
-  hero.forEach((s) => add(s.image, `Hero: ${s.title}`));
+  hero.forEach((s) => add(s.image, `Hero: ${plain(s.title)}`));
   destinations.forEach((d) => {
     add(d.cover, `Destination: ${d.name}`);
     d.gallery.forEach((g) => add(g, `Destination: ${d.name}`));

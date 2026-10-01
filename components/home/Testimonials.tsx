@@ -10,7 +10,7 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
   return (
     <Section tone="sand" labelledBy="voices-title">
       <Container>
-        <SectionHeading id="voices-title" eyebrow="Traveller voices" title="What guests will say about their trip" />
+        <SectionHeading id="voices-title" eyebrow="Traveller voices" title="What guests will say about their *trip*" />
         {hasSample && (
           <Reveal variant="fade">
             <p className={styles.notice}>
