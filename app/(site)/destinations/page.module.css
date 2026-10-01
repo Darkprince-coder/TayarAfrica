@@ -1,0 +1,27 @@
+.grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: 1fr;
+}
+.cell {
+  min-height: 24rem;
+}
+
+@media (min-width: 40rem) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 62rem) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+  .cell {
+    min-height: 28rem;
+  }
+  /* Break the rhythm: the first card leads across two columns. */
+  .cell:first-child {
+    grid-column: span 2;
+  }
+}

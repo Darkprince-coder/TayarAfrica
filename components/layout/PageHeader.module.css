@@ -1,0 +1,8 @@
+.header {
+  padding-top: calc(var(--nav-height) + clamp(2.5rem, 6vw, 5rem));
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+.header h1 {
+  font-size: var(--text-hero);
+  line-height: 1.02;
+}

@@ -69,10 +69,10 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const heroSlides: HeroSlide[] = [
-  { id: "hero-1", image: img("hero/hero-01.jpg", "Golden-hour savannah with acacia trees in Kenya", "hero"), title: "Africa, arranged around you.", subtitle: "Tell us what you want to see. We will plan the rest.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", order: 1, active: true },
-  { id: "hero-2", image: img("hero/hero-02.jpg", "Elephants walking toward Mount Kilimanjaro", "hero"), title: "Wake up to elephants and Kilimanjaro.", subtitle: "Safaris from the Maasai Mara to Amboseli.", ctaText: "Explore Experiences", ctaHref: "/experiences", order: 2, active: true },
-  { id: "hero-3", image: img("hero/hero-03.jpg", "Dhow sailing on turquoise water off the Kenyan coast", "hero"), title: "Then slow down by the ocean.", subtitle: "White sand, warm water and the Swahili coast.", ctaText: "Discover Destinations", ctaHref: "/destinations", order: 3, active: true },
-  { id: "hero-4", image: img("hero/hero-04.jpg", "Lion resting on the Maasai Mara plains at sunrise", "hero"), title: "See the Mara at first light.", subtitle: "Early game drives with a driver-guide who knows the plains.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", order: 4, active: true },
+  { id: "hero-1", image: img("hero/hero-01.jpg", "Two elephants grazing on a wide green Kenyan savannah", "hero", { desktop: "50% 78%", mobile: "28% 80%" }), title: "Africa, arranged around you.", subtitle: "Tell us what you want to see. We will plan the rest.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", order: 1, active: true },
+  { id: "hero-2", image: img("hero/hero-02.jpg", "An elephant walking through golden grass with Mount Kilimanjaro behind", "hero", { desktop: "50% 70%", mobile: "52% 70%" }), title: "Wake up to elephants and Kilimanjaro.", subtitle: "Safaris from the Maasai Mara to Amboseli.", ctaText: "Explore Experiences", ctaHref: "/experiences", order: 2, active: true },
+  { id: "hero-3", image: img("hero/hero-03.jpg", "A wooden dhow on turquoise water beside a white-sand beach with palms", "hero", { desktop: "50% 55%", mobile: "64% 60%" }), title: "Then slow down by the ocean.", subtitle: "White sand, warm water and the Swahili coast.", ctaText: "Discover Destinations", ctaHref: "/destinations", order: 3, active: true },
+  { id: "hero-4", image: img("hero/hero-04.jpg", "Lionesses and a cub resting in golden grass at sunrise", "hero", { desktop: "42% 50%", mobile: "42% 50%" }), title: "See the Mara at first light.", subtitle: "Early game drives with a driver-guide who knows the plains.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", order: 4, active: true },
 ];
 
 /** PLACEHOLDER social links — replace with real profiles. */

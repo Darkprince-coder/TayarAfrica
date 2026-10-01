@@ -9,8 +9,8 @@ import styles from "./Parallax.module.css";
  * overflow: hidden, since the child is slightly scaled up to avoid exposing edges.
  */
 export function Parallax({
-  shift = "7%",
-  scale = 1.18,
+  shift = "5%",
+  scale = 1.12,
   className,
   children,
 }: {

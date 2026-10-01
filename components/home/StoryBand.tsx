@@ -11,8 +11,8 @@ export function StoryBand({ image }: { image: ImageRef }) {
   return (
     <section className={styles.band} aria-labelledby="story-title">
       <div className={styles.media}>
-        <Parallax shift="9%">
-          <ImageFrame src={image.src} alt={image.alt} sizes="100vw" className={styles.frame} />
+        <Parallax>
+          <ImageFrame src={image.src} focus={image.focus} focusMobile={image.focusMobile} alt={image.alt} sizes="100vw" className={styles.frame} />
         </Parallax>
       </div>
       <div className={styles.scrim} />

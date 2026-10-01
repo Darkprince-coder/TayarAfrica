@@ -17,9 +17,9 @@ const steps = [
   },
 ];
 
-export function HowItWorks() {
+export function HowItWorks({ id = "how-it-works" }: { id?: string }) {
   return (
-    <Section tone="sand" labelledBy="process-title" id="how-it-works">
+    <Section tone="sand" labelledBy="process-title" id={id}>
       <Container>
         <SectionHeading id="process-title" eyebrow="How it works" title="Three steps from idea to departure" />
         <Reveal as="div" variant="fade" className={styles.steps}>

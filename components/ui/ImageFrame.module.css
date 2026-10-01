@@ -9,6 +9,12 @@
 }
 .image {
   object-fit: cover;
+  object-position: var(--focus, 50% 50%);
+}
+@media (max-width: 40rem) {
+  .image {
+    object-position: var(--focus-m, var(--focus, 50% 50%));
+  }
 }
 .placeholder {
   position: absolute;

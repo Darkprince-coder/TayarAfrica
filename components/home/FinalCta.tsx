@@ -10,8 +10,8 @@ export function FinalCta({ image, whatsapp }: { image: ImageRef; whatsapp: strin
   return (
     <section className={styles.cta} aria-labelledby="final-cta-title">
       <div className={styles.media}>
-        <Parallax shift="8%">
-          <ImageFrame src={image.src} alt={image.alt} sizes="100vw" className={styles.frame} />
+        <Parallax>
+          <ImageFrame src={image.src} focus={image.focus} focusMobile={image.focusMobile} alt={image.alt} sizes="100vw" className={styles.frame} />
         </Parallax>
       </div>
       <div className={styles.scrim} />

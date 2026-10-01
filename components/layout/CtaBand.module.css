@@ -1,0 +1,24 @@
+.band {
+  text-align: center;
+}
+.inner {
+  max-width: 44rem;
+  margin-inline: auto;
+  display: grid;
+  gap: var(--space-5);
+  justify-items: center;
+}
+.title {
+  font-size: var(--text-3xl);
+}
+.text {
+  font-size: var(--text-lg);
+  color: var(--color-text-on-dark-muted);
+  max-width: 34rem;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+}

@@ -85,6 +85,13 @@ ol[role="list"] {
   color: #fff;
 }
 
+/* Pages with a fixed mobile action bar leave room for it under the footer. */
+@media (max-width: 61.99rem) {
+  body:has([data-mobile-bar]) footer {
+    padding-bottom: 6rem;
+  }
+}
+
 /* For pages without a full-bleed hero: clears the fixed navigation. */
 .nav-offset {
   padding-top: var(--nav-height);

@@ -13,6 +13,10 @@ export interface ImageRef {
   src: string;
   alt: string;
   role: ImageRole;
+  /** Where the subject sits, as CSS object-position (e.g. "40% 60%"). Keeps it in frame when the photo is cropped. */
+  focus?: string;
+  /** Same, but for narrow portrait screens, where far more of the photo is cropped away. */
+  focusMobile?: string;
 }
 
 export interface Destination {

@@ -1,0 +1,42 @@
+.split {
+  display: grid;
+  gap: var(--space-6);
+}
+.prose {
+  display: grid;
+  gap: var(--space-5);
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  max-width: 36rem;
+  align-content: start;
+}
+.cards {
+  display: grid;
+  gap: var(--space-4);
+}
+.card {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  background: var(--color-bone);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-lg);
+}
+.card p {
+  color: var(--color-text-muted);
+}
+.cardTitle {
+  font-size: var(--text-2xl);
+}
+
+@media (min-width: 62rem) {
+  .split {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: var(--space-9);
+    align-items: start;
+  }
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+}

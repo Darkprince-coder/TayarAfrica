@@ -17,24 +17,22 @@ const ENTER = ["wipe", "iris", "fade", "rise"] as const;
 const TEXT_FX = ["rise", "blur", "slide", "drop"] as const;
 /** Slow camera drift per slide (x, y as % of the image). */
 const DRIFT = [
-  ["-2.5%", "-1.5%"],
-  ["2.5%", "1.2%"],
-  ["-1.5%", "2.2%"],
-  ["2%", "-2%"],
+  ["-1.5%", "-1%"],
+  ["1.5%", "0.8%"],
+  ["-1%", "1.3%"],
+  ["1.3%", "-1.2%"],
 ] as const;
 
 type View = { current: number; previous: number | null };
 
 export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
   const [view, setView] = useState<View>({ current: 0, previous: null });
-  const [userPaused, setUserPaused] = useState(false);
-  const [hover, setHover] = useState(false);
-  const [focusWithin, setFocusWithin] = useState(false);
   const [onScreen, setOnScreen] = useState(true);
   const rootRef = useRef<HTMLElement>(null);
 
   const count = slides.length;
-  const running = count > 1 && !userPaused && !hover && !focusWithin && onScreen;
+  // Always plays on its own (visitors cannot be expected to find a pause control); it only rests while scrolled out of view.
+  const running = count > 1 && onScreen;
 
   useEffect(() => {
     const el = rootRef.current;
@@ -70,15 +68,11 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       aria-roledescription="carousel"
       aria-label="Featured journeys"
       data-running={running}
-      onPointerEnter={(e) => e.pointerType === "mouse" && setHover(true)}
-      onPointerLeave={() => setHover(false)}
-      onFocus={(e) => e.target.matches(":focus-visible") && setFocusWithin(true)}
-      onBlur={() => setFocusWithin(false)}
     >
       <h1 className="visually-hidden">TAYARI Africa Tours: Kenya safaris and beach holidays</h1>
 
       {/* Photography */}
-      <div className={styles.stage} aria-live={running ? "off" : "polite"}>
+      <div className={styles.stage} aria-live="off">
         {slides.map((slide, i) => {
           const isCurrent = i === view.current;
           const isPrevious = i === view.previous;
@@ -103,6 +97,8 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                 sizes="100vw"
                 priority={i === 0}
                 quality={85}
+                focus={slide.image.focus}
+                focusMobile={slide.image.focusMobile}
                 className={styles.frame}
                 imageClassName={styles.image}
               />
@@ -149,12 +145,9 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
         })}
       </div>
 
-      {/* Progress dots, counter and pause */}
+      {/* Progress lines: tap one to jump to that slide */}
       {count > 1 && (
         <div className={styles.controls} style={{ "--slide-seconds": `${SLIDE_SECONDS}s` } as CSSProperties}>
-          <p className={styles.counter} aria-hidden="true">
-            <span>{String(view.current + 1).padStart(2, "0")}</span> / {String(count).padStart(2, "0")}
-          </p>
           <ul role="list" className={styles.dots}>
             {slides.map((slide, i) => (
               <li key={slide.id}>
@@ -170,9 +163,6 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
               </li>
             ))}
           </ul>
-          <button type="button" className={styles.pause} onClick={() => setUserPaused((p) => !p)} aria-label={userPaused ? "Play slideshow" : "Pause slideshow"}>
-            <span className={cn(styles.pauseIcon, userPaused && styles.playIcon)} aria-hidden="true" />
-          </button>
         </div>
       )}
     </section>

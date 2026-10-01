@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { cn } from "@/lib/cn";
 import styles from "./ImageFrame.module.css";
 
@@ -16,6 +16,10 @@ type ImageFrameProps = {
   rounded?: boolean;
   className?: string;
   imageClassName?: string;
+  /** CSS object-position for wide screens, e.g. "40% 60%". Defaults to the centre. */
+  focus?: string;
+  /** Object-position for narrow portrait screens, where most of a landscape photo is cropped. */
+  focusMobile?: string;
 };
 
 /**
@@ -32,6 +36,8 @@ export function ImageFrame({
   rounded,
   className,
   imageClassName,
+  focus,
+  focusMobile,
 }: ImageFrameProps) {
   const [failed, setFailed] = useState(false);
 
@@ -50,6 +56,7 @@ export function ImageFrame({
           priority={priority}
           quality={quality}
           className={cn(styles.image, imageClassName)}
+          style={{ "--focus": focus, "--focus-m": focusMobile } as CSSProperties}
           onError={() => setFailed(true)}
           ref={(el) => {
             // Handles images that already failed before hydration.

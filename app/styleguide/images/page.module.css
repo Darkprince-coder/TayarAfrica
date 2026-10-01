@@ -22,7 +22,7 @@
   width: 100%;
   border-collapse: collapse;
   font-size: var(--text-sm);
-  min-width: 52rem;
+  min-width: 64rem;
 }
 .table th,
 .table td {
@@ -47,4 +47,20 @@
 .missing {
   color: var(--color-error);
   font-weight: 700;
+}
+.warn {
+  color: #9a5b00;
+  font-weight: 700;
+}
+.stray {
+  padding: var(--space-4) var(--space-5);
+  background: #fff7e6;
+  border: 1px solid #f0d9a8;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+}
+.stray ul {
+  margin-top: var(--space-2);
+  display: grid;
+  gap: 2px;
 }

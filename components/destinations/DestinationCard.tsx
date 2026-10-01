@@ -19,7 +19,7 @@ export function DestinationCard({
   return (
     <Link href={`/destinations/${destination.slug}`} className={cn(styles.card, className)}>
       <ImageFrame
-        src={destination.cover.src}
+        src={destination.cover.src} focus={destination.cover.focus} focusMobile={destination.cover.focusMobile}
         alt={destination.cover.alt}
         sizes={sizes}
         priority={priority}
