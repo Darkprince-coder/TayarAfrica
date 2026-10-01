@@ -8,7 +8,7 @@ export const destinations: Destination[] = [
     name: "Maasai Mara",
     country: "Kenya",
     region: "Narok County, Southwest Kenya",
-    tagline: "Endless golden plains and the drama of the wild.",
+    tagline: "Open plains, big cats and the great migration.",
     shortDescription:
       "Kenya's most celebrated safari landscape: open savannah, big cats at dawn and, in season, the great wildebeest migration.",
     longDescription: [
@@ -46,7 +46,7 @@ export const destinations: Destination[] = [
     shortDescription:
       "Famous for large elephant herds and postcard views of Mount Kilimanjaro rising across the plains.",
     longDescription: [
-      "Amboseli is a place of big skies and bigger elephants. Its swamps and open plains make it one of the best places in Kenya to watch elephants up close, with Mount Kilimanjaro as the backdrop on clear mornings.",
+      "Amboseli's swamps and open plains make it one of the best places in Kenya to watch elephants up close, with Mount Kilimanjaro in the background on clear mornings.",
       "The park is compact, so even a short stay delivers rewarding game drives, birdlife around the wetlands and memorable photography at sunrise.",
     ],
     highlights: ["Large elephant herds", "Kilimanjaro views on clear days", "Wetland birdlife", "Compact park, easy to explore"],
@@ -69,7 +69,7 @@ export const destinations: Destination[] = [
     name: "Tsavo",
     country: "Kenya",
     region: "Taita-Taveta & Makueni Counties, Southeast Kenya",
-    tagline: "Raw, vast and red — Kenya's wild heartland.",
+    tagline: "Red earth, red elephants and very few crowds.",
     shortDescription:
       "Tsavo East and West together form one of Africa's largest protected areas, known for red-dust elephants and dramatic volcanic scenery.",
     longDescription: [
@@ -96,7 +96,7 @@ export const destinations: Destination[] = [
     name: "Samburu",
     country: "Kenya",
     region: "Samburu County, Northern Kenya",
-    tagline: "Rare northern wildlife along a lifeline river.",
+    tagline: "Dry northern country with wildlife you won't see elsewhere.",
     shortDescription:
       "A rugged northern reserve home to species rarely seen farther south, set along the Ewaso Ng'iro River.",
     longDescription: [
@@ -123,11 +123,11 @@ export const destinations: Destination[] = [
     name: "Diani Beach",
     country: "Kenya",
     region: "Kwale County, South Coast",
-    tagline: "White sand, turquoise water and slow, sunlit days.",
+    tagline: "White sand, warm water and nowhere to be.",
     shortDescription:
       "A long stretch of white-sand coastline on Kenya's south coast, ideal for rest after safari or a beach-focused escape.",
     longDescription: [
-      "Diani is where safari-weary travellers exhale. Palm-fringed sand, warm Indian Ocean water and relaxed resorts make it the natural finish to a bush itinerary.",
+      "Diani is where many safari trips end. Palm-fringed sand, warm Indian Ocean water and relaxed resorts make it an easy place to rest after early mornings in the bush.",
       "Active travellers can swim, snorkel, kite-surf or take a dhow to nearby marine areas.",
     ],
     highlights: ["Long white-sand beach", "Swimming and snorkelling", "Dhow trips", "Perfect safari-and-beach pairing"],
@@ -150,12 +150,12 @@ export const destinations: Destination[] = [
     name: "Lamu",
     country: "Kenya",
     region: "Lamu Archipelago, North Coast",
-    tagline: "A living Swahili town where time moves by dhow.",
+    tagline: "A car-free Swahili island town, best explored on foot or by dhow.",
     shortDescription:
       "A historic island town of narrow lanes, carved doors and dhows, with a car-free, unhurried rhythm.",
     longDescription: [
       "Lamu Old Town is recognised as a UNESCO World Heritage Site and remains one of the best-preserved Swahili settlements on the coast. Donkeys and footpaths replace traffic.",
-      "Days here are about wandering, sailing and tasting. Evenings belong to the waterfront.",
+      "Days here are for walking the lanes, sailing and eating. Evenings are spent on the waterfront.",
     ],
     highlights: ["UNESCO-listed Old Town", "Dhow sailing", "Swahili food and architecture", "Peaceful, car-free island"],
     activities: ["Old Town walks", "Dhow sailing", "Swahili cooking experiences", "Beach time at Shela"],

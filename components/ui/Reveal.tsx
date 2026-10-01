@@ -6,7 +6,7 @@ import styles from "./Reveal.module.css";
 
 type RevealProps = {
   as?: "div" | "li" | "section" | "article";
-  variant?: "up" | "fade";
+  variant?: "up" | "fade" | "clip";
   /** Stagger delay in ms, e.g. index * 80 for lists. */
   delay?: number;
   className?: string;

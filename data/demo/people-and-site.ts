@@ -69,10 +69,10 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const heroSlides: HeroSlide[] = [
-  { id: "hero-1", image: img("hero/hero-01.jpg", "Golden-hour savannah with acacia trees in Kenya", "hero"), title: "Africa, arranged around you.", subtitle: "Tell us the journey you imagine. We'll shape it into something real.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", order: 1, active: true },
-  { id: "hero-2", image: img("hero/hero-02.jpg", "Elephants walking toward Mount Kilimanjaro", "hero"), title: "Wake up to wild horizons.", subtitle: "From the Maasai Mara to the foot of Kilimanjaro.", ctaText: "Explore Experiences", ctaHref: "/experiences", order: 2, active: true },
-  { id: "hero-3", image: img("hero/hero-03.jpg", "Dhow sailing on turquoise water off the Kenyan coast", "hero"), title: "Then let the ocean slow you down.", subtitle: "Swahili coast, white sand and unhurried days.", ctaText: "Discover Destinations", ctaHref: "/destinations", order: 3, active: true },
-  { id: "hero-4", image: img("hero/hero-04.jpg", "Lion resting on the Maasai Mara plains at sunrise", "hero"), title: "Moments you'll carry home.", subtitle: "Carefully coordinated, personally looked after.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", order: 4, active: true },
+  { id: "hero-1", image: img("hero/hero-01.jpg", "Golden-hour savannah with acacia trees in Kenya", "hero"), title: "Africa, arranged around you.", subtitle: "Tell us what you want to see. We will plan the rest.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", order: 1, active: true },
+  { id: "hero-2", image: img("hero/hero-02.jpg", "Elephants walking toward Mount Kilimanjaro", "hero"), title: "Wake up to elephants and Kilimanjaro.", subtitle: "Safaris from the Maasai Mara to Amboseli.", ctaText: "Explore Experiences", ctaHref: "/experiences", order: 2, active: true },
+  { id: "hero-3", image: img("hero/hero-03.jpg", "Dhow sailing on turquoise water off the Kenyan coast", "hero"), title: "Then slow down by the ocean.", subtitle: "White sand, warm water and the Swahili coast.", ctaText: "Discover Destinations", ctaHref: "/destinations", order: 3, active: true },
+  { id: "hero-4", image: img("hero/hero-04.jpg", "Lion resting on the Maasai Mara plains at sunrise", "hero"), title: "See the Mara at first light.", subtitle: "Early game drives with a driver-guide who knows the plains.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", order: 4, active: true },
 ];
 
 /** PLACEHOLDER social links — replace with real profiles. */
@@ -88,8 +88,8 @@ export const siteSettings: SiteSettings = {
     { label: "TikTok", href: "https://tiktok.com/" },
   ],
   seo: {
-    defaultTitle: `${siteConfig.name} — Kenya safaris & journeys`,
+    defaultTitle: `${siteConfig.name} | Kenya safaris and beach holidays`,
     defaultDescription: siteConfig.description,
-    ogImage: img("og/default.jpg", "TAYARI Africa Tours — Kenya safaris and journeys", "og"),
+    ogImage: img("og/default.jpg", "TAYARI Africa Tours, Kenya safaris and beach holidays", "og"),
   },
 };

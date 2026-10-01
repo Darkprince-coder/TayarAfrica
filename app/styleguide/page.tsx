@@ -32,12 +32,12 @@ export default function StyleguidePage() {
     <main id="main" className={styles.page}>
       <header>
         <h1 className={styles.title}>Design foundations</h1>
-        <p className={styles.muted}>Internal review page — Phase 0.</p>
+        <p className={styles.muted}>Internal review page: Phase 0.</p>
       </header>
 
       <section aria-labelledby="palette">
         <h2 id="palette" className={styles.h2}>
-          Palette — Savanna Dusk
+          Palette: Savanna Dusk
         </h2>
         <ul role="list" className={styles.swatches}>
           {swatches.map(([name, token, hex]) => (
@@ -58,28 +58,28 @@ export default function StyleguidePage() {
         </h2>
         <div className={styles.pairs}>
           <div className={styles.pair} style={{ background: "var(--color-bone)" }}>
-            Ink on bone — body copy
+            Ink on bone: body copy
           </div>
           <div className={styles.pair} style={{ background: "var(--color-sand)", color: "var(--color-text-muted)" }}>
-            Muted on sand — captions
+            Muted on sand: captions
           </div>
           <div className={styles.pair} style={{ background: "var(--color-forest)", color: "var(--color-text-on-dark)" }}>
-            Cream on forest — dark sections
+            Cream on forest: dark sections
           </div>
           <div className={styles.pair} style={{ background: "var(--color-ember)", color: "#fff" }}>
-            White on ember — primary CTA
+            White on ember: primary CTA
           </div>
         </div>
       </section>
 
       <section aria-labelledby="type" className={styles.type}>
         <h2 id="type" className={styles.h2}>
-          Typography — Fraunces + Manrope
+          Typography: Fraunces + Manrope
         </h2>
         <p className={styles.display}>Africa, arranged around you.</p>
         <h3 style={{ fontSize: "var(--text-2xl)" }}>Maasai Mara, Amboseli, Diani</h3>
         <p style={{ fontSize: "var(--text-lg)" }}>
-          Lead paragraph in Manrope — warm, modern and highly readable at every size, built for long itineraries and
+          Lead paragraph in Manrope. Warm, modern and highly readable at every size, built for long itineraries and
           quick mobile reads alike.
         </p>
         <p>

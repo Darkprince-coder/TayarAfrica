@@ -1,7 +1,8 @@
 .reveal {
   transition:
     opacity var(--dur-slow) var(--ease-out),
-    transform var(--dur-slow) var(--ease-out);
+    transform var(--dur-slow) var(--ease-out),
+    clip-path 1.2s var(--ease-out);
 }
 
 .reveal[data-state="armed"] {
@@ -10,8 +11,14 @@
 .up[data-state="armed"] {
   transform: translate3d(0, 28px, 0);
 }
+/* Image-style reveal: the frame wipes open from the top while easing in. */
+.clip[data-state="armed"] {
+  opacity: 1;
+  clip-path: inset(0 0 100% 0);
+}
 
 .reveal[data-state="shown"] {
   opacity: 1;
   transform: none;
+  clip-path: inset(0 0 0 0);
 }

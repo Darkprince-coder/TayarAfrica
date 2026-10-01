@@ -1,0 +1,71 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  display: grid;
+  place-items: center;
+  background: var(--color-forest-deep);
+  pointer-events: none;
+  /* Whole sequence is ~1.8s: reveal, brief hold, fade away. */
+  animation: out 520ms var(--ease-in-out) 1280ms forwards;
+}
+
+.stack {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-5);
+}
+
+.emblem {
+  width: clamp(7rem, 22vw, 10rem);
+  height: auto;
+  animation: reveal 1000ms var(--ease-out) both;
+}
+
+.word {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  animation: rise 700ms var(--ease-out) 600ms both;
+}
+
+@keyframes reveal {
+  from {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    clip-path: circle(75% at 50% 50%);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Returning visitors in this session, and anyone who prefers reduced motion, never see it. */
+:global(html[data-intro-seen]) .loader {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader {
+    display: none;
+  }
+}

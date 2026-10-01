@@ -7,7 +7,7 @@ export const siteConfig = {
   legalName: "TAYARI Africa Tours Consultants",
   tagline: "Africa, arranged around you.",
   description:
-    "TAYARI Africa Tours Consultants plans safaris, beach escapes and cultural journeys across Kenya, coordinating stays, transfers and experiences so you can simply arrive and explore.",
+    "TAYARI Africa Tours Consultants plans safaris, beach holidays and cultural trips in Kenya. We arrange the stays, transfers and activities, so all you have to do is turn up.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   locale: "en",
   /** PLACEHOLDER contact details — replace with real values before launch. */

@@ -1,0 +1,13 @@
+/* Opacity only: a transform here would break position: fixed and sticky children. */
+.page {
+  animation: fade-in 420ms var(--ease-out) both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

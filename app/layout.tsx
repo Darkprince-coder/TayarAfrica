@@ -19,7 +19,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Kenya safaris & journeys`,
+    default: `${siteConfig.name} | Kenya safaris and beach holidays`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -37,7 +37,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang={siteConfig.locale} className={`${fraunces.variable} ${manrope.variable}`}>
+    // suppressHydrationWarning: the intro script sets a data attribute on <html> before hydration.
+    <html lang={siteConfig.locale} className={`${fraunces.variable} ${manrope.variable}`} suppressHydrationWarning>
       <body>
         <a href="#main" className="skip-link">
           Skip to content

@@ -1,0 +1,33 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: var(--color-forest-deep);
+  transition: color var(--dur-base) var(--ease-out);
+}
+.light {
+  color: var(--color-text-on-dark);
+}
+.emblem {
+  width: 2.75rem;
+  height: auto;
+}
+.word {
+  display: grid;
+  line-height: 1;
+}
+.name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+.sub {
+  margin-top: 0.3rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}

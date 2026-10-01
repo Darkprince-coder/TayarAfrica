@@ -1,0 +1,63 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-items: end;
+  color: var(--color-text-on-dark);
+  background: var(--color-forest-deep);
+  overflow: hidden;
+}
+.media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.fill {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgb(20 38 30 / 0.78), rgb(20 38 30 / 0.15) 55%, transparent),
+    linear-gradient(to right, rgb(20 38 30 / 0.45), transparent 60%);
+}
+.copy {
+  position: relative;
+  max-width: var(--container);
+  width: 100%;
+  margin-inline: auto;
+  padding: calc(var(--nav-height) + var(--space-8)) var(--gutter) clamp(3rem, 8vh, 6rem);
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
+}
+.title {
+  font-size: var(--text-hero);
+  max-width: 14ch;
+  line-height: 1.02;
+}
+.subtitle {
+  font-size: var(--text-lg);
+  max-width: 32rem;
+  color: var(--color-text-on-dark);
+  opacity: 0.9;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--space-4);
+}
+.card {
+  padding: var(--space-6);
+  background: var(--color-sand);
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+}
+.clip {
+  margin-top: var(--space-6);
+}
