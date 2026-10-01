@@ -1,0 +1,26 @@
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+.head > :first-child {
+  flex: 1 1 24rem;
+}
+.grid {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 62rem) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+  /* A gentle stagger so the row feels hand-placed. */
+  .grid > li:nth-child(even) {
+    margin-top: var(--space-7);
+  }
+}

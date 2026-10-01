@@ -92,4 +92,8 @@ export const siteSettings: SiteSettings = {
     defaultDescription: siteConfig.description,
     ogImage: img("og/default.jpg", "TAYARI Africa Tours, Kenya safaris and beach holidays", "og"),
   },
+  homeImages: {
+    story: img("about/story-01.jpg", "Safari vehicle crossing open savannah at dusk", "story"),
+    cta: img("about/story-02.jpg", "Acacia tree silhouetted against a Kenyan sunset", "story"),
+  },
 };

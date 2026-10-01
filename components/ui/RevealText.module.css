@@ -1,0 +1,24 @@
+.text {
+  margin: 0;
+}
+
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* Room for ascenders and descenders so the mask never clips letters. */
+  padding: 0.08em 0 0.16em;
+  margin: -0.08em 0 -0.16em;
+}
+
+.inner {
+  display: inline-block;
+  transition:
+    transform 1.3s var(--ease-cine) calc(var(--delay, 0ms) + 150ms + var(--i, 0) * 85ms),
+    opacity 0.9s var(--ease-cine) calc(var(--delay, 0ms) + 150ms + var(--i, 0) * 85ms);
+}
+
+:global(html[data-motion]) .text:not([data-state="shown"]) .inner {
+  transform: translate3d(0, 112%, 0) rotate(3deg);
+  opacity: 0;
+}

@@ -21,7 +21,7 @@ Full spec: `docs/TAYARI_Africa_Tours_Coding_Agent_Specification.docx`.
 - **CSS Modules** per component (`Component.module.css`). Global CSS only in `styles/` (tokens + reset). Never hard-code colours/spacing: use tokens from `styles/tokens.css`.
 - Motion library (`motion`) only where CSS can't do the job. Everything honours `prefers-reduced-motion`; never delay important content behind animation.
 - Server Components by default; add `"use client"` only for interactivity. Important content must be server-rendered for SEO.
-- Feature folders: `components/{layout,navigation,hero,destinations,experiences,booking,team,ui}`, `lib/{analytics,validation,supabase,content}`, `data/demo/`.
+- Feature folders: `components/{layout,navigation,hero,home,destinations,experiences,booking,team,ui}`, `lib/{analytics,validation,supabase,content}`, `data/demo/`.
 - **Content access goes through `lib/content`** (e.g. `getDestinations()`), never import `data/demo` directly in pages. This is the seam where Supabase/CMS replaces demo data.
 - Validation with Zod, shared between client and server. Server-side validation always.
 - Analytics only through `lib/analytics` (GA4 ID from env). No scattered tags.
@@ -39,3 +39,12 @@ Full spec: `docs/TAYARI_Africa_Tours_Coding_Agent_Specification.docx`.
 ## Workflow
 - Build in reviewed phases (0 Foundation → 1 Data & UI kit → 2 Shell & motion → 3 Homepage → 4 Content pages → 5 Inquiry flow → 6 SEO & GA4 → 7 QA). Stop after each phase for user review. Ask before making major decisions.
 - Commands: `npm run dev`, `npm run build`, `npm run lint`.
+
+## Navigation
+- Top level stays short. Related pages go in a group (`navItems` in `lib/navigation.ts`): dropdown on desktop (hover for mouse, click/keyboard otherwise), accordion on mobile. Anything about the company lives under **About** (About TAYARI, How we plan a trip, Meet the team). Add future sections as groups, never as more top-level links.
+
+## Motion system (cinematic, delayed, never blocking)
+- `MotionScript` (root layout) sets `data-motion` on `<html>` before paint unless reduced motion; CSS starts reveal elements hidden only under that flag. `IntroScript`/`IntroLoader` handle the once-per-session logo intro; `lib/motion-gate.ts` makes reveals and the hero wait for it.
+- Use `Reveal` (up / fade / clip) and `RevealText` (word mask) for scroll reveals; `SectionHeading` already uses them. Stagger with `delay`. Easing tokens: `--ease-cine`, `--ease-wipe`.
+- Hero (`components/hero/HeroSlider`): 6s autoplay driven by the CSS progress animation, pauses on hover / keyboard focus / off-screen / pause button, a different image transition and text effect per slide.
+- Content alignment: gutters live inside `Container` (and footer/hero inners) so everything lines up with the nav.

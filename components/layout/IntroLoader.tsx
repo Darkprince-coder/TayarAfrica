@@ -2,14 +2,13 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { INTRO_END_EVENT, INTRO_HANDOFF_MS, INTRO_STORAGE_KEY } from "@/lib/motion-gate";
 import styles from "./IntroLoader.module.css";
-
-export const INTRO_STORAGE_KEY = "tayari-intro";
 
 /**
  * Short logo reveal, shown once per browser session.
- * - A tiny inline script (see IntroScript) marks returning visitors before first paint,
- *   so the overlay never flashes for them.
+ * - IntroScript (inline) marks returning visitors before first paint, so the overlay never
+ *   flashes for them, and marks first visits so page reveals wait for the handoff.
  * - The overlay is purely visual: it never blocks clicks, hides itself with CSS even
  *   without JS, and is skipped entirely for reduced motion.
  */
@@ -22,6 +21,11 @@ export function IntroLoader() {
     } catch {
       // Storage can be blocked; the intro then simply plays each visit.
     }
+    const timer = window.setTimeout(() => {
+      document.documentElement.removeAttribute("data-intro-playing");
+      window.dispatchEvent(new Event(INTRO_END_EVENT));
+    }, INTRO_HANDOFF_MS);
+    return () => window.clearTimeout(timer);
   }, []);
 
   if (done) return null;
@@ -40,10 +44,4 @@ export function IntroLoader() {
       </div>
     </div>
   );
-}
-
-/** Runs before first paint: flags returning visitors so CSS can hide the loader at once. */
-export function IntroScript() {
-  const code = `try{if(sessionStorage.getItem(${JSON.stringify(INTRO_STORAGE_KEY)}))document.documentElement.setAttribute("data-intro-seen","")}catch(e){}`;
-  return <script dangerouslySetInnerHTML={{ __html: code }} />;
 }

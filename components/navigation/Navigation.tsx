@@ -6,7 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/layout/Logo";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
-import { isActive, isOverlayRoute, navLinks, primaryCta } from "@/lib/navigation";
+import { isActive, isGroupActive, isOverlayRoute, navItems, primaryCta } from "@/lib/navigation";
+import { NavDropdown } from "./NavDropdown";
 import styles from "./Navigation.module.css";
 
 const FOCUSABLE = "a[href], button:not([disabled])";
@@ -17,6 +18,8 @@ export function Navigation({ phone, whatsapp }: { phone: string; whatsapp: strin
   // The menu is "open" only for the page it was opened on, so navigating always closes it.
   const [openFor, setOpenFor] = useState<string | null>(null);
   const open = openFor === pathname;
+  // Which mobile group (e.g. "About") is expanded.
+  const [group, setGroup] = useState<string | null>(null);
 
   const headerRef = useRef<HTMLElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -49,7 +52,7 @@ export function Navigation({ phone, whatsapp }: { phone: string; whatsapp: strin
       const items = [
         ...(headerRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? []),
         ...(panelRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? []),
-      ].filter((el) => el.offsetParent !== null);
+      ].filter((el) => el.offsetParent !== null && !el.closest("[inert]"));
       if (!items.length) return;
       const first = items[0];
       const last = items[items.length - 1];
@@ -82,15 +85,17 @@ export function Navigation({ phone, whatsapp }: { phone: string; whatsapp: strin
 
           <nav aria-label="Main" className={styles.desktopNav}>
             <ul role="list" className={styles.links}>
-              {navLinks
-                .filter((l) => l.desktop !== false)
-                .map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href} className={styles.link} aria-current={isActive(pathname, l.href) ? "page" : undefined}>
-                      {l.label}
+              {navItems.map((item) =>
+                item.children ? (
+                  <NavDropdown key={item.label} item={item} pathname={pathname} />
+                ) : (
+                  <li key={item.href}>
+                    <Link href={item.href!} className={styles.link} aria-current={isActive(pathname, item.href!) ? "page" : undefined}>
+                      {item.label}
                     </Link>
                   </li>
-                ))}
+                ),
+              )}
             </ul>
           </nav>
 
@@ -116,15 +121,48 @@ export function Navigation({ phone, whatsapp }: { phone: string; whatsapp: strin
       <div id="mobile-menu" ref={panelRef} className={styles.panel} data-open={open} inert={!open} role="dialog" aria-modal="true" aria-label="Menu">
         <nav aria-label="Mobile" className={styles.panelInner}>
           <ul role="list" className={styles.panelLinks}>
-            {navLinks.map((l, i) => (
-              <li key={l.href} style={{ "--i": i } as React.CSSProperties}>
-                <Link href={l.href} className={styles.panelLink} aria-current={isActive(pathname, l.href) ? "page" : undefined}>
-                  {l.label}
-                </Link>
+            {navItems.map((item, i) => (
+              <li key={item.label} style={{ "--i": i } as React.CSSProperties}>
+                {item.children ? (
+                  <>
+                    <button
+                      type="button"
+                      className={cn(styles.panelLink, styles.groupButton, isGroupActive(pathname, item) && styles.groupActive)}
+                      aria-expanded={group === item.label}
+                      aria-controls={`group-${item.label}`}
+                      onClick={() => setGroup(group === item.label ? null : item.label)}
+                    >
+                      {item.label}
+                      <svg className={styles.groupChevron} width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </button>
+                    <div id={`group-${item.label}`} className={styles.group} data-open={group === item.label} inert={group !== item.label}>
+                      <ul role="list" className={styles.groupList}>
+                        {item.children.map((child) => (
+                          <li key={child.href}>
+                            <Link href={child.href} className={styles.subLink} onClick={() => setOpenFor(null)}>
+                              {child.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                ) : (
+                  <Link
+                    href={item.href!}
+                    className={styles.panelLink}
+                    aria-current={isActive(pathname, item.href!) ? "page" : undefined}
+                    onClick={() => setOpenFor(null)}
+                  >
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
-          <div className={styles.panelFoot} style={{ "--i": navLinks.length } as React.CSSProperties}>
+          <div className={styles.panelFoot} style={{ "--i": navItems.length } as React.CSSProperties}>
             <Button href={primaryCta.href} size="lg" fullWidth arrow>
               {primaryCta.label}
             </Button>

@@ -1,20 +1,38 @@
-export type NavLink = {
+export type NavChild = { label: string; href: string; description?: string };
+
+export type NavItem = {
   label: string;
-  href: string;
-  /** Set false to keep a link out of the desktop bar (it still appears in the mobile menu and footer). */
-  desktop?: boolean;
+  /** A plain link. Omit when the item is a group with children. */
+  href?: string;
+  /** Group of related links shown in a dropdown (desktop) or accordion (mobile). */
+  children?: NavChild[];
 };
 
-export const navLinks: NavLink[] = [
+/**
+ * Main navigation. Keep the top level short: related pages (anything about the company,
+ * and any future section) go inside a group instead of adding another top-level item.
+ */
+export const navItems: NavItem[] = [
   { label: "Destinations", href: "/destinations" },
   { label: "Experiences", href: "/experiences" },
   { label: "Services", href: "/services" },
-  { label: "About", href: "/about" },
-  { label: "Team", href: "/team", desktop: false },
+  {
+    label: "About",
+    children: [
+      { label: "About TAYARI", href: "/about", description: "Who we are and what we do" },
+      { label: "How we plan a trip", href: "/about#how-we-work", description: "From first message to departure" },
+      { label: "Meet the team", href: "/team", description: "The people behind your trip" },
+    ],
+  },
   { label: "Contact", href: "/contact" },
 ];
 
-export const legalLinks: NavLink[] = [
+/** Every link in the navigation, flattened (used by the footer). */
+export const flatNavLinks: { label: string; href: string }[] = navItems.flatMap((item) =>
+  item.children ? item.children.map(({ label, href }) => ({ label, href })) : item.href ? [{ label: item.label, href: item.href }] : [],
+);
+
+export const legalLinks = [
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms of Service", href: "/terms" },
 ];
@@ -30,5 +48,10 @@ export function isOverlayRoute(pathname: string): boolean {
 }
 
 export function isActive(pathname: string, href: string): boolean {
-  return pathname === href || pathname.startsWith(`${href}/`);
+  const path = href.split("#")[0];
+  return pathname === path || pathname.startsWith(`${path}/`);
+}
+
+export function isGroupActive(pathname: string, item: NavItem): boolean {
+  return Boolean(item.children?.some((c) => isActive(pathname, c.href)));
 }

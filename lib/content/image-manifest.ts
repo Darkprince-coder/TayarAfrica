@@ -44,6 +44,8 @@ export async function getImageManifest(): Promise<ManifestEntry[]> {
   });
   team.forEach((m) => add(m.portrait, `Team: ${m.name}`));
   add(settings.seo.ogImage, "Social share");
+  add(settings.homeImages.story, "Homepage story band");
+  add(settings.homeImages.cta, "Homepage closing call to action");
 
   return [...map.values()];
 }

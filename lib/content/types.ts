@@ -116,4 +116,6 @@ export interface SiteSettings {
   contact: { email: string; phone: string; whatsapp: string; location: string };
   social: { label: string; href: string }[];
   seo: { defaultTitle: string; defaultDescription: string; ogImage: ImageRef };
+  /** Large atmosphere photos used on the homepage (story band and closing call to action). */
+  homeImages: { story: ImageRef; cta: ImageRef };
 }

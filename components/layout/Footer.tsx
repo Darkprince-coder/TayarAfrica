@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getSiteSettings } from "@/lib/content";
-import { legalLinks, navLinks, primaryCta } from "@/lib/navigation";
+import { flatNavLinks, legalLinks, primaryCta } from "@/lib/navigation";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui/Button";
 import styles from "./Footer.module.css";
@@ -25,7 +25,7 @@ export async function Footer() {
         <nav aria-label="Footer" className={styles.col}>
           <h2 className={styles.heading}>Explore</h2>
           <ul role="list" className={styles.list}>
-            {navLinks.map((l) => (
+            {flatNavLinks.map((l) => (
               <li key={l.href}>
                 <Link href={l.href}>{l.label}</Link>
               </li>

@@ -1,0 +1,66 @@
+.steps {
+  position: relative;
+}
+.list {
+  display: grid;
+  gap: var(--space-7);
+  position: relative;
+}
+.step {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+.number {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  line-height: 1;
+  color: var(--color-ember);
+}
+.title {
+  font-size: var(--text-xl);
+}
+.text {
+  color: var(--color-text-muted);
+  max-width: 24rem;
+}
+
+/* A thin rule draws across the top of the steps as the section arrives (desktop only). */
+.line {
+  display: none;
+}
+
+@media (min-width: 52rem) {
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+  .step {
+    padding-top: var(--space-5);
+  }
+  .line {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--color-forest);
+    transform-origin: left;
+    transition: transform 2.2s var(--ease-wipe) 0.3s;
+  }
+  :global(html[data-motion]) .steps:not([data-state="shown"]) .line {
+    transform: scaleX(0);
+  }
+  /* Each step lifts in one after the other behind the line. */
+  .step {
+    transition:
+      opacity 1.3s var(--ease-cine) calc(0.5s + var(--n) * 0.25s),
+      transform 1.3s var(--ease-cine) calc(0.5s + var(--n) * 0.25s);
+  }
+  :global(html[data-motion]) .steps:not([data-state="shown"]) .step {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+}

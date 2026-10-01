@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/Footer";
-import { IntroLoader, IntroScript } from "@/components/layout/IntroLoader";
+import { IntroLoader } from "@/components/layout/IntroLoader";
+import { IntroScript } from "@/components/layout/IntroScript";
 import { Navigation } from "@/components/navigation/Navigation";
 import { getSiteSettings } from "@/lib/content";
 

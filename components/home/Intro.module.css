@@ -1,0 +1,26 @@
+.grid {
+  display: grid;
+  gap: var(--space-7);
+  align-items: end;
+}
+.statement {
+  font-size: var(--text-3xl);
+  max-width: 20ch;
+}
+.side {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
+  max-width: 28rem;
+}
+.copy {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 62rem) {
+  .grid {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: var(--space-9);
+  }
+}

@@ -30,7 +30,7 @@
 }
 @supports (backdrop-filter: blur(1px)) {
   .solid {
-    background: rgb(250 246 238 / 0.82);
+    background: rgb(250 246 238 / 0.93);
     backdrop-filter: saturate(1.4) blur(14px);
   }
 }
@@ -200,6 +200,54 @@
 .panelLink[aria-current="page"] {
   color: var(--color-gold);
 }
+/* Mobile accordion group */
+.groupButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border-top: 0;
+  border-inline: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.groupActive {
+  color: var(--color-gold);
+}
+.groupChevron {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.groupButton[aria-expanded="true"] .groupChevron {
+  transform: rotate(180deg);
+}
+.group {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-base) var(--ease-out);
+}
+.group[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.groupList {
+  overflow: hidden;
+  min-height: 0;
+  display: grid;
+  padding-left: var(--space-4);
+}
+.subLink {
+  display: block;
+  padding: var(--space-3) 0;
+  font-size: var(--text-lg);
+  color: var(--color-text-on-dark-muted);
+  text-decoration: none;
+  border-bottom: 1px solid rgb(244 238 227 / 0.08);
+}
+.subLink:last-child {
+  border-bottom: 0;
+}
+
 .panelFoot {
   display: grid;
   gap: var(--space-4);

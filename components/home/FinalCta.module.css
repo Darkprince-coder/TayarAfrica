@@ -1,0 +1,49 @@
+.cta {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: min(80svh, 46rem);
+  color: var(--color-text-on-dark);
+  background: var(--color-forest-deep);
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+.media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.frame {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgb(20 38 30 / 0.55), rgb(20 38 30 / 0.82));
+}
+.content {
+  position: relative;
+  max-width: 44rem;
+  padding: var(--section-pad) var(--gutter);
+  display: grid;
+  gap: var(--space-5);
+  justify-items: center;
+}
+.title {
+  font-size: var(--text-3xl);
+}
+.copy {
+  font-size: var(--text-lg);
+  color: rgb(244 238 227 / 0.9);
+  max-width: 34rem;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+}

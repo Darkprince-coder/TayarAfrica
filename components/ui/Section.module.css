@@ -1,6 +1,5 @@
 .section {
   padding-block: var(--section-pad);
-  padding-inline: var(--gutter);
 }
 .flush {
   padding-block: 0;
@@ -18,10 +17,12 @@
   color: var(--color-text-on-dark);
 }
 
+/* The gutter lives inside the container so content lines up with the navigation and hero. */
 .container {
   width: 100%;
   max-width: var(--container);
   margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 .narrow {
   max-width: var(--container-narrow);

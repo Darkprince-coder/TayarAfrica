@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Manrope } from "next/font/google";
+import { MotionReady } from "@/components/layout/MotionReady";
+import { MotionScript } from "@/components/layout/MotionScript";
 import { siteConfig } from "@/lib/site";
 import "@/styles/globals.css";
 
@@ -40,6 +42,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     // suppressHydrationWarning: the intro script sets a data attribute on <html> before hydration.
     <html lang={siteConfig.locale} className={`${fraunces.variable} ${manrope.variable}`} suppressHydrationWarning>
       <body>
+        <MotionScript />
+        <MotionReady />
         <a href="#main" className="skip-link">
           Skip to content
         </a>
