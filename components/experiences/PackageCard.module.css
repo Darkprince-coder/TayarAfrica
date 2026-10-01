@@ -103,6 +103,11 @@
   max-width: 34rem;
 }
 
+/* Compact on phones: a normal landscape image on top (without a height the image collapses). */
+.compact .media {
+  aspect-ratio: var(--ratio-landscape);
+}
+
 /* Compact: image beside the text on wider screens, so supporting trips read as a list, not another grid. */
 @media (min-width: 40rem) {
   .compact {
