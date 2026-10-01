@@ -29,8 +29,8 @@ export function Intro() {
             </p>
           </Reveal>
           <Reveal delay={500}>
-            <Button href="/about" variant="secondary" arrow>
-              About TAYARI
+            <Button href="/about" variant="link" arrow>
+              Read about TAYARI
             </Button>
           </Reveal>
         </div>

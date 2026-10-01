@@ -140,7 +140,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
               </p>
               <p className={styles.subtitle}>{slide.subtitle}</p>
               <div className={styles.cta}>
-                <Button href={slide.ctaHref} size="lg" arrow>
+                <Button href={slide.ctaHref} size="lg" arrow variant={slide.ctaStyle === "glass" ? "glass" : "primary"}>
                   {slide.ctaText}
                 </Button>
               </div>

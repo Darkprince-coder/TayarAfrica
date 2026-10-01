@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/Badge";
+import { cn } from "@/lib/cn";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
 import type { Testimonial } from "@/lib/content/types";
@@ -21,7 +22,7 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
         )}
         <ul role="list" className={styles.grid}>
           {testimonials.slice(0, 3).map((t, i) => (
-            <Reveal as="li" delay={i * 150} key={t.id} className={styles.card}>
+            <Reveal as="li" delay={i * 150} key={t.id} className={cn(styles.card, i === 0 && styles.lead)}>
               <figure className={styles.figure}>
                 <span className={styles.mark} aria-hidden="true">
                   &ldquo;

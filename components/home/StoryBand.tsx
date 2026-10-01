@@ -43,8 +43,8 @@ export function StoryBand({ image }: { image: ImageRef }) {
               </p>
             </Reveal>
             <Reveal delay={550}>
-              <Button href="/about#how-we-work" variant="light" arrow>
-                How we plan a trip
+              <Button href="/about#how-we-work" variant="linkLight" arrow>
+                See how we plan a trip
               </Button>
             </Reveal>
           </div>

@@ -34,6 +34,7 @@
   background: var(--color-forest);
   color: var(--color-text-on-dark);
   --accent: var(--color-gold);
+  --focus-color: var(--color-gold-bright);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lift);
 }

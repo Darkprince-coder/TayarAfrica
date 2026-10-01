@@ -32,7 +32,7 @@ export function FinalCta({ image, whatsapp }: { image: ImageRef; whatsapp: strin
             </Reveal>
           </div>
 
-          <Reveal variant="clip" delay={200} className={styles.photo}>
+          <Reveal variant="right" delay={200} className={styles.photo}>
             <ImageFrame
               src={image.src}
               alt={image.alt}

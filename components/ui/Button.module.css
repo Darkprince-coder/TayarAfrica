@@ -54,6 +54,49 @@
   color: var(--color-forest-deep);
 }
 
+.glass {
+  background: rgb(20 38 30 / 0.28);
+  color: var(--color-text-on-dark);
+  border-color: rgb(244 238 227 / 0.55);
+  backdrop-filter: blur(8px);
+}
+
+/* Text links: quiet by design, so the one flagship button on a screen stays the loudest thing. */
+.link,
+.linkLight {
+  min-height: 2.75rem;
+  padding: 0 0.15rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.link {
+  color: var(--color-forest);
+}
+.linkLight {
+  color: var(--color-text-on-dark);
+}
+.link .label,
+.linkLight .label {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+  padding-bottom: 0.2rem;
+  transition: background-size var(--dur-base) var(--ease-out);
+}
+
+/* A soft sheen crosses the flagship button on hover. */
+.primary {
+  position: relative;
+  overflow: hidden;
+}
+.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.22) 50%, transparent 65%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
 /* Hover effects only where hover exists — touch never depends on them. */
 @media (hover: hover) {
   .primary:hover {
@@ -71,6 +114,19 @@
   }
   .light:hover {
     background: #fff;
+  }
+  .glass:hover {
+    background: rgb(20 38 30 / 0.5);
+    border-color: var(--color-text-on-dark);
+  }
+  .link:hover .label,
+  .linkLight:hover .label {
+    background-size: 0 1px;
+    background-position: 100% 100%;
+  }
+  .primary:hover::after {
+    transform: translateX(120%);
+    transition: transform 0.9s var(--ease-cine);
   }
   .button:hover .arrow {
     transform: translateX(4px);

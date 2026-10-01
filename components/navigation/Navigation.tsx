@@ -100,7 +100,7 @@ export function Navigation({ phone, whatsapp }: { phone: string; whatsapp: strin
           </nav>
 
           <div className={styles.actions}>
-            <Button href={primaryCta.href} className={styles.cta}>
+            <Button href={primaryCta.href} className={styles.cta} variant={solid ? "primary" : "glass"}>
               {primaryCta.label}
             </Button>
             <button
@@ -163,7 +163,7 @@ export function Navigation({ phone, whatsapp }: { phone: string; whatsapp: strin
             ))}
           </ul>
           <div className={styles.panelFoot} style={{ "--i": navItems.length } as React.CSSProperties}>
-            <Button href={primaryCta.href} size="lg" fullWidth arrow>
+            <Button href={primaryCta.href} fullWidth arrow>
               {primaryCta.label}
             </Button>
             <p className={styles.panelContact}>

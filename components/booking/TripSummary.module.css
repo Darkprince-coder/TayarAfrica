@@ -1,4 +1,5 @@
 .summary {
+  --focus-color: var(--color-gold-bright);
   display: grid;
   gap: var(--space-4);
   padding: var(--space-6);

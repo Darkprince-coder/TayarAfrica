@@ -1,5 +1,6 @@
 .section {
   position: relative;
+  overflow-x: clip; /* slide-in reveals start off to the side and must not widen the page */
   padding-block: var(--section-pad);
 }
 .sm {
@@ -38,6 +39,7 @@
   background: var(--color-forest);
   color: var(--color-text-on-dark);
   --accent: var(--color-gold);
+  --focus-color: var(--color-gold-bright);
 }
 
 /* The gutter lives inside the container so content lines up with the navigation and hero. */

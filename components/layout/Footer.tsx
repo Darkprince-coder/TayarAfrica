@@ -69,6 +69,10 @@ export async function Footer() {
         </div>
       </div>
 
+      <p className={styles.mega} aria-hidden="true">
+        TAYARI
+      </p>
+
       <div className={styles.bottom}>
         <p>
           &copy; {new Date().getFullYear()} {site.legalName}

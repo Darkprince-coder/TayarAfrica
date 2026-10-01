@@ -4,7 +4,11 @@ import { cn } from "@/lib/cn";
 import styles from "./Button.module.css";
 
 type Common = {
-  variant?: "primary" | "secondary" | "ghost" | "light";
+  /**
+   * primary: the flagship action (ember). secondary: outlined. glass: translucent, for use over photographs.
+   * link / linkLight: a text link with an animated underline, for tertiary actions on light / dark surfaces.
+   */
+  variant?: "primary" | "secondary" | "ghost" | "light" | "glass" | "link" | "linkLight";
   size?: "md" | "lg";
   fullWidth?: boolean;
   /** Shows a small arrow that nudges on hover. */

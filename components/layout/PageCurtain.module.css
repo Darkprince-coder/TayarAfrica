@@ -1,0 +1,54 @@
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 90; /* above the navigation, below the first-visit logo intro */
+  display: grid;
+  place-items: center;
+  background: var(--color-forest-deep);
+  pointer-events: none;
+  /* Covered at once, held briefly, then wiped away upward. */
+  animation: wipe 1050ms var(--ease-wipe) both;
+}
+.mark {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  animation: mark-out 520ms var(--ease-in-out) 120ms both;
+}
+.emblem {
+  width: 4rem;
+  height: auto;
+  opacity: 0.9;
+}
+.motif {
+  width: 5rem;
+  color: var(--color-gold);
+  opacity: 0.8;
+}
+
+@keyframes wipe {
+  0%,
+  28% {
+    clip-path: inset(0 0 0 0);
+  }
+  99% {
+    clip-path: inset(0 0 100% 0);
+    visibility: visible;
+  }
+  100% {
+    clip-path: inset(0 0 100% 0);
+    visibility: hidden;
+  }
+}
+@keyframes mark-out {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curtain {
+    display: none;
+  }
+}

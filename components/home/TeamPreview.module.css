@@ -1,26 +1,34 @@
-.head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
-  gap: var(--space-5);
+.layout {
+  display: grid;
+  gap: var(--space-7);
 }
-.head > :first-child {
-  flex: 1 1 24rem;
+.lead {
+  max-width: 26rem;
+}
+.side {
+  display: grid;
+  align-content: end;
 }
 .grid {
   display: grid;
-  gap: var(--space-5);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
 }
 
 @media (min-width: 62rem) {
-  .grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-6);
+  .layout {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-9);
+    align-items: end;
   }
-  /* A gentle stagger so the row feels hand-placed. */
-  .grid > li:nth-child(even) {
-    margin-top: var(--space-7);
+  .lead {
+    max-width: none;
+  }
+  .grid {
+    gap: var(--space-5);
+  }
+  /* A gentle stagger so the three feel hand-placed. */
+  .grid > li:nth-child(2) {
+    margin-top: var(--space-6);
   }
 }

@@ -1,4 +1,5 @@
 .hero {
+  --focus-color: var(--color-gold-bright);
   position: relative;
   min-height: 100svh;
   display: grid;

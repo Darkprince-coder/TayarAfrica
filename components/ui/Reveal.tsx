@@ -7,8 +7,8 @@ import styles from "./Reveal.module.css";
 
 type RevealProps = {
   as?: "div" | "li" | "section" | "article";
-  /** up: rises and fades in. fade: fades only. clip: image-style wipe with a slow settle. */
-  variant?: "up" | "fade" | "clip";
+  /** up: rises and fades in. fade: fades only. clip: image-style wipe with a slow settle. left / right: slides in from that side. */
+  variant?: "up" | "fade" | "clip" | "left" | "right";
   /** Extra delay in ms. Use index * ~120 to stagger lists. */
   delay?: number;
   className?: string;

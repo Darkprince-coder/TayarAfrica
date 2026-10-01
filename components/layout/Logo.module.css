@@ -10,7 +10,7 @@
   color: var(--color-text-on-dark);
 }
 .emblem {
-  width: 2.75rem;
+  width: 3.25rem;
   height: auto;
 }
 .word {
@@ -19,7 +19,7 @@
 }
 .name {
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   font-weight: 600;
   letter-spacing: 0.14em;
 }

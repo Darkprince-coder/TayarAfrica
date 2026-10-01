@@ -23,7 +23,7 @@ export function FeaturedDestinations({ destinations }: { destinations: Destinati
           lead="From open savannah to the Swahili coast. Start with a place, or tell us what you want to feel and we will suggest one."
           align="split"
           action={
-            <Button href="/destinations" variant="secondary" arrow>
+            <Button href="/destinations" variant="link" arrow>
               See all destinations
             </Button>
           }

@@ -110,6 +110,8 @@ export interface HeroSlide {
   ctaHref: string;
   /** Where the words sit, chosen to keep them clear of the photo's subject. */
   textPosition?: "bottom-left" | "middle-left" | "bottom-right";
+  /** primary: the flagship orange button. glass: a quieter translucent one, for slides that point at browsing rather than enquiring. */
+  ctaStyle?: "primary" | "glass";
   order: number;
   active: boolean;
 }

@@ -6,11 +6,20 @@
 
 /* Hidden start state: only when motion is allowed (data-motion on <html>) and until shown. */
 :global(html[data-motion]) .up:not([data-state="shown"]),
+:global(html[data-motion]) .left:not([data-state="shown"]),
+:global(html[data-motion]) .right:not([data-state="shown"]),
 :global(html[data-motion]) .fade:not([data-state="shown"]) {
   opacity: 0;
 }
 :global(html[data-motion]) .up:not([data-state="shown"]) {
   transform: translate3d(0, 46px, 0);
+}
+
+:global(html[data-motion]) .left:not([data-state="shown"]) {
+  transform: translate3d(-56px, 0, 0);
+}
+:global(html[data-motion]) .right:not([data-state="shown"]) {
+  transform: translate3d(56px, 0, 0);
 }
 
 /* Clip variant: the picture wipes open from the top and settles from slightly zoomed in. */
