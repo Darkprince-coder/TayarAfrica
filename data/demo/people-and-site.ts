@@ -69,10 +69,10 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const heroSlides: HeroSlide[] = [
-  { id: "hero-1", image: img("hero/hero-01.jpg", "Elephants walking across the Amboseli plains with Mount Kilimanjaro behind", "hero", { desktop: "50% 60%", mobile: "56% 60%" }), title: "Africa, arranged around you.", subtitle: "Tell us what you want to see. We will plan the rest.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", order: 1, active: true },
-  { id: "hero-2", image: img("hero/hero-02.jpg", "A lone acacia tree silhouetted against an orange Kenyan sunset", "hero", { desktop: "40% 55%", mobile: "42% 55%" }), title: "Watch the sun go down over the Mara.", subtitle: "Game drives, sundowners and long evenings on the plains.", ctaText: "Explore Experiences", ctaHref: "/experiences", order: 2, active: true },
-  { id: "hero-3", image: img("hero/hero-03.jpg", "Palm trees and beach umbrellas along a white sand beach on the Kenyan coast", "hero", { desktop: "40% 60%", mobile: "35% 60%" }), title: "Then slow down by the ocean.", subtitle: "White sand, warm water and the Swahili coast.", ctaText: "Discover Destinations", ctaHref: "/destinations", order: 3, active: true },
-  { id: "hero-4", image: img("hero/hero-04.jpg", "A lioness standing beside a tree trunk in the Kenyan savannah", "hero", { desktop: "60% 45%", mobile: "62% 45%" }), title: "See the Mara at first light.", subtitle: "Early game drives with a driver-guide who knows the plains.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", order: 4, active: true },
+  { id: "hero-1", image: img("hero/hero-01.jpg", "Elephants walking across the Amboseli plains with Mount Kilimanjaro behind", "hero", { desktop: "50% 60%", mobile: "56% 60%" }), title: "Africa, arranged around you.", subtitle: "Tell us what you want to see. We will plan the rest.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", textPosition: "middle-left", order: 1, active: true },
+  { id: "hero-2", image: img("hero/hero-02.jpg", "A lone acacia tree silhouetted against an orange Kenyan sunset", "hero", { desktop: "40% 55%", mobile: "42% 55%" }), title: "Watch the sun go down over the Mara.", subtitle: "Game drives, sundowners and long evenings on the plains.", ctaText: "Explore Experiences", ctaHref: "/experiences", textPosition: "bottom-right", order: 2, active: true },
+  { id: "hero-3", image: img("hero/hero-03.jpg", "Palm trees and beach umbrellas along a white sand beach on the Kenyan coast", "hero", { desktop: "40% 60%", mobile: "35% 60%" }), title: "Then slow down by the ocean.", subtitle: "White sand, warm water and the Swahili coast.", ctaText: "Discover Destinations", ctaHref: "/destinations", textPosition: "bottom-left", order: 3, active: true },
+  { id: "hero-4", image: img("hero/hero-04.jpg", "A lioness standing beside a tree trunk in the Kenyan savannah", "hero", { desktop: "50% 45%", mobile: "36% 45%" }), title: "See the Mara at first light.", subtitle: "Early game drives with a driver-guide who knows the plains.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", textPosition: "middle-left", order: 4, active: true },
 ];
 
 /** PLACEHOLDER social links — replace with real profiles. */
@@ -93,7 +93,7 @@ export const siteSettings: SiteSettings = {
     ogImage: img("og/default.jpg", "TAYARI Africa Tours, Kenya safaris and beach holidays", "og"),
   },
   homeImages: {
-    story: img("about/story-01.jpg", "A hot-air balloon floating above open plains at sunrise", "story"),
-    cta: img("about/story-02.jpg", "A giraffe and acacia trees on the plains under a dramatic evening sky", "story"),
+    story: img("about/story-01.jpg", "A hot-air balloon floating above open plains at sunrise", "story", { desktop: "22% 50%", mobile: "22% 50%" }),
+    cta: img("about/story-02.jpg", "A giraffe and acacia trees on the plains under a dramatic evening sky", "story", { desktop: "46% 50%", mobile: "46% 50%" }),
   },
 };

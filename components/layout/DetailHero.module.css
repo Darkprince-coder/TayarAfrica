@@ -22,8 +22,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgb(20 38 30 / 0.92), rgb(20 38 30 / 0.6) 40%, rgb(20 38 30 / 0.12) 75%, transparent),
-    linear-gradient(to right, rgb(20 38 30 / 0.55), transparent 65%);
+    linear-gradient(to top, rgb(20 38 30 / 0.8), rgb(20 38 30 / 0.36) 34%, transparent 62%),
+    linear-gradient(to right, rgb(20 38 30 / 0.5), transparent 58%);
 }
 .content {
   position: relative;

@@ -1,49 +1,57 @@
-.cta {
-  position: relative;
+.section {
+  padding-block: clamp(4rem, 3rem + 6vw, 8rem);
+}
+.grid {
   display: grid;
-  place-items: center;
-  min-height: min(80svh, 46rem);
-  color: var(--color-text-on-dark);
-  background: var(--color-forest-deep);
-  text-align: center;
-  overflow: hidden;
-  isolation: isolate;
+  gap: var(--space-7);
+  align-items: center;
 }
-.media {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-.frame {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-}
-.scrim {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, rgb(20 38 30 / 0.55), rgb(20 38 30 / 0.82));
-}
-.content {
-  position: relative;
-  max-width: 44rem;
-  padding: var(--section-pad) var(--gutter);
+
+.copy {
   display: grid;
   gap: var(--space-5);
-  justify-items: center;
+  justify-items: start;
+}
+.eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
 }
 .title {
-  font-size: var(--text-3xl);
+  font-size: clamp(2.6rem, 1.4rem + 4.6vw, 6rem);
+  line-height: 1;
+  max-width: 12ch;
 }
-.copy {
+.text {
   font-size: var(--text-lg);
-  color: rgb(244 238 227 / 0.9);
-  max-width: 34rem;
+  color: var(--color-text-on-dark-muted);
+  max-width: 30rem;
 }
 .actions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
   gap: var(--space-4);
-  margin-top: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.photo {
+  aspect-ratio: var(--ratio-landscape);
+}
+.frame {
+  height: 100%;
+}
+
+@media (min-width: 62rem) {
+  .grid {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: var(--space-9);
+  }
+  .photo {
+    aspect-ratio: var(--ratio-portrait);
+    /* A touch of vertical offset keeps the composition from feeling boxed in. */
+    margin-block: calc(var(--space-6) * -1) var(--space-6);
+  }
 }

@@ -1,40 +1,40 @@
-.band {
-  position: relative;
-  min-height: min(90svh, 52rem);
-  display: grid;
-  align-items: center;
-  color: var(--color-text-on-dark);
-  background: var(--color-forest-deep);
-  overflow: hidden;
-  isolation: isolate;
+.section {
+  overflow: hidden; /* the panel's overlap must never create sideways scroll */
 }
-.media {
-  position: absolute;
-  inset: 0;
+.grid {
+  display: grid;
+  gap: 0;
+}
+
+.photo {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: var(--ratio-landscape);
+}
+.photoInner {
+  position: relative;
+  height: 100%;
   overflow: hidden;
+  border-radius: var(--radius-lg);
 }
 .frame {
   position: absolute;
   inset: 0;
   height: 100%;
 }
-.scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgb(20 38 30 / 0.85), rgb(20 38 30 / 0.35) 65%, rgb(20 38 30 / 0.15));
-}
-.content {
+
+.panel {
   position: relative;
-  width: 100%;
-  max-width: var(--container);
-  margin-inline: auto;
-  padding: var(--section-pad) var(--gutter);
+  z-index: 2;
   display: grid;
   gap: var(--space-5);
   justify-items: start;
-}
-.content > * {
-  max-width: 34rem;
+  margin: calc(var(--space-7) * -1) var(--space-4) 0;
+  padding: clamp(1.75rem, 4vw, 3.5rem);
+  background: var(--color-forest);
+  color: var(--color-text-on-dark);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lift);
 }
 .eyebrow {
   font-size: var(--text-xs);
@@ -48,5 +48,27 @@
 }
 .copy {
   font-size: var(--text-lg);
-  color: rgb(244 238 227 / 0.9);
+  color: var(--color-text-on-dark-muted);
+  max-width: 32rem;
+}
+
+@media (min-width: 62rem) {
+  .grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+  }
+  .photo {
+    grid-column: 1 / span 7;
+    grid-row: 1;
+    aspect-ratio: auto;
+    /* A real height (not min-height) so the clipped inner wrapper can fill it. */
+    height: clamp(30rem, 40vw, 40rem);
+  }
+  /* The panel overlaps the photo's edge and sits slightly lower, like a printed spread. */
+  .panel {
+    grid-column: 6 / span 7;
+    grid-row: 1;
+    margin: var(--space-9) 0 calc(var(--space-7) * -1) 0;
+    padding: clamp(2.5rem, 4vw, 4rem);
+  }
 }

@@ -28,9 +28,9 @@ export const destinations: Destination[] = [
         "Wildlife is excellent year-round. The migration is typically in the Mara from around July to October; the drier months make game viewing easier.",
       bestMonths: "Jul – Oct, Jan – Feb",
     },
-    cover: img("destinations/maasai-mara/cover.jpg", "Two elephants walking across the Maasai Mara plains under a stormy sky", "cover"),
+    cover: img("destinations/maasai-mara/cover.jpg", "Two elephants standing in dry grass on the Maasai Mara", "cover"),
     gallery: [
-      img("destinations/maasai-mara/gallery-01.jpg", "Two elephants standing in dry grass on the Maasai Mara", "gallery"),
+      img("destinations/maasai-mara/gallery-01.jpg", "Two elephants walking across the Maasai Mara plains under a stormy sky", "gallery"),
       img("destinations/maasai-mara/gallery-02.jpg", "Wildebeest herds spread across the Mara plains during the migration", "gallery"),
     ],
     featured: true,

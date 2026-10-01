@@ -95,14 +95,42 @@
   }
 }
 
+/* A whisper of shade at the very bottom so the progress lines always read. */
 .scrim {
   position: absolute;
   inset: 0;
   z-index: 3;
-  background:
-    linear-gradient(to top, rgb(20 38 30 / 0.88), rgb(20 38 30 / 0.45) 38%, rgb(20 38 30 / 0.1) 70%, transparent),
-    linear-gradient(to right, rgb(20 38 30 / 0.5), transparent 62%);
+  background: linear-gradient(to top, rgb(20 38 30 / 0.4), transparent 24%);
   pointer-events: none;
+}
+
+/* The shade belongs to each photo (it wipes in with it) and only darkens the side where the words sit. */
+.shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.slide[data-pos="bottom-left"] .shade {
+  background:
+    linear-gradient(to top, rgb(20 38 30 / 0.66), rgb(20 38 30 / 0.22) 34%, transparent 58%),
+    linear-gradient(to right, rgb(20 38 30 / 0.42), transparent 52%);
+}
+.slide[data-pos="middle-left"] .shade {
+  background:
+    linear-gradient(to right, rgb(20 38 30 / 0.66), rgb(20 38 30 / 0.28) 40%, transparent 68%),
+    linear-gradient(to top, rgb(20 38 30 / 0.3), transparent 30%);
+}
+.slide[data-pos="bottom-right"] .shade {
+  background:
+    linear-gradient(to top, rgb(20 38 30 / 0.66), rgb(20 38 30 / 0.22) 34%, transparent 58%),
+    linear-gradient(to left, rgb(20 38 30 / 0.42), transparent 52%);
+}
+/* On phones the words always sit low and full width. */
+@media (max-width: 40rem) {
+  .slide .shade {
+    background: linear-gradient(to top, rgb(20 38 30 / 0.78), rgb(20 38 30 / 0.34) 46%, transparent 72%) !important;
+  }
 }
 
 /* The very first slide eases in from the dark once the logo intro hands off. */
@@ -110,7 +138,7 @@
   opacity: 0;
 }
 .stage {
-  transition: opacity 2s var(--ease-in-out);
+  transition: opacity 1.4s var(--ease-in-out);
 }
 
 /* ---------- Words ---------- */
@@ -130,6 +158,27 @@
   justify-items: start;
   align-content: end;
   visibility: hidden;
+}
+.copy[data-pos="middle-left"] {
+  align-content: center;
+}
+.copy[data-pos="bottom-right"] {
+  justify-items: end;
+  text-align: right;
+}
+.copy[data-pos="bottom-right"] .eyebrow {
+  flex-direction: row-reverse;
+}
+@media (max-width: 40rem) {
+  .copy,
+  .copy[data-pos] {
+    align-content: end;
+    justify-items: start;
+    text-align: left;
+  }
+  .copy[data-pos="bottom-right"] .eyebrow {
+    flex-direction: row;
+  }
 }
 .copy.current,
 .copy.previous {
@@ -155,11 +204,12 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: var(--text-hero);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  max-width: 13ch;
+  font-size: clamp(2.9rem, 1.5rem + 5.8vw, 7.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.028em;
+  max-width: 11ch;
   text-wrap: balance;
+  text-shadow: 0 2px 28px rgb(20 38 30 / 0.4);
 }
 .word {
   display: inline-block;
@@ -176,6 +226,10 @@
   display: inline-block;
 }
 
+.eyebrow,
+.subtitle {
+  text-shadow: 0 1px 16px rgb(20 38 30 / 0.55);
+}
 .subtitle {
   font-size: var(--text-lg);
   max-width: 30rem;
@@ -346,7 +400,8 @@
   inset: 0;
   background: var(--color-text-on-dark);
   transform-origin: left;
-  animation: progress var(--slide-seconds, 6s) linear both;
+  /* 1s pause so the headline lands before the clock starts. */
+  animation: progress var(--slide-seconds, 5s) linear 1s both;
 }
 .hero[data-running="false"] .fill {
   animation-play-state: paused;
@@ -376,5 +431,54 @@
   }
   .enter {
     animation: none !important;
+  }
+}
+
+/* Scroll cue (wide screens only) */
+.cue {
+  display: none;
+}
+@media (min-width: 62rem) {
+  .cue {
+    position: absolute;
+    z-index: 6;
+    right: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+    bottom: var(--space-6);
+    display: grid;
+    justify-items: center;
+    gap: var(--space-2);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgb(244 238 227 / 0.85);
+    writing-mode: vertical-rl;
+  }
+  .cue i {
+    width: 1px;
+    height: 3.25rem;
+    background: rgb(244 238 227 / 0.35);
+    position: relative;
+    overflow: hidden;
+  }
+  .cue i::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-gold);
+    transform: translateY(-100%);
+    animation: cue 2.4s var(--ease-in-out) infinite;
+  }
+}
+@keyframes cue {
+  60%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cue i::after {
+    animation: none;
+    transform: none;
   }
 }

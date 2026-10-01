@@ -10,7 +10,7 @@ function priceLabel(price: TravelPackage["price"]): string {
 export function PackageCard({ travelPackage: p, sizes }: { travelPackage: TravelPackage; sizes: string }) {
   return (
     <Link href={`/experiences/${p.slug}`} className={styles.card}>
-      <ImageFrame src={p.cover.src} focus={p.cover.focus} focusMobile={p.cover.focusMobile} alt={p.cover.alt} ratio="4 / 3" sizes={sizes} className={styles.media} imageClassName={styles.image} />
+      <ImageFrame src={p.cover.src} focus={p.cover.focus} focusMobile={p.cover.focusMobile} alt={p.cover.alt} ratio="var(--ratio-landscape)" sizes={sizes} className={styles.media} imageClassName={styles.image} />
       <span className={styles.body}>
         <span className={styles.meta}>
           {p.duration.days} days, {p.duration.nights} nights

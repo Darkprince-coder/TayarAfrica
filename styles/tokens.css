@@ -58,6 +58,13 @@
   --container: 80rem;
   --container-narrow: 46rem;
 
+  /* Photography: shared colour grade and aspect ratios */
+  --photo-grade-top: rgb(255 214 160 / 0.2);
+  --photo-grade-bottom: rgb(150 90 40 / 0.22);
+  --ratio-portrait: 4 / 5;
+  --ratio-landscape: 3 / 2;
+  --ratio-wide: 16 / 9;
+
   /* Shape & depth */
   --radius-sm: 0.375rem;
   --radius-md: 0.75rem;

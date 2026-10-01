@@ -1,8 +1,20 @@
 .frame {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
   width: 100%;
   background: var(--color-sand-deep);
+}
+/* One shared colour grade for every photograph: a faint warm wash that pulls teal beaches, green
+   savannah and orange sunsets toward the same family. Change --photo-grade-* in tokens.css. */
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--photo-grade-top), var(--photo-grade-bottom));
+  mix-blend-mode: soft-light;
 }
 .rounded {
   border-radius: var(--radius-lg);

@@ -8,8 +8,8 @@ import type { HeroSlide } from "@/lib/content/types";
 import { afterIntro } from "@/lib/motion-gate";
 import styles from "./HeroSlider.module.css";
 
-/** Seconds each slide stays before the next one begins (also the progress-dot duration). */
-const SLIDE_SECONDS = 6;
+/** Progress-line duration. The line starts 1s after a slide arrives (letting the words land), so a slide stays about 6s. */
+const SLIDE_SECONDS = 5;
 
 /** Image transition used when a slide ARRIVES. Cycled by slide index so no two in a row match. */
 const ENTER = ["wipe", "iris", "fade", "rise"] as const;
@@ -82,6 +82,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
               key={slide.id}
               className={cn(styles.slide, isCurrent && styles.current, isPrevious && styles.previous, isCurrent && view.previous !== null && styles.enter)}
               data-enter={ENTER[i % ENTER.length]}
+              data-pos={slide.textPosition ?? "bottom-left"}
               style={{ "--dx": dx, "--dy": dy } as CSSProperties}
               role="group"
               aria-roledescription="slide"
@@ -102,6 +103,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                 className={styles.frame}
                 imageClassName={styles.image}
               />
+              <span className={styles.shade} aria-hidden="true" />
             </div>
           );
         })}
@@ -118,6 +120,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
               key={slide.id}
               className={cn(styles.copy, isCurrent && styles.current, isPrevious && styles.previous)}
               data-fx={TEXT_FX[i % TEXT_FX.length]}
+              data-pos={slide.textPosition ?? "bottom-left"}
               aria-hidden={!isCurrent}
               inert={!isCurrent}
             >
@@ -143,6 +146,11 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
             </div>
           );
         })}
+      </div>
+
+      <div className={styles.cue} aria-hidden="true">
+        <span>Scroll</span>
+        <i />
       </div>
 
       {/* Progress lines: tap one to jump to that slide */}

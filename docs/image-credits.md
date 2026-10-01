@@ -14,8 +14,8 @@ Before launch, confirm the final photography (licensed, owned or commissioned) a
 | `public/images/hero/hero-02.jpg` | [23831844](https://www.pexels.com/photo/23831844/) |
 | `public/images/hero/hero-03.jpg` | [13292007](https://www.pexels.com/photo/13292007/) |
 | `public/images/hero/hero-04.jpg` | [33965621](https://www.pexels.com/photo/33965621/) |
-| `public/images/destinations/maasai-mara/cover.jpg` | [18960157](https://www.pexels.com/photo/18960157/) |
-| `public/images/destinations/maasai-mara/gallery-01.jpg` | [10822356](https://www.pexels.com/photo/10822356/) |
+| `public/images/destinations/maasai-mara/cover.jpg` | [10822356](https://www.pexels.com/photo/10822356/) |
+| `public/images/destinations/maasai-mara/gallery-01.jpg` | [18960157](https://www.pexels.com/photo/18960157/) |
 | `public/images/destinations/maasai-mara/gallery-02.jpg` | [29003466](https://www.pexels.com/photo/29003466/) |
 | `public/images/destinations/amboseli/cover.jpg` | [19171291](https://www.pexels.com/photo/19171291/) |
 | `public/images/destinations/amboseli/gallery-01.jpg` | [35718707](https://www.pexels.com/photo/35718707/) |

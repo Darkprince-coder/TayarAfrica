@@ -2,8 +2,8 @@
 import fs from "node:fs";
 
 const alt = {
-  "destinations/maasai-mara/cover.jpg": "Two elephants walking across the Maasai Mara plains under a stormy sky",
-  "destinations/maasai-mara/gallery-01.jpg": "Two elephants standing in dry grass on the Maasai Mara",
+  "destinations/maasai-mara/cover.jpg": "Two elephants standing in dry grass on the Maasai Mara",
+  "destinations/maasai-mara/gallery-01.jpg": "Two elephants walking across the Maasai Mara plains under a stormy sky",
   "destinations/maasai-mara/gallery-02.jpg": "Wildebeest herds spread across the Mara plains during the migration",
   "destinations/amboseli/cover.jpg": "Zebras and an acacia tree beneath Mount Kilimanjaro in Amboseli",
   "destinations/amboseli/gallery-01.jpg": "An elephant herd with calves walking across Amboseli",

@@ -5,10 +5,10 @@
 }
 .lead {
   grid-column: 1 / -1;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: var(--ratio-wide);
 }
 .item {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: var(--ratio-landscape);
 }
 .frame {
   height: 100%;
@@ -31,7 +31,7 @@
   .grid[data-count="2"] .lead {
     grid-column: span 2;
     grid-row: span 1;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: var(--ratio-landscape);
   }
   .grid[data-count="2"] .item {
     aspect-ratio: auto;

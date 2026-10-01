@@ -108,6 +108,8 @@ export interface HeroSlide {
   subtitle: string;
   ctaText: string;
   ctaHref: string;
+  /** Where the words sit, chosen to keep them clear of the photo's subject. */
+  textPosition?: "bottom-left" | "middle-left" | "bottom-right";
   order: number;
   active: boolean;
 }
