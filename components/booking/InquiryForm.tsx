@@ -30,6 +30,8 @@ type Props = {
   destinations: { slug: string; name: string }[];
   initialPackage: string;
   initialDestination: string;
+  /** From the homepage trip finder (?duration=…); already checked against DURATION_VALUES. */
+  initialDuration?: string;
   /** Today as YYYY-MM-DD, computed on the server so the date picker's minimum matches the server check. */
   today: string;
   whatsapp: string;
@@ -46,12 +48,13 @@ function subset(values: InquiryFormValues, keys: readonly string[]) {
   return Object.fromEntries(keys.map((k) => [k, (values as Record<string, unknown>)[k]]));
 }
 
-export function InquiryForm({ packages, destinations, initialPackage, initialDestination, today, whatsapp }: Props) {
+export function InquiryForm({ packages, destinations, initialPackage, initialDestination, initialDuration, today, whatsapp }: Props) {
   const startPackage = packages.find((p) => p.slug === initialPackage);
   const [values, setValues] = useState<InquiryFormValues>(() => ({
     ...emptyInquiry,
     packageSlug: startPackage?.slug ?? "",
     destinationSlug: destinations.some((d) => d.slug === initialDestination) ? initialDestination : "",
+    duration: initialDuration || emptyInquiry.duration,
     experienceTypes: startPackage ? startPackage.types.filter((t) => (EXPERIENCE_TYPES as readonly string[]).includes(t)) : [],
   }));
   const [errors, setErrors] = useState<Record<string, string>>({});

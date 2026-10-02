@@ -67,7 +67,7 @@
   color: var(--color-text-muted);
   padding: 0.4rem 0.9rem;
   background: var(--color-sand);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-button);
   animation: fade-up 1s var(--ease-cine) 1.5s both;
 }
 .ref strong {

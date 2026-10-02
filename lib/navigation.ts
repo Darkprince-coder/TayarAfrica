@@ -43,7 +43,7 @@ export const primaryCta = { label: "Plan Your Journey", href: "/plan-your-journe
  * over it. Everywhere else the nav is solid from the start.
  */
 export function isOverlayRoute(pathname: string): boolean {
-  return pathname === "/" || pathname.startsWith("/destinations/") || pathname.startsWith("/tours/");
+  return pathname === "/" || pathname === "/explore" || pathname.startsWith("/destinations/") || pathname.startsWith("/tours/");
 }
 
 export function isActive(pathname: string, href: string): boolean {

@@ -1,34 +1,156 @@
-.grid {
+/* Phones and tablets: a row of tall cards you swipe, snapping to the gutter. */
+.rail {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: none;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.strips {
   display: grid;
-  gap: var(--space-4);
-  grid-template-columns: 1fr;
+  grid-auto-flow: column;
+  grid-auto-columns: min(74vw, 22rem);
+  gap: var(--space-3);
+  padding-inline: var(--gutter);
+  width: max-content;
 }
-.grid > li {
-  min-height: 22rem;
-}
-.more {
-  margin-top: var(--space-7);
-  display: flex;
-  justify-content: center;
-}
-
-@media (min-width: 40rem) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.item {
+  scroll-snap-align: start;
+  height: clamp(24rem, 62vh, 30rem);
 }
 
-/* Editorial layout: one tall tile on the left, a wide one along the bottom right. */
+/* Wide screens: strips side by side inside the container; the hovered one widens. */
 @media (min-width: 62rem) {
-  .grid {
-    grid-template-columns: 1.15fr 1fr 1fr;
-    grid-template-rows: repeat(2, 21rem);
-    gap: var(--space-5);
+  .rail {
+    overflow: visible;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
   }
-  .cell0 {
-    grid-row: 1 / span 2;
+  .strips {
+    display: flex;
+    gap: var(--space-3);
+    width: auto;
+    padding: 0;
+    height: clamp(30rem, 66vh, 40rem);
   }
-  .cell3 {
-    grid-column: 2 / span 2;
+  .item {
+    flex: 1 1 0;
+    min-width: 0;
+    height: auto;
+    transition: flex-grow 0.9s var(--ease-cine);
+  }
+  .strips:hover .item:hover,
+  .item:focus-within {
+    flex-grow: 2.4;
+  }
+}
+
+.strip {
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  color: var(--color-text-on-dark);
+  text-decoration: none;
+  isolation: isolate;
+}
+.media {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.image {
+  transition:
+    transform 1.4s var(--ease-cine),
+    filter 0.9s var(--ease-out);
+}
+.shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(14 26 21 / 0.9), rgb(14 26 21 / 0.35) 40%, rgb(14 26 21 / 0.1) 70%);
+  transition: background-color 0.9s var(--ease-out);
+}
+
+.number {
+  position: absolute;
+  top: var(--space-5);
+  left: var(--space-5);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.body {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-5);
+}
+.country {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 1.3rem + 1vw, 2.3rem);
+  font-weight: 500;
+  line-height: 1.05;
+}
+.tagline {
+  max-width: 22rem;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-text-on-dark-muted);
+}
+
+@media (min-width: 62rem) {
+  /* Narrow strips keep only the place; the line arrives as a strip opens. */
+  .tagline {
+    max-height: 0;
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+    transition:
+      max-height 0.9s var(--ease-cine),
+      opacity 0.6s var(--ease-out),
+      transform 0.9s var(--ease-cine);
+  }
+  .item:hover .tagline,
+  .item:focus-within .tagline {
+    max-height: 6rem;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.15s;
+  }
+}
+
+@media (hover: hover) {
+  .item:hover .image {
+    transform: scale(1.05);
+  }
+  /* The others step back a little while one is open. */
+  .strips:hover .item:not(:hover) .shade {
+    background-color: rgb(14 26 21 / 0.25);
+  }
+}
+.strip:focus-visible {
+  outline: 2px solid var(--color-gold-bright);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item,
+  .image,
+  .tagline {
+    transition: none !important;
   }
 }

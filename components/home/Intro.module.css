@@ -1,22 +1,94 @@
-.stage {
+.layout {
   display: grid;
-  justify-items: center;
-  gap: var(--space-6);
-  text-align: center;
+  gap: var(--space-7);
 }
-.ornament {
-  width: 7.5rem;
+@media (min-width: 62rem) {
+  .layout {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 1fr) minmax(0, 6fr);
+    align-items: center;
+    gap: 0;
+  }
+  .text {
+    grid-column: 3;
+  }
+}
+
+/* ---------- Photograph ---------- */
+.figure {
+  position: relative;
+  margin: 0;
+  padding: 0 var(--space-5) var(--space-5) 0;
+}
+/* A sand block sits behind and below the photo, offset, so the image feels placed rather than boxed. */
+.block {
+  position: absolute;
+  top: var(--space-8);
+  right: 0;
+  bottom: 0;
+  left: var(--space-8);
+  background: var(--color-sand);
+  border-radius: var(--radius-md);
+}
+.photoWrap {
+  position: relative;
+}
+.photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+.frame {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+@media (max-width: 40rem) {
+  .photo {
+    aspect-ratio: 5 / 4;
+  }
+  .block {
+    top: var(--space-6);
+    left: var(--space-6);
+  }
+}
+
+/* ---------- Words ---------- */
+.text {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
+  max-width: 34rem;
+}
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--color-ember);
-  opacity: 0.75;
 }
-.statement {
+.kicker::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+}
+.title {
   font-size: var(--text-display);
-  line-height: 1.04;
-  letter-spacing: -0.025em;
-  max-width: 19ch;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  max-width: 11ch;
 }
-.copy {
-  font-size: var(--text-lg);
+/* The lead reads like a pull quote: the serif, a size up, warm ink. */
+.lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 1.15rem + 0.7vw, 1.7rem);
+  line-height: 1.4;
+  color: var(--color-text);
+}
+.body {
   color: var(--color-text-muted);
-  max-width: 36rem;
 }

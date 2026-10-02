@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Container, Section } from "@/components/ui/Section";
 import { getDestinations, getPackages, getSiteSettings } from "@/lib/content";
 import { formatDuration } from "@/lib/content/format";
+import { DURATION_VALUES } from "@/lib/validation/options";
 
 export const metadata: Metadata = {
   title: "Plan Your Journey",
@@ -11,10 +12,10 @@ export const metadata: Metadata = {
     "Tell Tayari about the trip you have in mind, anywhere in Africa. Three short steps, and a consultant will reply with ideas and a quote. This is a request, not a booking.",
 };
 
-type Props = { searchParams: Promise<{ package?: string; destination?: string }> };
+type Props = { searchParams: Promise<{ package?: string; destination?: string; duration?: string }> };
 
 export default async function PlanYourJourneyPage({ searchParams }: Props) {
-  const { package: packageParam = "", destination: destinationParam = "" } = await searchParams;
+  const { package: packageParam = "", destination: destinationParam = "", duration: durationParam = "" } = await searchParams;
   const [packages, destinations, site] = await Promise.all([getPackages(), getDestinations(), getSiteSettings()]);
 
   return (
@@ -39,6 +40,7 @@ export default async function PlanYourJourneyPage({ searchParams }: Props) {
             // Only trusted values reach the form: an unknown slug in the URL is simply ignored.
             initialPackage={packages.some((p) => p.slug === packageParam) ? packageParam : ""}
             initialDestination={destinations.some((d) => d.slug === destinationParam) ? destinationParam : ""}
+            initialDuration={(DURATION_VALUES as string[]).includes(durationParam) ? durationParam : ""}
             today={new Date().toISOString().slice(0, 10)}
             whatsapp={site.contact.whatsapp}
           />

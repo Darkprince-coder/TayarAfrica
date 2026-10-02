@@ -54,6 +54,9 @@ Sources: `docs/Website final touches .docx` (client brief), `docs/roadmap.md` (a
 - Hero (`components/hero/HeroSlider`): 6s autoplay driven by the CSS progress animation, pauses on hover / keyboard focus / off-screen / pause button, a different image transition and text effect per slide.
 - Content alignment: gutters live inside `Container` (and footer/hero inners) so everything lines up with the nav.
 
+## Trip finder
+- `components/home/TripFinder` (docked in the homepage hero, prefilled on `/explore`) filters tours and destinations: where / how long / what for. GET form to `/explore?where=&length=&theme=`, logic in `lib/content/filter.ts` (unknown values ignored). Destinations carry `themes`; tour themes derive from `experienceTypes`. The custom tour is always offered as the fallback. `/explore` is noindex.
+
 ## Inquiry flow (Phase 5)
 - `/plan-your-journey` is a 3-step form (`components/booking/InquiryForm`): The trip, The details, About you. Deep links: `?package=<slug>` and `?destination=<slug>` prefill it (unknown slugs are ignored).
 - Validation lives in `lib/validation/` (Zod, one schema per step, reused by the server). Choice lists are in `lib/validation/options.ts`.

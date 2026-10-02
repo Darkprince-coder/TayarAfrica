@@ -15,6 +15,7 @@ export const destinations: Destination[] = [
     countryCodes: ["KE"],
     africaRegion: "east",
     listing: "page",
+    themes: ["wildlife"],
     region: "Kajiado County, South Kenya",
     tagline: "Elephants beneath Africa's tallest free-standing mountain.",
     shortDescription:
@@ -45,6 +46,7 @@ export const destinations: Destination[] = [
     countryCodes: ["KE"],
     africaRegion: "east",
     listing: "page",
+    themes: ["wildlife","culture"],
     region: "Narok County, Southwest Kenya",
     tagline: "Open plains, big cats and the great migration.",
     shortDescription:
@@ -82,6 +84,7 @@ export const destinations: Destination[] = [
     countryCodes: ["KE"],
     africaRegion: "east",
     listing: "page",
+    themes: ["wildlife","culture"],
     region: "Samburu County, Northern Kenya",
     tagline: "Dry northern country with wildlife you won't see further south.",
     shortDescription:
@@ -113,6 +116,7 @@ export const destinations: Destination[] = [
     countryCodes: ["KE"],
     africaRegion: "east",
     listing: "page",
+    themes: ["wildlife"],
     region: "Taita-Taveta & Makueni Counties, Southeast Kenya",
     tagline: "Red earth, red elephants and very few crowds.",
     shortDescription:
@@ -143,6 +147,7 @@ export const destinations: Destination[] = [
     countryCodes: ["KE"],
     africaRegion: "east",
     listing: "page",
+    themes: ["beach"],
     region: "Kwale County, South Coast",
     tagline: "White sand, warm water and nowhere to be.",
     shortDescription:
@@ -173,6 +178,7 @@ export const destinations: Destination[] = [
     countryCodes: ["KE"],
     africaRegion: "east",
     listing: "page",
+    themes: ["wildlife"],
     region: "Nairobi, Central Kenya",
     tagline: "Rhinos and lions with a city skyline behind them.",
     shortDescription:
@@ -204,6 +210,7 @@ export const destinations: Destination[] = [
     countryCodes: ["KE"],
     africaRegion: "east",
     listing: "page",
+    themes: ["beach","culture"],
     region: "Lamu Archipelago, North Coast",
     tagline: "A car-free Swahili island town, best explored on foot or by dhow.",
     shortDescription: "A historic island town of narrow lanes, carved doors and dhows, with a car-free, unhurried rhythm.",
@@ -232,6 +239,7 @@ export const destinations: Destination[] = [
     countryCodes: ["TZ"],
     africaRegion: "east",
     listing: "page",
+    themes: ["wildlife"],
     region: "Northern Tanzania",
     tagline: "Endless plains and the herds that cross them.",
     shortDescription:
@@ -264,6 +272,7 @@ export const destinations: Destination[] = [
     countryCodes: ["TZ"],
     africaRegion: "east",
     listing: "page",
+    themes: ["wildlife","culture"],
     region: "Arusha Region, Northern Tanzania",
     tagline: "A whole safari inside the walls of an old volcano.",
     shortDescription:
@@ -294,6 +303,7 @@ export const destinations: Destination[] = [
     countryCodes: ["TZ"],
     africaRegion: "east",
     listing: "page",
+    themes: ["beach","culture"],
     region: "Zanzibar Archipelago, Tanzania",
     tagline: "Spice island beaches and the lanes of Stone Town.",
     shortDescription:
@@ -326,6 +336,7 @@ export const destinations: Destination[] = [
     countryCodes: ["UG", "RW"],
     africaRegion: "east",
     listing: "card",
+    themes: ["wildlife"],
     region: "Bwindi (Uganda) and Volcanoes National Park (Rwanda)",
     tagline: "An hour with a mountain gorilla family, deep in the forest.",
     shortDescription:
@@ -336,7 +347,7 @@ export const destinations: Destination[] = [
     bestTime: null,
     cover: img("destinations/gorilla-trekking/cover.jpg", "A mountain gorilla sitting in thick green forest", "cover"),
     gallery: [],
-    featured: false,
+    featured: true,
     order: 11,
     status: "published",
   },
@@ -347,6 +358,7 @@ export const destinations: Destination[] = [
     countryCodes: ["ZM", "ZW"],
     africaRegion: "southern",
     listing: "card",
+    themes: ["wildlife"],
     region: "On the Zambezi River, between Zambia and Zimbabwe",
     tagline: "The Zambezi falling into a gorge you hear before you see.",
     shortDescription:
@@ -357,7 +369,7 @@ export const destinations: Destination[] = [
     bestTime: null,
     cover: img("destinations/victoria-falls/cover.jpg", "Victoria Falls pouring over the cliffs into the gorge", "cover"),
     gallery: [],
-    featured: false,
+    featured: true,
     order: 12,
     status: "published",
   },
@@ -368,6 +380,7 @@ export const destinations: Destination[] = [
     countryCodes: ["BW"],
     africaRegion: "southern",
     listing: "card",
+    themes: ["wildlife"],
     region: "Northern Botswana",
     tagline: "Elephants on the riverbank, seen from the water.",
     shortDescription:
@@ -389,6 +402,7 @@ export const destinations: Destination[] = [
     countryCodes: ["ZA"],
     africaRegion: "southern",
     listing: "card",
+    themes: ["wildlife"],
     region: "Northeast South Africa",
     tagline: "Big Five country, from self-drive roads to private reserves.",
     shortDescription:
@@ -410,6 +424,7 @@ export const destinations: Destination[] = [
     countryCodes: ["ZA"],
     africaRegion: "southern",
     listing: "card",
+    themes: ["beach","culture"],
     region: "Western Cape, South Africa",
     tagline: "Table Mountain, two oceans and the winelands next door.",
     shortDescription:
@@ -431,6 +446,7 @@ export const destinations: Destination[] = [
     countryCodes: ["EG"],
     africaRegion: "north",
     listing: "card",
+    themes: ["culture"],
     region: "Cairo, Luxor and Aswan",
     tagline: "The pyramids at Giza, then slowly up the Nile.",
     shortDescription:
@@ -452,6 +468,7 @@ export const destinations: Destination[] = [
     countryCodes: ["MA"],
     africaRegion: "north",
     listing: "card",
+    themes: ["culture"],
     region: "Morocco",
     tagline: "Souks, riads and the Atlas Mountains on the horizon.",
     shortDescription:
@@ -473,6 +490,7 @@ export const destinations: Destination[] = [
     countryCodes: ["GH", "SN"],
     africaRegion: "west",
     listing: "card",
+    themes: ["culture","beach"],
     region: "West Africa",
     tagline: "Culture and heritage on the West African coast.",
     shortDescription:

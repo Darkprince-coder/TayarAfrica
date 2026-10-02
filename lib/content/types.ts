@@ -19,6 +19,9 @@ export interface ImageRef {
   focusMobile?: string;
 }
 
+/** What a place is good for; drives the trip finder's "what are you after" filter. */
+export type Theme = "wildlife" | "beach" | "culture";
+
 /** Parts of the continent, used to group destinations and colour the Africa map. */
 export type AfricaRegion = "east" | "southern" | "north" | "west" | "central";
 
@@ -35,6 +38,7 @@ export interface Destination {
    * trip request (used for places we plan to order rather than with a set itinerary).
    */
   listing: "page" | "card";
+  themes: Theme[];
   /** Where it is within the country, e.g. "Narok County, Southwest Kenya". */
   region: string;
   tagline: string;
@@ -130,21 +134,24 @@ export interface Testimonial {
   isSample: boolean;
 }
 
+/**
+ * A hero photograph. The words over the hero stay fixed (see SiteSettings.hero) while the photos
+ * crossfade beneath them, like the cover of a magazine.
+ */
 export interface HeroSlide {
   id: string;
   image: ImageRef;
-  /** Where the photo was taken, shown as a small caption above the title (e.g. "Amboseli, Kenya"). */
+  /** Where the photo was taken, shown as a small caption (e.g. "Amboseli, Kenya"). */
   place: string;
-  title: string;
-  subtitle: string;
-  ctaText: string;
-  ctaHref: string;
-  /** Where the words sit, chosen to keep them clear of the photo's subject. */
-  textPosition?: "bottom-left" | "middle-left" | "bottom-right";
-  /** primary: the flagship orange button. glass: a quieter translucent one, for slides that point at browsing rather than enquiring. */
-  ctaStyle?: "primary" | "glass";
   order: number;
   active: boolean;
+}
+
+/** The fixed words over the homepage hero. Wrap words in *asterisks* for the italic accent. */
+export interface HeroCopy {
+  kicker: string;
+  title: string;
+  subtitle: string;
 }
 
 export interface Office {
@@ -178,8 +185,9 @@ export interface SiteSettings {
   tagline: string;
   description: string;
   contact: SiteContact;
+  hero: HeroCopy;
   social: { label: string; href: string }[];
   seo: { defaultTitle: string; defaultDescription: string; ogImage: ImageRef };
-  /** Large atmosphere photos used on the homepage (story band and closing call to action). */
-  homeImages: { story: ImageRef; cta: ImageRef };
+  /** Large atmosphere photos used on the homepage. */
+  homeImages: { intro: ImageRef; story: ImageRef; cta: ImageRef };
 }

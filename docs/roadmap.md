@@ -1,4 +1,4 @@
-# TAYARI live launch roadmap
+﻿# TAYARI live launch roadmap
 
 Source material: `docs/Website final touches .docx` (client brief, Pan-African scope) and the design direction
 "a beautiful travel editorial brought to life as a modern website" (inspiration only: Spirit of Kenya, Asilia,
@@ -9,8 +9,8 @@ Each phase stops for review before the next one starts.
 | # | Phase | Status |
 |---|-------|--------|
 | 1 | Brand and type foundation | Done (02597aa) |
-| 2 | Real content and Pan-African data | In review |
-| 3 | Homepage editorial redesign, first half | To do |
+| 2 | Real content and Pan-African data | Done (73d2432) |
+| 3 | Homepage editorial redesign, first half | Done |
 | 4 | Homepage editorial redesign, second half | To do |
 | 5 | Inner pages | To do |
 | 6 | Booking form and legal | To do |
@@ -46,6 +46,10 @@ asymmetric compositions, calm motion, separate mobile art direction, no generic 
 - Phase 3: hero, navigation over the hero, intro, destinations, tours.
 - Phase 4: how it works, why TAYARI, story, team, testimonials, final call to action, mobile pass.
 - Sample testimonials stay visible for review; production hides placeholder testimonials until real ones exist.
+
+## Feedback queued for later phases (2026-10-02)
+- Phase 4: team section arranged by role, not as a corporate grid of equal cards; remove the large outlined "Tayari" wordmark from the footer.
+- Phase 5: every page gets a hero photograph (photography-led storytelling throughout); the client will supply company branches to place on Contact/About.
 
 ## 5. Inner pages
 Destinations with an Africa map, destination and tour detail pages, About, Team (real names and roles; photos

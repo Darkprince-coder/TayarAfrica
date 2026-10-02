@@ -6,7 +6,8 @@ import { RevealText } from "./RevealText";
 import styles from "./Section.module.css";
 
 type SectionProps = {
-  tone?: "bone" | "sand" | "forest";
+  /** deep: the darkest green, for the photo-led moments that should feel like night after day. */
+  tone?: "bone" | "sand" | "forest" | "deep";
   /** Vertical breathing room: sm for light supporting sections, lg for the moments that should land. */
   size?: "sm" | "md" | "lg";
   /** Draws the Tayari pattern along the top edge, marking a change of mood. */

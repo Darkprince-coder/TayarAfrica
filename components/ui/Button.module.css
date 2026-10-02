@@ -6,7 +6,7 @@
   min-height: 3rem; /* touch-friendly */
   padding: 0 var(--space-6);
   border: 1px solid transparent;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-button);
   font-weight: 600;
   font-size: var(--text-sm);
   letter-spacing: 0.02em;

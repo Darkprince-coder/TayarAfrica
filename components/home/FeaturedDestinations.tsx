@@ -1,41 +1,65 @@
-import { DestinationCard } from "@/components/destinations/DestinationCard";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { ImageFrame } from "@/components/ui/ImageFrame";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
+import { destinationHref } from "@/lib/content/format";
 import type { Destination } from "@/lib/content/types";
 import styles from "./FeaturedDestinations.module.css";
 
-const SIZES = [
-  "(min-width: 62rem) 40vw, (min-width: 40rem) 50vw, 100vw",
-  "(min-width: 62rem) 27vw, (min-width: 40rem) 50vw, 100vw",
-  "(min-width: 62rem) 27vw, (min-width: 40rem) 50vw, 100vw",
-  "(min-width: 62rem) 54vw, (min-width: 40rem) 50vw, 100vw",
-];
+const pad = (n: number) => String(n).padStart(2, "0");
 
+/**
+ * "Where could you go": tall photo strips side by side on wide screens. The one under the pointer
+ * (or keyboard focus) widens and reveals its line; on phones the strips become a row you swipe.
+ */
 export function FeaturedDestinations({ destinations }: { destinations: Destination[] }) {
+  const items = destinations.slice(0, 6);
   return (
-    <Section tone="sand" labelledBy="destinations-title">
+    <Section tone="deep" labelledBy="destinations-title">
       <Container>
         <SectionHeading
           id="destinations-title"
-          eyebrow="01 / Destinations"
-          title="Where in *Africa* do you want to be?"
-          lead="Kenya is home and most trips start in East Africa, but we plan across the whole continent. Start with a place, or tell us what you want to feel and we will suggest one."
+          eyebrow="Where could you go"
+          title="Kenya at heart. *Africa within reach.*"
+          lead="Most journeys begin in East Africa. Plenty carry on: to the gorillas, to Victoria Falls, to the pyramids or the Cape."
           align="split"
           action={
-            <Button href="/destinations" variant="link" arrow>
-              See all destinations
+            <Button href="/destinations" variant="linkLight" arrow>
+              See every destination
             </Button>
           }
         />
-        <ul role="list" className={styles.grid}>
-          {destinations.slice(0, 4).map((destination, i) => (
-            <Reveal as="li" variant="clip" delay={i * 140} key={destination.slug} className={styles[`cell${i}`]}>
-              <DestinationCard destination={destination} sizes={SIZES[i]} />
+      </Container>
+
+      <div className={styles.rail}>
+        <ul role="list" className={styles.strips}>
+          {items.map((d, i) => (
+            <Reveal as="li" variant="clip" delay={i * 110} key={d.slug} className={styles.item}>
+              <Link href={destinationHref(d)} className={styles.strip}>
+                <ImageFrame
+                  src={d.cover.src}
+                  alt={d.cover.alt}
+                  focus={d.cover.focus}
+                  focusMobile={d.cover.focusMobile}
+                  sizes="(min-width: 62rem) 30vw, 75vw"
+                  className={styles.media}
+                  imageClassName={styles.image}
+                />
+                <span className={styles.shade} aria-hidden="true" />
+                <span className={styles.number} aria-hidden="true">
+                  {pad(i + 1)}
+                </span>
+                <span className={styles.body}>
+                  <span className={styles.country}>{d.country}</span>
+                  <span className={styles.name}>{d.name}</span>
+                  <span className={styles.tagline}>{d.tagline}</span>
+                </span>
+              </Link>
             </Reveal>
           ))}
         </ul>
-      </Container>
+      </div>
     </Section>
   );
 }

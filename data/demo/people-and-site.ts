@@ -62,11 +62,13 @@ export const testimonials: Testimonial[] = [
   { id: "sample-3", name: "Sample Traveller", location: "Sample location", quote: "Sample testimonial: replace with genuine feedback from real guests once available.", status: "published", isSample: true },
 ];
 
+/** Photos only: the words over the hero live in siteSettings.hero. Captions name the place, never a city we are based in. */
 export const heroSlides: HeroSlide[] = [
-  { id: "hero-1", place: "Amboseli, Kenya", image: img("hero/hero-01.jpg", "Elephants walking across the Amboseli plains with Mount Kilimanjaro behind", "hero", { desktop: "50% 60%", mobile: "56% 60%" }), title: "Africa, *arranged* around you.", subtitle: "Tell us what you want to see. We will plan the rest.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", textPosition: "middle-left", ctaStyle: "primary", order: 1, active: true },
-  { id: "hero-2", place: "Maasai Mara, Kenya", image: img("hero/hero-02.jpg", "A lone acacia tree silhouetted against an orange Kenyan sunset", "hero", { desktop: "40% 55%", mobile: "42% 55%" }), title: "Watch the *sun go down* over the Mara.", subtitle: "Game drives, sundowners and long evenings on the plains.", ctaText: "See our tours", ctaHref: "/tours", textPosition: "bottom-right", ctaStyle: "glass", order: 2, active: true },
-  { id: "hero-3", place: "The Swahili coast", image: img("hero/hero-03.jpg", "Palm trees and beach umbrellas along a white sand beach on the Kenyan coast", "hero", { desktop: "40% 60%", mobile: "35% 60%" }), title: "Then slow down by the *ocean*.", subtitle: "White sand, warm water and the Swahili coast.", ctaText: "Discover Destinations", ctaHref: "/destinations", textPosition: "bottom-left", ctaStyle: "glass", order: 3, active: true },
-  { id: "hero-4", place: "Maasai Mara, Kenya", image: img("hero/hero-04.jpg", "A lioness standing beside a tree trunk in the Kenyan savannah", "hero", { desktop: "50% 45%", mobile: "36% 45%" }), title: "See the Mara at *first light*.", subtitle: "Early game drives with a driver-guide who knows the plains.", ctaText: "Plan a Mara trip", ctaHref: "/plan-your-journey?destination=maasai-mara", textPosition: "middle-left", ctaStyle: "primary", order: 4, active: true },
+  { id: "hero-1", place: "Amboseli, Kenya", image: img("hero/hero-01.jpg", "Elephants walking across the Amboseli plains with Mount Kilimanjaro behind", "hero", { desktop: "50% 60%", mobile: "62% 60%" }), order: 1, active: true },
+  { id: "hero-2", place: "Maasai Mara, Kenya", image: img("hero/hero-02.jpg", "A lone acacia tree silhouetted against an orange sunset in the Maasai Mara", "hero", { desktop: "40% 55%", mobile: "42% 55%" }), order: 2, active: true },
+  { id: "hero-3", place: "Ngorongoro Crater, Tanzania", image: img("destinations/ngorongoro/cover.jpg", "Zebras grazing in the Ngorongoro Crater as sunlight breaks through the clouds", "hero", { desktop: "50% 55%", mobile: "55% 55%" }), order: 3, active: true },
+  { id: "hero-4", place: "The Swahili coast", image: img("hero/hero-03.jpg", "Palm trees and beach umbrellas along a white sand beach on the Indian Ocean", "hero", { desktop: "40% 60%", mobile: "35% 60%" }), order: 4, active: true },
+  { id: "hero-5", place: "Maasai Mara, Kenya", image: img("hero/hero-04.jpg", "A lioness standing beside a tree trunk in the savannah", "hero", { desktop: "50% 45%", mobile: "36% 45%" }), order: 5, active: true },
 ];
 
 export const siteSettings: SiteSettings = {
@@ -80,12 +82,18 @@ export const siteSettings: SiteSettings = {
     hours: [...siteConfig.contact.hours],
   },
   social: siteConfig.social.map((s) => ({ ...s })),
+  hero: {
+    kicker: "Safaris · Coast · Culture",
+    title: "Africa, arranged *around you.*",
+    subtitle: "Say where you would like to go. People who know the roads, the seasons and the camps will plan the rest.",
+  },
   seo: {
     defaultTitle: `${siteConfig.name} | Safaris and tours across Africa`,
     defaultDescription: siteConfig.description,
     ogImage: img("og/default.jpg", "Tayari Africa Tours Consultants: safaris and tours across Africa", "og"),
   },
   homeImages: {
+    intro: img("destinations/ngorongoro/gallery-01.jpg", "Safari vehicles on a red dirt road across a wide crater floor", "story", { desktop: "40% 50%", mobile: "40% 50%" }),
     story: img("about/story-01.jpg", "A hot-air balloon floating above open plains at sunrise", "story", { desktop: "22% 50%", mobile: "22% 50%" }),
     cta: img("about/story-02.jpg", "A giraffe and acacia trees on the plains under a dramatic evening sky", "story", { desktop: "46% 50%", mobile: "46% 50%" }),
   },

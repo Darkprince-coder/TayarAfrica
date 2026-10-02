@@ -35,11 +35,15 @@
   background: var(--color-sand);
   color: var(--color-text);
 }
-.forest {
+.forest,
+.deep {
   background: var(--color-forest);
   color: var(--color-text-on-dark);
-  --accent: var(--color-gold);
+  --accent: var(--color-gold-bright);
   --focus-color: var(--color-gold-bright);
+}
+.deep {
+  background: var(--color-forest-deep);
 }
 
 /* The gutter lives inside the container so content lines up with the navigation and hero. */
@@ -107,8 +111,9 @@
   height: 1px;
   background: currentColor;
 }
-.forest .eyebrow {
-  color: var(--color-gold);
+.forest .eyebrow,
+.deep .eyebrow {
+  color: var(--color-gold-bright);
 }
 
 .title {
@@ -118,6 +123,7 @@
   font-size: var(--text-lg);
   color: var(--color-text-muted);
 }
-.forest .lead {
+.forest .lead,
+.deep .lead {
   color: var(--color-text-on-dark-muted);
 }

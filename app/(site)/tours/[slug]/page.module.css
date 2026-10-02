@@ -30,7 +30,7 @@
 .highlights li {
   padding: 0.55rem 1.1rem;
   background: var(--color-sand);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-button);
   font-size: var(--text-sm);
   font-weight: 600;
 }

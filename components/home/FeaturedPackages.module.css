@@ -1,31 +1,238 @@
 .layout {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-7);
 }
-.lead {
-  min-width: 0;
-}
-.rest {
-  display: grid;
-  gap: var(--space-5);
-  align-content: stretch;
-}
-.rest > li {
-  display: grid;
-}
-.more {
-  margin-top: var(--space-6);
-  display: flex;
-  justify-content: center;
-}
-
 @media (min-width: 62rem) {
   .layout {
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    gap: var(--space-6);
-    align-items: stretch;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--space-8);
+    align-items: start;
   }
-  .rest {
-    grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+/* Shared: photos ease in a touch on hover. */
+.zoom {
+  transition: transform 1.4s var(--ease-cine);
+}
+
+/* ---------- Lead journey ---------- */
+.lead {
+  display: grid;
+  gap: var(--space-5);
+}
+.leadMedia {
+  position: relative;
+  display: block;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+.leadFrame {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.chips {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.chip {
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: rgb(250 246 238 / 0.92);
+  color: var(--color-ink);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.leadBody {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+}
+.route {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-acacia);
+}
+.leadTitle {
+  font-size: var(--text-3xl);
+  line-height: 1.04;
+}
+.leadTitle a {
+  text-decoration: none;
+}
+.leadText {
+  max-width: 34rem;
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+}
+.leadActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-6);
+  margin-top: var(--space-2);
+}
+
+/* ---------- The index of other journeys ---------- */
+.index {
+  display: grid;
+  border-top: 1px solid var(--color-sand-deep);
+}
+/* Wide screens: the index rides alongside the tall lead journey instead of leaving a gap. */
+@media (min-width: 62rem) {
+  .index {
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-6));
   }
+}
+.row {
+  border-bottom: 1px solid var(--color-sand-deep);
+}
+.rowLink {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+  gap: var(--space-4);
+  align-items: center;
+  padding-block: var(--space-4);
+  text-decoration: none;
+  color: inherit;
+}
+@media (min-width: 40rem) {
+  .rowLink {
+    grid-template-columns: 7rem minmax(0, 1fr) auto;
+    gap: var(--space-5);
+    padding-block: var(--space-5);
+  }
+}
+.thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+.thumbFrame {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.rowBody {
+  display: grid;
+  gap: var(--space-1);
+}
+.rowTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: 1.15;
+}
+.rowMeta {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+.basis {
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+.rowArrow {
+  color: var(--color-ember);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+/* ---------- The made-to-order band ---------- */
+.custom {
+  margin-top: clamp(var(--space-7), 6vw, var(--space-9));
+}
+.customLink {
+  display: grid;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--color-forest-deep);
+  color: var(--color-text-on-dark);
+  text-decoration: none;
+}
+@media (min-width: 48rem) {
+  .customLink {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+}
+.customMedia {
+  position: relative;
+  display: block;
+  min-height: 14rem;
+  overflow: hidden;
+}
+.customFrame {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.customBody {
+  display: grid;
+  gap: var(--space-4);
+  align-content: center;
+  justify-items: start;
+  padding: clamp(var(--space-6), 4vw, var(--space-8));
+}
+.customKicker {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold-bright);
+}
+.customTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  line-height: 1.15;
+  max-width: 24ch;
+}
+.customTitle em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-gold-bright);
+}
+.customCta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.2rem;
+}
+.customCta svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .lead:hover .zoom,
+  .rowLink:hover .zoom,
+  .customLink:hover .zoom {
+    transform: scale(1.05);
+  }
+  .rowLink:hover .rowArrow,
+  .customLink:hover .customCta svg {
+    transform: translateX(4px);
+  }
+  .leadTitle a:hover,
+  .rowLink:hover .rowTitle {
+    color: var(--color-ember);
+  }
+}
+.rowLink:focus-visible,
+.customLink:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
 }
