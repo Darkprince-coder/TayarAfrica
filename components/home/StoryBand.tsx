@@ -9,7 +9,7 @@ import styles from "./StoryBand.module.css";
 
 /**
  * Editorial split: a tall photograph on one side and a forest-green panel that overlaps it on the
- * other, so the words never sit on top of the picture's subject. DEMO COPY: replace with TAYARI's story.
+ * other, so the words never sit on top of the picture's subject. DEMO COPY: replace with Tayari's story.
  */
 export function StoryBand({ image }: { image: ImageRef }) {
   return (

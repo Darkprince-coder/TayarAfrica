@@ -24,13 +24,13 @@ export function Intro() {
           />
           <Reveal delay={350}>
             <p className={styles.copy}>
-              TAYARI is a travel consultancy. You tell us where you want to go and what you want to do. We arrange the stays, transfers and
+              Tayari is a travel consultancy. You tell us where you want to go and what you want to do. We arrange the stays, transfers and
               activities with established local providers, and we stay in touch until you are home.
             </p>
           </Reveal>
           <Reveal delay={500}>
             <Button href="/about" variant="link" arrow>
-              Read about TAYARI
+              Read about Tayari
             </Button>
           </Reveal>
         </div>

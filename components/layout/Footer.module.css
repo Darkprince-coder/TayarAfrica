@@ -100,7 +100,7 @@
   }
 }
 
-/* TAYARI pattern across the top of the footer. */
+/* Tayari pattern across the top of the footer. */
 .band {
   max-width: var(--container);
   margin: calc(clamp(3.5rem, 2rem + 6vw, 6rem) * -0.5) auto clamp(2.5rem, 2rem + 3vw, 4rem);
@@ -113,9 +113,10 @@
 .mega {
   margin: clamp(2rem, 4vw, 4rem) 0 0;
   font-family: var(--font-display);
-  font-size: clamp(5rem, 21.5vw, 19rem);
-  line-height: 0.82;
-  letter-spacing: 0.04em;
+  font-size: clamp(8rem, 33vw, 29rem);
+  line-height: 0.9;
+  /* Mixed case, like the logo: no extra tracking. */
+  letter-spacing: -0.01em;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;

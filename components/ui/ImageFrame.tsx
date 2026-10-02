@@ -45,7 +45,7 @@ export function ImageFrame({
     <div className={cn(styles.frame, rounded && styles.rounded, className)} style={ratio ? { aspectRatio: ratio } : undefined}>
       {failed ? (
         <div className={styles.placeholder} role="img" aria-label={alt}>
-          <Image src="/brand/logo-emblem-light.png" alt="" width={120} height={117} className={styles.mark} />
+          <Image src="/brand/logo-emblem-light.png" alt="" width={120} height={130} className={styles.mark} />
         </div>
       ) : (
         <Image

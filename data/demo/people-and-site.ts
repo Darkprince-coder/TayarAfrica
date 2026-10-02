@@ -9,7 +9,7 @@ export const team: TeamMember[] = [
     name: "Amani Otieno",
     role: "Founder & Lead Travel Consultant",
     bio: "Placeholder profile. Describe the founder's background, how they came to travel planning and what they love most about designing journeys in Kenya.",
-    portrait: img("team/team-01.jpg", "Portrait of the TAYARI founder", "portrait"),
+    portrait: img("team/team-01.jpg", "Portrait of the Tayari founder", "portrait"),
     social: [],
     order: 1,
     status: "published",
@@ -20,7 +20,7 @@ export const team: TeamMember[] = [
     name: "Wanjiru Kamau",
     role: "Safari Specialist",
     bio: "Placeholder profile. Share this person's safari experience and the destinations they know best.",
-    portrait: img("team/team-02.jpg", "Portrait of a TAYARI safari specialist", "portrait"),
+    portrait: img("team/team-02.jpg", "Portrait of a Tayari safari specialist", "portrait"),
     social: [],
     order: 2,
     status: "published",
@@ -31,7 +31,7 @@ export const team: TeamMember[] = [
     name: "Hassan Mwinyi",
     role: "Coast & Culture Specialist",
     bio: "Placeholder profile. Introduce the coast and culture specialist and the experiences they love to arrange.",
-    portrait: img("team/team-03.jpg", "Portrait of a TAYARI coast and culture specialist", "portrait"),
+    portrait: img("team/team-03.jpg", "Portrait of a Tayari coast and culture specialist", "portrait"),
     social: [],
     order: 3,
     status: "published",
@@ -42,7 +42,7 @@ export const team: TeamMember[] = [
     name: "Njeri Mutua",
     role: "Guest Care & Logistics",
     bio: "Placeholder profile. Explain how this person looks after travellers before, during and after their trip.",
-    portrait: img("team/team-04.jpg", "Portrait of a TAYARI guest care coordinator", "portrait"),
+    portrait: img("team/team-04.jpg", "Portrait of a Tayari guest care coordinator", "portrait"),
     social: [],
     order: 4,
     status: "published",
@@ -63,7 +63,7 @@ export const services: Service[] = [
 
 /** SAMPLE ONLY — these are not real reviews and must be labelled as sample content in the UI. */
 export const testimonials: Testimonial[] = [
-  { id: "sample-1", name: "Sample Traveller", location: "Sample location", quote: "Sample testimonial: this is where a real traveller's words about their TAYARI journey will appear.", status: "published", isSample: true },
+  { id: "sample-1", name: "Sample Traveller", location: "Sample location", quote: "Sample testimonial: this is where a real traveller's words about their Tayari journey will appear.", status: "published", isSample: true },
   { id: "sample-2", name: "Sample Traveller", location: "Sample location", quote: "Sample testimonial: placeholder text showing how a short, personal review will look on the page.", status: "published", isSample: true },
   { id: "sample-3", name: "Sample Traveller", location: "Sample location", quote: "Sample testimonial: replace with genuine feedback from real guests once available.", status: "published", isSample: true },
 ];
@@ -90,7 +90,7 @@ export const siteSettings: SiteSettings = {
   seo: {
     defaultTitle: `${siteConfig.name} | Kenya safaris and beach holidays`,
     defaultDescription: siteConfig.description,
-    ogImage: img("og/default.jpg", "TAYARI Africa Tours, Kenya safaris and beach holidays", "og"),
+    ogImage: img("og/default.jpg", "Tayari Africa Tours Consultants, Kenya safaris and beach holidays", "og"),
   },
   homeImages: {
     story: img("about/story-01.jpg", "A hot-air balloon floating above open plains at sunrise", "story", { desktop: "22% 50%", mobile: "22% 50%" }),

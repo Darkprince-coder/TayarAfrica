@@ -19,7 +19,7 @@ export const navItems: NavItem[] = [
   {
     label: "About",
     children: [
-      { label: "About TAYARI", href: "/about", description: "Who we are and what we do" },
+      { label: "About Tayari", href: "/about", description: "Who we are and what we do" },
       { label: "How we plan a trip", href: "/about#how-we-work", description: "From first message to departure" },
       { label: "Meet the team", href: "/team", description: "The people behind your trip" },
     ],

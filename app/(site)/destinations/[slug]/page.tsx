@@ -131,7 +131,7 @@ export default async function DestinationPage({ params }: Props) {
 
       <CtaBand
         title={`Plan a trip to ${destination.name}`}
-        text="Tell us your dates and who is travelling. A TAYARI consultant will reply with ideas."
+        text="Tell us your dates and who is travelling. A Tayari consultant will reply with ideas."
         primary={{ label: "Plan a Trip Here", href: `/plan-your-journey?destination=${destination.slug}` }}
         secondary={{ label: "All destinations", href: "/destinations" }}
       />

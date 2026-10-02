@@ -1,33 +1,43 @@
 .logo {
+  --logo-name: var(--color-gold);
+  --logo-sub: var(--color-acacia);
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.6rem;
   text-decoration: none;
-  color: var(--color-forest-deep);
   transition: color var(--dur-base) var(--ease-out);
 }
+/* Over photography and dark surfaces: cream, so the mark never fights the image. */
 .light {
-  color: var(--color-text-on-dark);
+  --logo-name: var(--color-text-on-dark);
+  --logo-sub: var(--color-text-on-dark);
 }
 .emblem {
-  width: 3.25rem;
+  width: 2.75rem;
   height: auto;
 }
 .word {
   display: grid;
+  justify-items: start;
   line-height: 1;
 }
 .name {
   font-family: var(--font-display);
-  font-size: 1.45rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: 1.85rem;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  color: var(--logo-name);
+  transition: color var(--dur-base) var(--ease-out);
 }
 .sub {
-  margin-top: 0.3rem;
-  font-size: 0.625rem;
+  margin-top: 0.1rem;
+  /* Optical nudge so the spaced capitals sit under the serif's left edge. */
+  padding-left: 0.08em;
+  font-size: 0.5625rem;
   font-weight: 600;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
-  opacity: 0.8;
+  color: var(--logo-sub);
+  opacity: 0.9;
+  transition: color var(--dur-base) var(--ease-out);
 }

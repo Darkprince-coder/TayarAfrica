@@ -7,7 +7,7 @@ import { getDestinations, getPackages, getSiteSettings } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Plan Your Journey",
   description:
-    "Tell TAYARI about the Kenya trip you have in mind. Three short steps, and a consultant will reply with ideas and a quote. This is a request, not a booking.",
+    "Tell Tayari about the Kenya trip you have in mind. Three short steps, and a consultant will reply with ideas and a quote. This is a request, not a booking.",
 };
 
 type Props = { searchParams: Promise<{ package?: string; destination?: string }> };

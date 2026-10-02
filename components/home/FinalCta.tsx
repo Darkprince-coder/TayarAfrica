@@ -18,7 +18,7 @@ export function FinalCta({ image, whatsapp }: { image: ImageRef; whatsapp: strin
             </Reveal>
             <RevealText as="h2" id="final-cta-title" className={styles.title} text="Tell us where you *want to go*." delay={120} />
             <Reveal delay={450}>
-              <p className={styles.text}>It takes a couple of minutes. Share your dates and ideas, and a TAYARI consultant will reply to plan the rest with you.</p>
+              <p className={styles.text}>It takes a couple of minutes. Share your dates and ideas, and a Tayari consultant will reply to plan the rest with you.</p>
             </Reveal>
             <Reveal delay={600}>
               <div className={styles.actions}>

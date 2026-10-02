@@ -40,8 +40,8 @@ export function IntroLoader() {
       }}
     >
       <div className={styles.stack}>
-        <Image src="/brand/logo-emblem-light.png" alt="" width={240} height={235} priority className={styles.emblem} />
-        <p className={styles.word}>TAYARI Africa Tours</p>
+        <Image src="/brand/logo-emblem-light.png" alt="" width={240} height={259} priority className={styles.emblem} />
+        <p className={styles.word}>Tayari Africa Tours</p>
         <div className={styles.motif}>
           <Motif size={12} />
         </div>

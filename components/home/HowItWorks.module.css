@@ -20,7 +20,7 @@
   font-style: italic;
   color: transparent;
   -webkit-text-stroke: 1.5px var(--color-ember);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
 }
 .title {
   font-size: var(--text-xl);

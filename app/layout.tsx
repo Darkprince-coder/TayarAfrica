@@ -1,15 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { MotionReady } from "@/components/layout/MotionReady";
 import { MotionScript } from "@/components/layout/MotionScript";
 import { siteConfig } from "@/lib/site";
 import "@/styles/globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+// Display face for headings and storytelling only; Manrope does all functional UI.
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
   style: ["normal", "italic"],
-  axes: ["opsz"],
   display: "swap",
 });
 
@@ -41,7 +41,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     // suppressHydrationWarning: the intro script sets a data attribute on <html> before hydration.
-    <html lang={siteConfig.locale} className={`${fraunces.variable} ${manrope.variable}`} suppressHydrationWarning>
+    <html lang={siteConfig.locale} className={`${cormorant.variable} ${manrope.variable}`} suppressHydrationWarning>
       <body>
         <MotionScript />
         <MotionReady />

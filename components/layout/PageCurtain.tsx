@@ -37,7 +37,7 @@ export function PageCurtain() {
   return (
     <div ref={ref} className={styles.curtain} aria-hidden="true">
       <div className={styles.mark}>
-        <Image src="/brand/logo-emblem-light.png" alt="" width={96} height={94} className={styles.emblem} />
+        <Image src="/brand/logo-emblem-light.png" alt="" width={96} height={104} className={styles.emblem} />
         <div className={styles.motif}>
           <Motif size={10} />
         </div>

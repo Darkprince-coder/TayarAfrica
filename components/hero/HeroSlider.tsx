@@ -70,7 +70,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       aria-label="Featured journeys"
       data-running={running}
     >
-      <h1 className="visually-hidden">TAYARI Africa Tours: Kenya safaris and beach holidays</h1>
+      <h1 className="visually-hidden">Tayari Africa Tours Consultants: Kenya safaris and beach holidays</h1>
 
       {/* Photography */}
       <div className={styles.stage} aria-live="off">

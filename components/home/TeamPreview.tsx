@@ -22,7 +22,7 @@ export function TeamPreview({ team }: { team: TeamMember[] }) {
               id="team-title"
               eyebrow="The team"
               title="The people planning *your trip*"
-              lead="When you write to TAYARI, one of these people reads it."
+              lead="When you write to Tayari, one of these people reads it."
               action={
                 <Button href="/team" variant="link" arrow>
                   Meet the team

@@ -10,9 +10,9 @@ import { getTeam } from "@/lib/content";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "About TAYARI",
+  title: "About Tayari",
   description:
-    "TAYARI Africa Tours Consultants plans safaris, beach holidays and cultural trips in Kenya. Learn what we do, how we plan a trip and who you will deal with.",
+    "Tayari Africa Tours Consultants plans safaris, beach holidays and cultural trips in Kenya. Learn what we do, how we plan a trip and who you will deal with.",
 };
 
 /** DEMO COPY: mission, vision and the description of the work are draft wording for the board to review. */
@@ -22,7 +22,7 @@ export default async function AboutPage() {
   return (
     <>
       <PageHeader
-        eyebrow="About TAYARI"
+        eyebrow="About Tayari"
         title="A travel consultancy for *Kenya*"
         lead="We help people turn a rough idea of a Kenya trip into a plan they can book with confidence."
       />
@@ -34,7 +34,7 @@ export default async function AboutPage() {
             <div className={styles.prose}>
               <Reveal>
                 <p>
-                  TAYARI does not run its own lodges or vehicles. We work with established providers in each destination and put the pieces
+                  Tayari does not run its own lodges or vehicles. We work with established providers in each destination and put the pieces
                   together: where you stay, how you get there, what you do each day and who looks after you on the ground.
                 </p>
               </Reveal>

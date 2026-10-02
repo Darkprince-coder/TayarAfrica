@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CheckboxField, ChoiceChips, SelectField, TextAreaField, TextField } from "@/components/ui/Field";
 import { ImageFrame } from "@/components/ui/ImageFrame";
+import { Logo } from "@/components/layout/Logo";
 import { Reveal } from "@/components/ui/Reveal";
 import styles from "./page.module.css";
 
@@ -17,12 +18,15 @@ export const metadata: Metadata = {
 const swatches = [
   ["Bone", "--color-bone", "#FAF6EE"],
   ["Sand", "--color-sand", "#EFE6D6"],
-  ["Sand deep", "--color-sand-deep", "#E2D5BD"],
+  ["Sand deep", "--color-sand-deep", "#DFCFB6"],
+  ["Map sand (logo)", "--color-map", "#DBC4A5"],
   ["Forest", "--color-forest", "#1F3A2E"],
   ["Forest deep", "--color-forest-deep", "#14261E"],
   ["Ink", "--color-ink", "#1B1A17"],
-  ["Ember (CTA)", "--color-ember", "#B4501E"],
-  ["Gold", "--color-gold", "#C9A15A"],
+  ["Acacia (logo)", "--color-acacia", "#2F6C46"],
+  ["Acacia light", "--color-acacia-light", "#9FC2A4"],
+  ["Gold (logo)", "--color-gold", "#C19A3B"],
+  ["Ember (CTA only)", "--color-ember", "#B4501E"],
   ["Sage", "--color-sage", "#7D9380"],
 ] as const;
 
@@ -32,7 +36,7 @@ export default function StyleguidePage() {
     <main id="main" className={styles.page}>
       <header>
         <h1 className={styles.title}>Design foundations</h1>
-        <p className={styles.muted}>Internal review page: Phase 0.</p>
+        <p className={styles.muted}>Internal review page. Updated for the new logo and Cormorant Garamond.</p>
       </header>
 
       <section aria-labelledby="palette">
@@ -63,8 +67,14 @@ export default function StyleguidePage() {
           <div className={styles.pair} style={{ background: "var(--color-sand)", color: "var(--color-text-muted)" }}>
             Muted on sand: captions
           </div>
+          <div className={styles.pair} style={{ background: "var(--color-bone)", color: "var(--color-acacia)" }}>
+            Acacia on bone: labels, accents
+          </div>
           <div className={styles.pair} style={{ background: "var(--color-forest)", color: "var(--color-text-on-dark)" }}>
             Cream on forest: dark sections
+          </div>
+          <div className={styles.pair} style={{ background: "var(--color-forest-deep)", color: "var(--color-gold)" }}>
+            Gold on forest: small details only
           </div>
           <div className={styles.pair} style={{ background: "var(--color-ember)", color: "#fff" }}>
             White on ember: primary CTA
@@ -74,17 +84,22 @@ export default function StyleguidePage() {
 
       <section aria-labelledby="type" className={styles.type}>
         <h2 id="type" className={styles.h2}>
-          Typography: Fraunces + Manrope
+          Typography: Cormorant Garamond + Manrope
         </h2>
-        <p className={styles.display}>Africa, arranged around you.</p>
-        <h3 style={{ fontSize: "var(--text-2xl)" }}>Maasai Mara, Amboseli, Diani</h3>
-        <p style={{ fontSize: "var(--text-lg)" }}>
-          Lead paragraph in Manrope. Warm, modern and highly readable at every size, built for long itineraries and
-          quick mobile reads alike.
+        <p className={styles.eyebrow}>Eyebrow label · Manrope</p>
+        <p className={styles.display}>
+          Africa, <em className={styles.accent}>arranged</em> around you.
         </p>
-        <p>
-          Body copy. TAYARI coordinates stays, transfers and experiences through established partners, so your journey
-          feels effortless from the first message to the last sunset.
+        <h3 style={{ fontSize: "var(--text-3xl)" }}>A good trip is mostly good planning.</h3>
+        <h3 style={{ fontSize: "var(--text-2xl)" }}>Maasai Mara · Serengeti · Victoria Falls</h3>
+        <h4 style={{ fontSize: "var(--text-xl)" }}>Amboseli, 2 days and 1 night</h4>
+        <p style={{ fontSize: "var(--text-lg)", maxWidth: "38rem" }}>
+          Lead paragraph in Manrope. Cormorant carries the headings and the story; Manrope does the work: body text,
+          navigation, buttons, forms and labels.
+        </p>
+        <p style={{ maxWidth: "38rem" }}>
+          Body copy. We arrange the stays, transfers and activities, and you deal with the same person from your first
+          message to the day you fly home.
         </p>
       </section>
 
@@ -171,17 +186,24 @@ export default function StyleguidePage() {
           Logo assets
         </h2>
         <div className={styles.logos}>
+          {/* logoDark = dark artwork on sand; logoLight = light artwork on forest. */}
           <div className={styles.logoDark}>
-            <Image src="/brand/logo-full.png" alt="TAYARI logo, full colour" width={160} height={195} />
+            <Logo />
           </div>
           <div className={styles.logoLight}>
-            <Image src="/brand/logo-full-light.png" alt="TAYARI logo, light version" width={160} height={195} />
+            <Logo tone="light" />
           </div>
           <div className={styles.logoDark}>
-            <Image src="/brand/logo-emblem.png" alt="TAYARI emblem" width={120} height={117} />
+            <Image src="/brand/logo-full.png" alt="Tayari logo, full colour" width={160} height={173} />
           </div>
           <div className={styles.logoLight}>
-            <Image src="/brand/logo-emblem-light.png" alt="TAYARI emblem, light version" width={120} height={117} />
+            <Image src="/brand/logo-full-light.png" alt="Tayari logo, light version" width={160} height={173} />
+          </div>
+          <div className={styles.logoDark}>
+            <Image src="/brand/logo-emblem.png" alt="Tayari emblem" width={120} height={130} />
+          </div>
+          <div className={styles.logoLight}>
+            <Image src="/brand/logo-emblem-light.png" alt="Tayari emblem, light version" width={120} height={130} />
           </div>
         </div>
       </section>

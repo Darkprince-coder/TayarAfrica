@@ -200,7 +200,7 @@ export function InquiryForm({ packages, destinations, initialPackage, initialDes
           ]}
         >
           <p>
-            Thank you, {firstName}. We have received your trip request, and a TAYARI consultant will contact you by{" "}
+            Thank you, {firstName}. We have received your trip request, and a Tayari consultant will contact you by{" "}
             {values.contactPreference === "whatsapp" ? "WhatsApp" : values.contactPreference === "phone" ? "phone" : "email"} to talk through the details.
           </p>
           <p>This is a request, not a booking. Nothing is confirmed until we agree a plan with you.</p>
@@ -210,7 +210,7 @@ export function InquiryForm({ packages, destinations, initialPackage, initialDes
   }
 
   const waText = encodeURIComponent(
-    `Hello TAYARI, I tried to send a trip request${selectedPackage ? ` for "${selectedPackage.title}"` : ""} but it did not go through.`,
+    `Hello Tayari, I tried to send a trip request${selectedPackage ? ` for "${selectedPackage.title}"` : ""} but it did not go through.`,
   );
   const submitting = status === "submitting";
 
@@ -351,7 +351,7 @@ export function InquiryForm({ packages, destinations, initialPackage, initialDes
                 />
 
                 <CheckboxField name="consent" required checked={values.consent} onChange={(c) => set("consent", c)} error={errors.consent}>
-                  I agree that TAYARI may contact me about this request. See the{" "}
+                  I agree that Tayari may contact me about this request. See the{" "}
                   <Link href="/privacy" target="_blank">
                     privacy policy
                   </Link>

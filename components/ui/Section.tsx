@@ -9,7 +9,7 @@ type SectionProps = {
   tone?: "bone" | "sand" | "forest";
   /** Vertical breathing room: sm for light supporting sections, lg for the moments that should land. */
   size?: "sm" | "md" | "lg";
-  /** Draws the TAYARI pattern along the top edge, marking a change of mood. */
+  /** Draws the Tayari pattern along the top edge, marking a change of mood. */
   edge?: boolean;
   id?: string;
   /** id of the heading inside, for an accessible region name. */

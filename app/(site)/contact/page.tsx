@@ -9,7 +9,7 @@ import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Contact TAYARI Africa Tours by phone, WhatsApp or email, or send a trip request and we will reply to plan your Kenya trip.",
+  description: "Contact Tayari Africa Tours Consultants by phone, WhatsApp or email, or send a trip request and we will reply to plan your Kenya trip.",
 };
 
 export default async function ContactPage() {

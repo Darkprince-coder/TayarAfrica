@@ -13,7 +13,7 @@ const steps = [
   },
   {
     title: "You experience",
-    text: "You travel knowing who is meeting you and where you are going next, with a TAYARI contact to call if anything changes.",
+    text: "You travel knowing who is meeting you and where you are going next, with a Tayari contact to call if anything changes.",
   },
 ];
 

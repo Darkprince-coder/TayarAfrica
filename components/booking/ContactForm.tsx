@@ -82,7 +82,7 @@ export function ContactForm({ whatsapp }: { whatsapp: string }) {
         reference={reference}
         actions={[{ label: "Plan a trip", href: "/plan-your-journey" }, { label: "Back to home", href: "/", variant: "secondary" }]}
       >
-        <p>Thank you, {values.fullName.trim().split(/\s+/)[0]}. A TAYARI team member will reply to {values.email}.</p>
+        <p>Thank you, {values.fullName.trim().split(/\s+/)[0]}. A Tayari team member will reply to {values.email}.</p>
       </SuccessPanel>
     );
   }
@@ -98,7 +98,7 @@ export function ContactForm({ whatsapp }: { whatsapp: string }) {
       </div>
       <TextAreaField label="Your message" required {...field("message")} />
       <CheckboxField name="consent" required checked={values.consent} onChange={(c) => set("consent", c)} error={errors.consent}>
-        I agree that TAYARI may contact me about this message.
+        I agree that Tayari may contact me about this message.
       </CheckboxField>
 
       <div className={form.trap} aria-hidden="true">

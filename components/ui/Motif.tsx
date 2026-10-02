@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 import styles from "./Motif.module.css";
 
 /**
- * TAYARI pattern: an original, simplified take on East African beadwork (diamonds, dots and
+ * Tayari pattern: an original, simplified take on East African beadwork (diamonds, dots and
  * zigzags). It is drawn as a mask, so it takes the surrounding text colour, scales cleanly and
  * costs one tiny inline image. Purely decorative.
  */

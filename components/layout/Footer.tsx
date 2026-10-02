@@ -70,7 +70,7 @@ export async function Footer() {
       </div>
 
       <p className={styles.mega} aria-hidden="true">
-        TAYARI
+        Tayari
       </p>
 
       <div className={styles.bottom}>

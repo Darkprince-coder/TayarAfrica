@@ -16,7 +16,7 @@ type Props = {
 
 /**
  * Shown after a successful send. It always says "request received", never "booking confirmed",
- * because nothing is booked until TAYARI and the traveller agree a plan.
+ * because nothing is booked until Tayari and the traveller agree a plan.
  */
 export function SuccessPanel({ title, children, reference, nextSteps, actions }: Props) {
   const headingRef = useRef<HTMLHeadingElement>(null);

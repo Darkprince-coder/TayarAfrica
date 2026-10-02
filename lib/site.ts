@@ -3,11 +3,14 @@
  * will later be sourced from the CMS "site settings" record (see data/demo).
  */
 export const siteConfig = {
-  name: "TAYARI Africa Tours",
-  legalName: "TAYARI Africa Tours Consultants",
+  /** Official company name, as given by the client. Used in titles, metadata and the footer. */
+  name: "Tayari Africa Tours Consultants",
+  /** Short brand name, as on the logo. For tight spaces (logo label, loader). */
+  shortName: "Tayari Africa Tours",
+  legalName: "Tayari Africa Tours Consultants",
   tagline: "Africa, arranged around you.",
   description:
-    "TAYARI Africa Tours Consultants plans safaris, beach holidays and cultural trips in Kenya. We arrange the stays, transfers and activities, so all you have to do is turn up.",
+    "Tayari Africa Tours Consultants plans safaris, beach holidays and cultural trips in Kenya. We arrange the stays, transfers and activities, so all you have to do is turn up.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   locale: "en",
   /** PLACEHOLDER contact details — replace with real values before launch. */

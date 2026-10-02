@@ -9,7 +9,7 @@ import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Meet the team",
-  description: "The people at TAYARI Africa Tours who plan and look after your Kenya trip, from first message to the day you fly home.",
+  description: "The people at Tayari Africa Tours Consultants who plan and look after your Kenya trip, from first message to the day you fly home.",
 };
 
 export default async function TeamPage() {

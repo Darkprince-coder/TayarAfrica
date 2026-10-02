@@ -1,14 +1,15 @@
 /*
- * TAYARI design tokens — "Savanna Dusk".
- * Deep acacia green + warm sand + charcoal, with a terracotta "ember" accent for action
- * and a soft gold for fine detail. Independent of the (placeholder) logo colours so a
- * logo change never forces a redesign: only these variables need to move.
+ * TAYARI design tokens — "Savanna Dusk", tuned to the logo.
+ * The logo gives the sand of the map (#dbc4a5), the acacia green of the tree and lettering
+ * and the gold of the "Tayari" wordmark (#c19a3b). Around those: deep forest surfaces,
+ * warm charcoal ink and a terracotta "ember" kept for action only. Gold is for small details.
  */
 :root {
   /* Surfaces */
   --color-bone: #faf6ee; /* page background, lightest */
   --color-sand: #efe6d6; /* alternate section background */
-  --color-sand-deep: #e2d5bd; /* borders / dividers on sand */
+  --color-sand-deep: #dfcfb6; /* borders / dividers on sand */
+  --color-map: #dbc4a5; /* the sand of the logo's map: tinted panels, quiet fills */
   --color-forest: #1f3a2e; /* primary dark surface */
   --color-forest-deep: #14261e; /* footer, loader, hero scrim */
   --color-ink: #1b1a17; /* primary text (warm charcoal) */
@@ -22,10 +23,12 @@
   /* Accents */
   --color-ember: #b4501e; /* primary CTA — white text ~5:1 */
   --color-ember-hover: #983f13;
-  --color-gold: #c9a15a; /* fine detail on dark surfaces */
-  --color-gold-bright: #ecd08f; /* gold for italic accents over photography */
+  --color-gold: #c19a3b; /* logo gold: fine detail on dark surfaces, never large fills */
+  --color-gold-bright: #e3c47c; /* gold for italic accents over photography */
+  --color-acacia: #2f6c46; /* logo green, deepened to read as text on light (5.8:1 on bone) */
+  --color-acacia-light: #9fc2a4; /* logo green lifted for dark surfaces (6.3:1 on forest) */
   --color-sage: #7d9380; /* quiet secondary on dark */
-  --accent: var(--color-ember); /* italic accent words; sections on dark surfaces switch to gold */
+  --accent: var(--color-acacia); /* italic accent words; sections on dark surfaces switch to gold */
 
   /* Feedback */
   --color-success: #2f6b46;
@@ -33,7 +36,8 @@
   --color-focus: #d98a2b;
 
   /* Typography */
-  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  /* Cormorant Garamond: headings, destination and journey names, storytelling. Not for UI. */
+  --font-display: var(--font-cormorant), "Cormorant", Garamond, Georgia, serif;
   --font-body: var(--font-manrope), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --text-xs: clamp(0.75rem, 0.73rem + 0.1vw, 0.8125rem);

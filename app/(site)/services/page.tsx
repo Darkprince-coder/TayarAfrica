@@ -10,7 +10,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Our services",
   description:
-    "What TAYARI arranges in Kenya: safari experiences, accommodation, airport and local transfers, transport, cultural experiences, beach holidays and private trips.",
+    "What Tayari arranges in Kenya: safari experiences, accommodation, airport and local transfers, transport, cultural experiences, beach holidays and private trips.",
 };
 
 export default async function ServicesPage() {
@@ -21,7 +21,7 @@ export default async function ServicesPage() {
       <PageHeader
         eyebrow="Services"
         title="What we *arrange* for you"
-        lead="TAYARI is a consultancy. We plan the trip and coordinate the people who deliver each part of it."
+        lead="Tayari is a consultancy. We plan the trip and coordinate the people who deliver each part of it."
       />
       <Section tone="bone">
         <Container>
