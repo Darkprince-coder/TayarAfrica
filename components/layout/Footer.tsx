@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getSiteSettings } from "@/lib/content";
 import { flatNavLinks, legalLinks, primaryCta } from "@/lib/navigation";
+import { telHref, whatsappHref } from "@/lib/site";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui/Button";
 import { Motif } from "@/components/ui/Motif";
@@ -19,7 +20,7 @@ export async function Footer() {
         <div className={styles.brand}>
           <Logo tone="light" />
           <p className={styles.blurb}>
-            Safaris, beach holidays and cultural trips in Kenya, planned by people who will pick up the phone.
+            Safaris, culture, beaches and cross-border trips across Africa, planned by people who will pick up the phone.
           </p>
           <Button href={primaryCta.href} variant="light" arrow>
             {primaryCta.label}
@@ -41,17 +42,23 @@ export async function Footer() {
           <h2 className={styles.heading}>Talk to us</h2>
           <ul role="list" className={styles.list}>
             <li>
-              <a href={`tel:${contact.phone.replace(/\s/g, "")}`}>{contact.phone}</a>
+              <a href={telHref(contact.phone)}>{contact.phone}</a>
             </li>
             <li>
-              <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer">
-                WhatsApp
+              <a href={whatsappHref(contact.whatsapp)} target="_blank" rel="noopener noreferrer">
+                WhatsApp, 24/7 for emergencies
               </a>
             </li>
             <li>
-              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+              <a href={`mailto:${contact.email}`} className={styles.email}>
+                {contact.email}
+              </a>
             </li>
-            <li className={styles.muted}>{contact.location}</li>
+            <li className={styles.muted}>
+              {contact.location}
+              <br />
+              Client support in Maryland and Minnesota, USA
+            </li>
           </ul>
         </div>
 

@@ -19,12 +19,10 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-5);
   }
+  /* The side images keep their ratio and so set the row heights; the lead stretches across both rows. */
   .lead {
     grid-column: span 2;
     grid-row: span 2;
-    aspect-ratio: auto;
-  }
-  .item {
     aspect-ratio: auto;
   }
   /* With only two images, let them sit side by side at equal weight. */

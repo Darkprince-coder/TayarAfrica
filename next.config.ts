@@ -19,6 +19,17 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  // Old URLs from the prototype: "Experiences" became "Tours", Services moved into About,
+  // Nairobi became Nairobi National Park and Lamu is not on the client's list.
+  async redirects() {
+    return [
+      { source: "/experiences", destination: "/tours", permanent: true },
+      { source: "/experiences/:slug", destination: "/tours", permanent: true },
+      { source: "/services", destination: "/about#what-we-arrange", permanent: true },
+      { source: "/destinations/nairobi", destination: "/destinations/nairobi-national-park", permanent: true },
+      { source: "/destinations/lamu", destination: "/destinations", permanent: false },
+    ];
+  },
 };
 
 export default nextConfig;

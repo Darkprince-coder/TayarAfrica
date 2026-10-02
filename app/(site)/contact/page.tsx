@@ -5,22 +5,32 @@ import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section } from "@/components/ui/Section";
 import { getSiteSettings } from "@/lib/content";
+import { telHref, whatsappHref } from "@/lib/site";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Contact Tayari Africa Tours Consultants by phone, WhatsApp or email, or send a trip request and we will reply to plan your Kenya trip.",
+  description:
+    "Contact Tayari Africa Tours Consultants at our headquarters in Nairobi, Kenya, or our client support in Maryland and Minnesota, USA, by phone, WhatsApp or email. 24/7 emergency WhatsApp for travellers.",
 };
+
+type Row = { label: string; value: string; href?: string; external?: boolean; note?: string };
 
 export default async function ContactPage() {
   const { contact, social } = await getSiteSettings();
-  const tel = contact.phone.replace(/\s/g, "");
 
-  const rows = [
-    { label: "Phone", value: contact.phone, href: `tel:${tel}` },
-    { label: "WhatsApp", value: "Message us on WhatsApp", href: `https://wa.me/${contact.whatsapp}`, external: true },
+  const rows: Row[] = [
+    ...contact.offices.map((o) => ({ label: o.label, value: `${o.person}, ${o.phone}`, href: telHref(o.phone), note: o.place })),
+    {
+      label: "WhatsApp",
+      value: "Message us on WhatsApp",
+      href: whatsappHref(contact.whatsapp),
+      external: true,
+      note: `Emergencies while you are travelling: 24/7 on WhatsApp, ${contact.emergency}`,
+    },
     { label: "Email", value: contact.email, href: `mailto:${contact.email}` },
-    { label: "Based in", value: contact.location },
+    { label: "Hours", value: contact.hours.join(". "), note: "East Africa Time" },
+    { label: "Where we go", value: contact.coverage },
   ];
 
   return (
@@ -39,7 +49,7 @@ export default async function ContactPage() {
               </h2>
               <dl className={styles.rows}>
                 {rows.map((r, i) => (
-                  <Reveal key={r.label} delay={i * 90} className={styles.row}>
+                  <Reveal key={`${r.label}-${i}`} delay={Math.min(i, 5) * 90} className={styles.row}>
                     <dt>{r.label}</dt>
                     <dd>
                       {r.href ? (
@@ -49,6 +59,7 @@ export default async function ContactPage() {
                       ) : (
                         r.value
                       )}
+                      {r.note && <span className={styles.note}>{r.note}</span>}
                     </dd>
                   </Reveal>
                 ))}

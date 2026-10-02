@@ -1,6 +1,6 @@
 # Image credits
 
-Placeholder photography for the board prototype, downloaded from [Pexels](https://www.pexels.com). Pexels photos are free to use commercially and do not require attribution ([Pexels licence](https://www.pexels.com/license/)). Source pages are listed so each photo can be traced, credited or replaced.
+Placeholder photography, downloaded from [Pexels](https://www.pexels.com). Pexels photos are free to use commercially and do not require attribution ([Pexels licence](https://www.pexels.com/license/)). Source pages are listed so each photo can be traced, credited or replaced.
 
 Files were resized to at most 2400px wide and recompressed (progressive JPEG) with `sharp`. The social share image `og/default.jpg` is a crop of `hero/hero-01.jpg`.
 
@@ -32,14 +32,31 @@ Before launch, confirm the final photography (licensed, owned or commissioned) a
 | `public/images/destinations/lamu/cover.jpg` | [30282791](https://www.pexels.com/photo/30282791/) |
 | `public/images/destinations/lamu/gallery-01.jpg` | [30282793](https://www.pexels.com/photo/30282793/) |
 | `public/images/destinations/lamu/gallery-02.jpg` | [15898680](https://www.pexels.com/photo/15898680/) |
-| `public/images/destinations/nairobi/cover.jpg` | [15496531](https://www.pexels.com/photo/15496531/) |
-| `public/images/destinations/nairobi/gallery-01.jpg` | [9833514](https://www.pexels.com/photo/9833514/) |
-| `public/images/destinations/nairobi/gallery-02.jpg` | [29069329](https://www.pexels.com/photo/29069329/) |
-| `public/images/experiences/maasai-mara-classic-safari/cover.jpg` | [30705114](https://www.pexels.com/photo/30705114/) |
-| `public/images/experiences/amboseli-kilimanjaro-escape/cover.jpg` | [26924196](https://www.pexels.com/photo/26924196/) |
-| `public/images/experiences/tsavo-samburu-wild-circuit/cover.jpg` | [6318162](https://www.pexels.com/photo/6318162/) |
-| `public/images/experiences/kenya-safari-and-beach/cover.jpg` | [15948257](https://www.pexels.com/photo/15948257/) |
-| `public/images/experiences/lamu-cultural-escape/cover.jpg` | [27719214](https://www.pexels.com/photo/27719214/) |
-| `public/images/experiences/diani-beach-retreat/cover.jpg` | [29578085](https://www.pexels.com/photo/29578085/) |
+| `public/images/destinations/nairobi-national-park/gallery-02.jpg` | [15496531](https://www.pexels.com/photo/15496531/) |
+| `public/images/destinations/nairobi-national-park/gallery-01.jpg` | [29069329](https://www.pexels.com/photo/29069329/) |
+| `public/images/tours/maasai-mara-great-migration/gallery-01.jpg` | [30705114](https://www.pexels.com/photo/30705114/) |
+| `public/images/tours/amboseli-safari/cover.jpg` | [26924196](https://www.pexels.com/photo/26924196/) |
 | `public/images/about/story-01.jpg` | [37475786](https://www.pexels.com/photo/37475786/) |
 | `public/images/about/story-02.jpg` | [12925483](https://www.pexels.com/photo/12925483/) |
+| `public/images/destinations/serengeti/cover.jpg` | [5574041](https://www.pexels.com/photo/5574041/) |
+| `public/images/destinations/serengeti/gallery-01.jpg` | [9185432](https://www.pexels.com/photo/9185432/) |
+| `public/images/destinations/serengeti/gallery-02.jpg` | [20179673](https://www.pexels.com/photo/20179673/) |
+| `public/images/destinations/ngorongoro/cover.jpg` | [2862070](https://www.pexels.com/photo/2862070/) |
+| `public/images/destinations/ngorongoro/gallery-01.jpg` | [28708299](https://www.pexels.com/photo/28708299/) |
+| `public/images/destinations/ngorongoro/gallery-02.jpg` | [30630770](https://www.pexels.com/photo/30630770/) |
+| `public/images/destinations/zanzibar/cover.jpg` | [14408604](https://www.pexels.com/photo/14408604/) |
+| `public/images/destinations/zanzibar/gallery-01.jpg` | [5859000](https://www.pexels.com/photo/5859000/) |
+| `public/images/destinations/zanzibar/gallery-02.jpg` | [17931812](https://www.pexels.com/photo/17931812/) |
+| `public/images/destinations/nairobi-national-park/cover.jpg` | [6156855](https://www.pexels.com/photo/6156855/) |
+| `public/images/destinations/gorilla-trekking/cover.jpg` | [34303083](https://www.pexels.com/photo/34303083/) |
+| `public/images/destinations/victoria-falls/cover.jpg` | [23232507](https://www.pexels.com/photo/23232507/) |
+| `public/images/destinations/kruger/cover.jpg` | [34408699](https://www.pexels.com/photo/34408699/) |
+| `public/images/destinations/cape-town/cover.jpg` | [8470660](https://www.pexels.com/photo/8470660/) |
+| `public/images/destinations/chobe/cover.jpg` | [12563366](https://www.pexels.com/photo/12563366/) |
+| `public/images/destinations/egypt/cover.jpg` | [37662644](https://www.pexels.com/photo/37662644/) |
+| `public/images/destinations/marrakech/cover.jpg` | [36595610](https://www.pexels.com/photo/36595610/) |
+| `public/images/destinations/ghana-senegal/cover.jpg` | [3561109](https://www.pexels.com/photo/3561109/) |
+| `public/images/tours/maasai-mara-great-migration/cover.jpg` | [5369453](https://www.pexels.com/photo/5369453/) |
+| `public/images/tours/samburu-special-five/cover.jpg` | [29435757](https://www.pexels.com/photo/29435757/) |
+| `public/images/tours/serengeti-ngorongoro/cover.jpg` | [28708345](https://www.pexels.com/photo/28708345/) |
+| `public/images/tours/pan-african-custom-tours/cover.jpg` | [35314673](https://www.pexels.com/photo/35314673/) |

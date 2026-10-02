@@ -23,7 +23,8 @@ import { TripSummary } from "./TripSummary";
 import form from "./Form.module.css";
 import styles from "./InquiryForm.module.css";
 
-export type PackageOption = { slug: string; title: string; days: number; nights: number; types: string[]; cover: ImageRef };
+/** `length` is pre-formatted, e.g. "3 days, 2 nights" or "Flexible length"; `days` is null for made-to-order tours. */
+export type PackageOption = { slug: string; title: string; days: number | null; length: string; types: string[]; cover: ImageRef };
 type Props = {
   packages: PackageOption[];
   destinations: { slug: string; name: string }[];
@@ -245,7 +246,7 @@ export function InquiryForm({ packages, destinations, initialPackage, initialDes
                     }));
                   }}
                   placeholder="No specific trip yet"
-                  options={packages.map((p) => ({ value: p.slug, label: `${p.title} (${p.days} days)` }))}
+                  options={packages.map((p) => ({ value: p.slug, label: p.days ? `${p.title} (${p.days} days)` : p.title }))}
                   hint="Optional. Choose one of our sample trips as a starting point."
                 />
 
@@ -254,9 +255,7 @@ export function InquiryForm({ packages, destinations, initialPackage, initialDes
                     <ImageFrame src={selectedPackage.cover.src} alt="" ratio="4 / 3" sizes="96px" className={form.selectedImg} focus={selectedPackage.cover.focus} focusMobile={selectedPackage.cover.focusMobile} />
                     <div>
                       <p className={form.selectedTitle}>{selectedPackage.title}</p>
-                      <p className={form.selectedMeta}>
-                        {selectedPackage.days} days, {selectedPackage.nights} nights
-                      </p>
+                      <p className={form.selectedMeta}>{selectedPackage.length}</p>
                     </div>
                     <button type="button" className={form.linkButton} onClick={() => set("packageSlug", "")}>
                       Remove
@@ -266,7 +265,7 @@ export function InquiryForm({ packages, destinations, initialPackage, initialDes
 
                 {!selectedPackage && (
                   <SelectField
-                    label="Where in Kenya?"
+                    label="Where would you like to go?"
                     {...field("destinationSlug")}
                     placeholder="Not sure yet"
                     options={destinations.map((d) => ({ value: d.slug, label: d.name }))}

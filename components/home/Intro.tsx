@@ -20,7 +20,7 @@ export function Intro() {
             as="h2"
             id="intro-title"
             className={styles.statement}
-            text="We plan trips across *Kenya*, so you do not have to piece them together yourself."
+            text="We plan trips across *Africa*, so you do not have to piece them together yourself."
           />
           <Reveal delay={350}>
             <p className={styles.copy}>

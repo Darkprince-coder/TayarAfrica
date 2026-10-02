@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ImageFrame } from "@/components/ui/ImageFrame";
 import { cn } from "@/lib/cn";
+import { destinationHref } from "@/lib/content/format";
 import type { Destination } from "@/lib/content/types";
 import styles from "./DestinationCard.module.css";
 
@@ -17,7 +18,7 @@ export function DestinationCard({
   className?: string;
 }) {
   return (
-    <Link href={`/destinations/${destination.slug}`} className={cn(styles.card, className)}>
+    <Link href={destinationHref(destination)} className={cn(styles.card, className)}>
       <ImageFrame
         src={destination.cover.src} focus={destination.cover.focus} focusMobile={destination.cover.focusMobile}
         alt={destination.cover.alt}
@@ -28,7 +29,10 @@ export function DestinationCard({
       />
       <span className={styles.shade} aria-hidden="true" />
       <span className={styles.body}>
-        <span className={styles.region}>{destination.country}</span>
+        <span className={styles.region}>
+          {destination.country}
+          {destination.listing === "card" && <> · On request</>}
+        </span>
         <span className={styles.name}>{destination.name}</span>
         <span className={styles.tagline}>{destination.tagline}</span>
       </span>

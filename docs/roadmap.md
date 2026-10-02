@@ -8,8 +8,8 @@ Each phase stops for review before the next one starts.
 
 | # | Phase | Status |
 |---|-------|--------|
-| 1 | Brand and type foundation | In review |
-| 2 | Real content and Pan-African data | To do |
+| 1 | Brand and type foundation | Done (02597aa) |
+| 2 | Real content and Pan-African data | In review |
 | 3 | Homepage editorial redesign, first half | To do |
 | 4 | Homepage editorial redesign, second half | To do |
 | 5 | Inner pages | To do |
@@ -28,7 +28,7 @@ Each phase stops for review before the next one starts.
 - Review on `/styleguide`.
 
 ## 2. Real content and Pan-African data
-- Real company details in `lib/site.ts`: Kenya HQ (Kimana, Amboseli), USA offices, phones with staff names,
+- Real company details in `lib/site.ts`: Kenya HQ (Nairobi), USA client support (Maryland, Minnesota), phones with staff names,
   info@ email, hours, 24/7 WhatsApp, Facebook and Instagram.
 - Data model gains regions; destinations across Africa. Kenya and Tanzania get full pages; Uganda/Rwanda,
   Southern, North and West Africa get "on request" cards. Pexels placeholders, credited in `docs/image-credits.md`.

@@ -13,13 +13,12 @@ export type NavItem = {
  * and any future section) go inside a group instead of adding another top-level item.
  */
 export const navItems: NavItem[] = [
+  { label: "Tours", href: "/tours" },
   { label: "Destinations", href: "/destinations" },
-  { label: "Experiences", href: "/experiences" },
-  { label: "Services", href: "/services" },
   {
     label: "About",
     children: [
-      { label: "About Tayari", href: "/about", description: "Who we are and what we do" },
+      { label: "About Tayari", href: "/about", description: "Who we are and what we arrange" },
       { label: "How we plan a trip", href: "/about#how-we-work", description: "From first message to departure" },
       { label: "Meet the team", href: "/team", description: "The people behind your trip" },
     ],
@@ -44,7 +43,7 @@ export const primaryCta = { label: "Plan Your Journey", href: "/plan-your-journe
  * over it. Everywhere else the nav is solid from the start.
  */
 export function isOverlayRoute(pathname: string): boolean {
-  return pathname === "/" || pathname.startsWith("/destinations/") || pathname.startsWith("/experiences/");
+  return pathname === "/" || pathname.startsWith("/destinations/") || pathname.startsWith("/tours/");
 }
 
 export function isActive(pathname: string, href: string): boolean {

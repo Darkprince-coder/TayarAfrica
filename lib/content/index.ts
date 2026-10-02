@@ -51,8 +51,15 @@ export async function getServices(): Promise<Service[]> {
   return services.filter((s) => s.status === "published").sort(byOrder);
 }
 
+/**
+ * Sample testimonials are shown for design review (local and Vercel preview) but never on the live
+ * site. Override with SHOW_SAMPLE_CONTENT=true|false.
+ */
+const showSampleContent =
+  process.env.SHOW_SAMPLE_CONTENT !== undefined ? process.env.SHOW_SAMPLE_CONTENT === "true" : process.env.VERCEL_ENV !== "production";
+
 export async function getTestimonials(): Promise<Testimonial[]> {
-  return testimonials.filter((t) => t.status === "published");
+  return testimonials.filter((t) => t.status === "published" && (showSampleContent || !t.isSample));
 }
 
 export async function getHeroSlides(): Promise<HeroSlide[]> {

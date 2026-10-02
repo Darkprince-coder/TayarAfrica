@@ -5,7 +5,9 @@ import { Container, Section, SectionHeading } from "@/components/ui/Section";
 import type { Testimonial } from "@/lib/content/types";
 import styles from "./Testimonials.module.css";
 
+/** Renders nothing when there are no testimonials (e.g. live site before real reviews exist). */
 export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
+  if (testimonials.length === 0) return null;
   const hasSample = testimonials.some((t) => t.isSample);
 
   return (

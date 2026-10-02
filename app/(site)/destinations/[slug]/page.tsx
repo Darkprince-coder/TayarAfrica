@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PackageCard } from "@/components/experiences/PackageCard";
+import { PackageCard } from "@/components/tours/PackageCard";
 import { CtaBand } from "@/components/layout/CtaBand";
 import { DetailHero } from "@/components/layout/DetailHero";
 import { Gallery } from "@/components/ui/Gallery";
@@ -11,17 +11,18 @@ import styles from "./page.module.css";
 
 type Props = { params: Promise<{ slug: string }> };
 
+/** Only full destinations have a page; "on request" ones link straight to a trip request. */
 export async function generateStaticParams() {
-  return (await getDestinations()).map((d) => ({ slug: d.slug }));
+  return (await getDestinations()).filter((d) => d.listing === "page").map((d) => ({ slug: d.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const d = await getDestinationBySlug(slug);
-  if (!d) return {};
+  if (!d || d.listing !== "page") return {};
   return {
     title: `${d.name}, ${d.country}`,
-    description: `${d.shortDescription} Best time to visit: ${d.bestTime.bestMonths}.`,
+    description: d.bestTime ? `${d.shortDescription} Best time to visit: ${d.bestTime.bestMonths}.` : d.shortDescription,
     openGraph: { images: [{ url: d.cover.src, alt: d.cover.alt }] },
   };
 }
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function DestinationPage({ params }: Props) {
   const { slug } = await params;
   const destination = await getDestinationBySlug(slug);
-  if (!destination) notFound();
+  if (!destination || destination.listing !== "page") notFound();
 
   const packages = await getPackagesForDestination(slug);
 
@@ -58,9 +59,13 @@ export default async function DestinationPage({ params }: Props) {
               </div>
             </div>
             <Reveal delay={200} className={styles.facts}>
-              <h3 className={styles.factsTitle}>Best time to go</h3>
-              <p className={styles.months}>{destination.bestTime.bestMonths}</p>
-              <p className={styles.factsText}>{destination.bestTime.summary}</p>
+              {destination.bestTime && (
+                <>
+                  <h3 className={styles.factsTitle}>Best time to go</h3>
+                  <p className={styles.months}>{destination.bestTime.bestMonths}</p>
+                  <p className={styles.factsText}>{destination.bestTime.summary}</p>
+                </>
+              )}
               <dl className={styles.meta}>
                 <div>
                   <dt>Where</dt>

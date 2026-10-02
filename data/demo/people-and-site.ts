@@ -2,51 +2,45 @@ import type { HeroSlide, Service, SiteSettings, TeamMember, Testimonial } from "
 import { siteConfig } from "@/lib/site";
 import { img } from "./img";
 
-/** DEMO CONTENT — placeholder team profiles. Replace with real people before launch. */
+/**
+ * The real team, from the client brief. Bios are short DRAFTS built only from the brief; the team
+ * will write their own (and add roles and portraits) in the CMS. Portrait files are named after each
+ * person (team/<slug>.jpg) and stay empty until their real photo is supplied:
+ * no stock photos of people presented as staff.
+ */
 export const team: TeamMember[] = [
   {
-    slug: "founder-placeholder",
-    name: "Amani Otieno",
-    role: "Founder & Lead Travel Consultant",
-    bio: "Placeholder profile. Describe the founder's background, how they came to travel planning and what they love most about designing journeys in Kenya.",
-    portrait: img("team/team-01.jpg", "Portrait of the Tayari founder", "portrait"),
+    slug: "adam-saitoti",
+    name: "Adam Saitoti",
+    role: "Kenya HQ, Nairobi",
+    bio: "Adam is at our headquarters in Nairobi, where most East African safaris begin. Call or WhatsApp Adam about trips in Kenya, Tanzania and across Africa.",
+    portrait: img("team/adam-saitoti.jpg", "Portrait of Adam Saitoti", "portrait"),
     social: [],
     order: 1,
     status: "published",
-    isPlaceholder: true,
+    isPlaceholder: false,
   },
   {
-    slug: "safari-specialist-placeholder",
-    name: "Wanjiru Kamau",
-    role: "Safari Specialist",
-    bio: "Placeholder profile. Share this person's safari experience and the destinations they know best.",
-    portrait: img("team/team-02.jpg", "Portrait of a Tayari safari specialist", "portrait"),
+    slug: "naomi-misati",
+    name: "Naomi Misati",
+    role: "East Coast Client Support, Maryland, USA",
+    bio: "Naomi looks after travellers on the US East Coast from Maryland, so you can plan your trip in your own time zone.",
+    portrait: img("team/naomi-misati.jpg", "Portrait of Naomi Misati", "portrait"),
     social: [],
     order: 2,
     status: "published",
-    isPlaceholder: true,
+    isPlaceholder: false,
   },
   {
-    slug: "coast-specialist-placeholder",
-    name: "Hassan Mwinyi",
-    role: "Coast & Culture Specialist",
-    bio: "Placeholder profile. Introduce the coast and culture specialist and the experiences they love to arrange.",
-    portrait: img("team/team-03.jpg", "Portrait of a Tayari coast and culture specialist", "portrait"),
+    slug: "edinah-misati",
+    name: "Edinah Misati",
+    role: "USA office, Minnesota",
+    bio: "Edinah runs our Minnesota office and helps travellers in the USA plan and prepare for their trip.",
+    portrait: img("team/edinah-misati.jpg", "Portrait of Edinah Misati", "portrait"),
     social: [],
     order: 3,
     status: "published",
-    isPlaceholder: true,
-  },
-  {
-    slug: "guest-care-placeholder",
-    name: "Njeri Mutua",
-    role: "Guest Care & Logistics",
-    bio: "Placeholder profile. Explain how this person looks after travellers before, during and after their trip.",
-    portrait: img("team/team-04.jpg", "Portrait of a Tayari guest care coordinator", "portrait"),
-    social: [],
-    order: 4,
-    status: "published",
-    isPlaceholder: true,
+    isPlaceholder: false,
   },
 ];
 
@@ -69,28 +63,27 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const heroSlides: HeroSlide[] = [
-  { id: "hero-1", image: img("hero/hero-01.jpg", "Elephants walking across the Amboseli plains with Mount Kilimanjaro behind", "hero", { desktop: "50% 60%", mobile: "56% 60%" }), title: "Africa, *arranged* around you.", subtitle: "Tell us what you want to see. We will plan the rest.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", textPosition: "middle-left", ctaStyle: "primary", order: 1, active: true },
-  { id: "hero-2", image: img("hero/hero-02.jpg", "A lone acacia tree silhouetted against an orange Kenyan sunset", "hero", { desktop: "40% 55%", mobile: "42% 55%" }), title: "Watch the *sun go down* over the Mara.", subtitle: "Game drives, sundowners and long evenings on the plains.", ctaText: "Explore Experiences", ctaHref: "/experiences", textPosition: "bottom-right", ctaStyle: "glass", order: 2, active: true },
-  { id: "hero-3", image: img("hero/hero-03.jpg", "Palm trees and beach umbrellas along a white sand beach on the Kenyan coast", "hero", { desktop: "40% 60%", mobile: "35% 60%" }), title: "Then slow down by the *ocean*.", subtitle: "White sand, warm water and the Swahili coast.", ctaText: "Discover Destinations", ctaHref: "/destinations", textPosition: "bottom-left", ctaStyle: "glass", order: 3, active: true },
-  { id: "hero-4", image: img("hero/hero-04.jpg", "A lioness standing beside a tree trunk in the Kenyan savannah", "hero", { desktop: "50% 45%", mobile: "36% 45%" }), title: "See the Mara at *first light*.", subtitle: "Early game drives with a driver-guide who knows the plains.", ctaText: "Plan a Mara trip", ctaHref: "/plan-your-journey?destination=maasai-mara", textPosition: "middle-left", ctaStyle: "primary", order: 4, active: true },
+  { id: "hero-1", place: "Amboseli, Kenya", image: img("hero/hero-01.jpg", "Elephants walking across the Amboseli plains with Mount Kilimanjaro behind", "hero", { desktop: "50% 60%", mobile: "56% 60%" }), title: "Africa, *arranged* around you.", subtitle: "Tell us what you want to see. We will plan the rest.", ctaText: "Plan Your Journey", ctaHref: "/plan-your-journey", textPosition: "middle-left", ctaStyle: "primary", order: 1, active: true },
+  { id: "hero-2", place: "Maasai Mara, Kenya", image: img("hero/hero-02.jpg", "A lone acacia tree silhouetted against an orange Kenyan sunset", "hero", { desktop: "40% 55%", mobile: "42% 55%" }), title: "Watch the *sun go down* over the Mara.", subtitle: "Game drives, sundowners and long evenings on the plains.", ctaText: "See our tours", ctaHref: "/tours", textPosition: "bottom-right", ctaStyle: "glass", order: 2, active: true },
+  { id: "hero-3", place: "The Swahili coast", image: img("hero/hero-03.jpg", "Palm trees and beach umbrellas along a white sand beach on the Kenyan coast", "hero", { desktop: "40% 60%", mobile: "35% 60%" }), title: "Then slow down by the *ocean*.", subtitle: "White sand, warm water and the Swahili coast.", ctaText: "Discover Destinations", ctaHref: "/destinations", textPosition: "bottom-left", ctaStyle: "glass", order: 3, active: true },
+  { id: "hero-4", place: "Maasai Mara, Kenya", image: img("hero/hero-04.jpg", "A lioness standing beside a tree trunk in the Kenyan savannah", "hero", { desktop: "50% 45%", mobile: "36% 45%" }), title: "See the Mara at *first light*.", subtitle: "Early game drives with a driver-guide who knows the plains.", ctaText: "Plan a Mara trip", ctaHref: "/plan-your-journey?destination=maasai-mara", textPosition: "middle-left", ctaStyle: "primary", order: 4, active: true },
 ];
 
-/** PLACEHOLDER social links — replace with real profiles. */
 export const siteSettings: SiteSettings = {
   companyName: siteConfig.name,
   legalName: siteConfig.legalName,
   tagline: siteConfig.tagline,
   description: siteConfig.description,
-  contact: { ...siteConfig.contact },
-  social: [
-    { label: "Instagram", href: "https://instagram.com/" },
-    { label: "Facebook", href: "https://facebook.com/" },
-    { label: "TikTok", href: "https://tiktok.com/" },
-  ],
+  contact: {
+    ...siteConfig.contact,
+    offices: siteConfig.contact.offices.map((o) => ({ ...o })),
+    hours: [...siteConfig.contact.hours],
+  },
+  social: siteConfig.social.map((s) => ({ ...s })),
   seo: {
-    defaultTitle: `${siteConfig.name} | Kenya safaris and beach holidays`,
+    defaultTitle: `${siteConfig.name} | Safaris and tours across Africa`,
     defaultDescription: siteConfig.description,
-    ogImage: img("og/default.jpg", "Tayari Africa Tours Consultants, Kenya safaris and beach holidays", "og"),
+    ogImage: img("og/default.jpg", "Tayari Africa Tours Consultants: safaris and tours across Africa", "og"),
   },
   homeImages: {
     story: img("about/story-01.jpg", "A hot-air balloon floating above open plains at sunrise", "story", { desktop: "22% 50%", mobile: "22% 50%" }),

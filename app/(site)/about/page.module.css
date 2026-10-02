@@ -29,6 +29,33 @@
   font-size: var(--text-2xl);
 }
 
+/* What we arrange: a quiet two-column list, type and hairlines rather than boxes. */
+.services {
+  display: grid;
+  margin-top: var(--space-7);
+  border-top: 1px solid var(--color-sand-deep);
+}
+.service {
+  display: grid;
+  gap: var(--space-2);
+  padding-block: var(--space-5);
+  border-bottom: 1px solid var(--color-sand-deep);
+}
+.serviceTitle {
+  font-size: var(--text-xl);
+}
+.serviceText {
+  max-width: 34rem;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 48rem) {
+  .services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-8);
+  }
+}
+
 @media (min-width: 62rem) {
   .split {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);

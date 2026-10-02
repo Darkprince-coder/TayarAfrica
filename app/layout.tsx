@@ -22,7 +22,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | Kenya safaris and beach holidays`,
+    default: `${siteConfig.name} | Safaris and tours across Africa`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,

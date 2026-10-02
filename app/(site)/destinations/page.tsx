@@ -3,35 +3,66 @@ import { DestinationCard } from "@/components/destinations/DestinationCard";
 import { CtaBand } from "@/components/layout/CtaBand";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
-import { Container, Section } from "@/components/ui/Section";
+import { Container, Section, SectionHeading } from "@/components/ui/Section";
 import { getDestinations } from "@/lib/content";
+import type { Destination } from "@/lib/content/types";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Kenya destinations",
+  title: "Destinations across Africa",
   description:
-    "Explore Kenya's safari parks, beaches and historic towns: Maasai Mara, Amboseli, Tsavo, Samburu, Diani Beach, Lamu and Nairobi. Find where to go and when.",
+    "Where we plan trips: Kenya's Amboseli, Maasai Mara, Samburu, Tsavo, Diani and Nairobi National Park; Tanzania's Serengeti, Ngorongoro and Zanzibar; and, on request, gorillas in Uganda and Rwanda, Victoria Falls, Chobe, Kruger, Cape Town, Egypt, Marrakech, Ghana and Senegal.",
 };
 
+const SIZES = "(min-width: 62rem) 33vw, (min-width: 40rem) 50vw, 100vw";
+
+function Grid({ items }: { items: Destination[] }) {
+  return (
+    <ul role="list" className={styles.grid}>
+      {items.map((d, i) => (
+        <Reveal as="li" variant="clip" delay={(i % 3) * 120} key={d.slug} className={styles.cell}>
+          <DestinationCard destination={d} sizes={SIZES} />
+        </Reveal>
+      ))}
+    </ul>
+  );
+}
+
+/** Interim layout grouped by country. Phase 5 adds the Africa map and the editorial treatment. */
 export default async function DestinationsPage() {
   const destinations = await getDestinations();
+  const kenya = destinations.filter((d) => d.listing === "page" && d.country === "Kenya");
+  const tanzania = destinations.filter((d) => d.listing === "page" && d.country === "Tanzania");
+  const onRequest = destinations.filter((d) => d.listing === "card");
 
   return (
     <>
       <PageHeader
         eyebrow="Destinations"
         title="Where would you like to *go*?"
-        lead="Seven places to start from. Each page covers what the place is like, the best time to visit and trips we can plan there."
+        lead="Kenya is our base and Tanzania is next door, but we plan trips across the whole of Africa: east, south, north and west."
       />
-      <Section tone="bone">
+      <Section tone="bone" labelledBy="kenya-title">
         <Container>
-          <ul role="list" className={styles.grid}>
-            {destinations.map((d, i) => (
-              <Reveal as="li" variant="clip" delay={(i % 3) * 120} key={d.slug} className={styles.cell}>
-                <DestinationCard destination={d} sizes="(min-width: 62rem) 33vw, (min-width: 40rem) 50vw, 100vw" />
-              </Reveal>
-            ))}
-          </ul>
+          <SectionHeading id="kenya-title" eyebrow="Our base" title="Kenya" />
+          <Grid items={kenya} />
+        </Container>
+      </Section>
+      <Section tone="sand" labelledBy="tanzania-title">
+        <Container>
+          <SectionHeading id="tanzania-title" eyebrow="Next door" title="Tanzania" />
+          <Grid items={tanzania} />
+        </Container>
+      </Section>
+      <Section tone="bone" labelledBy="africa-title">
+        <Container>
+          <SectionHeading
+            id="africa-title"
+            eyebrow="On request"
+            title="Across the rest of Africa"
+            lead="We plan these to order. Pick one and tell us your dates, and we will send ideas and a quote."
+          />
+          <Grid items={onRequest} />
         </Container>
       </Section>
       <CtaBand

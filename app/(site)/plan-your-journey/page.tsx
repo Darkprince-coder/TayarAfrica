@@ -3,11 +3,12 @@ import { InquiryForm } from "@/components/booking/InquiryForm";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container, Section } from "@/components/ui/Section";
 import { getDestinations, getPackages, getSiteSettings } from "@/lib/content";
+import { formatDuration } from "@/lib/content/format";
 
 export const metadata: Metadata = {
   title: "Plan Your Journey",
   description:
-    "Tell Tayari about the Kenya trip you have in mind. Three short steps, and a consultant will reply with ideas and a quote. This is a request, not a booking.",
+    "Tell Tayari about the trip you have in mind, anywhere in Africa. Three short steps, and a consultant will reply with ideas and a quote. This is a request, not a booking.",
 };
 
 type Props = { searchParams: Promise<{ package?: string; destination?: string }> };
@@ -29,12 +30,12 @@ export default async function PlanYourJourneyPage({ searchParams }: Props) {
             packages={packages.map((p) => ({
               slug: p.slug,
               title: p.title,
-              days: p.duration.days,
-              nights: p.duration.nights,
+              days: p.duration?.days ?? null,
+              length: formatDuration(p.duration),
               types: p.experienceTypes,
               cover: p.cover,
             }))}
-            destinations={destinations.map((d) => ({ slug: d.slug, name: d.name }))}
+            destinations={destinations.map((d) => ({ slug: d.slug, name: d.name === d.country ? d.name : `${d.name}, ${d.country}` }))}
             // Only trusted values reach the form: an unknown slug in the URL is simply ignored.
             initialPackage={packages.some((p) => p.slug === packageParam) ? packageParam : ""}
             initialDestination={destinations.some((d) => d.slug === destinationParam) ? destinationParam : ""}

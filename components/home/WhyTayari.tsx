@@ -31,7 +31,7 @@ export function WhyTayari() {
             id="why-title"
             eyebrow="04 / Why Tayari"
             title="A trip is easier when *one team* looks after it"
-            lead="Kenya has a lot to offer and a lot of moving parts. We take care of the parts so you can enjoy the place."
+            lead="Africa has a lot to offer and a lot of moving parts. We take care of the parts so you can enjoy the place."
           />
           <ul role="list" className={styles.list}>
             {reasons.map((r, i) => (

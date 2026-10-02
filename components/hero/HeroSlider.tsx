@@ -70,7 +70,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       aria-label="Featured journeys"
       data-running={running}
     >
-      <h1 className="visually-hidden">Tayari Africa Tours Consultants: Kenya safaris and beach holidays</h1>
+      <h1 className="visually-hidden">Tayari Africa Tours Consultants: safaris and tours across Africa</h1>
 
       {/* Photography */}
       <div className={styles.stage} aria-live="off">
@@ -127,7 +127,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
             >
               <p className={styles.eyebrow}>
                 <span className={styles.eyebrowLine} aria-hidden="true" />
-                Kenya
+                {slide.place}
               </p>
               <p className={styles.title}>
                 {parseAccents(slide.title).map((word, w) => (

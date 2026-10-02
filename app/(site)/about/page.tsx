@@ -6,41 +6,47 @@ import { CtaBand } from "@/components/layout/CtaBand";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
-import { getTeam } from "@/lib/content";
+import { getServices, getTeam } from "@/lib/content";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "About Tayari",
   description:
-    "Tayari Africa Tours Consultants plans safaris, beach holidays and cultural trips in Kenya. Learn what we do, how we plan a trip and who you will deal with.",
+    "Tayari Africa Tours Consultants plans safaris, cultural, beach and cross-border trips across Africa from Nairobi, Kenya, with client support in Maryland and Minnesota, USA. Learn what we do and who you will deal with.",
 };
 
-/** DEMO COPY: mission, vision and the description of the work are draft wording for the board to review. */
+/** "What we do" follows the client's own description. Mission and vision are DRAFT wording for the client to confirm. */
 export default async function AboutPage() {
-  const team = await getTeam();
+  const [team, services] = await Promise.all([getTeam(), getServices()]);
 
   return (
     <>
       <PageHeader
         eyebrow="About Tayari"
-        title="A travel consultancy for *Kenya*"
-        lead="We help people turn a rough idea of a Kenya trip into a plan they can book with confidence."
+        title="Tayari means *ready*"
+        lead="We are ready to take you to the best of Africa. Tell us where you want to go, and we will plan the rest."
       />
 
       <Section tone="bone" labelledBy="what-we-do">
         <Container>
           <div className={styles.split}>
-            <SectionHeading id="what-we-do" eyebrow="What we do" title="We plan the trip and coordinate the details" />
+            <SectionHeading id="what-we-do" eyebrow="What we do" title="Safaris, culture, beaches and border crossings" />
             <div className={styles.prose}>
               <Reveal>
                 <p>
-                  Tayari does not run its own lodges or vehicles. We work with established providers in each destination and put the pieces
-                  together: where you stay, how you get there, what you do each day and who looks after you on the ground.
+                  Tayari Africa Tours Consultants is a Pan-African tour operator. Our headquarters are in Nairobi, Kenya, and our client support
+                  team in Maryland and Minnesota looks after travellers in the USA.
                 </p>
               </Reveal>
               <Reveal delay={120}>
                 <p>
-                  That means one place to ask questions, one plan to review and one team to call if something changes while you are travelling.
+                  We plan safaris, cultural, beach and cross-border trips across the continent: from the elephants of Amboseli and the great
+                  migration in the Maasai Mara and Serengeti, to the beaches of Zanzibar, the history of Egypt, Victoria Falls and Cape Town.
+                </p>
+              </Reveal>
+              <Reveal delay={240}>
+                <p>
+                  You get one place to ask questions, one plan to review and one team to call if something changes while you are travelling.
                 </p>
               </Reveal>
             </div>
@@ -54,13 +60,32 @@ export default async function AboutPage() {
           <div className={styles.cards}>
             <Reveal className={styles.card}>
               <h3 className={styles.cardTitle}>Our mission</h3>
-              <p>To make planning a trip to Kenya simple, clear and honest, so travellers know what they are getting before they go.</p>
+              <p>To make planning a trip to Africa simple, clear and honest, so travellers know what they are getting before they go.</p>
             </Reveal>
             <Reveal delay={150} className={styles.card}>
               <h3 className={styles.cardTitle}>Our vision</h3>
-              <p>To be the first team travellers think of when they want Kenya arranged well, and the one they recommend afterwards.</p>
+              <p>To be the first team travellers think of when they want Africa arranged well, and the one they recommend afterwards.</p>
             </Reveal>
           </div>
+        </Container>
+      </Section>
+
+      <Section tone="bone" labelledBy="what-we-arrange-title" id="what-we-arrange">
+        <Container>
+          <SectionHeading
+            id="what-we-arrange-title"
+            eyebrow="What we arrange"
+            title="One thing, or the whole trip"
+            lead="Ask us for a single airport transfer or a three-country journey. We arrange it either way."
+          />
+          <ul role="list" className={styles.services}>
+            {services.map((s, i) => (
+              <Reveal as="li" key={s.slug} delay={(i % 2) * 110} className={styles.service}>
+                <h3 className={styles.serviceTitle}>{s.title}</h3>
+                <p className={styles.serviceText}>{s.description}</p>
+              </Reveal>
+            ))}
+          </ul>
         </Container>
       </Section>
 

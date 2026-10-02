@@ -19,10 +19,23 @@ export interface ImageRef {
   focusMobile?: string;
 }
 
+/** Parts of the continent, used to group destinations and colour the Africa map. */
+export type AfricaRegion = "east" | "southern" | "north" | "west" | "central";
+
 export interface Destination {
   slug: string;
   name: string;
+  /** Display name of the country or countries, e.g. "Kenya" or "Zambia & Zimbabwe". */
   country: string;
+  /** ISO 3166-1 alpha-2 codes for the Africa map. More than one when a place spans a border. */
+  countryCodes: string[];
+  africaRegion: AfricaRegion;
+  /**
+   * page: a full destination page. card: a shorter "on request" listing that goes straight to a
+   * trip request (used for places we plan to order rather than with a set itinerary).
+   */
+  listing: "page" | "card";
+  /** Where it is within the country, e.g. "Narok County, Southwest Kenya". */
   region: string;
   tagline: string;
   shortDescription: string;
@@ -30,7 +43,7 @@ export interface Destination {
   longDescription: string[];
   highlights: string[];
   activities: string[];
-  bestTime: { summary: string; bestMonths: string };
+  bestTime: { summary: string; bestMonths: string } | null;
   cover: ImageRef;
   gallery: ImageRef[];
   featured: boolean;
@@ -44,11 +57,23 @@ export interface ItineraryDay {
   description: string;
 }
 
+export interface TourPrice {
+  /** Starting price, as given by the client. */
+  amount: number;
+  currency: "USD";
+  /** The same starting price in Kenyan shillings, when the client gives one. */
+  local?: { amount: number; currency: "KES" };
+  /** Who the price applies to, e.g. "per person" or "per person sharing". */
+  basis: string;
+  note: string;
+}
+
 export interface TravelPackage {
   slug: string;
   title: string;
   tagline: string;
-  duration: { days: number; nights: number };
+  /** null for made-to-order tours with no fixed length. */
+  duration: { days: number; nights: number } | null;
   /** Destination slugs this package visits. */
   destinations: string[];
   experienceTypes: string[];
@@ -61,7 +86,11 @@ export interface TravelPackage {
   cover: ImageRef;
   gallery: ImageRef[];
   /** null → show "Request a Quote". Never invent prices. */
-  price: { amount: number; currency: string; note: string } | null;
+  price: TourPrice | null;
+  /** Things the traveller must arrange, e.g. "Passport required". */
+  requirements: string[];
+  /** True for the made-to-order Pan-African tour: no fixed route or itinerary, price on request. */
+  custom: boolean;
   featured: boolean;
   order: number;
   status: PublishStatus;
@@ -104,6 +133,8 @@ export interface Testimonial {
 export interface HeroSlide {
   id: string;
   image: ImageRef;
+  /** Where the photo was taken, shown as a small caption above the title (e.g. "Amboseli, Kenya"). */
+  place: string;
   title: string;
   subtitle: string;
   ctaText: string;
@@ -116,12 +147,37 @@ export interface HeroSlide {
   active: boolean;
 }
 
+export interface Office {
+  /** e.g. "Kenya HQ" or "East Coast client support". */
+  label: string;
+  person: string;
+  phone: string;
+  place: string;
+}
+
+export interface SiteContact {
+  email: string;
+  /** Main number (Kenya HQ). */
+  phone: string;
+  /** Digits only, for wa.me links. */
+  whatsapp: string;
+  /** Short location line, e.g. "Nairobi, Kenya". */
+  location: string;
+  offices: Office[];
+  /** Opening hours, one line each. */
+  hours: string[];
+  /** 24/7 emergency line for travellers on a trip. */
+  emergency: string;
+  /** Where we operate, in a sentence. */
+  coverage: string;
+}
+
 export interface SiteSettings {
   companyName: string;
   legalName: string;
   tagline: string;
   description: string;
-  contact: { email: string; phone: string; whatsapp: string; location: string };
+  contact: SiteContact;
   social: { label: string; href: string }[];
   seo: { defaultTitle: string; defaultDescription: string; ogImage: ImageRef };
   /** Large atmosphere photos used on the homepage (story band and closing call to action). */

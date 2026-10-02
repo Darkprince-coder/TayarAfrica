@@ -20,8 +20,4 @@
   .cell {
     min-height: 28rem;
   }
-  /* Break the rhythm: the first card leads across two columns. */
-  .cell:first-child {
-    grid-column: span 2;
-  }
 }

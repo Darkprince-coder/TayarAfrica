@@ -125,3 +125,8 @@
   user-select: none;
   pointer-events: none;
 }
+
+/* The info@ address is long: let it break rather than overflow the column. */
+.email {
+  overflow-wrap: anywhere;
+}

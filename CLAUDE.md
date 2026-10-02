@@ -2,7 +2,7 @@
 
 # TAYARI Africa Tours — project guide
 
-Premium Pan-African tour consultancy website for **Tayari Africa Tours Consultants** (HQ Kimana, Amboseli, Kenya; USA offices in Delaware and Minnesota). Now heading for a **live launch on Vercel** with a Supabase CMS admin (media on Cloudinary).
+Premium Pan-African tour consultancy website for **Tayari Africa Tours Consultants** (HQ Nairobi, Kenya; USA client support in Maryland and Minnesota). Now heading for a **live launch on Vercel** with a Supabase CMS admin (media on Cloudinary).
 Sources: `docs/Website final touches .docx` (client brief), `docs/roadmap.md` (agreed phases and status), original spec `docs/TAYARI_Africa_Tours_Coding_Agent_Specification.docx`.
 
 ## What this product is
@@ -15,14 +15,17 @@ Sources: `docs/Website final touches .docx` (client brief), `docs/roadmap.md` (a
 - Write the brand as "Tayari" (as on the logo and in the client brief), never "TAYARI"; the official name is "Tayari Africa Tours Consultants". Capitals only through CSS on labels.
 - All demo content is placeholder. Team profiles and testimonials are clearly flagged as sample (`isPlaceholder: true`) and the UI labels testimonials as sample content.
 - Never invent awards, partnerships, reviews, rankings, guarantees or prices. Show tour prices exactly as the client gave them ("From $X pp"); use "Request a Quote" when none is supplied. Internal notes in the brief (e.g. profit margins) never appear on the site.
-- Contact details in `lib/site.ts` are placeholders.
+- Company and contact details in `lib/site.ts` are real (from the client brief). Facebook still needs the page's own URL. Team bios are drafts; team portraits use `team/<slug>.jpg` and stay empty until real photos arrive (never stock faces as staff).
+- Sample testimonials show locally and on Vercel previews, hidden in production (`SHOW_SAMPLE_CONTENT` overrides).
 
 ## Stack & conventions
 - Next.js App Router (read `node_modules/next/dist/docs/` before using unfamiliar APIs — this is a newer version), TypeScript strict, React Compiler on.
 - **CSS Modules** per component (`Component.module.css`). Global CSS only in `styles/` (tokens + reset). Never hard-code colours/spacing: use tokens from `styles/tokens.css`.
 - Motion library (`motion`) only where CSS can't do the job. Everything honours `prefers-reduced-motion`; never delay important content behind animation.
 - Server Components by default; add `"use client"` only for interactivity. Important content must be server-rendered for SEO.
-- Feature folders: `components/{layout,navigation,hero,home,destinations,experiences,booking,team,ui}`, `lib/{analytics,validation,supabase,content}`, `data/demo/`.
+- Feature folders: `components/{layout,navigation,hero,home,destinations,tours,booking,team,ui}`, `lib/{analytics,validation,supabase,content}`, `data/demo/`.
+- Formatting of durations, prices (USD + KES, basis such as "per person sharing") and destination links lives in `lib/content/format.ts`; use it everywhere.
+- Destinations: `listing: "page"` gets a full page; `listing: "card"` is "on request" and links to the trip request. Tours: `custom: true` has no itinerary or price.
 - **Content access goes through `lib/content`** (e.g. `getDestinations()`), never import `data/demo` directly in pages. This is the seam where Supabase/CMS replaces demo data.
 - Validation with Zod, shared between client and server. Server-side validation always.
 - Analytics only through `lib/analytics` (GA4 ID from env). No scattered tags.
@@ -43,7 +46,7 @@ Sources: `docs/Website final touches .docx` (client brief), `docs/roadmap.md` (a
 - Commands: `npm run dev`, `npm run build`, `npm run lint`.
 
 ## Navigation
-- Top level stays short. Related pages go in a group (`navItems` in `lib/navigation.ts`): dropdown on desktop (hover for mouse, click/keyboard otherwise), accordion on mobile. Anything about the company lives under **About** (About TAYARI, How we plan a trip, Meet the team). Add future sections as groups, never as more top-level links.
+- Top level stays short. Related pages go in a group (`navItems` in `lib/navigation.ts`): dropdown on desktop (hover for mouse, click/keyboard otherwise), accordion on mobile. Anything about the company lives under **About** (About Tayari, which also holds "What we arrange", How we plan a trip, Meet the team). Top level: Tours, Destinations, About, Contact; Gallery is added in Phase 5. Add future sections as groups, never as more top-level links.
 
 ## Motion system (cinematic, delayed, never blocking)
 - `MotionScript` (root layout) sets `data-motion` on `<html>` before paint unless reduced motion; CSS starts reveal elements hidden only under that flag. `IntroScript`/`IntroLoader` handle the once-per-session logo intro; `lib/motion-gate.ts` makes reveals and the hero wait for it.

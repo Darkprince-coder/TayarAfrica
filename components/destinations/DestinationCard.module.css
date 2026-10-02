@@ -28,7 +28,8 @@
 .shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgb(20 38 30 / 0.74), rgb(20 38 30 / 0.3) 26%, transparent 52%);
+  /* Deep enough at the bottom to hold text over bright skies, sand and white water. */
+  background: linear-gradient(to top, rgb(20 38 30 / 0.86), rgb(20 38 30 / 0.5) 32%, transparent 62%);
 }
 
 .body {
@@ -42,9 +43,11 @@
 .region {
   font-size: var(--text-xs);
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-gold);
+  /* Cream, not gold: gold vanished on busy photos. */
+  color: var(--color-text-on-dark);
+  opacity: 0.85;
 }
 .name {
   font-family: var(--font-display);

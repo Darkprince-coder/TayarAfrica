@@ -1,4 +1,4 @@
-import { PackageCard } from "@/components/experiences/PackageCard";
+import { PackageCard } from "@/components/tours/PackageCard";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
@@ -13,7 +13,7 @@ export function FeaturedPackages({ packages }: { packages: TravelPackage[] }) {
       <Container>
         <SectionHeading
           id="packages-title"
-          eyebrow="02 / Experiences"
+          eyebrow="02 / Tours"
           title="Trips we can *plan* for you"
           lead="Every trip below is a starting point. Dates, stays and pace can all be changed to suit you."
           align="center"
@@ -34,8 +34,8 @@ export function FeaturedPackages({ packages }: { packages: TravelPackage[] }) {
         </div>
         <div className={styles.more}>
           <Reveal delay={200}>
-            <Button href="/experiences" variant="link" arrow>
-              Browse all experiences
+            <Button href="/tours" variant="link" arrow>
+              See all tours
             </Button>
           </Reveal>
         </div>

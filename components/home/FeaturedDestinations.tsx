@@ -19,8 +19,8 @@ export function FeaturedDestinations({ destinations }: { destinations: Destinati
         <SectionHeading
           id="destinations-title"
           eyebrow="01 / Destinations"
-          title="Where in *Kenya* do you want to be?"
-          lead="From open savannah to the Swahili coast. Start with a place, or tell us what you want to feel and we will suggest one."
+          title="Where in *Africa* do you want to be?"
+          lead="Kenya is home and most trips start in East Africa, but we plan across the whole continent. Start with a place, or tell us what you want to feel and we will suggest one."
           align="split"
           action={
             <Button href="/destinations" variant="link" arrow>
