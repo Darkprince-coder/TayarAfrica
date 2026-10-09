@@ -57,6 +57,8 @@ export async function Footer() {
             <li className={styles.muted}>
               {contact.location}
               <br />
+              Branch in Amboseli, Kenya
+              <br />
               Client support in Maryland and Minnesota, USA
             </li>
           </ul>

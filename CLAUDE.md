@@ -64,7 +64,13 @@ Sources: `docs/Website final touches .docx` (client brief), `docs/roadmap.md` (a
 ## Trip finder
 - `components/home/TripFinder` (docked in the homepage hero, prefilled on `/explore`) filters tours and destinations: where / how long / what for. GET form to `/explore?where=&length=&theme=`, logic in `lib/content/filter.ts` (unknown values ignored). Destinations carry `themes`; tour themes derive from `experienceTypes`. The custom tour is always offered as the fallback. `/explore` is noindex.
 
-## Inquiry flow (Phase 5)
+## Booking and legal (Phase 6)
+- Booking terms (30% deposit, payment methods, balance on arrival, cancellation tiers) live once in `siteSettings.booking` and feed the trip request page (`components/booking/BookingProcess`) and the legal texts. Never show payment account numbers on the site.
+- Legal pages (/terms, /privacy, /cancellation) render `LegalPage` data from `getLegalPage()` via `components/layout/LegalArticle`. They are DRAFTS (`draft: true` shows a notice) until the client approves them.
+- The trip request requires a start date, pickup point (with suggestions), phone/WhatsApp and nationality.
+- Offices/branches are `contact.offices` (person optional, optional map pin); the head office has `contact.address` and `contact.headOffice`.
+
+## Inquiry flow
 - `/plan-your-journey` is a 3-step form (`components/booking/InquiryForm`): The trip, The details, About you. Deep links: `?package=<slug>` and `?destination=<slug>` prefill it (unknown slugs are ignored).
 - Validation lives in `lib/validation/` (Zod, one schema per step, reused by the server). Choice lists are in `lib/validation/options.ts`.
 - Submissions go through server actions (`app/(site)/plan-your-journey/actions.ts`, `app/(site)/contact/actions.ts`): re-validate, honeypot + minimum-time trap, per-client rate limit, idempotency key (double sends return the same reference), slug existence checks. Status and other privileged fields are never read from the browser.

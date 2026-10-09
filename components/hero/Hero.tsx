@@ -49,11 +49,14 @@ export function Hero({ slide, copy, children }: { slide: HeroSlide; copy: HeroCo
 
       <div className={styles.inner}>
         <div className={styles.lockup}>
-          <Image src="/brand/logo-emblem-solid.png" alt="" width={240} height={259} priority className={styles.emblem} />
-          <h1 id="hero-title" className={styles.wordmark}>
-            <span className={styles.name}>Tayari</span>
-            <span className={styles.sub}>Africa Tours</span>
-          </h1>
+          {/* Emblem and wordmark as one mark, so the map always sits centred over "Tayari". */}
+          <div className={styles.mark}>
+            <Image src="/brand/logo-emblem-solid.png" alt="" width={240} height={259} priority className={styles.emblem} />
+            <h1 id="hero-title" className={styles.wordmark}>
+              <span className={styles.name}>Tayari</span>
+              <span className={styles.sub}>Africa Tours</span>
+            </h1>
+          </div>
           <p className={styles.tagline}>
             <span>
               {parseAccents(copy.title).map((w, i) => (

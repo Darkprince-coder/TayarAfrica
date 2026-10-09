@@ -18,6 +18,7 @@ export function TripSummary({ values, lookup }: { values: InquiryFormValues; loo
   rows.push(["Stay", labelFor(ACCOMMODATION, values.accommodation)]);
   if (values.travelers) rows.push(["Travellers", values.travelers]);
   if (values.startDate) rows.push(["Starting", formatDate(values.startDate) + (values.flexibleDates ? " (flexible)" : "")]);
+  if (values.pickupPoint.trim()) rows.push(["Pickup", values.pickupPoint.trim()]);
   else if (values.flexibleDates) rows.push(["Dates", "Flexible"]);
   if (values.duration !== "not-sure") rows.push(["Length", labelFor(DURATIONS, values.duration)]);
 

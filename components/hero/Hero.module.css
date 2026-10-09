@@ -102,15 +102,18 @@
     padding-top: clamp(0rem, 2vh, 1.5rem);
   }
   .lockup .wordmark {
-    justify-items: start;
-  }
-  .lockup .sub {
-    padding-left: 0.1em;
+    justify-items: center;
   }
   /* Left-aligned, the tagline keeps only its trailing rule. */
   .lockup .tagline::before {
     display: none;
   }
+}
+.mark {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  width: fit-content;
 }
 .emblem {
   width: clamp(2.75rem, 2rem + 2.4vw, 4.5rem);
@@ -221,7 +224,13 @@
 :global(html[data-motion]) .hero:not([data-ready="true"]) :is(.emblem, .wordmark, .tagline, .bottom, .dock) {
   opacity: 0;
 }
-.hero[data-ready="true"] .emblem {
+.hero[data-ready="true"] .mark {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  width: fit-content;
+}
+.emblem {
   animation: rise 1.4s var(--ease-cine) 0.3s both;
 }
 .hero[data-ready="true"] .wordmark {

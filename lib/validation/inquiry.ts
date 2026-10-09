@@ -27,8 +27,10 @@ export const detailsShape = {
     .int("Please enter a whole number.")
     .min(1, "At least 1 traveller.")
     .max(50, "For groups over 50, please contact us directly."),
-  startDate: z.union([z.literal(""), isoDate]),
+  // Required by the client's booking process. An estimate is fine; "flexible" says so.
+  startDate: z.string().min(1, "Please choose a start date. An estimate is fine.").pipe(isoDate),
   flexibleDates: z.boolean(),
+  pickupPoint: line(120).pipe(z.string().min(2, "Please tell us where we should pick you up.")),
   duration: z.enum(DURATION_VALUES, { error: "Choose a trip length, or Not sure yet." }),
   message: paragraph(2000),
 };
@@ -37,7 +39,8 @@ export const detailsShape = {
 export const aboutShape = {
   fullName: line(100).pipe(z.string().min(2, "Please enter your full name.")),
   email: emailField,
-  phone: phoneText,
+  phone: phoneText.pipe(z.string().min(1, "Please add a phone or WhatsApp number so we can reach you.")),
+  nationality: line(80).pipe(z.string().min(2, "Please tell us your nationality.")),
   country: line(80).pipe(z.string().min(2, "Please tell us which country you live in.")),
   contactPreference: z.enum(CONTACT_VALUES, { error: "Choose how you would like us to reach you." }),
   consent: z.literal(true, { error: "Please confirm so we can contact you about this request." }),
@@ -86,11 +89,13 @@ export type InquiryFormValues = {
   travelers: string;
   startDate: string;
   flexibleDates: boolean;
+  pickupPoint: string;
   duration: string;
   message: string;
   fullName: string;
   email: string;
   phone: string;
+  nationality: string;
   country: string;
   contactPreference: string;
   consent: boolean;
@@ -105,11 +110,13 @@ export const emptyInquiry: InquiryFormValues = {
   travelers: "2",
   startDate: "",
   flexibleDates: false,
+  pickupPoint: "",
   duration: "not-sure",
   message: "",
   fullName: "",
   email: "",
   phone: "",
+  nationality: "",
   country: "",
   contactPreference: "email",
   consent: false,

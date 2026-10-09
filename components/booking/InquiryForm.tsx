@@ -15,7 +15,7 @@ import {
   tripSchema,
   type InquiryFormValues,
 } from "@/lib/validation/inquiry";
-import { ACCOMMODATION, CONTACT_PREFERENCES, DURATIONS, EXPERIENCE_TYPES } from "@/lib/validation/options";
+import { ACCOMMODATION, CONTACT_PREFERENCES, DURATIONS, EXPERIENCE_TYPES, PICKUP_SUGGESTIONS } from "@/lib/validation/options";
 import type { ImageRef } from "@/lib/content/types";
 import { Stepper } from "./Stepper";
 import { SuccessPanel } from "./SuccessPanel";
@@ -305,7 +305,7 @@ export function InquiryForm({ packages, destinations, initialPackage, initialDes
                   <h2 ref={headingRef} tabIndex={-1} className={form.stepTitle}>
                     When and who?
                   </h2>
-                  <p className={form.stepLead}>An approximate idea is enough. We will confirm dates with you.</p>
+                  <p className={form.stepLead}>An estimate is enough. We confirm the exact dates with you before anything is booked.</p>
                 </header>
 
                 <div className={form.row2}>
@@ -313,10 +313,24 @@ export function InquiryForm({ packages, destinations, initialPackage, initialDes
                   <SelectField label="How long?" required {...field("duration")} options={DURATIONS.map((d) => ({ value: d.value, label: d.label }))} />
                 </div>
 
-                <TextField label="Preferred start date" type="date" min={today} {...field("startDate")} hint="Leave blank if you are still deciding." />
+                <TextField label="Start date" type="date" min={today} required {...field("startDate")} hint="Your best guess. Tick below if it may move." />
                 <CheckboxField name="flexibleDates" checked={values.flexibleDates} onChange={(c) => set("flexibleDates", c)}>
                   My dates are flexible
                 </CheckboxField>
+
+                <TextField
+                  label="Pickup point"
+                  required
+                  list="pickup-suggestions"
+                  autoComplete="off"
+                  {...field("pickupPoint")}
+                  hint="An airport, your hotel or a town. Choose a suggestion or type your own."
+                />
+                <datalist id="pickup-suggestions">
+                  {PICKUP_SUGGESTIONS.map((p) => (
+                    <option key={p} value={p} />
+                  ))}
+                </datalist>
 
                 <TextAreaField
                   label="Anything else we should know?"
@@ -338,9 +352,12 @@ export function InquiryForm({ packages, destinations, initialPackage, initialDes
                 <TextField label="Full name" required autoComplete="name" {...field("fullName")} />
                 <div className={form.row2}>
                   <TextField label="Email" type="email" required autoComplete="email" inputMode="email" {...field("email")} />
-                  <TextField label="Phone or WhatsApp" type="tel" autoComplete="tel" inputMode="tel" {...field("phone")} hint="Include the country code." />
+                  <TextField label="Phone or WhatsApp" type="tel" required autoComplete="tel" inputMode="tel" {...field("phone")} hint="Include the country code." />
                 </div>
-                <TextField label="Country you live in" required autoComplete="country-name" {...field("country")} />
+                <div className={form.row2}>
+                  <TextField label="Nationality" required autoComplete="off" {...field("nationality")} hint="Helps us advise on visas and park fees." />
+                  <TextField label="Country you live in" required autoComplete="country-name" {...field("country")} />
+                </div>
 
                 <ChoiceChips
                   legend="How would you like us to contact you?"

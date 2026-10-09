@@ -166,6 +166,29 @@ export interface HeroCopy {
   subtitle: string;
 }
 
+/** How a trip goes from request to travel, from the client brief. One source for every page that mentions it. */
+export interface BookingPolicy {
+  /** Deposit taken to confirm a booking, as a percentage of the trip price. */
+  depositPercent: number;
+  paymentMethods: string[];
+  /** When the rest is paid, e.g. "on arrival". */
+  balanceDue: string;
+  /** Refunds by how long before the trip starts the traveller cancels, most generous first. */
+  cancellation: { when: string; refund: string }[];
+}
+
+/** A legal page (Terms, Privacy, Cancellation). Draft until the client approves it. */
+export interface LegalPage {
+  slug: "terms" | "privacy" | "cancellation";
+  title: string;
+  summary: string;
+  /** ISO date the text was last changed. */
+  updated: string;
+  sections: { heading: string; paragraphs: string[]; list?: string[] }[];
+  /** True until the client (or their lawyer) approves the text; shows a notice on the page. */
+  draft: boolean;
+}
+
 export type PageKey = "about" | "tours" | "destinations" | "team" | "contact" | "gallery" | "plan" | "legal";
 
 /** What a gallery photo shows; drives the gallery's filter. */
@@ -183,12 +206,16 @@ export interface GalleryImage {
   status: PublishStatus;
 }
 
+/** A branch or office. The client can add as many as they like in the CMS. */
 export interface Office {
-  /** e.g. "Kenya HQ" or "East Coast client support". */
+  /** e.g. "Kenya HQ", "Amboseli branch" or "East Coast client support". */
   label: string;
-  person: string;
+  /** Contact person, when there is one. */
+  person?: string;
   phone: string;
   place: string;
+  /** [longitude, latitude] to pin it on the Contact page map (African offices only). */
+  pin?: [number, number];
 }
 
 export interface SiteContact {
@@ -197,8 +224,10 @@ export interface SiteContact {
   phone: string;
   /** Digits only, for wa.me links. */
   whatsapp: string;
-  /** Short location line, e.g. "Nairobi, Kenya". */
+  /** Short location line, e.g. "Riara Road, Nairobi, Kenya". */
   location: string;
+  /** Full street address of the head office. */
+  address: string;
   offices: Office[];
   /** Opening hours, one line each. */
   hours: string[];
@@ -217,6 +246,7 @@ export interface SiteSettings {
   description: string;
   contact: SiteContact;
   hero: HeroCopy;
+  booking: BookingPolicy;
   social: { label: string; href: string }[];
   seo: { defaultTitle: string; defaultDescription: string; ogImage: ImageRef };
   /** Large atmosphere photos used on the homepage. */

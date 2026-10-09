@@ -35,6 +35,7 @@ export const flatNavLinks: { label: string; href: string }[] = navItems.flatMap(
 export const legalLinks = [
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms of Service", href: "/terms" },
+  { label: "Cancellation Policy", href: "/cancellation" },
 ];
 
 export const primaryCta = { label: "Plan Your Journey", href: "/plan-your-journey" };

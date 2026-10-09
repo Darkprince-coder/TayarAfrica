@@ -17,17 +17,21 @@ export const siteConfig = {
     email: "info@tayariafricatoursconsultants.com",
     phone: "+254 710 368 954",
     whatsapp: "254710368954",
-    location: "Nairobi CBD, Kenya",
+    location: "Riara Road, Nairobi, Kenya",
+    /** Full street address of the head office. */
+    address: "Junction Heights Apartments, #E3, Riara Road, Nairobi, Kenya",
     offices: [
-      { label: "Kenya HQ", person: "Adam Saitoti", phone: "+254 710 368 954", place: "Nairobi CBD, Kenya" },
+      { label: "Kenya HQ", person: "Adam Saitoti", phone: "+254 710 368 954", place: "Riara Road, Nairobi, Kenya" },
+      // Branch confirmed by the client; uses the main Kenya number until it has its own contact.
+      { label: "Amboseli branch", phone: "+254 710 368 954", place: "Amboseli, Kenya", pin: [37.26, -2.65] as [number, number] },
       { label: "East Coast client support", person: "Naomi Misati", phone: "+1 (302) 465-0341", place: "Maryland, USA" },
       { label: "USA office", person: "Edinah Misati", phone: "+1 (763) 496-7625", place: "Minnesota, USA" },
     ],
     hours: ["Monday to Saturday, 7am to 7pm", "Sunday, 8am to 5pm"],
     emergency: "+254 710 368 954",
     coverage: "The whole of Africa: East, Southern, North, West and Central.",
-    // Pinned on Nairobi CBD until the client gives the street address; then update both.
-    headOffice: { pin: [36.822, -1.286] as [number, number], directionsQuery: "Nairobi CBD, Nairobi, Kenya" },
+    // Junction Heights Apartments, Riara Road (Kilimani, near The Junction).
+    headOffice: { pin: [36.763, -1.298] as [number, number], directionsQuery: "Junction Heights Apartments, Riara Road, Nairobi" },
   },
   social: [
     // Page name from the brief. TODO: replace the search link with the page's own URL once the client shares it.

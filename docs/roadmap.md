@@ -13,7 +13,7 @@ Each phase stops for review before the next one starts.
 | 3 | Homepage editorial redesign, first half | Done |
 | 4 | Homepage editorial redesign, second half | Done |
 | 5 | Inner pages | Done |
-| 6 | Booking form and legal | To do |
+| 6 | Booking form and legal | Done |
 | 7 | CMS admin on Supabase | To do |
 | 8 | Bookings and notifications | To do |
 | 9 | Launch | To do |

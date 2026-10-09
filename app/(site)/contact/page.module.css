@@ -149,3 +149,10 @@
   max-width: 30rem;
   color: var(--color-text-on-dark-muted);
 }
+.address {
+  font-style: normal;
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-text-on-dark);
+}

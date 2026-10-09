@@ -87,6 +87,17 @@ export const siteSettings: SiteSettings = {
     headOffice: { ...siteConfig.contact.headOffice },
   },
   social: siteConfig.social.map((s) => ({ ...s })),
+  // From the client brief. Payment account details are sent with each quote, never shown here.
+  booking: {
+    depositPercent: 30,
+    paymentMethods: ["M-Pesa", "bank transfer", "WorldRemit", "Zelle"],
+    balanceDue: "on arrival",
+    cancellation: [
+      { when: "7 days or more before your trip starts", refund: "Full refund of your deposit" },
+      { when: "3 to 6 days before", refund: "50% of your deposit refunded" },
+      { when: "Within 48 hours of the start", refund: "No refund" },
+    ],
+  },
   hero: {
     kicker: "Safaris · Coast · Culture",
     title: "Africa, arranged *around you.*",

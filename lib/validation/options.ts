@@ -19,6 +19,17 @@ export const DURATIONS = [
   { value: "not-sure", label: "Not sure yet" },
 ] as const;
 
+/** Common pickup points, offered as suggestions; travellers can type anything. */
+export const PICKUP_SUGGESTIONS = [
+  "Nairobi: Jomo Kenyatta International Airport (JKIA)",
+  "Nairobi: my hotel or home",
+  "Nairobi: Wilson Airport",
+  "Mombasa: Moi International Airport",
+  "Mombasa: my hotel",
+  "Arusha: Kilimanjaro International Airport",
+  "Zanzibar: Abeid Amani Karume Airport",
+] as const;
+
 export const CONTACT_PREFERENCES = [
   { value: "email", label: "Email" },
   { value: "whatsapp", label: "WhatsApp" },

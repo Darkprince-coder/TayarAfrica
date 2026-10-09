@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BookingProcess } from "@/components/booking/BookingProcess";
 import { InquiryForm } from "@/components/booking/InquiryForm";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container, Section } from "@/components/ui/Section";
@@ -25,7 +26,7 @@ export default async function PlanYourJourneyPage({ searchParams }: Props) {
         image={site.pageImages.plan}
         kicker="Plan Your Journey"
         title="Tell us about your *trip*"
-        lead="Three short steps, about two minutes. This is a request, not a booking: nothing is confirmed until we agree a plan with you."
+        lead="Three short steps, about two minutes. This is a request, not a booking: nothing is confirmed until you accept a quote and pay the deposit."
       />
       <Section tone="bone" labelledBy="page-title">
         <Container>
@@ -48,6 +49,7 @@ export default async function PlanYourJourneyPage({ searchParams }: Props) {
           />
         </Container>
       </Section>
+      <BookingProcess booking={site.booking} />
     </>
   );
 }

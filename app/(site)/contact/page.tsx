@@ -23,11 +23,13 @@ const EAST_AFRICA = viewFor([30.5, 5.6], [43.5, -7.2]);
 export default async function ContactPage() {
   const { contact, social, pageImages } = await getSiteSettings();
   const pin = pinAt(contact.headOffice.pin);
+  // Other African branches with a pin (e.g. Amboseli).
+  const branches = contact.offices.filter((o) => o.pin).map((o) => ({ label: o.place.replace(/, Kenya$/, ""), xy: pinAt(o.pin!) }));
   // Pin and label are drawn in map units; scale them to how far the map is zoomed.
   const k = Number(EAST_AFRICA.split(" ")[2]) / 800;
 
   const rows: Row[] = [
-    ...contact.offices.map((o) => ({ label: o.label, value: `${o.person}, ${o.phone}`, href: telHref(o.phone), note: o.place })),
+    ...contact.offices.map((o) => ({ label: o.label, value: o.person ? `${o.person}, ${o.phone}` : o.phone, href: telHref(o.phone), note: o.place })),
     {
       label: "WhatsApp",
       value: "Message us on WhatsApp",
@@ -109,7 +111,7 @@ export default async function ContactPage() {
               <AfricaMap
                 highlight={["KE"]}
                 view={EAST_AFRICA}
-                label="Map of East Africa with Kenya highlighted and our head office marked in Nairobi"
+                label="Map of East Africa with Kenya highlighted, our head office marked in Nairobi and our branch in Amboseli"
                 className={styles.map}
               >
                 <circle cx={pin[0]} cy={pin[1]} r={16 * k} className={styles.pinHalo} />
@@ -117,6 +119,14 @@ export default async function ContactPage() {
                 <text x={pin[0] + 22 * k} y={pin[1] + 9 * k} fontSize={30 * k} className={styles.pinLabel}>
                   Nairobi
                 </text>
+                {branches.map((b) => (
+                  <g key={b.label}>
+                    <circle cx={b.xy[0]} cy={b.xy[1]} r={6 * k} className={styles.pin} />
+                    <text x={b.xy[0] + 18 * k} y={b.xy[1] + 8 * k} fontSize={24 * k} className={styles.pinLabel}>
+                      {b.label}
+                    </text>
+                  </g>
+                ))}
               </AfricaMap>
             </Reveal>
             <div className={styles.findText}>
@@ -124,11 +134,12 @@ export default async function ContactPage() {
                 <p className={styles.findKicker}>Find us</p>
               </Reveal>
               <h2 id="find-title" className={styles.findTitle}>
-                Our head office is in <em>{contact.location.replace(/, Kenya$/, "")}.</em>
+                Our head office is in <em>Nairobi.</em>
               </h2>
+              <address className={styles.address}>{contact.address}</address>
               <p className={styles.findCopy}>
-                Most trips start in Nairobi, and so do we. Call or message before you visit so the right person is in. If you are in the USA,
-                our client support team in Maryland and Minnesota will help by phone and WhatsApp.
+                Most trips start in Nairobi, and so do we, with a branch at Amboseli too. Call or message before you visit so the right person is in. If
+                you are in the USA, our client support team will help by phone and WhatsApp.
               </p>
               <Button href={directionsHref(contact.headOffice.directionsQuery)} variant="light" arrow target="_blank" rel="noopener noreferrer">
                 Get directions
