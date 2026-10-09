@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { DestinationCard } from "@/components/destinations/DestinationCard";
+import { DestinationExplorer, type ExplorerPin } from "@/components/destinations/DestinationExplorer";
+import { AFRICA_VIEW, AfricaMap, placePins } from "@/components/geo/AfricaMap";
 import { CtaBand } from "@/components/layout/CtaBand";
-import { PageHeader } from "@/components/layout/PageHeader";
+import { PageHero } from "@/components/layout/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
-import { getDestinations } from "@/lib/content";
+import { getDestinations, getSiteSettings } from "@/lib/content";
+import { destinationHref, regionLabel } from "@/lib/content/format";
 import type { Destination } from "@/lib/content/types";
 import styles from "./page.module.css";
 
@@ -15,6 +18,14 @@ export const metadata: Metadata = {
 };
 
 const SIZES = "(min-width: 62rem) 33vw, (min-width: 40rem) 50vw, 100vw";
+const GROUPS = ["Kenya", "Tanzania", "Uganda & Rwanda", "Southern Africa", "North Africa", "West Africa", "Central Africa"];
+
+/** Which line of the map's list a place belongs to. */
+function groupOf(d: Destination): string {
+  if (d.country === "Kenya" || d.country === "Tanzania") return d.country;
+  if (d.countryCodes.some((c) => c === "UG" || c === "RW")) return "Uganda & Rwanda";
+  return regionLabel(d.africaRegion);
+}
 
 function Grid({ items }: { items: Destination[] }) {
   return (
@@ -28,20 +39,51 @@ function Grid({ items }: { items: Destination[] }) {
   );
 }
 
-/** Interim layout grouped by country. Phase 5 adds the Africa map and the editorial treatment. */
 export default async function DestinationsPage() {
-  const destinations = await getDestinations();
+  const [destinations, site] = await Promise.all([getDestinations(), getSiteSettings()]);
   const kenya = destinations.filter((d) => d.listing === "page" && d.country === "Kenya");
   const tanzania = destinations.filter((d) => d.listing === "page" && d.country === "Tanzania");
   const onRequest = destinations.filter((d) => d.listing === "card");
 
+  const covered = [...new Set(destinations.flatMap((d) => d.countryCodes))];
+  const pins: ExplorerPin[] = placePins(
+    destinations.map((d) => ({
+      id: d.slug,
+      label: d.name,
+      href: destinationHref(d),
+      note: d.listing === "page" ? (d.country === "Kenya" || d.country === "Tanzania" ? "" : d.country) : "On request",
+      group: groupOf(d),
+      points: d.coordinates,
+    })),
+  );
+
   return (
     <>
-      <PageHeader
-        eyebrow="Destinations"
-        title="Where would you like to *go*?"
-        lead="Kenya is our base and Tanzania is next door, but we plan trips across the whole of Africa: east, south, north and west."
+      <PageHero
+        image={site.pageImages.destinations}
+        kicker="Destinations"
+        title="Where would you like to *wake up?*"
+        lead="Kenya is home and Tanzania is next door. From there we plan across the whole continent: east, south, north and west."
       />
+
+      <Section tone="deep" labelledBy="map-title">
+        <Container>
+          <SectionHeading
+            id="map-title"
+            eyebrow="The map"
+            title="Every place we plan, *in one view.*"
+            lead="Point at a place to find it on the map. Full guides for Kenya and Tanzania; the rest we plan to order."
+            align="split"
+          />
+          <DestinationExplorer
+            view={AFRICA_VIEW}
+            map={<AfricaMap highlight={covered} label="Map of Africa with the countries we plan trips in highlighted" />}
+            pins={pins}
+            groups={GROUPS}
+          />
+        </Container>
+      </Section>
+
       <Section tone="bone" labelledBy="kenya-title">
         <Container>
           <SectionHeading id="kenya-title" eyebrow="Our base" title="Kenya" />

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/booking/ContactForm";
-import { PageHeader } from "@/components/layout/PageHeader";
+import { PageHero } from "@/components/layout/PageHero";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section } from "@/components/ui/Section";
 import { getSiteSettings } from "@/lib/content";
-import { telHref, whatsappHref } from "@/lib/site";
+import { AfricaMap, pinAt, viewFor } from "@/components/geo/AfricaMap";
+import { directionsHref, telHref, whatsappHref } from "@/lib/site";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -16,8 +17,14 @@ export const metadata: Metadata = {
 
 type Row = { label: string; value: string; href?: string; external?: boolean; note?: string };
 
+/** East Africa, framed around Kenya. */
+const EAST_AFRICA = viewFor([30.5, 5.6], [43.5, -7.2]);
+
 export default async function ContactPage() {
-  const { contact, social } = await getSiteSettings();
+  const { contact, social, pageImages } = await getSiteSettings();
+  const pin = pinAt(contact.headOffice.pin);
+  // Pin and label are drawn in map units; scale them to how far the map is zoomed.
+  const k = Number(EAST_AFRICA.split(" ")[2]) / 800;
 
   const rows: Row[] = [
     ...contact.offices.map((o) => ({ label: o.label, value: `${o.person}, ${o.phone}`, href: telHref(o.phone), note: o.place })),
@@ -35,8 +42,9 @@ export default async function ContactPage() {
 
   return (
     <>
-      <PageHeader
-        eyebrow="Contact"
+      <PageHero
+        image={pageImages.contact}
+        kicker="Contact"
         title="Talk to *us*"
         lead="Ask a question, or tell us about the trip you have in mind. A person reads every message."
       />
@@ -89,6 +97,42 @@ export default async function ContactPage() {
                   Plan Your Journey
                 </Button>
               </Reveal>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      <Section tone="deep" labelledBy="find-title">
+        <Container>
+          <div className={styles.find}>
+            <Reveal variant="clip" className={styles.mapCard}>
+              <AfricaMap
+                highlight={["KE"]}
+                view={EAST_AFRICA}
+                label="Map of East Africa with Kenya highlighted and our head office marked in Nairobi"
+                className={styles.map}
+              >
+                <circle cx={pin[0]} cy={pin[1]} r={16 * k} className={styles.pinHalo} />
+                <circle cx={pin[0]} cy={pin[1]} r={8 * k} className={styles.pin} />
+                <text x={pin[0] + 22 * k} y={pin[1] + 9 * k} fontSize={30 * k} className={styles.pinLabel}>
+                  Nairobi
+                </text>
+              </AfricaMap>
+            </Reveal>
+            <div className={styles.findText}>
+              <Reveal variant="fade">
+                <p className={styles.findKicker}>Find us</p>
+              </Reveal>
+              <h2 id="find-title" className={styles.findTitle}>
+                Our head office is in <em>{contact.location.replace(/, Kenya$/, "")}.</em>
+              </h2>
+              <p className={styles.findCopy}>
+                Most trips start in Nairobi, and so do we. Call or message before you visit so the right person is in. If you are in the USA,
+                our client support team in Maryland and Minnesota will help by phone and WhatsApp.
+              </p>
+              <Button href={directionsHref(contact.headOffice.directionsQuery)} variant="light" arrow target="_blank" rel="noopener noreferrer">
+                Get directions
+              </Button>
             </div>
           </div>
         </Container>

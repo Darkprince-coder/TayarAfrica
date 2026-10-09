@@ -34,7 +34,7 @@ export default async function ExplorePage({ searchParams }: Props) {
     <>
       <section className={styles.header} aria-labelledby="explore-title">
         <div className={styles.media}>
-          <ImageFrame src={site.homeImages.story.src} alt="" sizes="100vw" priority focus={site.homeImages.story.focus} className={styles.frame} />
+          <ImageFrame src={site.homeImages.story.src} alt="" sizes="(max-aspect-ratio: 3/2) 120vh, 100vw" priority focus={site.homeImages.story.focus} className={styles.frame} />
         </div>
         <span className={styles.shade} aria-hidden="true" />
         <Container className={styles.headerInner}>

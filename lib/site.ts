@@ -26,6 +26,8 @@ export const siteConfig = {
     hours: ["Monday to Saturday, 7am to 7pm", "Sunday, 8am to 5pm"],
     emergency: "+254 710 368 954",
     coverage: "The whole of Africa: East, Southern, North, West and Central.",
+    // Pinned on Nairobi CBD until the client gives the street address; then update both.
+    headOffice: { pin: [36.822, -1.286] as [number, number], directionsQuery: "Nairobi CBD, Nairobi, Kenya" },
   },
   social: [
     // Page name from the brief. TODO: replace the search link with the page's own URL once the client shares it.
@@ -33,6 +35,9 @@ export const siteConfig = {
     { label: "Instagram", href: "https://www.instagram.com/tayariafricatours/" },
   ],
 } as const;
+
+/** Google Maps directions to a place (opens the app on phones). No embed, no tracking on our pages. */
+export const directionsHref = (query: string) => `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`;
 
 /** "tel:" link value for a display phone number. */
 export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PackageCard } from "@/components/tours/PackageCard";
 import { CtaBand } from "@/components/layout/CtaBand";
-import { DetailHero } from "@/components/layout/DetailHero";
+import { PageHero } from "@/components/layout/PageHero";
+import { Button } from "@/components/ui/Button";
 import { Gallery } from "@/components/ui/Gallery";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
@@ -36,13 +37,18 @@ export default async function DestinationPage({ params }: Props) {
 
   return (
     <>
-      <DetailHero
+      <PageHero
+        size="tall"
         image={destination.cover}
-        eyebrow={destination.region}
+        kicker={destination.region}
         title={destination.name}
-        subtitle={destination.tagline}
+        lead={destination.tagline}
         breadcrumb={[{ label: "Destinations", href: "/destinations" }, { label: destination.name }]}
-        cta={{ label: "Plan a Trip Here", href: `/plan-your-journey?destination=${destination.slug}` }}
+        actions={
+          <Button href={`/plan-your-journey?destination=${destination.slug}`} size="lg" arrow>
+            Plan a Trip Here
+          </Button>
+        }
       />
 
       <Section tone="bone" labelledBy="overview-title">

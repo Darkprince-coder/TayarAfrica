@@ -1,0 +1,117 @@
+.hero {
+  --focus-color: var(--color-gold-bright);
+  --accent: var(--color-gold-bright);
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  color: var(--color-text-on-dark);
+  background: var(--color-forest-deep);
+}
+.tall {
+  min-height: max(86svh, 32rem);
+}
+.medium {
+  min-height: max(68svh, 28rem);
+}
+.short {
+  min-height: max(48svh, 22rem);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+.frame {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.image {
+  filter: saturate(1.06) contrast(1.04);
+}
+/* The same grade as the homepage: dark at the top for the navigation, deepest at the foot where
+   the words sit, a soft vignette. */
+.grade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 120% 90% at 60% 40%, transparent 45%, rgb(10 18 14 / 0.45) 100%),
+    linear-gradient(to bottom, rgb(14 26 21 / 0.55) 0%, transparent 30%, rgb(14 26 21 / 0.35) 58%, rgb(10 18 14 / 0.85) 100%),
+    linear-gradient(to right, rgb(10 18 14 / 0.45), transparent 60%);
+}
+
+.content {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: calc(var(--nav-height) + var(--space-8)) var(--gutter) clamp(var(--space-7), 7vh, var(--space-8));
+}
+
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  color: rgb(244 238 227 / 0.8);
+}
+.crumbs li + li::before {
+  content: "/";
+  margin-right: var(--space-2);
+  opacity: 0.6;
+}
+.crumbs a {
+  text-decoration: none;
+}
+@media (hover: hover) {
+  .crumbs a:hover {
+    text-decoration: underline;
+  }
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.kicker::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: var(--color-gold-bright);
+}
+.title {
+  font-size: var(--text-hero);
+  line-height: 1.02;
+  max-width: 15ch;
+  text-shadow: 0 2px 26px rgb(10 18 14 / 0.35);
+}
+.short .title {
+  font-size: var(--text-3xl);
+  max-width: 20ch;
+}
+.lead {
+  max-width: 34rem;
+  font-size: var(--text-lg);
+  color: rgb(244 238 227 / 0.9);
+  text-shadow: 0 1px 14px rgb(10 18 14 / 0.5);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-6);
+  margin-top: var(--space-2);
+}

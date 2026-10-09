@@ -3,10 +3,10 @@ import { HowItWorks } from "@/components/home/HowItWorks";
 import { TeamPreview } from "@/components/home/TeamPreview";
 import { WhyTayari } from "@/components/home/WhyTayari";
 import { CtaBand } from "@/components/layout/CtaBand";
-import { PageHeader } from "@/components/layout/PageHeader";
+import { PageHero } from "@/components/layout/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
-import { getServices, getTeam } from "@/lib/content";
+import { getServices, getSiteSettings, getTeam } from "@/lib/content";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -17,12 +17,13 @@ export const metadata: Metadata = {
 
 /** "What we do" follows the client's own description. Mission and vision are DRAFT wording for the client to confirm. */
 export default async function AboutPage() {
-  const [team, services] = await Promise.all([getTeam(), getServices()]);
+  const [team, services, site] = await Promise.all([getTeam(), getServices(), getSiteSettings()]);
 
   return (
     <>
-      <PageHeader
-        eyebrow="About Tayari"
+      <PageHero
+        image={site.pageImages.about}
+        kicker="About Tayari"
         title="Tayari means *ready*"
         lead="We are ready to take you to the best of Africa. Tell us where you want to go, and we will plan the rest."
       />

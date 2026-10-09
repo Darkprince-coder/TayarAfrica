@@ -15,6 +15,7 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   { label: "Tours", href: "/tours" },
   { label: "Destinations", href: "/destinations" },
+  { label: "Gallery", href: "/gallery" },
   {
     label: "About",
     children: [
@@ -38,12 +39,15 @@ export const legalLinks = [
 
 export const primaryCta = { label: "Plan Your Journey", href: "/plan-your-journey" };
 
+/** Routes that do NOT open on a full-bleed photograph (the nav is solid from the start there). */
+const SOLID_ROUTES = ["/styleguide"];
+
 /**
- * Routes whose first screen is a full-bleed photograph, so the nav starts transparent
- * over it. Everywhere else the nav is solid from the start.
+ * Every site page opens on a photograph (PageHero or the homepage hero), so the nav starts
+ * transparent over it and turns solid on scroll.
  */
 export function isOverlayRoute(pathname: string): boolean {
-  return pathname === "/" || pathname === "/explore" || pathname.startsWith("/destinations/") || pathname.startsWith("/tours/");
+  return !SOLID_ROUTES.some((r) => pathname === r || pathname.startsWith(`${r}/`));
 }
 
 export function isActive(pathname: string, href: string): boolean {

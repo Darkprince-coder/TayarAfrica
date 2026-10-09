@@ -39,6 +39,8 @@ export interface Destination {
    */
   listing: "page" | "card";
   themes: Theme[];
+  /** Where to pin it on the Africa map, as [longitude, latitude]. Several when it spans places. */
+  coordinates: [number, number][];
   /** Where it is within the country, e.g. "Narok County, Southwest Kenya". */
   region: string;
   tagline: string;
@@ -84,6 +86,8 @@ export interface TravelPackage {
   shortDescription: string;
   description: string[];
   itinerary: ItineraryDay[];
+  /** Where the nights are spent, in order (e.g. 2 nights in the Maasai Mara). Empty for made-to-order tours. */
+  stays: { place: string; nights: number }[];
   highlights: string[];
   included: string[];
   excluded: string[];
@@ -162,6 +166,23 @@ export interface HeroCopy {
   subtitle: string;
 }
 
+export type PageKey = "about" | "tours" | "destinations" | "team" | "contact" | "gallery" | "plan" | "legal";
+
+/** What a gallery photo shows; drives the gallery's filter. */
+export type GalleryCategory = "wildlife" | "landscapes" | "coast" | "culture" | "journeys";
+
+export interface GalleryImage {
+  id: string;
+  image: ImageRef;
+  category: GalleryCategory;
+  /** Where it was taken, if known. Shown in the enlarged view. */
+  place?: string;
+  /** Wide: spans two columns in the grid on large screens. */
+  wide?: boolean;
+  order: number;
+  status: PublishStatus;
+}
+
 export interface Office {
   /** e.g. "Kenya HQ" or "East Coast client support". */
   label: string;
@@ -185,6 +206,8 @@ export interface SiteContact {
   emergency: string;
   /** Where we operate, in a sentence. */
   coverage: string;
+  /** The head office on the map: where to pin it ([longitude, latitude]) and what to search for directions. */
+  headOffice: { pin: [number, number]; directionsQuery: string };
 }
 
 export interface SiteSettings {
@@ -198,4 +221,6 @@ export interface SiteSettings {
   seo: { defaultTitle: string; defaultDescription: string; ogImage: ImageRef };
   /** Large atmosphere photos used on the homepage. */
   homeImages: { intro: ImageRef; story: ImageRef; cta: ImageRef };
+  /** The opening photograph of each inner page. */
+  pageImages: Record<PageKey, ImageRef>;
 }

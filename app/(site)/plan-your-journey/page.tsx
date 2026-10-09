@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { InquiryForm } from "@/components/booking/InquiryForm";
-import { PageHeader } from "@/components/layout/PageHeader";
+import { PageHero } from "@/components/layout/PageHero";
 import { Container, Section } from "@/components/ui/Section";
 import { getDestinations, getPackages, getSiteSettings } from "@/lib/content";
 import { formatDuration } from "@/lib/content/format";
@@ -20,8 +20,10 @@ export default async function PlanYourJourneyPage({ searchParams }: Props) {
 
   return (
     <>
-      <PageHeader
-        eyebrow="Plan Your Journey"
+      <PageHero
+        size="short"
+        image={site.pageImages.plan}
+        kicker="Plan Your Journey"
         title="Tell us about your *trip*"
         lead="Three short steps, about two minutes. This is a request, not a booking: nothing is confirmed until we agree a plan with you."
       />

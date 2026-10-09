@@ -1,9 +1,11 @@
 import "server-only";
 import { destinations } from "@/data/demo/destinations";
+import { gallery } from "@/data/demo/gallery";
 import { packages } from "@/data/demo/packages";
 import { heroSlides, services, siteSettings, team, testimonials } from "@/data/demo/people-and-site";
 import type {
   Destination,
+  GalleryImage,
   HeroSlide,
   Service,
   SiteSettings,
@@ -66,8 +68,12 @@ export async function getHeroSlides(): Promise<HeroSlide[]> {
   return heroSlides.filter((s) => s.active).sort(byOrder);
 }
 
+export async function getGallery(): Promise<GalleryImage[]> {
+  return gallery.filter((g) => g.status === "published").sort(byOrder);
+}
+
 export async function getSiteSettings(): Promise<SiteSettings> {
   return siteSettings;
 }
 
-export type { Destination, HeroSlide, Service, SiteSettings, TeamMember, Testimonial, TravelPackage } from "./types";
+export type { Destination, GalleryImage, HeroSlide, Service, SiteSettings, TeamMember, Testimonial, TravelPackage } from "./types";

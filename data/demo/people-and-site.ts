@@ -84,6 +84,7 @@ export const siteSettings: SiteSettings = {
     ...siteConfig.contact,
     offices: siteConfig.contact.offices.map((o) => ({ ...o })),
     hours: [...siteConfig.contact.hours],
+    headOffice: { ...siteConfig.contact.headOffice },
   },
   social: siteConfig.social.map((s) => ({ ...s })),
   hero: {
@@ -100,5 +101,15 @@ export const siteSettings: SiteSettings = {
     intro: img("destinations/ngorongoro/gallery-01.jpg", "Safari vehicles on a red dirt road across a wide crater floor", "story", { desktop: "40% 50%", mobile: "40% 50%" }),
     story: img("about/story-01.jpg", "A hot-air balloon floating above open plains at sunrise", "story", { desktop: "22% 50%", mobile: "22% 50%" }),
     cta: img("about/story-02.jpg", "A giraffe and acacia trees on the plains under a dramatic evening sky", "story", { desktop: "46% 50%", mobile: "46% 50%" }),
+  },
+  pageImages: {
+    about: img("hero/hero-02.jpg", "A lone acacia tree silhouetted against an orange sunset", "hero", { desktop: "45% 55%", mobile: "40% 55%" }),
+    tours: img("hero/pexels-redrum-visuals-5819209.jpg", "Three impala in green grass among acacia trees", "hero", { desktop: "50% 55%", mobile: "55% 55%" }),
+    destinations: img("hero/hero-01.jpg", "Elephants walking across the Amboseli plains with Mount Kilimanjaro behind", "hero", { desktop: "50% 55%", mobile: "62% 55%" }),
+    team: img("destinations/ngorongoro/gallery-01.jpg", "Safari vehicles on a red dirt road across a wide crater floor", "hero", { desktop: "50% 60%", mobile: "68% 60%" }),
+    contact: img("hero/hero-03.jpg", "Camels led along a white sand beach on the Indian Ocean", "hero", { desktop: "50% 60%", mobile: "40% 60%" }),
+    gallery: img("destinations/serengeti/gallery-02.jpg", "Hot-air balloons drifting over acacia savannah", "hero", { desktop: "50% 50%", mobile: "50% 50%" }),
+    plan: img("destinations/amboseli/gallery-02.jpg", "Mount Kilimanjaro rising above acacia trees and cloud", "hero", { desktop: "50% 50%", mobile: "50% 50%" }),
+    legal: img("destinations/tsavo/gallery-02.jpg", "A red dirt road running through green bush", "hero", { desktop: "50% 60%", mobile: "50% 60%" }),
   },
 };

@@ -33,7 +33,7 @@ export async function getImageManifest(): Promise<ManifestEntry[]> {
     getSiteSettings(),
   ]);
 
-  hero.forEach((s) => add(s.image, `Hero: ${s.place}`));
+  hero.forEach((s) => add(s.image, s.place ? `Homepage hero: ${s.place}` : "Homepage hero"));
   destinations.forEach((d) => {
     add(d.cover, `Destination: ${d.name}`);
     d.gallery.forEach((g) => add(g, `Destination: ${d.name}`));
@@ -46,6 +46,7 @@ export async function getImageManifest(): Promise<ManifestEntry[]> {
   add(settings.seo.ogImage, "Social share");
   add(settings.homeImages.intro, "Homepage introduction");
   add(settings.homeImages.story, "Homepage story band");
+  Object.entries(settings.pageImages).forEach(([page, image]) => add(image, `Page hero: ${page}`));
   add(settings.homeImages.cta, "Homepage closing call to action");
 
   return [...map.values()];

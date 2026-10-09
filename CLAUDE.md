@@ -47,13 +47,19 @@ Sources: `docs/Website final touches .docx` (client brief), `docs/roadmap.md` (a
 - Commands: `npm run dev`, `npm run build`, `npm run lint`.
 
 ## Navigation
-- Top level stays short. Related pages go in a group (`navItems` in `lib/navigation.ts`): dropdown on desktop (hover for mouse, click/keyboard otherwise), accordion on mobile. Anything about the company lives under **About** (About Tayari, which also holds "What we arrange", How we plan a trip, Meet the team). Top level: Tours, Destinations, About, Contact; Gallery is added in Phase 5. Add future sections as groups, never as more top-level links.
+- Top level stays short. Related pages go in a group (`navItems` in `lib/navigation.ts`): dropdown on desktop (hover for mouse, click/keyboard otherwise), accordion on mobile. Anything about the company lives under **About** (About Tayari, which also holds "What we arrange", How we plan a trip, Meet the team). Top level: Tours, Destinations, Gallery, About, Contact. Add future sections as groups, never as more top-level links.
 
 ## Motion system (cinematic, delayed, never blocking)
 - `MotionScript` (root layout) sets `data-motion` on `<html>` before paint unless reduced motion; CSS starts reveal elements hidden only under that flag. `IntroScript`/`IntroLoader` handle the once-per-session logo intro; `lib/motion-gate.ts` makes reveals and the hero wait for it.
 - Use `Reveal` (up / fade / clip) and `RevealText` (word mask) for scroll reveals; `SectionHeading` already uses them. Stagger with `delay`. Easing tokens: `--ease-cine`, `--ease-wipe`.
 - Hero (`components/hero/Hero`): one photograph (first active hero slide), graded warm and dark with a slow push-in; the large Tayari mark is the headline with the tagline under it; a quiet bottom row; the trip finder docked on the bottom edge and hanging slightly below; with the finder, the photo plus its overhang fill the first screen so the next section only shows on scroll. No slideshow.
 - Content alignment: gutters live inside `Container` (and footer/hero inners) so everything lines up with the nav.
+
+## Page openings, maps and gallery
+- Every site page opens on a photograph: the homepage `Hero`, otherwise `components/layout/PageHero` (sizes tall / medium / short; images from `siteSettings.pageImages`, or the destination/tour cover). Full-bleed photos must pass portrait-aware `sizes` (e.g. "(max-aspect-ratio: 3/2) 140vh, 100vw") so phones fetch a sharp file. The nav is transparent over every route except `/styleguide` (`isOverlayRoute`).
+- Africa map: `lib/geo/africa.ts` is GENERATED (Natural Earth 1:50m, public domain) with matching Mercator `projectToAfrica`. `components/geo/AfricaMap` draws it server-side (crop with `viewFor`); `DestinationExplorer` overlays linked pins and list on /destinations; Contact uses a cropped East Africa map with the head-office pin and a Google Maps directions link (no embed). Destinations carry `coordinates`; the head office pin lives in `contact.headOffice`.
+- Gallery: `/gallery`, data via `getGallery()` (`GalleryImage` with category, optional place and wide), `components/gallery/GalleryGrid` with filters and a native `<dialog>` enlarged view.
+- Team: `components/team/TeamGroups` (level, grouped by branch) is shared by the homepage and /team (with bios). Tours carry `stays` (nights per place) shown as "Your nights at a glance".
 
 ## Trip finder
 - `components/home/TripFinder` (docked in the homepage hero, prefilled on `/explore`) filters tours and destinations: where / how long / what for. GET form to `/explore?where=&length=&theme=`, logic in `lib/content/filter.ts` (unknown values ignored). Destinations carry `themes`; tour themes derive from `experienceTypes`. The custom tour is always offered as the fallback. `/explore` is noindex.

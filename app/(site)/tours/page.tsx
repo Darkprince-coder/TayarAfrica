@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { PackageCard } from "@/components/tours/PackageCard";
 import { CtaBand } from "@/components/layout/CtaBand";
-import { PageHeader } from "@/components/layout/PageHeader";
+import { PageHero } from "@/components/layout/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
-import { getPackages } from "@/lib/content";
+import { getPackages, getSiteSettings } from "@/lib/content";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -15,14 +15,15 @@ export const metadata: Metadata = {
 
 /** Interim layout: the East African tours, then the made-to-order Pan-African tour. Refined in Phase 5. */
 export default async function ToursPage() {
-  const packages = await getPackages();
+  const [packages, site] = await Promise.all([getPackages(), getSiteSettings()]);
   const set = packages.filter((p) => !p.custom);
   const custom = packages.filter((p) => p.custom);
 
   return (
     <>
-      <PageHeader
-        eyebrow="Tours"
+      <PageHero
+        image={site.pageImages.tours}
+        kicker="Tours"
         title="Trips we can *plan* for you"
         lead="Each tour is a starting point. Change the dates, add a beach stay or take something out, and we will adjust the plan."
       />

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { PackageCard } from "@/components/tours/PackageCard";
 import { Timeline } from "@/components/tours/Timeline";
 import { CtaBand } from "@/components/layout/CtaBand";
-import { DetailHero } from "@/components/layout/DetailHero";
+import { PageHero } from "@/components/layout/PageHero";
 import { Button } from "@/components/ui/Button";
 import { Gallery } from "@/components/ui/Gallery";
 import { Reveal } from "@/components/ui/Reveal";
@@ -52,19 +52,40 @@ export default async function PackagePage({ params }: Props) {
 
   return (
     <>
-      <DetailHero
+      <PageHero
+        size="tall"
         image={trip.cover}
-        eyebrow={trip.custom ? "Made to order" : formatDuration(trip.duration)}
+        kicker={trip.custom ? "Made to order" : formatDuration(trip.duration)}
         title={trip.title}
-        subtitle={trip.tagline}
+        lead={trip.tagline}
         breadcrumb={[{ label: "Tours", href: "/tours" }, { label: trip.title }]}
-        cta={{ label: "Request This Trip", href: requestHref }}
+        actions={
+          <Button href={requestHref} size="lg" arrow>
+            Request This Trip
+          </Button>
+        }
       />
 
       <Section tone="bone" className={styles.mainSection}>
         <Container>
           <div className={styles.layout}>
             <div className={styles.main}>
+              {trip.stays.length > 0 && (
+                <Reveal className={styles.glance}>
+                  <p className={styles.glanceTitle}>Your nights at a glance</p>
+                  <ol role="list" className={styles.stops}>
+                    {trip.stays.map((st, i) => (
+                      <li key={`${st.place}-${i}`} className={styles.stop}>
+                        <span className={styles.stopNo}>{String(i + 1).padStart(2, "0")}</span>
+                        <span className={styles.stopPlace}>{st.place}</span>
+                        <span className={styles.stopNights}>
+                          {st.nights} {st.nights === 1 ? "night" : "nights"}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                </Reveal>
+              )}
               <section aria-labelledby="trip-overview">
                 <SectionHeading id="trip-overview" eyebrow="The trip" title="What this trip is like" />
                 <div className={styles.prose}>

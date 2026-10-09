@@ -1,72 +1,41 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/layout/CtaBand";
-import { PageHeader } from "@/components/layout/PageHeader";
-import { ImageFrame } from "@/components/ui/ImageFrame";
-import { Reveal } from "@/components/ui/Reveal";
-import { Container, Section } from "@/components/ui/Section";
-import { getTeam } from "@/lib/content";
-import styles from "./page.module.css";
+import { PageHero } from "@/components/layout/PageHero";
+import { TeamGroups } from "@/components/team/TeamGroups";
+import { Container, Section, SectionHeading } from "@/components/ui/Section";
+import { getSiteSettings, getTeam } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Meet the team",
-  description: "The people at Tayari Africa Tours Consultants who plan and look after your trip, from first message to the day you fly home.",
+  description:
+    "The people at Tayari Africa Tours Consultants who plan and look after your trip, in Kenya and in the USA, from first message to the day you fly home.",
 };
 
 export default async function TeamPage() {
-  const team = await getTeam();
+  const [team, site] = await Promise.all([getTeam(), getSiteSettings()]);
 
   return (
     <>
-      <PageHeader
-        eyebrow="The team"
+      <PageHero
+        image={site.pageImages.team}
+        kicker="The team"
         title="The people behind *your trip*"
         lead="When you send a request, one of us reads it, replies and stays in touch until you are home."
       />
-      <Section tone="bone">
+      <Section tone="bone" labelledBy="team-list-title">
         <Container>
-          <ul role="list" className={styles.list}>
-            {team.map((m, i) => (
-              <Reveal as="li" key={m.slug} className={styles.member}>
-                <Reveal variant="clip" delay={80} className={styles.photo}>
-                  <ImageFrame
-                    src={m.portrait.src}
-                    alt={m.portrait.alt}
-                    ratio="4 / 5"
-                    sizes="(min-width: 62rem) 30vw, (min-width: 40rem) 40vw, 90vw"
-                    focus={m.portrait.focus}
-                    focusMobile={m.portrait.focusMobile}
-                    rounded
-                  />
-                </Reveal>
-                <div className={styles.copy}>
-                  <p className={styles.index} aria-hidden="true">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <h2 className={styles.name}>{m.name}</h2>
-                  <p className={styles.role}>
-                    {m.role} · {m.location}
-                  </p>
-                  <p className={styles.bio}>{m.bio}</p>
-                  {m.social.length > 0 && (
-                    <ul role="list" className={styles.social}>
-                      {m.social.map((s) => (
-                        <li key={s.href}>
-                          <a href={s.href} target="_blank" rel="noopener noreferrer">
-                            {s.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </Reveal>
-            ))}
-          </ul>
+          <SectionHeading
+            id="team-list-title"
+            eyebrow="Where we are"
+            title="In Kenya, *and in the USA.*"
+            lead="Our team in Kenya plans and runs your trip on the ground. Client support in the USA helps you plan in your own time zone."
+          />
+          <TeamGroups team={team} showBio />
         </Container>
       </Section>
       <CtaBand
-        title="Say hello"
-        text="Tell us about the trip you have in mind and we will take it from there."
+        title="Talk to a person"
+        text="Send us a message or a trip request, and one of the team will reply."
         primary={{ label: "Plan Your Journey", href: "/plan-your-journey" }}
         secondary={{ label: "Contact us", href: "/contact" }}
       />

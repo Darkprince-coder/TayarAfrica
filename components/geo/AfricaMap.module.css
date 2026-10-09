@@ -1,0 +1,25 @@
+.map {
+  position: relative;
+  width: 100%;
+}
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+/* Lines keep their weight however far the map is zoomed. */
+.svg path {
+  vector-effect: non-scaling-stroke;
+}
+.country {
+  fill: var(--map-land, rgb(244 238 227 / 0.08));
+  stroke: var(--map-line, rgb(244 238 227 / 0.14));
+  stroke-width: 0.8;
+}
+.lit {
+  fill: var(--map-lit, var(--color-map));
+  stroke: var(--map-line-lit, rgb(20 38 30 / 0.5));
+  stroke-width: 0.8;
+}
