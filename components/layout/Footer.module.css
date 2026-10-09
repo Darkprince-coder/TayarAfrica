@@ -109,21 +109,19 @@
   opacity: 0.45;
 }
 
-/* An oversized, barely-there wordmark to close the page. */
-.mega {
-  margin: clamp(2rem, 4vw, 4rem) 0 0;
+/* A quiet sign-off line before the legal bar. */
+.signoff {
+  max-width: var(--container);
+  margin: clamp(var(--space-7), 5vw, var(--space-8)) auto 0;
+  padding-inline: var(--gutter);
   font-family: var(--font-display);
-  font-size: clamp(8rem, 33vw, 29rem);
-  line-height: 0.9;
-  /* Mixed case, like the logo: no extra tracking. */
-  letter-spacing: -0.01em;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  color: transparent;
-  -webkit-text-stroke: 1px rgb(244 238 227 / 0.14);
-  user-select: none;
-  pointer-events: none;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  line-height: 1.2;
+  color: var(--color-text-on-dark);
+}
+.signoff em {
+  font-style: italic;
+  color: var(--color-gold-bright);
 }
 
 /* The info@ address is long: let it break rather than overflow the column. */

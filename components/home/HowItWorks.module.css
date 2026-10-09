@@ -1,70 +1,84 @@
-.steps {
-  position: relative;
+.head {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  text-align: center;
+  margin-bottom: clamp(var(--space-7), 6vw, var(--space-9));
 }
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-ember);
+}
+.kicker::before,
+.kicker::after {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+}
+.heading {
+  font-size: var(--text-3xl);
+  max-width: 18ch;
+}
+
+/* Each step hangs from a hairline with a small open dot on it: down the left on phones,
+   one continuous line across on wide screens. */
 .list {
   display: grid;
-  gap: var(--space-7);
-  position: relative;
 }
 .step {
+  position: relative;
   display: grid;
-  gap: var(--space-3);
+  gap: var(--space-2);
   align-content: start;
+  padding: 0 0 var(--space-7) var(--space-6);
+  border-left: 1px solid var(--color-sand-deep);
 }
-
-/* Oversized outlined numerals: an editorial counterpoint to the solid headings. */
+.step:last-child {
+  padding-bottom: 0;
+}
+.dot {
+  position: absolute;
+  top: 0.35rem;
+  left: -0.36rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--color-bone);
+  border: 1px solid var(--color-ember);
+}
 .number {
   font-family: var(--font-display);
-  font-size: clamp(5rem, 3rem + 8vw, 9.5rem);
-  line-height: 0.9;
   font-style: italic;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--color-ember);
-  letter-spacing: -0.02em;
+  font-size: var(--text-lg);
+  line-height: 1;
+  color: var(--color-ember);
 }
 .title {
-  font-size: var(--text-xl);
+  font-size: var(--text-2xl);
 }
 .text {
-  color: var(--color-text-muted);
   max-width: 24rem;
+  color: var(--color-text-muted);
 }
 
-/* A thin rule draws across the top of the steps as the section arrives (desktop only). */
-.line {
-  display: none;
-}
-
-@media (min-width: 52rem) {
+@media (min-width: 48rem) {
   .list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-6);
   }
   .step {
-    padding-top: var(--space-5);
+    padding: var(--space-6) var(--space-7) 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--color-sand-deep);
   }
-  .line {
-    display: block;
-    position: absolute;
-    top: 0;
+  .dot {
+    top: -0.36rem;
     left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--color-forest);
-    transform-origin: left;
-    transition: transform 2.2s var(--ease-wipe) 0.3s;
-  }
-  :global(html[data-motion]) .steps:not([data-state="shown"]) .line {
-    transform: scaleX(0);
-  }
-  /* Each step lifts in one after the other behind the line. */
-  .step {
-    transition:
-      opacity 1.3s var(--ease-cine) calc(0.5s + var(--n) * 0.25s),
-      transform 1.3s var(--ease-cine) calc(0.5s + var(--n) * 0.25s);
-  }
-  :global(html[data-motion]) .steps:not([data-state="shown"]) .step {
-    opacity: 0;
-    transform: translate3d(0, 30px, 0);
   }
 }

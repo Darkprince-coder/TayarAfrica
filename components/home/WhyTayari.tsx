@@ -1,48 +1,50 @@
 import { Reveal } from "@/components/ui/Reveal";
-import { Container, Section, SectionHeading } from "@/components/ui/Section";
+import { RevealText } from "@/components/ui/RevealText";
+import { Container, Section } from "@/components/ui/Section";
 import styles from "./WhyTayari.module.css";
 
-/** DEMO COPY: replace with Tayari's own commitments before launch. No awards or statistics are claimed. */
+/** Plain commitments, no awards or statistics. Each reads as a statement first, explanation second. */
 const reasons = [
   {
-    title: "You talk to people",
-    text: "Questions go to a Tayari consultant who knows your plans, not to a booking form.",
+    title: "Planned for you, not from a brochure.",
+    text: "We start from your dates, your group and your budget, and build the trip from there.",
   },
   {
-    title: "Honest about what is included",
-    text: "Each itinerary lists what the price covers and what it does not, so there are no surprises later.",
+    title: "Handled on the ground.",
+    text: "Stays, drivers, guides and park fees are arranged with providers we work with in each country.",
   },
   {
-    title: "Built around your dates",
-    text: "We start from your dates, group and budget, then suggest stays and activities that fit.",
+    title: "Straight answers.",
+    text: "Every quote says what is included and what is not. If something does not suit the season, we will say so.",
   },
   {
-    title: "Local arrangements handled",
-    text: "Transfers, accommodation and activities are arranged with established providers in each destination.",
+    title: "Easy to change.",
+    text: "Another night by the river, a beach at the end, a slower pace. We reshape the plan around you.",
+  },
+  {
+    title: "A person on the other end.",
+    text: "You write to people, not a booking engine, and our WhatsApp line is open day and night while you travel.",
   },
 ];
 
+/** Why travel with us: type and spacing carry it. No cards, no icons. */
 export function WhyTayari() {
   return (
-    <Section tone="forest" edge labelledBy="why-title">
+    <Section tone="forest" labelledBy="why-title">
       <Container>
-        <div className={styles.grid}>
-          <SectionHeading
-            id="why-title"
-            eyebrow="04 / Why Tayari"
-            title="A trip is easier when *one team* looks after it"
-            lead="Africa has a lot to offer and a lot of moving parts. We take care of the parts so you can enjoy the place."
-          />
+        <div className={styles.layout}>
+          <div className={styles.head}>
+            <Reveal variant="fade">
+              <p className={styles.kicker}>Why travel with us</p>
+            </Reveal>
+            <RevealText as="h2" id="why-title" className={styles.heading} text="We handle the details. *You keep the view.*" delay={120} />
+          </div>
+
           <ul role="list" className={styles.list}>
             {reasons.map((r, i) => (
-              <Reveal as="li" key={r.title} delay={i * 130} className={styles.item}>
-                <span className={styles.index} aria-hidden="true">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className={styles.title}>{r.title}</h3>
-                  <p className={styles.text}>{r.text}</p>
-                </div>
+              <Reveal as="li" key={r.title} delay={i * 110} className={styles.item}>
+                <h3 className={styles.title}>{r.title}</h3>
+                <p className={styles.text}>{r.text}</p>
               </Reveal>
             ))}
           </ul>

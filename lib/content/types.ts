@@ -103,7 +103,15 @@ export interface TravelPackage {
 export interface TeamMember {
   slug: string;
   name: string;
+  /** What they do, e.g. "East Coast Client Support". */
   role: string;
+  /** Where they work, e.g. "Maryland, USA". */
+  location: string;
+  /**
+   * Which branch they belong to, e.g. "In Kenya" or "In the USA". The homepage groups people by
+   * this, so a new branch is just a new group name in the CMS.
+   */
+  group: string;
   bio: string;
   portrait: ImageRef;
   social: { label: string; href: string }[];
@@ -141,13 +149,13 @@ export interface Testimonial {
 export interface HeroSlide {
   id: string;
   image: ImageRef;
-  /** Where the photo was taken, shown as a small caption (e.g. "Amboseli, Kenya"). */
+  /** Where the photo was taken, if known (e.g. "Amboseli, Kenya"). Not shown when empty. */
   place: string;
   order: number;
   active: boolean;
 }
 
-/** The fixed words over the homepage hero. Wrap words in *asterisks* for the italic accent. */
+/** The words over the homepage hero: `title` is the tagline under the large logo. Wrap words in *asterisks* for the italic accent. */
 export interface HeroCopy {
   kicker: string;
   title: string;

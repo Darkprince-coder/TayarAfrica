@@ -1,4 +1,4 @@
-import { HeroSlider } from "@/components/hero/HeroSlider";
+import { Hero } from "@/components/hero/Hero";
 import { FeaturedDestinations } from "@/components/home/FeaturedDestinations";
 import { FeaturedPackages } from "@/components/home/FeaturedPackages";
 import { FinalCta } from "@/components/home/FinalCta";
@@ -24,9 +24,11 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroSlider slides={slides} copy={site.hero}>
-        <TripFinder />
-      </HeroSlider>
+      {slides[0] && (
+        <Hero slide={slides[0]} copy={site.hero}>
+          <TripFinder />
+        </Hero>
+      )}
       <Intro image={site.homeImages.intro} />
       <FeaturedDestinations destinations={featured} />
       <FeaturedPackages packages={packages} destinations={allDestinations} />

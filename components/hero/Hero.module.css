@@ -1,0 +1,248 @@
+.hero {
+  --focus-color: var(--color-gold-bright);
+  /* How far a docked trip finder hangs below the photograph into the next section. */
+  --drop: 0rem;
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  display: grid;
+  min-height: max(80svh, 34rem);
+  color: var(--color-text-on-dark);
+  background: var(--color-forest-deep);
+}
+/* With the trip finder docked, the first screen ends on the finder: the photo plus the finder's
+   overhang fill the viewport (less a small breath), so the next section only appears on scroll. */
+.hero[data-docked] {
+  --drop: 4rem;
+  min-height: max(calc(100svh - var(--drop) - var(--space-5)), 34rem);
+  margin-bottom: var(--drop);
+}
+@media (min-width: 62rem) {
+  .hero {
+    min-height: max(86svh, 40rem);
+  }
+  .hero[data-docked] {
+    --drop: 3rem;
+    min-height: max(calc(100svh - var(--drop) - var(--space-5)), 40rem);
+  }
+}
+
+/* ---------- Photograph ---------- */
+.stage {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  transition: opacity 1.6s var(--ease-in-out);
+}
+:global(html[data-motion]) .hero:not([data-ready="true"]) .stage {
+  opacity: 0;
+}
+.frame {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.image {
+  filter: saturate(1.08) contrast(1.05);
+}
+/* A slow push-in, once, over most of a minute. */
+.hero[data-ready="true"] .image {
+  animation: push 40s var(--ease-out) both;
+}
+@keyframes push {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+/* One grade for the whole picture: warm at the top, deep green-black at the foot where the words
+   and finder sit, and a soft vignette so the eye settles in the middle. */
+.grade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 90% at 58% 38%, transparent 42%, rgb(10 18 14 / 0.55) 100%),
+    linear-gradient(to bottom, rgb(14 26 21 / 0.55) 0%, rgb(40 20 8 / 0.28) 30%, rgb(14 26 21 / 0.12) 48%, rgb(14 26 21 / 0.55) 70%, rgb(10 18 14 / 0.9) 100%);
+}
+
+/* ---------- Words ---------- */
+.inner {
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  gap: var(--space-6);
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: calc(var(--nav-height) + var(--space-6)) var(--gutter) 0;
+}
+.hero:not([data-docked]) .inner {
+  padding-bottom: var(--space-7);
+}
+
+/* The mark as the headline: centred in the open sky. */
+.lockup {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+@media (min-width: 62rem) {
+  /* The sky opens to the right of the acacia: the mark sits there. */
+  .lockup {
+    justify-self: end;
+    align-content: start;
+    width: min(100%, 36rem);
+    margin-right: 4%;
+    padding-top: clamp(0rem, 3vh, 2rem);
+  }
+}
+.emblem {
+  width: clamp(2.75rem, 2rem + 2.4vw, 4.5rem);
+  height: auto;
+  filter: drop-shadow(0 2px 14px rgb(10 18 14 / 0.35));
+}
+.wordmark {
+  display: grid;
+  justify-items: center;
+  margin: 0;
+  font-weight: inherit;
+}
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 2rem + 5.5vw, 7.5rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.005em;
+  text-shadow: 0 2px 30px rgb(10 18 14 / 0.35);
+}
+.sub {
+  margin-top: var(--space-2);
+  text-shadow: 0 1px 14px rgb(10 18 14 / 0.5);
+  padding-left: 0.5em; /* balances the trailing letter-spacing so the line stays centred */
+  font-family: var(--font-body);
+  font-size: clamp(0.7rem, 0.6rem + 0.45vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+}
+.tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1rem + 0.9vw, 1.8rem);
+  line-height: 1.2;
+  text-shadow: 0 1px 16px rgb(10 18 14 / 0.55);
+}
+.tagline::before,
+.tagline::after {
+  content: "";
+  width: clamp(1.5rem, 1rem + 2vw, 3rem);
+  height: 1px;
+  background: var(--color-gold-bright);
+  opacity: 0.8;
+}
+.tagline em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* A quiet row along the foot of the picture. */
+.bottom {
+  display: grid;
+  gap: var(--space-5);
+  align-items: end;
+}
+@media (min-width: 62rem) {
+  .bottom {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-8);
+  }
+}
+.lead {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 30rem;
+}
+.kicker {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.subtitle {
+  font-size: var(--text-base);
+  color: rgb(244 238 227 / 0.85);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-6);
+}
+
+.dock {
+  margin-bottom: calc(var(--drop) * -1);
+}
+
+/* Phones and tablets with the finder: the finder carries the action, so the row keeps only the
+   short line, and the mark sits in the sky above the trees. */
+@media (max-width: 61.99rem) {
+  .hero[data-docked] .actions {
+    display: none;
+  }
+  .hero[data-docked] .inner {
+    gap: var(--space-5);
+  }
+  .lockup {
+    align-content: start;
+    padding-top: var(--space-4);
+  }
+}
+
+/* ---------- Entrance: once, when the page is ready ---------- */
+:global(html[data-motion]) .hero:not([data-ready="true"]) :is(.emblem, .wordmark, .tagline, .bottom, .dock) {
+  opacity: 0;
+}
+.hero[data-ready="true"] .emblem {
+  animation: rise 1.4s var(--ease-cine) 0.3s both;
+}
+.hero[data-ready="true"] .wordmark {
+  animation: rise 1.6s var(--ease-cine) 0.5s both;
+}
+.hero[data-ready="true"] .tagline {
+  animation: rise 1.4s var(--ease-cine) 0.9s both;
+}
+.hero[data-ready="true"] .bottom {
+  animation: rise 1.3s var(--ease-cine) 1.2s both;
+}
+.hero[data-ready="true"] .dock {
+  animation: rise 1.3s var(--ease-cine) 1.45s both;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image,
+  .emblem,
+  .wordmark,
+  .tagline,
+  .bottom,
+  .dock {
+    animation: none !important;
+  }
+}

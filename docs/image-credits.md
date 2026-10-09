@@ -10,6 +10,7 @@ Before launch, confirm the final photography (licensed, owned or commissioned) a
 
 | File | Pexels photo |
 |---|---|
+| `public/images/hero/hero-dusk.jpg` | [26990522](https://www.pexels.com/photo/26990522/) (homepage hero) |
 | `public/images/hero/hero-01.jpg` | [26924191](https://www.pexels.com/photo/26924191/) |
 | `public/images/hero/hero-02.jpg` | [23831844](https://www.pexels.com/photo/23831844/) |
 | `public/images/hero/hero-03.jpg` | [13292007](https://www.pexels.com/photo/13292007/) |
@@ -60,3 +61,7 @@ Before launch, confirm the final photography (licensed, owned or commissioned) a
 | `public/images/tours/samburu-special-five/cover.jpg` | [29435757](https://www.pexels.com/photo/29435757/) |
 | `public/images/tours/serengeti-ngorongoro/cover.jpg` | [28708345](https://www.pexels.com/photo/28708345/) |
 | `public/images/tours/pan-african-custom-tours/cover.jpg` | [35314673](https://www.pexels.com/photo/35314673/) |
+
+## Team portraits
+
+Supplied by the client (Oct 2026), originals in `assets-src/user-supplied-originals/team/`. Edinah's full-length photo is cropped to head and shoulders.

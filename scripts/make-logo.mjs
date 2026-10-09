@@ -16,6 +16,9 @@ const GOLD_LIGHT = [227, 196, 122];
 /** Small icons need more contrast than the logo's pale sand: a deeper map and a dark tree. */
 const ICON_MAP = [190, 152, 98];
 const ICON_TREE = [24, 52, 38];
+/** Solid mark for large use over photography: a cream map with a deep green tree. */
+const SOLID_MAP = [244, 238, 227];
+const SOLID_TREE = [20, 38, 30];
 /** The light variants show the map as a faint shape so it reads on photography without a blob. */
 const LIGHT_MAP_ALPHA = 0.18;
 /** Rows below this belong to the lettering (the tree ends well above it). */
@@ -118,6 +121,7 @@ function render(kind) {
       else if (isGreen(i)) cls = "tree";
     }
     if (kind === "icon" && a > 0) c = cls === "tree" ? ICON_TREE : ICON_MAP;
+    if (kind === "emblem-solid" && a > 0) c = cls === "tree" ? SOLID_TREE : SOLID_MAP;
     if (kind.endsWith("light") && a > 0) {
       if (cls === "gold") c = GOLD_LIGHT;
       else if (cls === "tree") c = CREAM;
@@ -153,6 +157,7 @@ const emblemBox = bbox(emblem);
 const emblemPng = await raw(emblem).extract(emblemBox).png().toBuffer();
 await sharp(emblemPng).resize({ width: 800 }).png({ compressionLevel: 9 }).toFile(`${OUT}/logo-emblem.png`);
 await raw(render("emblem-light")).extract(emblemBox).resize({ width: 800 }).png({ compressionLevel: 9 }).toFile(`${OUT}/logo-emblem-light.png`);
+await raw(render("emblem-solid")).extract(emblemBox).resize({ width: 800 }).png({ compressionLevel: 9 }).toFile(`${OUT}/logo-emblem-solid.png`);
 
 const clear = { r: 0, g: 0, b: 0, alpha: 0 };
 const iconPng = await raw(render("icon")).extract(emblemBox).png().toBuffer();

@@ -43,7 +43,9 @@ export default async function TeamPage() {
                     {String(i + 1).padStart(2, "0")}
                   </p>
                   <h2 className={styles.name}>{m.name}</h2>
-                  <p className={styles.role}>{m.role}</p>
+                  <p className={styles.role}>
+                    {m.role} · {m.location}
+                  </p>
                   <p className={styles.bio}>{m.bio}</p>
                   {m.social.length > 0 && (
                     <ul role="list" className={styles.social}>

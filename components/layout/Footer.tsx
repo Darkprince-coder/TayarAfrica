@@ -76,8 +76,8 @@ export async function Footer() {
         </div>
       </div>
 
-      <p className={styles.mega} aria-hidden="true">
-        Tayari
+      <p className={styles.signoff}>
+        Planned in Kenya. <em>Travelled across Africa.</em>
       </p>
 
       <div className={styles.bottom}>

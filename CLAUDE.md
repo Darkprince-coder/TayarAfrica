@@ -15,7 +15,8 @@ Sources: `docs/Website final touches .docx` (client brief), `docs/roadmap.md` (a
 - Write the brand as "Tayari" (as on the logo and in the client brief), never "TAYARI"; the official name is "Tayari Africa Tours Consultants". Capitals only through CSS on labels.
 - All demo content is placeholder. Team profiles and testimonials are clearly flagged as sample (`isPlaceholder: true`) and the UI labels testimonials as sample content.
 - Never invent awards, partnerships, reviews, rankings, guarantees or prices. Show tour prices exactly as the client gave them ("From $X pp"); use "Request a Quote" when none is supplied. Internal notes in the brief (e.g. profit margins) never appear on the site.
-- Company and contact details in `lib/site.ts` are real (from the client brief). Facebook still needs the page's own URL. Team bios are drafts; team portraits use `team/<slug>.jpg` and stay empty until real photos arrive (never stock faces as staff).
+- Team members carry `role`, `location` and `group` (branch, e.g. "In Kenya"); the homepage groups people by branch, so new branches are just new group names. Roles come from the client only.
+- Company and contact details in `lib/site.ts` are real (from the client brief). Facebook still needs the page's own URL. Team bios are drafts; team portraits are real client photos at `team/<slug>.jpg` (originals in `assets-src/user-supplied-originals/team/`; never stock faces as staff).
 - Sample testimonials show locally and on Vercel previews, hidden in production (`SHOW_SAMPLE_CONTENT` overrides).
 
 ## Stack & conventions
@@ -51,7 +52,7 @@ Sources: `docs/Website final touches .docx` (client brief), `docs/roadmap.md` (a
 ## Motion system (cinematic, delayed, never blocking)
 - `MotionScript` (root layout) sets `data-motion` on `<html>` before paint unless reduced motion; CSS starts reveal elements hidden only under that flag. `IntroScript`/`IntroLoader` handle the once-per-session logo intro; `lib/motion-gate.ts` makes reveals and the hero wait for it.
 - Use `Reveal` (up / fade / clip) and `RevealText` (word mask) for scroll reveals; `SectionHeading` already uses them. Stagger with `delay`. Easing tokens: `--ease-cine`, `--ease-wipe`.
-- Hero (`components/hero/HeroSlider`): 6s autoplay driven by the CSS progress animation, pauses on hover / keyboard focus / off-screen / pause button, a different image transition and text effect per slide.
+- Hero (`components/hero/Hero`): one photograph (first active hero slide), graded warm and dark with a slow push-in; the large Tayari mark is the headline with the tagline under it; a quiet bottom row; the trip finder docked on the bottom edge and hanging slightly below; with the finder, the photo plus its overhang fill the first screen so the next section only shows on scroll. No slideshow.
 - Content alignment: gutters live inside `Container` (and footer/hero inners) so everything lines up with the nav.
 
 ## Trip finder

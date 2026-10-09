@@ -5,16 +5,17 @@ import { img } from "./img";
 /**
  * The real team, from the client brief. Bios are short DRAFTS built only from the brief; the team
  * will write their own (and add roles and portraits) in the CMS. Portrait files are named after each
- * person (team/<slug>.jpg) and stay empty until their real photo is supplied:
- * no stock photos of people presented as staff.
+ * person (team/<slug>.jpg); real photos supplied by the client (originals in assets-src/user-supplied-originals/team).
  */
 export const team: TeamMember[] = [
   {
     slug: "adam-saitoti",
     name: "Adam Saitoti",
-    role: "Kenya HQ, Nairobi",
+    role: "Kenya Headquarters",
+    location: "Nairobi, Kenya",
+    group: "In Kenya",
     bio: "Adam is at our headquarters in Nairobi, where most East African safaris begin. Call or WhatsApp Adam about trips in Kenya, Tanzania and across Africa.",
-    portrait: img("team/adam-saitoti.jpg", "Portrait of Adam Saitoti", "portrait"),
+    portrait: img("team/adam-saitoti.jpg", "Adam Saitoti, smiling, in a dark suit and bow tie", "portrait", { desktop: "50% 25%", mobile: "50% 25%" }),
     social: [],
     order: 1,
     status: "published",
@@ -23,9 +24,11 @@ export const team: TeamMember[] = [
   {
     slug: "naomi-misati",
     name: "Naomi Misati",
-    role: "East Coast Client Support, Maryland, USA",
+    role: "East Coast Client Support",
+    location: "Maryland, USA",
+    group: "In the USA",
     bio: "Naomi looks after travellers on the US East Coast from Maryland, so you can plan your trip in your own time zone.",
-    portrait: img("team/naomi-misati.jpg", "Portrait of Naomi Misati", "portrait"),
+    portrait: img("team/naomi-misati.jpg", "Naomi Misati, smiling, in a grey Tayari Africa polo shirt", "portrait", { desktop: "50% 30%", mobile: "50% 30%" }),
     social: [],
     order: 2,
     status: "published",
@@ -34,9 +37,11 @@ export const team: TeamMember[] = [
   {
     slug: "edinah-misati",
     name: "Edinah Misati",
-    role: "USA office, Minnesota",
+    role: "USA Office",
+    location: "Minnesota, USA",
+    group: "In the USA",
     bio: "Edinah runs our Minnesota office and helps travellers in the USA plan and prepare for their trip.",
-    portrait: img("team/edinah-misati.jpg", "Portrait of Edinah Misati", "portrait"),
+    portrait: img("team/edinah-misati.jpg", "Edinah Misati in a grey Tayari Africa polo shirt", "portrait", { desktop: "50% 30%", mobile: "50% 30%" }),
     social: [],
     order: 3,
     status: "published",
@@ -62,13 +67,12 @@ export const testimonials: Testimonial[] = [
   { id: "sample-3", name: "Sample Traveller", location: "Sample location", quote: "Sample testimonial: replace with genuine feedback from real guests once available.", status: "published", isSample: true },
 ];
 
-/** Photos only: the words over the hero live in siteSettings.hero. Captions name the place, never a city we are based in. */
+/**
+ * The hero photograph. The homepage uses the first active one; more can be added in the CMS and
+ * ordered, but the design is built around a single strong image, not a slideshow.
+ */
 export const heroSlides: HeroSlide[] = [
-  { id: "hero-1", place: "Amboseli, Kenya", image: img("hero/hero-01.jpg", "Elephants walking across the Amboseli plains with Mount Kilimanjaro behind", "hero", { desktop: "50% 60%", mobile: "62% 60%" }), order: 1, active: true },
-  { id: "hero-2", place: "Maasai Mara, Kenya", image: img("hero/hero-02.jpg", "A lone acacia tree silhouetted against an orange sunset in the Maasai Mara", "hero", { desktop: "40% 55%", mobile: "42% 55%" }), order: 2, active: true },
-  { id: "hero-3", place: "Ngorongoro Crater, Tanzania", image: img("destinations/ngorongoro/cover.jpg", "Zebras grazing in the Ngorongoro Crater as sunlight breaks through the clouds", "hero", { desktop: "50% 55%", mobile: "55% 55%" }), order: 3, active: true },
-  { id: "hero-4", place: "The Swahili coast", image: img("hero/hero-03.jpg", "Palm trees and beach umbrellas along a white sand beach on the Indian Ocean", "hero", { desktop: "40% 60%", mobile: "35% 60%" }), order: 4, active: true },
-  { id: "hero-5", place: "Maasai Mara, Kenya", image: img("hero/hero-04.jpg", "A lioness standing beside a tree trunk in the savannah", "hero", { desktop: "50% 45%", mobile: "36% 45%" }), order: 5, active: true },
+  { id: "hero-dusk", place: "", image: img("hero/hero-dusk.jpg", "Elephants walking to a waterhole beside a lone acacia tree at dusk", "hero", { desktop: "50% 55%", mobile: "42% 60%" }), order: 1, active: true },
 ];
 
 export const siteSettings: SiteSettings = {
@@ -85,7 +89,7 @@ export const siteSettings: SiteSettings = {
   hero: {
     kicker: "Safaris · Coast · Culture",
     title: "Africa, arranged *around you.*",
-    subtitle: "Say where you would like to go. People who know the roads, the seasons and the camps will plan the rest.",
+    subtitle: "Tell us where you would like to go. We know the roads, the seasons and the camps.",
   },
   seo: {
     defaultTitle: `${siteConfig.name} | Safaris and tours across Africa`,
