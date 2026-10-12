@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import type { EmailOtpType } from "@supabase/supabase-js";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { audit } from "@/lib/admin/audit";
@@ -42,10 +43,36 @@ export async function requestReset(_: FormState, form: FormData): Promise<FormSt
   if (!parsed.success) return { error: parsed.error.issues[0].message };
   const supabase = await sessionClient();
   await supabase.auth.resetPasswordForEmail(parsed.data, {
-    redirectTo: `${await siteOrigin()}/admin/auth/confirm?next=/admin/set-password`,
+    redirectTo: `${await siteOrigin()}/admin/auth/confirm`,
   });
   // Always the same answer, whether or not the email has an account.
   return { ok: "If that email belongs to a team account, a reset link is on its way. It works once and expires after an hour." };
+}
+
+const LINK_TYPES: EmailOtpType[] = ["invite", "recovery", "email", "magiclink"];
+
+/**
+ * "Continue" on an invite or reset link (/admin/auth/confirm). Only this uses up the one-time link,
+ * never just opening the page. Invite and reset links then go to choosing a password.
+ */
+export async function continueFromLink(_: FormState, form: FormData): Promise<FormState> {
+  const tokenHash = form.get("token_hash");
+  const type = form.get("type") as EmailOtpType | null;
+  const code = form.get("code");
+  const supabase = await sessionClient();
+  let ok = false;
+  if (typeof tokenHash === "string" && type && LINK_TYPES.includes(type)) {
+    ok = !(await supabase.auth.verifyOtp({ token_hash: tokenHash, type })).error;
+  } else if (typeof code === "string" && code) {
+    ok = !(await supabase.auth.exchangeCodeForSession(code)).error;
+  }
+  if (!ok) {
+    return {
+      error: "This link has already been used, has expired, or a newer one was made since (only the newest link works). Ask a teammate for a new link on the People page, or use “Forgot your password?”.",
+    };
+  }
+  const next = form.get("next");
+  redirect(typeof next === "string" && next ? safeNext(next) : "/admin/set-password");
 }
 
 /** After an invite or reset link: the person is signed in and chooses their password. */
