@@ -9,6 +9,13 @@ import { importStarterContent } from "./import-actions";
 
 export const metadata: Metadata = { title: "Overview" };
 
+/**
+ * The "Keep an offline copy" box (requests spreadsheet + full backup) is hidden for now, while the
+ * client decides on a paid Supabase plan (which has its own backups). Set to true to show it again.
+ * The requests spreadsheet stays available on the Booking requests page either way.
+ */
+const SHOW_OFFLINE_COPY = false;
+
 export default async function OverviewPage() {
   const me = await requireStaff();
   const supabase = await sessionClient();
@@ -17,19 +24,23 @@ export default async function OverviewPage() {
     if (filter) q = q.eq(filter[0], filter[1]);
     return (await q).count ?? 0;
   };
-  const [settings, fresh, open, tours, destinations, people] = await Promise.all([
-    supabase.from("site_settings").select("id").eq("id", 1).maybeSingle(),
-    count("inquiries", ["status", "new"]),
-    count("inquiries", ["status", "in_progress"]),
-    count("tours"),
-    count("destinations"),
-    count("staff"),
-  ]);
+  const [settings, fresh, open, tours, destinations, people] =
+    await Promise.all([
+      supabase.from("site_settings").select("id").eq("id", 1).maybeSingle(),
+      count("inquiries", ["status", "new"]),
+      count("inquiries", ["status", "in_progress"]),
+      count("tours"),
+      count("destinations"),
+      count("staff"),
+    ]);
   const imported = Boolean(settings.data);
 
   return (
     <>
-      <PageHead title={`Hello${me.fullName ? `, ${me.fullName.split(" ")[0]}` : ""}`} lead="What is waiting, and where to find things." />
+      <PageHead
+        title={`Hello${me.fullName ? `, ${me.fullName.split(" ")[0]}` : ""}`}
+        lead="What is waiting, and where to find things."
+      />
 
       {!imported && (
         <section className={styles.card} aria-labelledby="import-title">
@@ -37,10 +48,17 @@ export default async function OverviewPage() {
             First step: bring the website content in
           </h2>
           <p className={styles.muted}>
-            The website is still showing its built-in content. This copies all of it (tours, destinations, team, gallery, page photos,
-            contact details and legal pages) into the database so the team can edit it here. It only runs once.
+            The website is still showing its built-in content. This copies all
+            of it (tours, destinations, team, gallery, page photos, contact
+            details and legal pages) into the database so the team can edit it
+            here. It only runs once.
           </p>
-          <ActionForm action={importStarterContent} submitLabel="Import the website content" pendingLabel="Importing…" variant="secondary">
+          <ActionForm
+            action={importStarterContent}
+            submitLabel="Import the website content"
+            pendingLabel="Importing…"
+            variant="secondary"
+          >
             {null}
           </ActionForm>
         </section>
@@ -60,7 +78,9 @@ export default async function OverviewPage() {
           <span className={styles.statLabel}>Tours</span>
         </div>
         <div className={styles.stat}>
-          <span className={styles.statValue}>{imported ? destinations : "–"}</span>
+          <span className={styles.statValue}>
+            {imported ? destinations : "–"}
+          </span>
           <span className={styles.statLabel}>Destinations</span>
         </div>
         <Link href="/admin/people" className={styles.stat}>
@@ -69,24 +89,27 @@ export default async function OverviewPage() {
         </Link>
       </div>
 
-      <section className={styles.card} aria-labelledby="backup-title">
-        <h2 id="backup-title" className={styles.cardTitle}>
-          Keep an offline copy
-        </h2>
-        <p className={styles.muted}>
-          The free database plan keeps no backups, so save a copy now and then (once a week is a good habit) somewhere safe, such as
-          the company Google Drive. The files hold travellers&rsquo; contact details: keep them private. Each download is noted in the
-          change log.
-        </p>
-        <div className={styles.row}>
-          <a href="/admin/export/requests" className={styles.filter} download>
-            Booking requests (spreadsheet)
-          </a>
-          <a href="/admin/export/backup" className={styles.filter} download>
-            Full backup of everything (for a developer)
-          </a>
-        </div>
-      </section>
+      {SHOW_OFFLINE_COPY && (
+        <section className={styles.card} aria-labelledby="backup-title">
+          <h2 id="backup-title" className={styles.cardTitle}>
+            Keep an offline copy
+          </h2>
+          <p className={styles.muted}>
+            The free database plan keeps no backups, so save a copy now and then
+            (once a week is a good habit) somewhere safe, such as the company
+            Google Drive. The files hold travellers&rsquo; contact details: keep
+            them private. Each download is noted in the change log.
+          </p>
+          <div className={styles.row}>
+            <a href="/admin/export/requests" className={styles.filter} download>
+              Booking requests (spreadsheet)
+            </a>
+            <a href="/admin/export/backup" className={styles.filter} download>
+              Full backup of everything (for a developer)
+            </a>
+          </div>
+        </section>
+      )}
     </>
   );
 }
