@@ -3,6 +3,7 @@ import { ActionForm } from "@/components/admin/ActionForm";
 import { PageHead } from "@/components/admin/Shell";
 import styles from "@/components/admin/Shell.module.css";
 import { TwoStepSetup } from "@/components/admin/TwoStepSetup";
+import { PasswordField } from "@/components/admin/PasswordField";
 import { TextField } from "@/components/ui/Field";
 import { requireStaff } from "@/lib/admin/session";
 import { changePassword, turnOffTwoStep, updateName } from "../../auth-actions";
@@ -30,9 +31,9 @@ export default async function AccountPage() {
         </h2>
         <p className={styles.muted}>Use at least 10 characters. Forgotten it? Sign out and use “Forgot your password?”, or ask a teammate for a reset link.</p>
         <ActionForm action={changePassword} submitLabel="Change password" pendingLabel="Changing…" variant="secondary">
-          <TextField label="Current password" name="current" type="password" autoComplete="current-password" required />
-          <TextField label="New password" name="password" type="password" autoComplete="new-password" minLength={10} required />
-          <TextField label="New password again" name="confirm" type="password" autoComplete="new-password" minLength={10} required />
+          <PasswordField label="Current password" name="current" autoComplete="current-password" required />
+          <PasswordField label="New password" name="password" autoComplete="new-password" minLength={10} required />
+          <PasswordField label="New password again" name="confirm" autoComplete="new-password" minLength={10} required />
         </ActionForm>
       </section>
 

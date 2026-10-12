@@ -1,6 +1,8 @@
 .shell {
   min-height: 100svh;
   display: grid;
+  /* Short pages: keep the phone top bar at its own height instead of sharing out the spare space. */
+  align-content: start;
   background: var(--color-bone);
 }
 @media (min-width: 62rem) {

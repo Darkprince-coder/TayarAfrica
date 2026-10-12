@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ActionForm } from "@/components/admin/ActionForm";
 import { AuthCard } from "@/components/admin/AuthCard";
+import { PasswordField } from "@/components/admin/PasswordField";
 import { TextField } from "@/components/ui/Field";
 import { signIn } from "../../auth-actions";
 
@@ -21,7 +22,7 @@ export default async function LoginPage({ searchParams }: Props) {
       <ActionForm action={signIn} submitLabel="Sign in" pendingLabel="Signing in…">
         <input type="hidden" name="next" value={next} />
         <TextField label="Email" name="email" type="email" autoComplete="email" required />
-        <TextField label="Password" name="password" type="password" autoComplete="current-password" required />
+        <PasswordField label="Password" name="password" autoComplete="current-password" required />
       </ActionForm>
     </AuthCard>
   );
