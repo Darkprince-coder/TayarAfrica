@@ -25,7 +25,7 @@ export const siteConfig = {
       // Branch confirmed by the client; uses the main Kenya number until it has its own contact.
       { label: "Amboseli branch", phone: "+254 710 368 954", place: "Amboseli, Kenya", pin: [37.26, -2.65] as [number, number] },
       { label: "East Coast client support", person: "Naomi Misati", phone: "+1 (302) 465-0341", place: "Maryland, USA" },
-      { label: "USA office", person: "Edinah Misati", phone: "+1 (763) 496-7625", place: "Minnesota, USA" },
+      { label: "USA office", person: "Edinah Paskalia", phone: "+1 (763) 496-7625", place: "Minnesota, USA" },
     ],
     hours: ["Monday to Saturday, 7am to 7pm", "Sunday, 8am to 5pm"],
     emergency: "+254 710 368 954",

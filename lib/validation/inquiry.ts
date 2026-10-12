@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { emailField, isoDate, isPastDate, line, paragraph, phoneText } from "./common";
-import { ACCOMMODATION_VALUES, CONTACT_VALUES, DURATION_VALUES, EXPERIENCE_TYPES } from "./options";
+import { ACCOMMODATION_VALUES, ARRIVAL_VALUES, CONTACT_VALUES, DURATION_VALUES, EXPERIENCE_TYPES } from "./options";
 
 /**
  * Trip request, split by form step. The same schemas validate each step in the browser and the
@@ -30,7 +30,11 @@ export const detailsShape = {
   // Required by the client's booking process. An estimate is fine; "flexible" says so.
   startDate: z.string().min(1, "Please choose a start date. An estimate is fine.").pipe(isoDate),
   flexibleDates: z.boolean(),
-  pickupPoint: line(120).pipe(z.string().min(2, "Please tell us where we should pick you up.")),
+  arrival: z.enum(ARRIVAL_VALUES, { error: "Choose how you would like to arrive." }),
+  /** Where we meet them (arrival = pickup). */
+  pickupPoint: line(120),
+  /** The city they fly from (arrival = flights). */
+  departureCity: line(120),
   duration: z.enum(DURATION_VALUES, { error: "Choose a trip length, or Not sure yet." }),
   message: paragraph(2000),
 };
@@ -46,12 +50,18 @@ export const aboutShape = {
   consent: z.literal(true, { error: "Please confirm so we can contact you about this request." }),
 };
 
-type Cross = { startDate?: string; phone?: string; contactPreference?: string };
+type Cross = { startDate?: string; phone?: string; contactPreference?: string; arrival?: string; pickupPoint?: string; departureCity?: string };
 
 /** Rules that look at more than one field. */
 function crossChecks(data: Cross, ctx: z.RefinementCtx) {
   if (data.startDate && isPastDate(data.startDate)) {
     ctx.addIssue({ code: "custom", path: ["startDate"], message: "Please choose a date that is today or later." });
+  }
+  if (data.arrival === "pickup" && (data.pickupPoint ?? "").length < 2) {
+    ctx.addIssue({ code: "custom", path: ["pickupPoint"], message: "Please tell us where we should meet you." });
+  }
+  if (data.arrival === "flights" && (data.departureCity ?? "").length < 2) {
+    ctx.addIssue({ code: "custom", path: ["departureCity"], message: "Please tell us which city you would fly from." });
   }
   if ((data.contactPreference === "whatsapp" || data.contactPreference === "phone") && !data.phone) {
     ctx.addIssue({ code: "custom", path: ["phone"], message: "Please add a phone number so we can reach you that way." });
@@ -89,7 +99,9 @@ export type InquiryFormValues = {
   travelers: string;
   startDate: string;
   flexibleDates: boolean;
+  arrival: string;
   pickupPoint: string;
+  departureCity: string;
   duration: string;
   message: string;
   fullName: string;
@@ -110,7 +122,9 @@ export const emptyInquiry: InquiryFormValues = {
   travelers: "2",
   startDate: "",
   flexibleDates: false,
+  arrival: "pickup",
   pickupPoint: "",
+  departureCity: "",
   duration: "not-sure",
   message: "",
   fullName: "",

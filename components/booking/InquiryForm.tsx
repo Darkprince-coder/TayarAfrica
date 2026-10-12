@@ -15,7 +15,7 @@ import {
   tripSchema,
   type InquiryFormValues,
 } from "@/lib/validation/inquiry";
-import { ACCOMMODATION, CONTACT_PREFERENCES, DURATIONS, EXPERIENCE_TYPES, PICKUP_SUGGESTIONS } from "@/lib/validation/options";
+import { ACCOMMODATION, CONTACT_PREFERENCES, DURATIONS, EXPERIENCE_TYPES, ARRIVAL_OPTIONS } from "@/lib/validation/options";
 import type { ImageRef } from "@/lib/content/types";
 import { Stepper } from "./Stepper";
 import { SuccessPanel } from "./SuccessPanel";
@@ -318,19 +318,37 @@ export function InquiryForm({ packages, destinations, initialPackage, initialDes
                   My dates are flexible
                 </CheckboxField>
 
-                <TextField
-                  label="Pickup point"
-                  required
-                  list="pickup-suggestions"
-                  autoComplete="off"
-                  {...field("pickupPoint")}
-                  hint="An airport, your hotel or a town. Choose a suggestion or type your own."
+                <ChoiceChips
+                  legend="Getting here"
+                  name="arrival"
+                  type="radio"
+                  options={ARRIVAL_OPTIONS.map((a) => ({ value: a.value, label: a.label }))}
+                  value={[values.arrival]}
+                  onChange={([v]) => set("arrival", v)}
+                  error={errors.arrival}
+                  hint={
+                    values.arrival === "flights"
+                      ? "We will quote the whole package, international flights included."
+                      : "You book your own flights and we meet you on arrival."
+                  }
                 />
-                <datalist id="pickup-suggestions">
-                  {PICKUP_SUGGESTIONS.map((p) => (
-                    <option key={p} value={p} />
-                  ))}
-                </datalist>
+                {values.arrival === "flights" ? (
+                  <TextField
+                    label="Which city would you fly from?"
+                    required
+                    autoComplete="address-level2"
+                    {...field("departureCity")}
+                    hint="For example London, Frankfurt, New York or Minneapolis."
+                  />
+                ) : (
+                  <TextField
+                    label="Where should we meet you?"
+                    required
+                    autoComplete="off"
+                    {...field("pickupPoint")}
+                    hint="Your arrival airport, hotel or town. For example JKIA Nairobi, Kilimanjaro Airport, Zanzibar or your hotel."
+                  />
+                )}
 
                 <TextAreaField
                   label="Anything else we should know?"

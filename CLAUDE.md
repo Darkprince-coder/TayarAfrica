@@ -67,7 +67,7 @@ Sources: `docs/Website final touches .docx` (client brief), `docs/roadmap.md` (a
 ## Booking and legal (Phase 6)
 - Booking terms (30% deposit, payment methods, balance on arrival, cancellation tiers) live once in `siteSettings.booking` and feed the trip request page (`components/booking/BookingProcess`) and the legal texts. Never show payment account numbers on the site.
 - Legal pages (/terms, /privacy, /cancellation) render `LegalPage` data from `getLegalPage()` via `components/layout/LegalArticle`. They are DRAFTS (`draft: true` shows a notice) until the client approves them.
-- The trip request requires a start date, pickup point (with suggestions), phone/WhatsApp and nationality.
+- The trip request requires a start date, phone/WhatsApp and nationality, and asks "Getting here": meet on arrival (pickup point required) or include international flights in the quote (departure city required). The team prices flights by hand; the site never books them.
 - Offices/branches are `contact.offices` (person optional, optional map pin); the head office has `contact.address` and `contact.headOffice`.
 
 ## Inquiry flow

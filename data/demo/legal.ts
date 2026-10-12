@@ -136,7 +136,7 @@ export const legalPages: LegalPage[] = [
         list: [
           "your name, email address and phone or WhatsApp number",
           "your nationality and the country you live in",
-          "your trip details: dates, number of travellers, pickup point, the places and kind of trip you are interested in, and anything else you tell us",
+          "your trip details: dates, number of travellers, where to meet you or the city you would fly from, the places and kind of trip you are interested in, and anything else you tell us",
           "how you would like us to contact you",
         ],
       },

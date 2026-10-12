@@ -19,16 +19,16 @@ export const DURATIONS = [
   { value: "not-sure", label: "Not sure yet" },
 ] as const;
 
-/** Common pickup points, offered as suggestions; travellers can type anything. */
-export const PICKUP_SUGGESTIONS = [
-  "Nairobi: Jomo Kenyatta International Airport (JKIA)",
-  "Nairobi: my hotel or home",
-  "Nairobi: Wilson Airport",
-  "Mombasa: Moi International Airport",
-  "Mombasa: my hotel",
-  "Arusha: Kilimanjaro International Airport",
-  "Zanzibar: Abeid Amani Karume Airport",
+/**
+ * How the traveller wants to arrive. "pickup": they book their own flights and we meet them
+ * (airport, hotel or town). "flights": they want international flights included in the quote,
+ * which the team prices by hand. The site never books flights itself.
+ */
+export const ARRIVAL_OPTIONS = [
+  { value: "pickup", label: "Meet me when I arrive" },
+  { value: "flights", label: "Include my flights in the quote" },
 ] as const;
+export const ARRIVAL_VALUES = ARRIVAL_OPTIONS.map((a) => a.value) as [string, ...string[]];
 
 export const CONTACT_PREFERENCES = [
   { value: "email", label: "Email" },
