@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import { PackageCard } from "@/components/tours/PackageCard";
+import { CustomTourBand, TourSpreads } from "@/components/tours/TourSpreads";
 import { CtaBand } from "@/components/layout/CtaBand";
 import { PageHero } from "@/components/layout/PageHero";
-import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
-import { getPackages, getSiteSettings } from "@/lib/content";
-import styles from "./page.module.css";
+import { getDestinations, getPackages, getSiteSettings } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -18,11 +16,14 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-/** Interim layout: the East African tours, then the made-to-order Pan-African tour. Refined in Phase 5. */
+/**
+ * The tours as magazine spreads (photo and story, alternating sides), then the made-to-order tour
+ * as a full-width photograph.
+ */
 export default async function ToursPage() {
-  const [packages, site] = await Promise.all([getPackages(), getSiteSettings()]);
+  const [packages, destinations, site] = await Promise.all([getPackages(), getDestinations(), getSiteSettings()]);
   const set = packages.filter((p) => !p.custom);
-  const custom = packages.filter((p) => p.custom);
+  const custom = packages.find((p) => p.custom);
 
   return (
     <>
@@ -34,30 +35,17 @@ export default async function ToursPage() {
       />
       <Section tone="bone" labelledBy="east-africa-title">
         <Container>
-          <SectionHeading id="east-africa-title" eyebrow="East Africa" title="Safaris from Kenya" />
-          <ul role="list" className={styles.grid}>
-            {set.map((p, i) => (
-              <Reveal as="li" delay={(i % 2) * 130} key={p.slug}>
-                <PackageCard travelPackage={p} sizes="(min-width: 40rem) 50vw, 100vw" />
-              </Reveal>
-            ))}
-          </ul>
+          <SectionHeading
+            id="east-africa-title"
+            eyebrow="East Africa"
+            title="Safaris from Kenya, *and over the border.*"
+            lead="Short, well-paced trips from Nairobi. Prices are where each one starts; we quote your exact dates."
+            align="split"
+          />
+          <TourSpreads tours={set} destinations={destinations} />
         </Container>
       </Section>
-      {custom.length > 0 && (
-        <Section tone="sand" labelledBy="custom-title">
-          <Container>
-            <SectionHeading id="custom-title" eyebrow="Pan-African" title="Anywhere else in Africa" />
-            <ul role="list" className={styles.custom}>
-              {custom.map((p) => (
-                <Reveal as="li" key={p.slug}>
-                  <PackageCard travelPackage={p} variant="feature" sizes="(min-width: 62rem) 66vw, 100vw" />
-                </Reveal>
-              ))}
-            </ul>
-          </Container>
-        </Section>
-      )}
+      {custom && <CustomTourBand tour={custom} />}
       <CtaBand
         title="Want something different?"
         text="Most trips we plan start from an idea rather than a package. Tell us yours."

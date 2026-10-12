@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { DestinationCard } from "@/components/destinations/DestinationCard";
+import { DestinationIndex, DestinationMosaic } from "@/components/destinations/DestinationLayouts";
 import { DestinationExplorer, type ExplorerPin } from "@/components/destinations/DestinationExplorer";
-import { AFRICA_VIEW, AfricaMap, placePins } from "@/components/geo/AfricaMap";
+import { AFRICA_VIEW, AfricaMap, placePins, viewFor } from "@/components/geo/AfricaMap";
 import { CtaBand } from "@/components/layout/CtaBand";
 import { PageHero } from "@/components/layout/PageHero";
-import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
 import { getDestinations, getSiteSettings } from "@/lib/content";
 import { destinationHref, regionLabel } from "@/lib/content/format";
 import type { Destination } from "@/lib/content/types";
-import styles from "./page.module.css";
 import { pageMeta } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,7 +20,9 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-const SIZES = "(min-width: 62rem) 33vw, (min-width: 40rem) 50vw, 100vw";
+/** Kenya and Tanzania are too crowded at continent scale: they get a close-up in the map's corner. */
+const EAST_AFRICA_VIEW = viewFor([33.5, 2], [42, -7.5]);
+
 const GROUPS = ["Kenya", "Tanzania", "Uganda & Rwanda", "Southern Africa", "North Africa", "West Africa", "Central Africa"];
 
 /** Which line of the map's list a place belongs to. */
@@ -30,18 +30,6 @@ function groupOf(d: Destination): string {
   if (d.country === "Kenya" || d.country === "Tanzania") return d.country;
   if (d.countryCodes.some((c) => c === "UG" || c === "RW")) return "Uganda & Rwanda";
   return regionLabel(d.africaRegion);
-}
-
-function Grid({ items }: { items: Destination[] }) {
-  return (
-    <ul role="list" className={styles.grid}>
-      {items.map((d, i) => (
-        <Reveal as="li" variant="clip" delay={(i % 3) * 120} key={d.slug} className={styles.cell}>
-          <DestinationCard destination={d} sizes={SIZES} />
-        </Reveal>
-      ))}
-    </ul>
-  );
 }
 
 export default async function DestinationsPage() {
@@ -85,20 +73,25 @@ export default async function DestinationsPage() {
             map={<AfricaMap highlight={covered} label="Map of Africa with the countries we plan trips in highlighted" />}
             pins={pins}
             groups={GROUPS}
+            inset={{
+              view: EAST_AFRICA_VIEW,
+              label: "Kenya & Tanzania",
+              map: <AfricaMap highlight={covered} view={EAST_AFRICA_VIEW} label="Close-up of Kenya and Tanzania" />,
+            }}
           />
         </Container>
       </Section>
 
       <Section tone="bone" labelledBy="kenya-title">
         <Container>
-          <SectionHeading id="kenya-title" eyebrow="Our base" title="Kenya" />
-          <Grid items={kenya} />
+          <SectionHeading id="kenya-title" eyebrow="Our base" title="Kenya, *our home ground.*" lead="The parks we know best, from the Mara to the coast." align="split" />
+          <DestinationMosaic items={kenya} />
         </Container>
       </Section>
       <Section tone="sand" labelledBy="tanzania-title">
         <Container>
-          <SectionHeading id="tanzania-title" eyebrow="Next door" title="Tanzania" />
-          <Grid items={tanzania} />
+          <SectionHeading id="tanzania-title" eyebrow="Next door" title="Tanzania, *across the border.*" lead="The Serengeti, the crater and Zanzibar, easy to add to a Kenya trip." align="split" />
+          <DestinationMosaic items={tanzania} mirror />
         </Container>
       </Section>
       <Section tone="bone" labelledBy="africa-title">
@@ -109,7 +102,7 @@ export default async function DestinationsPage() {
             title="Across the rest of Africa"
             lead="We plan these to order. Pick one and tell us your dates, and we will send ideas and a quote."
           />
-          <Grid items={onRequest} />
+          <DestinationIndex items={onRequest} />
         </Container>
       </Section>
       <CtaBand

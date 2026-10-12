@@ -29,13 +29,11 @@
 .dot {
   fill: var(--color-ember);
   stroke: var(--color-text-on-dark);
-  stroke-width: 1.6;
   transition:
     r var(--dur-base) var(--ease-out),
     fill var(--dur-fast) var(--ease-out);
 }
 .pinActive .dot {
-  r: 8.5;
   fill: var(--color-gold-bright);
 }
 .label {
@@ -47,6 +45,41 @@
   stroke: var(--color-forest-deep);
   stroke-width: 6px;
   stroke-linejoin: round;
+  pointer-events: none;
+}
+
+/* ---------- East Africa close-up ---------- */
+.insetGuide rect {
+  fill: none;
+  stroke: var(--color-gold-bright);
+  stroke-width: 1.5;
+}
+.insetGuide line {
+  stroke: var(--color-gold-bright);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  opacity: 0.7;
+}
+.inset {
+  position: absolute;
+  border: 1px solid var(--color-gold-bright);
+  border-radius: var(--radius-sm);
+  background: var(--color-forest-deep);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+.insetLabel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0.25rem 0.5rem;
+  border-bottom-right-radius: var(--radius-sm);
+  background: var(--color-forest-deep);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-gold-bright);
   pointer-events: none;
 }
 
