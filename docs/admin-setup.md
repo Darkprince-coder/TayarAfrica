@@ -100,6 +100,16 @@ app (TOTP)" enabled). Leave it on. Nothing to pay.
 The vercel.app copy always tells search engines "noindex"; only the real domain on the production
 build is listed (`siteConfig.indexable`).
 
+## Keeping the free Supabase project awake
+
+Free Supabase projects pause after 7 days without activity. `vercel.json` has Vercel call
+`/api/keep-alive` once a day (05:00 UTC), which makes one small database read. Nothing to set up;
+check it under Vercel > the project > **Settings > Cron Jobs**. Optional: add `CRON_SECRET` (any
+long random string) to Vercel's Environment Variables so only Vercel's scheduler can call it.
+
+The free plan has **no backups**. Supabase Pro (about $25 a month) adds daily backups kept for 7
+days, no pausing, and more room. Recommended once real booking requests come in.
+
 ## Later (with the domain)
 
 - Resend: verify the domain, then Supabase > Authentication > Emails > **SMTP Settings** with
