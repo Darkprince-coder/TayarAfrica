@@ -9,33 +9,133 @@
   }
 }
 
-/* ---------- Sidebar (a top bar on phones) ---------- */
-.side {
+/* ---------- Top bar (phones and tablets only) ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-3) var(--space-5);
-  padding: var(--space-4) var(--gutter);
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: calc(var(--space-3) + env(safe-area-inset-top, 0px)) var(--gutter) var(--space-3);
   background: var(--color-forest-deep);
   color: var(--color-text-on-dark);
 }
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+  border: 1px solid rgb(244 238 227 / 0.25);
+  border-radius: var(--radius-button);
+  background: none;
+  color: var(--color-text-on-dark);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+.menuButton:hover {
+  background: rgb(244 238 227 / 0.08);
+}
+/* Three lines, drawn with one element and its shadows. */
+.burger {
+  width: 1rem;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  box-shadow: 0 -5px 0 currentColor, 0 5px 0 currentColor;
+}
+
+/* ---------- Sidebar (slides in on phones, always shown on wide screens) ---------- */
+.side {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: var(--z-menu);
+  width: min(19rem, 86vw);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: calc(var(--space-4) + env(safe-area-inset-top, 0px)) var(--space-4) calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--color-forest-deep);
+  color: var(--color-text-on-dark);
+  box-shadow: var(--shadow-lift);
+  /* Hidden (and out of the tab order) until opened. */
+  visibility: hidden;
+  transform: translateX(-100%);
+  transition:
+    transform var(--dur-base) var(--ease-cine),
+    visibility 0s linear var(--dur-base);
+}
+.side[data-open] {
+  visibility: visible;
+  transform: none;
+  transition: transform var(--dur-base) var(--ease-cine);
+}
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-menu) - 1);
+  background: rgb(20 38 30 / 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.backdrop[data-open] {
+  opacity: 1;
+  pointer-events: auto;
+}
+.closeButton {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  padding: 0 var(--space-2);
+  border: 0;
+  background: none;
+  color: var(--color-text-on-dark-muted);
+  font: inherit;
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+.closeButton span {
+  font-size: var(--text-xl);
+  line-height: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .side,
+  .side[data-open],
+  .backdrop {
+    transition: none;
+  }
+}
 @media (min-width: 62rem) {
+  .topbar,
+  .backdrop,
+  .closeButton {
+    display: none;
+  }
   .side {
     position: sticky;
     top: 0;
+    width: auto;
     height: 100svh;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    gap: var(--space-2);
     padding: var(--space-6) var(--space-4);
+    box-shadow: none;
+    visibility: visible;
+    transform: none;
+    transition: none;
   }
 }
 .brand {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  margin-right: auto;
   font-size: var(--text-sm);
   color: var(--color-text-on-dark-muted);
   text-decoration: none;
@@ -46,33 +146,31 @@
   font-weight: 500;
   color: var(--color-gold-bright);
 }
-@media (min-width: 62rem) {
-  .brand {
-    margin: 0 0 var(--space-5);
-  }
+.sideBrand {
+  margin: 0 0 var(--space-5);
 }
 .nav {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--space-1);
-}
-@media (min-width: 62rem) {
-  .nav {
-    flex-direction: column;
-  }
 }
 .link {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-2);
-  min-height: 2.5rem;
+  min-height: 2.75rem;
   padding: 0 var(--space-3);
   border-radius: var(--radius-sm);
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-text-on-dark);
   text-decoration: none;
+}
+@media (min-width: 62rem) {
+  .link {
+    min-height: 2.5rem;
+  }
 }
 .link[aria-current="page"],
 a.link:hover {
@@ -98,13 +196,10 @@ a.link:hover {
 .foot {
   display: grid;
   gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-6);
   font-size: var(--text-xs);
   color: var(--color-text-on-dark-muted);
-}
-@media (min-width: 62rem) {
-  .foot {
-    margin-top: auto;
-  }
 }
 .foot a,
 .foot button {

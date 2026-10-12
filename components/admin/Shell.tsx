@@ -4,14 +4,15 @@ import type { ReactNode } from "react";
 import { signOut } from "@/app/admin/auth-actions";
 import type { StaffUser } from "@/lib/admin/session";
 import { AdminNav } from "./AdminNav";
+import { SideDrawer } from "./SideDrawer";
 import styles from "./Shell.module.css";
 
-/** The admin frame: sidebar (a top bar on phones) and the page. */
+/** The admin frame: sidebar (a top bar with a slide-in menu on phones) and the page. */
 export function Shell({ me, newCount, children }: { me: StaffUser; newCount: number; children: ReactNode }) {
   return (
     <div className={styles.shell}>
-      <aside className={styles.side}>
-        <Link href="/admin" className={styles.brand}>
+      <SideDrawer newCount={newCount}>
+        <Link href="/admin" className={`${styles.brand} ${styles.sideBrand}`}>
           <Image src="/brand/logo-emblem-light.png" alt="" width={30} height={32} />
           <span>
             <strong>Tayari</strong> admin
@@ -27,7 +28,7 @@ export function Shell({ me, newCount, children }: { me: StaffUser; newCount: num
             <button type="submit">Sign out</button>
           </form>
         </div>
-      </aside>
+      </SideDrawer>
       <main id="main" className={styles.main}>
         <div className={styles.inner}>{children}</div>
       </main>
