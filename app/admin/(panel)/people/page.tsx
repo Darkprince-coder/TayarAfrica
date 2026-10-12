@@ -10,7 +10,7 @@ import { inviteMember, removeMember, resetLinkFor, resetTwoStepFor } from "./act
 
 export const metadata: Metadata = { title: "People" };
 
-const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Africa/Nairobi" });
 
 export default async function PeoplePage() {
   const me = await requireStaff();

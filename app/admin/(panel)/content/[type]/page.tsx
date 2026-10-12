@@ -66,7 +66,7 @@ export default async function ContentListPage({ params }: Props) {
                       <span className={styles.pill}>{r.item.draft ? "Draft" : "Approved"}</span>
                     )}
                   </td>
-                  <td className={styles.muted}>{new Date(r.updatedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</td>
+                  <td className={styles.muted}>{new Date(r.updatedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "Africa/Nairobi" })}</td>
                 </tr>
               );
             })}

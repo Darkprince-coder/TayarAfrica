@@ -304,6 +304,91 @@ a.link:hover {
 .thumbCell {
   width: 4.5rem;
 }
+/* Phones: Booking requests as tappable rows. Name and status on top, then what they asked for,
+   then when it came in. The name's link covers the whole row, so the Open button is not needed. */
+@media (max-width: 39.99rem) {
+  .inbox thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .inbox tbody {
+    display: grid;
+  }
+  .inbox tr {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "from from status"
+      "what what what"
+      "received kind kind";
+    gap: var(--space-2) var(--space-3);
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--color-sand-deep);
+  }
+  .inbox tr:last-child {
+    border-bottom: 0;
+  }
+  .inbox td {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+  .inbox .from {
+    grid-area: from;
+    font-size: var(--text-base);
+  }
+  .inbox .from .muted {
+    display: inline;
+    margin-left: var(--space-2);
+    font-size: var(--text-xs);
+  }
+  .inbox .status {
+    grid-area: status;
+    justify-self: end;
+  }
+  .inbox .what {
+    grid-area: what;
+    color: var(--color-ink);
+  }
+  .inbox .received,
+  .inbox .kind {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+  .inbox .received {
+    grid-area: received;
+  }
+  .inbox .kind {
+    grid-area: kind;
+  }
+  .inbox .kind::before {
+    content: "· ";
+  }
+  .inbox .open {
+    display: none;
+  }
+  /* The whole row opens the request. */
+  .inbox .rowLink::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .inbox tr:has(.rowLink:focus-visible) {
+    outline: 2px solid var(--color-acacia);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+  /* Lists get the room: less padding around them on phones. */
+  .card:has(> .inbox),
+  .card:has(> .stack) {
+    padding: var(--space-2) var(--space-4);
+  }
+}
+
 /* Phones: a stacking table becomes compact rows (photo left, the rest beneath the name). */
 @media (max-width: 39.99rem) {
   .stack thead {
@@ -316,23 +401,33 @@ a.link:hover {
   .stack tr {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-1) var(--space-3);
-    padding-block: var(--space-3);
-    border-bottom: 1px solid var(--color-sand);
+    gap: var(--space-1) var(--space-4);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--color-sand-deep);
   }
+  /* Photo | name across; status and date share the second line. */
   .stack tr:has(.thumbCell) {
-    grid-template-columns: 4.5rem minmax(0, 1fr);
+    grid-template-columns: 4.5rem auto minmax(0, 1fr);
+    align-items: center;
   }
   .stack td {
     display: block;
     padding: 0;
     border: 0;
   }
-  .stack tr:has(.thumbCell) td:not(.thumbCell) {
+  .stack tr:has(.thumbCell) td:nth-child(2) {
+    grid-column: 2 / -1;
+  }
+  .stack tr:has(.thumbCell) td:nth-child(3) {
     grid-column: 2;
   }
+  .stack tr:has(.thumbCell) td:nth-child(4) {
+    grid-column: 3;
+    font-size: var(--text-xs);
+  }
   .stack .thumbCell {
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 2;
+    align-self: start;
     width: auto;
   }
 }

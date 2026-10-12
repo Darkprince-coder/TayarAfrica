@@ -9,7 +9,7 @@ import { sessionClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { title: "Booking requests" };
 
-const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Africa/Nairobi" });
 
 type Props = { searchParams: Promise<{ status?: string; deleted?: string }> };
 
@@ -61,7 +61,7 @@ export default async function InboxPage({ searchParams }: Props) {
         <p className={styles.muted}>Could not load requests: {error.message}</p>
       ) : rows && rows.length > 0 ? (
         <div className={`${styles.card} ${styles.scroll}`}>
-          <table className={`${styles.table} ${styles.stack}`}>
+          <table className={`${styles.table} ${styles.inbox}`}>
             <thead>
               <tr>
                 <th>Received</th>
@@ -79,21 +79,23 @@ export default async function InboxPage({ searchParams }: Props) {
                 const p = r.payload as Record<string, unknown>;
                 return (
                   <tr key={r.id}>
-                    <td>{when(r.created_at)}</td>
-                    <td>
-                      <Link href={`/admin/inbox/${r.id}`}>{String(p.fullName ?? "Unknown")}</Link>
+                    <td className={styles.received}>{when(r.created_at)}</td>
+                    <td className={styles.from}>
+                      <Link href={`/admin/inbox/${r.id}`} className={styles.rowLink}>
+                        {String(p.fullName ?? "Unknown")}
+                      </Link>
                       <div className={styles.muted}>{r.reference}</div>
                     </td>
-                    <td>{r.kind === "trip" ? "Trip request" : "Message"}</td>
-                    <td className={styles.muted}>
+                    <td className={styles.kind}>{r.kind === "trip" ? "Trip request" : "Message"}</td>
+                    <td className={`${styles.muted} ${styles.what}`}>
                       {r.kind === "trip" ? [p.startDate, p.travelers && `${p.travelers} travellers`, nameOf(p.packageSlug) || nameOf(p.destinationSlug)].filter(Boolean).join(" · ") : String(p.message ?? "").slice(0, 80)}
                     </td>
-                    <td>
+                    <td className={styles.status}>
                       <span className={styles.pill} data-status={r.status}>
                         {STATUS_LABEL[r.status] ?? r.status}
                       </span>
                     </td>
-                    <td>
+                    <td className={styles.open}>
                       <Link href={`/admin/inbox/${r.id}`} className={styles.filter} aria-label={`Open ${String(p.fullName ?? "request")} ${r.reference}`}>
                         Open
                       </Link>
