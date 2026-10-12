@@ -68,6 +68,25 @@ export default async function OverviewPage() {
           <span className={styles.statLabel}>People with access</span>
         </Link>
       </div>
+
+      <section className={styles.card} aria-labelledby="backup-title">
+        <h2 id="backup-title" className={styles.cardTitle}>
+          Keep an offline copy
+        </h2>
+        <p className={styles.muted}>
+          The free database plan keeps no backups, so save a copy now and then (once a week is a good habit) somewhere safe, such as
+          the company Google Drive. The files hold travellers&rsquo; contact details: keep them private. Each download is noted in the
+          change log.
+        </p>
+        <div className={styles.row}>
+          <a href="/admin/export/requests" className={styles.filter} download>
+            Booking requests (spreadsheet)
+          </a>
+          <a href="/admin/export/backup" className={styles.filter} download>
+            Full backup of everything (for a developer)
+          </a>
+        </div>
+      </section>
     </>
   );
 }

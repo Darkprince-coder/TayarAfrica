@@ -31,6 +31,11 @@ export default async function InboxPage({ searchParams }: Props) {
           {deleted} was deleted.
         </p>
       )}
+      <p className={styles.muted}>
+        <a href="/admin/export/requests" download>
+          Download all requests as a spreadsheet
+        </a>
+      </p>
       <nav className={styles.filters} aria-label="Filter by status">
         <Link href="/admin/inbox" className={styles.filter} aria-current={!filter ? "page" : undefined}>
           All
