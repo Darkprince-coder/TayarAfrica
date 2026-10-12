@@ -21,7 +21,17 @@ export default async function InboxPage({ searchParams }: Props) {
   const supabase = await sessionClient();
   let query = supabase.from("inquiries").select("id, reference, kind, status, payload, created_at").order("created_at", { ascending: false }).limit(200);
   if (filter) query = query.eq("status", filter);
-  const { data: rows, error } = await query;
+  const [{ data: rows, error }, tours, places] = await Promise.all([
+    query,
+    supabase.from("tours").select("slug, data->>title"),
+    supabase.from("destinations").select("slug, data->>name"),
+  ]);
+  // Show tours and destinations by name, not by their web address.
+  const names = new Map<string, string>([
+    ...(tours.data ?? []).map((t) => [t.slug, String(t.title ?? t.slug)] as [string, string]),
+    ...(places.data ?? []).map((d) => [d.slug, String(d.name ?? d.slug)] as [string, string]),
+  ]);
+  const nameOf = (slug: unknown) => (typeof slug === "string" && slug ? (names.get(slug) ?? slug) : "");
 
   return (
     <>
@@ -51,7 +61,7 @@ export default async function InboxPage({ searchParams }: Props) {
         <p className={styles.muted}>Could not load requests: {error.message}</p>
       ) : rows && rows.length > 0 ? (
         <div className={`${styles.card} ${styles.scroll}`}>
-          <table className={styles.table}>
+          <table className={`${styles.table} ${styles.stack}`}>
             <thead>
               <tr>
                 <th>Received</th>
@@ -76,7 +86,7 @@ export default async function InboxPage({ searchParams }: Props) {
                     </td>
                     <td>{r.kind === "trip" ? "Trip request" : "Message"}</td>
                     <td className={styles.muted}>
-                      {r.kind === "trip" ? [p.startDate, p.travelers && `${p.travelers} travellers`, p.packageSlug || p.destinationSlug].filter(Boolean).join(" · ") : String(p.message ?? "").slice(0, 80)}
+                      {r.kind === "trip" ? [p.startDate, p.travelers && `${p.travelers} travellers`, nameOf(p.packageSlug) || nameOf(p.destinationSlug)].filter(Boolean).join(" · ") : String(p.message ?? "").slice(0, 80)}
                     </td>
                     <td>
                       <span className={styles.pill} data-status={r.status}>

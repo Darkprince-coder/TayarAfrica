@@ -63,14 +63,18 @@ export default async function AboutPage() {
       <Section tone="sand" labelledBy="mission-title">
         <Container>
           <SectionHeading id="mission-title" eyebrow="Mission and vision" title="What we are working towards" />
-          <div className={styles.cards}>
-            <Reveal className={styles.card}>
-              <h3 className={styles.cardTitle}>Our mission</h3>
-              <p>To make planning a trip to Africa simple, clear and honest, so travellers know what they are getting before they go.</p>
+          <div className={styles.statements}>
+            <Reveal className={styles.statement}>
+              <h3 className={styles.statementLabel}>Our mission</h3>
+              <p className={styles.statementText}>
+                To make planning a trip to Africa simple, clear and honest, so travellers know what they are getting before they go.
+              </p>
             </Reveal>
-            <Reveal delay={150} className={styles.card}>
-              <h3 className={styles.cardTitle}>Our vision</h3>
-              <p>To be the first team travellers think of when they want Africa arranged well, and the one they recommend afterwards.</p>
+            <Reveal delay={180} className={styles.statement}>
+              <h3 className={styles.statementLabel}>Our vision</h3>
+              <p className={styles.statementText}>
+                To be the first team travellers think of when they want Africa arranged well, and the one they recommend afterwards.
+              </p>
             </Reveal>
           </div>
         </Container>

@@ -35,7 +35,7 @@ export default async function ContentListPage({ params }: Props) {
         </div>
       )}
       <div className={`${styles.card} ${styles.scroll}`}>
-        <table className={styles.table}>
+        <table className={`${styles.table} ${styles.stack}`}>
           <thead>
             <tr>
               <th aria-label="Photo" />
@@ -49,7 +49,7 @@ export default async function ContentListPage({ params }: Props) {
               const src = thumb(r.item);
               return (
                 <tr key={r.key}>
-                  <td style={{ width: "4.5rem" }}>
+                  <td className={styles.thumbCell}>
                     {/* eslint-disable-next-line @next/next/no-img-element -- small admin thumbnail */}
                     {src && <img src={src} alt="" width={64} height={44} style={{ objectFit: "cover", borderRadius: 4 }} />}
                   </td>

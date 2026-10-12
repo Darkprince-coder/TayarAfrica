@@ -301,6 +301,41 @@ a.link:hover {
 .table a {
   font-weight: 600;
 }
+.thumbCell {
+  width: 4.5rem;
+}
+/* Phones: a stacking table becomes compact rows (photo left, the rest beneath the name). */
+@media (max-width: 39.99rem) {
+  .stack thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .stack tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1) var(--space-3);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--color-sand);
+  }
+  .stack tr:has(.thumbCell) {
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+  }
+  .stack td {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+  .stack tr:has(.thumbCell) td:not(.thumbCell) {
+    grid-column: 2;
+  }
+  .stack .thumbCell {
+    grid-row: 1 / span 3;
+    width: auto;
+  }
+}
 .pill {
   display: inline-block;
   padding: 0.15rem 0.5rem;
