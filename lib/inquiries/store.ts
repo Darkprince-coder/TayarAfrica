@@ -1,9 +1,10 @@
 import "server-only";
 import { createHash } from "node:crypto";
+import { isServiceConfigured, serviceClient } from "@/lib/supabase/admin";
 import type { InquiryRecord, InquiryStore } from "./types";
 
 /**
- * MOCK store for the board prototype. Records live in server memory only (they vanish on restart
+ * MOCK store, used when Supabase is not configured. Records live in server memory only (they vanish on restart
  * and are not shared between serverless instances). Replace with a Supabase-backed store later.
  *
  * Demo switch (server env var MOCK_INQUIRY_MODE):
@@ -38,4 +39,20 @@ export const mockInquiryStore: InquiryStore = {
   },
 };
 
-export const inquiryStore: InquiryStore = mockInquiryStore;
+/**
+ * Supabase store: one row per request in `inquiries`, inserted with the service key (visitors
+ * have no write access). The idempotency key is unique, so a double send returns the first row.
+ */
+export const supabaseInquiryStore: InquiryStore = {
+  async save(record, idempotencyKey) {
+    const db = serviceClient();
+    const reference = referenceFor(idempotencyKey);
+    const { error } = await db
+      .from("inquiries")
+      .upsert({ reference, kind: record.kind, payload: record.payload, idempotency_key: idempotencyKey }, { onConflict: "idempotency_key", ignoreDuplicates: true });
+    if (error) throw new Error(`Saving inquiry failed: ${error.message}`);
+    return { reference };
+  },
+};
+
+export const inquiryStore: InquiryStore = isServiceConfigured() ? supabaseInquiryStore : mockInquiryStore;

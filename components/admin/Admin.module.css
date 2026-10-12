@@ -1,0 +1,63 @@
+/* ---------- Sign-in screens ---------- */
+.authPage {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6) var(--gutter);
+  background: var(--color-forest-deep);
+}
+.authCard {
+  width: min(100%, 26rem);
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-7) var(--space-6);
+  border-radius: var(--radius-lg);
+  background: var(--color-bone);
+  box-shadow: var(--shadow-lift);
+}
+.authBrand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.authBrand strong {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: var(--color-gold);
+}
+.authTitle {
+  font-size: var(--text-2xl);
+}
+.authLead {
+  margin-top: calc(var(--space-3) * -1);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.authFoot {
+  font-size: var(--text-sm);
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Forms ---------- */
+.form {
+  display: grid;
+  gap: var(--space-4);
+}
+.error,
+.ok {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+}
+.error {
+  background: rgb(166 50 39 / 0.08);
+  color: var(--color-error);
+}
+.ok {
+  background: rgb(47 107 70 / 0.1);
+  color: var(--color-success);
+}

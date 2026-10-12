@@ -31,6 +31,7 @@ Sources: `docs/Website final touches .docx` (client brief), `docs/roadmap.md` (a
 - Validation with Zod, shared between client and server. Server-side validation always.
 - Analytics only through `lib/analytics` (GA4 ID from env). No scattered tags.
 - Env vars: see `.env.example`. Never expose service-role keys client-side.
+- Supabase: schema lives in `supabase/migrations/`. Every new table needs explicit GRANTs (Supabase stopped granting automatically in 2026) AND row level security policies; keep both in the same migration. Visitors (anon) never get access to inquiries, staff or audit tables.
 
 ## Design system — "Savanna Dusk"
 - Palette tuned to the logo: bone/sand surfaces, map sand (`--color-map`), acacia green (`--color-acacia`, italic accents and labels on light), deep forest surfaces, warm charcoal ink, terracotta "ember" for CTAs only, logo gold for small details (never large fills).
