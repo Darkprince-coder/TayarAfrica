@@ -17,9 +17,10 @@ const records = (globalStore.__tayariInquiries ??= new Map<string, InquiryRecord
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-function referenceFor(idempotencyKey: string): string {
+/** TAY-… for trip requests, MSG-… for contact messages: the same reference the visitor sees and the inbox shows. */
+function referenceFor(idempotencyKey: string, kind: InquiryRecord["kind"]): string {
   const hash = createHash("sha256").update(idempotencyKey).digest("hex").slice(0, 6).toUpperCase();
-  return `TAY-${hash}`;
+  return `${kind === "contact" ? "MSG" : "TAY"}-${hash}`;
 }
 
 export const mockInquiryStore: InquiryStore = {
@@ -28,7 +29,7 @@ export const mockInquiryStore: InquiryStore = {
     await wait(mode === "slow" ? 9000 : 900);
     if (mode === "error") throw new Error("Mock store failure (MOCK_INQUIRY_MODE=error)");
 
-    const reference = referenceFor(idempotencyKey);
+    const reference = referenceFor(idempotencyKey, record.kind);
     // Same key twice (double click, retry after a slow response) returns the same request.
     if (!records.has(reference)) {
       records.set(reference, { ...record, reference, status: "new", createdAt: new Date().toISOString() });
@@ -46,7 +47,7 @@ export const mockInquiryStore: InquiryStore = {
 export const supabaseInquiryStore: InquiryStore = {
   async save(record, idempotencyKey) {
     const db = serviceClient();
-    const reference = referenceFor(idempotencyKey);
+    const reference = referenceFor(idempotencyKey, record.kind);
     const { error } = await db
       .from("inquiries")
       .upsert({ reference, kind: record.kind, payload: record.payload, idempotency_key: idempotencyKey }, { onConflict: "idempotency_key", ignoreDuplicates: true });

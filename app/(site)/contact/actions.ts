@@ -25,7 +25,7 @@ export async function submitContact(input: unknown): Promise<SubmitResult> {
       { kind: "contact", payload: { fullName: data.fullName, email: data.email, phone: data.phone || null, message: data.message } },
       data.idempotencyKey,
     );
-    return { ok: true, reference: reference.replace("TAY-", "MSG-") };
+    return { ok: true, reference };
   } catch (error) {
     console.error("[contact] save failed", error instanceof Error ? error.message : error);
     return { ok: false, code: "unavailable", message: "We could not send your message just now." };
