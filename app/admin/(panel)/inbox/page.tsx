@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHead } from "@/components/admin/Shell";
+import admin from "@/components/admin/Admin.module.css";
 import styles from "@/components/admin/Shell.module.css";
 import { STATUS_LABEL } from "@/lib/admin/inquiries";
 import { requireStaff } from "@/lib/admin/session";
@@ -10,11 +11,11 @@ export const metadata: Metadata = { title: "Booking requests" };
 
 const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
 
-type Props = { searchParams: Promise<{ status?: string }> };
+type Props = { searchParams: Promise<{ status?: string; deleted?: string }> };
 
 export default async function InboxPage({ searchParams }: Props) {
   await requireStaff();
-  const { status } = await searchParams;
+  const { status, deleted } = await searchParams;
   const filter = status && STATUS_LABEL[status] ? status : null;
 
   const supabase = await sessionClient();
@@ -24,7 +25,12 @@ export default async function InboxPage({ searchParams }: Props) {
 
   return (
     <>
-      <PageHead title="Booking requests" lead="Trip requests and contact messages from the website, newest first. Open one to update its status and keep notes." />
+      <PageHead title="Booking requests" lead="Trip requests and contact messages from the website, newest first. Open one to change its status, keep notes or delete it." />
+      {deleted && /^[A-Z]{3}-[A-Z0-9]{6}$/.test(deleted) && (
+        <p className={admin.ok} role="status">
+          {deleted} was deleted.
+        </p>
+      )}
       <nav className={styles.filters} aria-label="Filter by status">
         <Link href="/admin/inbox" className={styles.filter} aria-current={!filter ? "page" : undefined}>
           All
@@ -48,6 +54,9 @@ export default async function InboxPage({ searchParams }: Props) {
                 <th>Type</th>
                 <th>When / what</th>
                 <th>Status</th>
+                <th>
+                  <span className="visually-hidden">Open</span>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -68,6 +77,11 @@ export default async function InboxPage({ searchParams }: Props) {
                       <span className={styles.pill} data-status={r.status}>
                         {STATUS_LABEL[r.status] ?? r.status}
                       </span>
+                    </td>
+                    <td>
+                      <Link href={`/admin/inbox/${r.id}`} className={styles.filter} aria-label={`Open ${String(p.fullName ?? "request")} ${r.reference}`}>
+                        Open
+                      </Link>
                     </td>
                   </tr>
                 );

@@ -335,6 +335,20 @@ a.link:hover {
   font-size: var(--text-sm);
   text-decoration: none;
 }
+/* Also used as buttons (one-tap status on a request). */
+button.filter {
+  min-height: 2.75rem;
+  padding-inline: 1rem;
+  background: none;
+  font: inherit;
+  font-size: var(--text-sm);
+  color: inherit;
+  cursor: pointer;
+}
+button.filter:hover {
+  border-color: var(--color-forest);
+}
+.filter[aria-pressed="true"],
 .filter[aria-current="page"] {
   background: var(--color-forest);
   border-color: var(--color-forest);
