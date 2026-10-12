@@ -4,12 +4,17 @@ import { PageHero } from "@/components/layout/PageHero";
 import { TeamGroups } from "@/components/team/TeamGroups";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
 import { getSiteSettings, getTeam } from "@/lib/content";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Meet the team",
-  description:
-    "The people at Tayari Africa Tours Consultants who plan and look after your trip, in Kenya and in the USA, from first message to the day you fly home.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSiteSettings();
+  return pageMeta({
+    path: "/team",
+    title: "Meet the team",
+    description: "The people at Tayari Africa Tours Consultants who plan and look after your trip, in Kenya and in the USA, from first message to the day you fly home.",
+    image: site.pageImages.team,
+  });
+}
 
 export default async function TeamPage() {
   const [team, site] = await Promise.all([getTeam(), getSiteSettings()]);

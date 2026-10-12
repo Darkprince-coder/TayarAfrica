@@ -8,12 +8,18 @@ import { getSiteSettings } from "@/lib/content";
 import { AfricaMap, pinAt, viewFor } from "@/components/geo/AfricaMap";
 import { directionsHref, telHref, whatsappHref } from "@/lib/site";
 import styles from "./page.module.css";
+import { organizationLd, pageMeta } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Contact Tayari Africa Tours Consultants at our headquarters in Nairobi, Kenya, or our client support in Maryland and Minnesota, USA, by phone, WhatsApp or email. 24/7 emergency WhatsApp for travellers.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSiteSettings();
+  return pageMeta({
+    path: "/contact",
+    title: "Contact",
+    description: "Contact Tayari Africa Tours Consultants at our headquarters in Nairobi, Kenya, or our client support in Maryland and Minnesota, USA, by phone, WhatsApp or email. 24/7 emergency WhatsApp for travellers.",
+    image: site.pageImages.contact,
+  });
+}
 
 type Row = { label: string; value: string; href?: string; external?: boolean; note?: string };
 
@@ -21,7 +27,8 @@ type Row = { label: string; value: string; href?: string; external?: boolean; no
 const EAST_AFRICA = viewFor([30.5, 5.6], [43.5, -7.2]);
 
 export default async function ContactPage() {
-  const { contact, social, pageImages } = await getSiteSettings();
+  const site = await getSiteSettings();
+  const { contact, social, pageImages } = site;
   const pin = pinAt(contact.headOffice.pin);
   // Other African branches with a pin (e.g. Amboseli).
   const branches = contact.offices.filter((o) => o.pin).map((o) => ({ label: o.place.replace(/, Kenya$/, ""), xy: pinAt(o.pin!) }));
@@ -44,6 +51,7 @@ export default async function ContactPage() {
 
   return (
     <>
+      <JsonLd data={organizationLd(site)} />
       <PageHero
         image={pageImages.contact}
         kicker="Contact"

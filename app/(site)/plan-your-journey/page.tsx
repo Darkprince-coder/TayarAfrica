@@ -6,12 +6,17 @@ import { Container, Section } from "@/components/ui/Section";
 import { getDestinations, getPackages, getSiteSettings } from "@/lib/content";
 import { formatDuration } from "@/lib/content/format";
 import { DURATION_VALUES } from "@/lib/validation/options";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Plan Your Journey",
-  description:
-    "Tell Tayari about the trip you have in mind, anywhere in Africa. Three short steps, and a consultant will reply with ideas and a quote. This is a request, not a booking.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSiteSettings();
+  return pageMeta({
+    path: "/plan-your-journey",
+    title: "Plan Your Journey",
+    description: "Tell Tayari about the trip you have in mind, anywhere in Africa. Three short steps, and a consultant will reply with ideas and a quote. This is a request, not a booking.",
+    image: site.pageImages.plan,
+  });
+}
 
 type Props = { searchParams: Promise<{ package?: string; destination?: string; duration?: string }> };
 

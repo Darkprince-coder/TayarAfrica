@@ -4,11 +4,17 @@ import { CtaBand } from "@/components/layout/CtaBand";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container, Section } from "@/components/ui/Section";
 import { getGallery, getSiteSettings } from "@/lib/content";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Gallery",
-  description: "Photographs from the places we plan trips to across Africa: wildlife, landscapes, the coast and culture.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSiteSettings();
+  return pageMeta({
+    path: "/gallery",
+    title: "Gallery",
+    description: "Photographs from the places we plan trips to across Africa: wildlife, landscapes, the coast and culture.",
+    image: site.pageImages.gallery,
+  });
+}
 
 export default async function GalleryPage() {
   const [items, site] = await Promise.all([getGallery(), getSiteSettings()]);

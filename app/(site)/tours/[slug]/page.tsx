@@ -13,6 +13,8 @@ import { getDestinations, getPackageBySlug, getPackages, getSiteSettings } from 
 import { destinationHref, formatDuration, formatLocalPrice, formatPrice } from "@/lib/content/format";
 import type { ItineraryDay } from "@/lib/content/types";
 import styles from "./page.module.css";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbLd, pageMeta, tourLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -31,11 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = await getPackageBySlug(slug);
   if (!p) return {};
-  return {
-    title: p.title,
-    description: `${p.shortDescription} ${formatDuration(p.duration)}.`,
-    openGraph: { images: [{ url: p.cover.src, alt: p.cover.alt }] },
-  };
+  return pageMeta({ path: `/tours/${p.slug}`, title: p.title, description: `${p.shortDescription} ${formatDuration(p.duration)}.`, image: p.cover, type: "article" });
 }
 
 export default async function PackagePage({ params }: Props) {
@@ -52,6 +50,8 @@ export default async function PackagePage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={tourLd(trip)} />
+      <JsonLd data={breadcrumbLd([{ name: "Tours", path: "/tours" }, { name: trip.title, path: `/tours/${trip.slug}` }])} />
       <PageHero
         size="tall"
         image={trip.cover}

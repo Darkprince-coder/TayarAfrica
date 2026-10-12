@@ -6,12 +6,17 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
 import { getPackages, getSiteSettings } from "@/lib/content";
 import styles from "./page.module.css";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Tours across Africa",
-  description:
-    "Safaris in Amboseli, the Maasai Mara, Samburu, the Serengeti and the Ngorongoro Crater, with prices from $380 per person, plus custom tours planned to order anywhere in Africa.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSiteSettings();
+  return pageMeta({
+    path: "/tours",
+    title: "Tours across Africa",
+    description: "Safaris in Amboseli, the Maasai Mara, Samburu, the Serengeti and the Ngorongoro Crater, with prices from $380 per person, plus custom tours planned to order anywhere in Africa.",
+    image: site.pageImages.tours,
+  });
+}
 
 /** Interim layout: the East African tours, then the made-to-order Pan-African tour. Refined in Phase 5. */
 export default async function ToursPage() {

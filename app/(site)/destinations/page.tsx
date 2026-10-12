@@ -10,12 +10,17 @@ import { getDestinations, getSiteSettings } from "@/lib/content";
 import { destinationHref, regionLabel } from "@/lib/content/format";
 import type { Destination } from "@/lib/content/types";
 import styles from "./page.module.css";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Destinations across Africa",
-  description:
-    "Where we plan trips: Kenya's Amboseli, Maasai Mara, Samburu, Tsavo, Diani and Nairobi National Park; Tanzania's Serengeti, Ngorongoro and Zanzibar; and, on request, gorillas in Uganda and Rwanda, Victoria Falls, Chobe, Kruger, Cape Town, Egypt, Marrakech, Ghana and Senegal.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSiteSettings();
+  return pageMeta({
+    path: "/destinations",
+    title: "Destinations across Africa",
+    description: "Where we plan trips: Kenya's Amboseli, Maasai Mara, Samburu, Tsavo, Diani and Nairobi National Park; Tanzania's Serengeti, Ngorongoro and Zanzibar; and, on request, gorillas in Uganda and Rwanda, Victoria Falls, Chobe, Kruger, Cape Town, Egypt, Marrakech, Ghana and Senegal.",
+    image: site.pageImages.destinations,
+  });
+}
 
 const SIZES = "(min-width: 62rem) 33vw, (min-width: 40rem) 50vw, 100vw";
 const GROUPS = ["Kenya", "Tanzania", "Uganda & Rwanda", "Southern Africa", "North Africa", "West Africa", "Central Africa"];

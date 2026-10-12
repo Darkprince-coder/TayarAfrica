@@ -8,12 +8,17 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
 import { getServices, getSiteSettings, getTeam } from "@/lib/content";
 import styles from "./page.module.css";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About Tayari",
-  description:
-    "Tayari Africa Tours Consultants plans safaris, cultural, beach and cross-border trips across Africa from Nairobi, Kenya, with client support in Maryland and Minnesota, USA. Learn what we do and who you will deal with.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSiteSettings();
+  return pageMeta({
+    path: "/about",
+    title: "About Tayari",
+    description: "Tayari Africa Tours Consultants plans safaris, cultural, beach and cross-border trips across Africa from Nairobi, Kenya, with client support in Maryland and Minnesota, USA. Learn what we do and who you will deal with.",
+    image: site.pageImages.about,
+  });
+}
 
 /** "What we do" follows the client's own description. Mission and vision are DRAFT wording for the client to confirm. */
 export default async function AboutPage() {

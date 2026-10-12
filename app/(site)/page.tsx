@@ -10,6 +10,14 @@ import { TripFinder } from "@/components/home/TripFinder";
 import { Testimonials } from "@/components/home/Testimonials";
 import { WhyTayari } from "@/components/home/WhyTayari";
 import { getDestinations, getHeroSlides, getPackages, getSiteSettings, getTeam, getTestimonials } from "@/lib/content";
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationLd, pageMeta } from "@/lib/seo";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSiteSettings();
+  return pageMeta({ path: "/", title: site.seo.defaultTitle, description: site.seo.defaultDescription, image: site.seo.ogImage, absoluteTitle: true });
+}
 
 export default async function HomePage() {
   const [slides, allDestinations, packages, team, testimonials, site] = await Promise.all([
@@ -24,6 +32,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <JsonLd data={organizationLd(site)} />
       {slides[0] && (
         <Hero slide={slides[0]} copy={site.hero}>
           <TripFinder />

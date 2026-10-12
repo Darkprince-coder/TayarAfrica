@@ -9,6 +9,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
 import { getDestinationBySlug, getDestinations, getPackagesForDestination } from "@/lib/content";
 import styles from "./page.module.css";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbLd, destinationLd, pageMeta } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -21,11 +23,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const d = await getDestinationBySlug(slug);
   if (!d || d.listing !== "page") return {};
-  return {
+  return pageMeta({
+    path: `/destinations/${d.slug}`,
     title: `${d.name}, ${d.country}`,
     description: d.bestTime ? `${d.shortDescription} Best time to visit: ${d.bestTime.bestMonths}.` : d.shortDescription,
-    openGraph: { images: [{ url: d.cover.src, alt: d.cover.alt }] },
-  };
+    image: d.cover,
+    type: "article",
+  });
 }
 
 export default async function DestinationPage({ params }: Props) {
@@ -37,6 +41,8 @@ export default async function DestinationPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={destinationLd(destination)} />
+      <JsonLd data={breadcrumbLd([{ name: "Destinations", path: "/destinations" }, { name: destination.name, path: `/destinations/${destination.slug}` }])} />
       <PageHero
         size="tall"
         image={destination.cover}

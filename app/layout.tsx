@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  // Defaults for pages without their own (lib/seo.ts pageMeta sets full previews per page).
+  openGraph: { type: "website", siteName: siteConfig.name, locale: "en_GB" },
+  twitter: { card: "summary_large_image" },
   // Test copies stay out of search results (see siteConfig.indexable).
   robots: siteConfig.indexable ? undefined : { index: false, follow: false },
   icons: {
