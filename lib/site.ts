@@ -1,4 +1,12 @@
 /**
+ * The site's own address (canonical links, share previews, sitemap). NEXT_PUBLIC_SITE_URL when
+ * set; otherwise the production address Vercel reports (the vercel.app address, or the custom
+ * domain once one is added); otherwise localhost. Empty values count as unset.
+ */
+const vercelHost = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL;
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || (vercelHost ? `https://${vercelHost}` : "") || "http://localhost:3000";
+
+/**
  * Central site configuration, from the client brief (docs/Website final touches .docx).
  * Becomes the CMS "site settings" record later (see data/demo/people-and-site.ts).
  */
@@ -11,14 +19,13 @@ export const siteConfig = {
   tagline: "Africa, arranged around you.",
   description:
     "Tayari Africa Tours Consultants plans safaris, beach holidays, cultural and cross-border trips across Africa, from our headquarters in Nairobi, Kenya, with client support in the USA.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: siteUrl,
   /**
    * Search engines may list the site only on Vercel's production build AND on the real domain.
-   * Test copies (vercel.app, previews, localhost) always say "noindex", so switching
-   * NEXT_PUBLIC_SITE_URL to the domain at launch is the only step needed.
+   * Test copies (vercel.app, previews, localhost) always say "noindex"; pointing the site at the
+   * domain at launch (adding it in Vercel, and NEXT_PUBLIC_SITE_URL if set) is the only step needed.
    */
-  indexable:
-    process.env.VERCEL_ENV === "production" && !/(^|\.)(vercel\.app|localhost)$/.test(new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").hostname),
+  indexable: process.env.VERCEL_ENV === "production" && !/(^|\.)(vercel\.app|localhost)$/.test(new URL(siteUrl).hostname),
   locale: "en",
   contact: {
     email: "info@tayariafricatoursconsultants.com",
