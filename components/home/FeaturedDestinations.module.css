@@ -1,6 +1,11 @@
 /* Phones and tablets: a row of tall cards you swipe, snapping to the gutter. */
 .rail {
   overflow-x: auto;
+  /* Sideways only. Cards still waiting to reveal are briefly zoomed in (taller than the row);
+     without this a slightly diagonal swipe scrolls the row up and hides the top of the cards. */
+  overflow-y: hidden;
+  /* Room for the keyboard focus ring, which the row would otherwise cut off. */
+  padding-block: var(--space-2);
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: var(--gutter);
@@ -14,18 +19,28 @@
   grid-auto-flow: column;
   grid-auto-columns: min(74vw, 22rem);
   gap: var(--space-3);
-  padding-inline: var(--gutter);
   width: max-content;
+}
+/* Doubled class so it beats the global ul[role="list"] reset, which zeroed this padding and put
+   the first card flush against the screen edge instead of in line with the heading. */
+@media (max-width: 61.99rem) {
+  .strips.strips {
+    padding-inline: var(--gutter);
+  }
 }
 .item {
   scroll-snap-align: start;
   height: clamp(24rem, 62vh, 30rem);
+  /* The zoomed-in start of the reveal stays inside the card (the margin keeps the focus ring). */
+  overflow: clip;
+  overflow-clip-margin: var(--space-2);
 }
 
 /* Wide screens: strips side by side inside the container; the hovered one widens. */
 @media (min-width: 62rem) {
   .rail {
     overflow: visible;
+    padding-block: 0;
     max-width: var(--container);
     margin-inline: auto;
     padding-inline: var(--gutter);
@@ -41,6 +56,7 @@
     flex: 1 1 0;
     min-width: 0;
     height: auto;
+    overflow: visible;
     transition: flex-grow 0.9s var(--ease-cine);
   }
   .strips:hover .item:hover,
