@@ -14,9 +14,9 @@ Each phase stops for review before the next one starts.
 | 4 | Homepage editorial redesign, second half | Done |
 | 5 | Inner pages | Done |
 | 6 | Booking form and legal | Done |
-| 7 | CMS admin on Supabase | In review (part 1 committed, part 2 built) |
-| 8 | Bookings and notifications | To do |
-| 9 | Launch | To do |
+| 7 | CMS admin on Supabase | Done (test deploy live on Vercel) |
+| 8 | Bookings and notifications | Requests saved and managed in the admin; email alerts wait for the domain (Resend) |
+| 9 | Launch | In progress: SEO, speed/accessibility pass and polish done on the test deploy; domain, GA4, legal approval, photos to do |
 
 ## 1. Brand and type foundation
 - New logo (map of Africa, acacia, gold "Tayari", green "AFRICA TOURS") turned into transparent brand assets by
@@ -69,10 +69,20 @@ Draft Terms, Cancellation and Privacy for client approval before launch.
 Admin section inside this app: staff sign-in, tours, destinations, team, testimonials, hero slides, gallery and
 site settings. Media goes to Cloudinary. `lib/content` switches from demo data to Supabase.
 
+Built since: optional two-step login, invite/reset links that survive link previews, Show/Hide on passwords,
+a slide-in menu on phones, one-tap request status, notes and delete, offline copies (requests spreadsheet and
+full backup), and a daily keep-alive so the free Supabase project never pauses.
+
 ## 8. Bookings and notifications
-Submissions saved in the admin with a status. Email alert to the team (recipients to be confirmed; one of the
+Done: submissions saved in the admin with a status. To do: Email alert to the team (recipients to be confirmed; one of the
 client emails until then) and a "request received" email to the visitor, sent with Resend.
 
 ## 9. Launch
 Vercel hosting, domain `tayariafricatoursconsultants.com` and email DNS, GA4, SEO, performance and accessibility
 checks, legal approval, real photography swapped in.
+
+Done on the test deploy (tayari-africa-tours.vercel.app, noindex until the domain): canonical addresses, share
+previews, schema.org data, sitemap and robots; accessibility and best practices 100 in Lighthouse; logo intro only
+when a visit starts on the homepage; Tours as editorial spreads, Destinations as mosaic + index with an East Africa
+map close-up, About mission/vision as statements. To do: domain (indexing then switches on by itself), Resend,
+GA4 and Search Console, Supabase Pro and Vercel Pro (commercial use, backups), client approvals and real photos.
