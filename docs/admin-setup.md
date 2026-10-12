@@ -81,6 +81,25 @@ two-step** next to their name on **People** (logged under Recent changes).
 Supabase has app codes switched on by default (Authentication > **Multi-Factor**: "Authenticator
 app (TOTP)" enabled). Leave it on. Nothing to pay.
 
+## Test deploy on Vercel (before the domain)
+
+1. Sign in to Vercel with the **Tayari-tours** GitHub account. **Add New > Project**, import
+   `TayariAfricaTours` (allow Vercel's GitHub app to see that repository).
+2. Project name decides the address: `tayari-africa-tours` gives
+   `https://tayari-africa-tours.vercel.app`.
+3. Before pressing Deploy, open **Environment Variables** and add, copied from `.env.local`:
+   `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`,
+   `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, and
+   `NEXT_PUBLIC_SITE_URL` set to the vercel.app address above. Changing a `NEXT_PUBLIC_` value
+   later needs a redeploy.
+4. Deploy. Then **Settings > Functions**: region **Washington, D.C. (iad1)**, next to Supabase.
+5. Supabase > Authentication > **URL Configuration**: Site URL = the vercel.app address; add
+   `https://<address>/admin/auth/confirm` to Redirect URLs (keep the localhost one).
+6. The admin is at `https://<address>/admin`, with the same accounts.
+
+The vercel.app copy always tells search engines "noindex"; only the real domain on the production
+build is listed (`siteConfig.indexable`).
+
 ## Later (with the domain)
 
 - Resend: verify the domain, then Supabase > Authentication > Emails > **SMTP Settings** with

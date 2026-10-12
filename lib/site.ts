@@ -12,6 +12,13 @@ export const siteConfig = {
   description:
     "Tayari Africa Tours Consultants plans safaris, beach holidays, cultural and cross-border trips across Africa, from our headquarters in Nairobi, Kenya, with client support in the USA.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  /**
+   * Search engines may list the site only on Vercel's production build AND on the real domain.
+   * Test copies (vercel.app, previews, localhost) always say "noindex", so switching
+   * NEXT_PUBLIC_SITE_URL to the domain at launch is the only step needed.
+   */
+  indexable:
+    process.env.VERCEL_ENV === "production" && !/(^|\.)(vercel\.app|localhost)$/.test(new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").hostname),
   locale: "en",
   contact: {
     email: "info@tayariafricatoursconsultants.com",

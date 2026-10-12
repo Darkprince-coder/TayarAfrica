@@ -26,6 +26,8 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  // Test copies stay out of search results (see siteConfig.indexable).
+  robots: siteConfig.indexable ? undefined : { index: false, follow: false },
   icons: {
     icon: "/brand/favicon-32.png",
     apple: "/brand/apple-touch-icon.png",
