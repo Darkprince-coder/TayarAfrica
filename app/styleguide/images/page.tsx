@@ -35,9 +35,11 @@ export default async function ImageChecklistPage() {
   const manifest = await getImageManifest();
   const rows = await Promise.all(
     manifest.map(async (m) => {
-      const file = path.join(PUBLIC, m.src);
-      const present = existsSync(file);
-      const size = present ? await pixelSize(file) : null;
+      // Uploads from the admin live on Cloudinary: present by definition, size not checked here.
+      const remote = /^https?:///.test(m.src);
+      const file = remote ? "" : path.join(PUBLIC, m.src);
+      const present = remote || existsSync(file);
+      const size = present && !remote ? await pixelSize(file) : null;
       const min = imageSpecs[m.role].minWidth;
       const tooSmall = Boolean(size && size.width < min);
       return { ...m, present, size, min, tooSmall };

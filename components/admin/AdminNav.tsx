@@ -7,11 +7,17 @@ import styles from "./Shell.module.css";
 const LINKS = [
   { href: "/admin", label: "Overview" },
   { href: "/admin/inbox", label: "Booking requests", badge: true },
+  { href: "/admin/content/tours", label: "Tours" },
+  { href: "/admin/content/destinations", label: "Destinations" },
+  { href: "/admin/content/team", label: "Team" },
+  { href: "/admin/content/gallery", label: "Gallery" },
+  { href: "/admin/content/testimonials", label: "Testimonials" },
+  { href: "/admin/content/homepage-photo", label: "Homepage photo" },
+  { href: "/admin/content/legal", label: "Legal pages" },
+  { href: "/admin/settings", label: "Site settings" },
   { href: "/admin/people", label: "People" },
   { href: "/admin/account", label: "My account" },
 ];
-/** Content editors arrive in the next step of this phase. */
-const SOON = ["Tours", "Destinations", "Team", "Gallery", "Site settings"];
 
 export function AdminNav({ newCount }: { newCount: number }) {
   const path = usePathname();
@@ -23,11 +29,6 @@ export function AdminNav({ newCount }: { newCount: number }) {
           {l.label}
           {l.badge && newCount > 0 && <span className={styles.badge}>{newCount}</span>}
         </Link>
-      ))}
-      {SOON.map((s) => (
-        <span key={s} className={styles.link} aria-disabled="true">
-          {s} <span className={styles.soon}>soon</span>
-        </span>
       ))}
     </nav>
   );

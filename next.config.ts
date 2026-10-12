@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
     // In development, replaced photos show up straight away instead of after the cache expires.
     minimumCacheTTL: process.env.NODE_ENV === "production" ? 14400 : 1,
     qualities: [60, 75, 85],
+    // Photos uploaded from the admin live on Cloudinary; only our own account is allowed.
+    remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com", pathname: `/${process.env.CLOUDINARY_CLOUD_NAME || "__unset__"}/**` }],
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

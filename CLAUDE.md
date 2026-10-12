@@ -62,6 +62,12 @@ Sources: `docs/Website final touches .docx` (client brief), `docs/roadmap.md` (a
 - Gallery: `/gallery`, data via `getGallery()` (`GalleryImage` with category, optional place and wide), `components/gallery/GalleryGrid` with filters and a native `<dialog>` enlarged view.
 - Team: `components/team/TeamGroups` (level, grouped by branch) is shared by the homepage and /team (with bios). Tours carry `stays` (nights per place) shown as "Your nights at a glance".
 
+## Admin (/admin)
+- Supabase auth, invite-only, everyone equal; `lib/admin/session.ts#requireStaff` guards every admin page and action (proxy.ts is only an optimistic redirect). Setup steps: `docs/admin-setup.md`.
+- Editors are declarative: `lib/admin/editors.ts` lists each content type's fields (`lib/admin/fields.ts` defines field kinds and the shared `validate()` used in the browser AND again on the server). Generic pages `/admin/content/[type]` and `[type]/[key]`, plus `/admin/settings`. To add a field: add it to the editor definition and the type in `lib/content/types.ts`.
+- Saves go through `app/admin/(panel)/content/actions.ts` (session client, RLS applies) and call `updateTag(CONTENT_TAG)` so the public site updates immediately.
+- Photos upload from the browser straight to Cloudinary with a server-signed request (folder `tayari/`); only `/images/...` and our Cloudinary account are accepted as image sources (`next.config.ts` remotePatterns).
+
 ## Trip finder
 - `components/home/TripFinder` (docked in the homepage hero, prefilled on `/explore`) filters tours and destinations: where / how long / what for. GET form to `/explore?where=&length=&theme=`, logic in `lib/content/filter.ts` (unknown values ignored). Destinations carry `themes`; tour themes derive from `experienceTypes`. The custom tour is always offered as the fallback. `/explore` is noindex.
 

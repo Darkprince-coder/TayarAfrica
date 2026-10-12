@@ -14,7 +14,7 @@ Each phase stops for review before the next one starts.
 | 4 | Homepage editorial redesign, second half | Done |
 | 5 | Inner pages | Done |
 | 6 | Booking form and legal | Done |
-| 7 | CMS admin on Supabase | In progress (part 1 built) |
+| 7 | CMS admin on Supabase | In review (part 1 committed, part 2 built) |
 | 8 | Bookings and notifications | To do |
 | 9 | Launch | To do |
 
