@@ -4,8 +4,9 @@ import { PageHead } from "@/components/admin/Shell";
 import styles from "@/components/admin/Shell.module.css";
 import { TextField } from "@/components/ui/Field";
 import { requireStaff } from "@/lib/admin/session";
+import { serviceClient } from "@/lib/supabase/admin";
 import { sessionClient } from "@/lib/supabase/server";
-import { inviteMember, removeMember, resetLinkFor } from "./actions";
+import { inviteMember, removeMember, resetLinkFor, resetTwoStepFor } from "./actions";
 
 export const metadata: Metadata = { title: "People" };
 
@@ -18,6 +19,16 @@ export default async function PeoplePage() {
     supabase.from("staff").select("id, email, full_name, created_at").order("created_at"),
     supabase.from("audit_log").select("actor_email, action, target, created_at").order("created_at", { ascending: false }).limit(15),
   ]);
+  // Who has two-step login on (read with the server key; the browser never sees other people's sign-in details).
+  const db = serviceClient();
+  const twoStep = new Map(
+    await Promise.all(
+      (staff ?? []).map(async (p) => {
+        const { data } = await db.auth.admin.mfa.listFactors({ userId: p.id });
+        return [p.id, Boolean(data?.factors.some((f) => f.factor_type === "totp" && f.status === "verified"))] as const;
+      }),
+    ),
+  );
 
   return (
     <>
@@ -50,6 +61,7 @@ export default async function PeoplePage() {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Since</th>
+                <th>Two-step login</th>
                 <th>Locked out?</th>
                 <th>Access</th>
               </tr>
@@ -64,9 +76,26 @@ export default async function PeoplePage() {
                   <td>{p.email}</td>
                   <td>{when(p.created_at)}</td>
                   <td>
+                    {twoStep.get(p.id) ? (
+                      <span className={styles.pill}>On</span>
+                    ) : (
+                      <span className={styles.muted}>Off</span>
+                    )}
+                  </td>
+                  <td>
                     <LinkForm action={resetLinkFor} submitLabel="Reset link" variant="ghost">
                       <input type="hidden" name="email" value={p.email} />
                     </LinkForm>
+                    {twoStep.get(p.id) && p.id !== me.id && (
+                      <LinkForm
+                        action={resetTwoStepFor}
+                        submitLabel="Reset two-step"
+                        variant="ghost"
+                        confirm={`Turn off two-step login for ${p.full_name || p.email}? Only do this if they asked, for example after losing their phone. They can turn it on again afterwards.`}
+                      >
+                        <input type="hidden" name="id" value={p.id} />
+                      </LinkForm>
+                    )}
                   </td>
                   <td>
                     <LinkForm action={removeMember} submitLabel="Remove" variant="ghost" confirm={`Remove ${p.full_name || p.email}? They will lose access straight away.`}>

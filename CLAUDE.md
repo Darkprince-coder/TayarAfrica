@@ -64,6 +64,7 @@ Sources: `docs/Website final touches .docx` (client brief), `docs/roadmap.md` (a
 
 ## Admin (/admin)
 - Supabase auth, invite-only, everyone equal; `lib/admin/session.ts#requireStaff` guards every admin page and action (proxy.ts is only an optimistic redirect). Setup steps: `docs/admin-setup.md`.
+- Two-step login (TOTP) is optional per person (`lib/admin/two-step.ts`): enrol on My account, `/admin/verify` after the password, `requireStaff` redirects there until the session is aal2, and `is_staff()` in SQL enforces the same (migration 0002). Teammates can reset it from People (service key, audit log). Never re-sign-in on the session client to check a password (it drops aal2); use `passwordMatches`.
 - Editors are declarative: `lib/admin/editors.ts` lists each content type's fields (`lib/admin/fields.ts` defines field kinds and the shared `validate()` used in the browser AND again on the server). Generic pages `/admin/content/[type]` and `[type]/[key]`, plus `/admin/settings`. To add a field: add it to the editor definition and the type in `lib/content/types.ts`.
 - Saves go through `app/admin/(panel)/content/actions.ts` (session client, RLS applies) and call `updateTag(CONTENT_TAG)` so the public site updates immediately.
 - Photos upload from the browser straight to Cloudinary with a server-signed request (folder `tayari/`); only `/images/...` and our Cloudinary account are accepted as image sources (`next.config.ts` remotePatterns).

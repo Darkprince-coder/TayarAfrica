@@ -23,7 +23,8 @@ create table if not exists public.staff (
 );
 
 -- True when the signed-in user is on the team. SECURITY DEFINER so policies can call it
--- without the caller needing to read the staff table directly.
+-- without the caller needing to read the staff table directly. People with two-step login on
+-- must also have passed the code step (aal2); see 0002_two_step.sql.
 create or replace function public.is_staff()
 returns boolean
 language sql
@@ -31,7 +32,13 @@ stable
 security definer
 set search_path = public
 as $$
-  select exists (select 1 from public.staff where id = auth.uid());
+  select exists (select 1 from public.staff where id = auth.uid())
+    and (
+      coalesce(auth.jwt() ->> 'aal', 'aal1') = 'aal2'
+      or not exists (
+        select 1 from auth.mfa_factors f where f.user_id = auth.uid() and f.status = 'verified'
+      )
+    );
 $$;
 -- Policies on public tables call this for visitors too, so both roles may run it.
 revoke all on function public.is_staff() from public;
@@ -130,7 +137,9 @@ grant select, insert, update, delete on public.staff to service_role;
 drop policy if exists "staff read team" on public.staff;
 create policy "staff read team" on public.staff for select using (public.is_staff());
 drop policy if exists "staff edit own name" on public.staff;
-create policy "staff edit own name" on public.staff for update using (id = auth.uid()) with check (id = auth.uid());
+create policy "staff edit own name" on public.staff for update
+  using (id = auth.uid() and public.is_staff())
+  with check (id = auth.uid() and public.is_staff());
 -- Adding and removing people goes through the server (service key) so the
 -- "never remove the last account" rule and the audit log always apply.
 

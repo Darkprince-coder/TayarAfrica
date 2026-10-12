@@ -61,3 +61,16 @@
   background: rgb(47 107 70 / 0.1);
   color: var(--color-success);
 }
+
+/* ---------- Small text-style buttons (sign out on the code screen) ---------- */
+.textButton {
+  margin-top: var(--space-3);
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--color-acacia);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}

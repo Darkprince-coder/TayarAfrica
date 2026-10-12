@@ -26,7 +26,8 @@ Never paste the service key into chat, email or a commit.
 ## 3. Create the tables
 
 Supabase > **SQL Editor > New query**. Paste all of `supabase/migrations/0001_init.sql` and press
-**Run**. It is safe to run again.
+**Run**. Then do the same with `supabase/migrations/0002_two_step.sql` (each file in order, each
+in a new query). Both are safe to run again.
 
 ## 4. Lock down sign-ups and set the links
 
@@ -68,6 +69,17 @@ everything from Supabase.
 
 Admin > **People** > Invite someone. Send each person their link. They choose their own password.
 Everyone has the same access; the last account can never be removed.
+
+## Two-step login (optional, per person)
+
+Each person can turn it on in **My account**: scan the QR code with an authenticator app (Google
+Authenticator, Microsoft Authenticator, 1Password) and confirm one code. From then on, sign-in asks
+for a six-digit code after the password, and the database itself refuses anything from a session
+that has not passed the code step. Someone who loses their phone asks a teammate to press **Reset
+two-step** next to their name on **People** (logged under Recent changes).
+
+Supabase has app codes switched on by default (Authentication > **Multi-Factor**: "Authenticator
+app (TOTP)" enabled). Leave it on. Nothing to pay.
 
 ## Later (with the domain)
 

@@ -1,0 +1,49 @@
+.setup {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-5);
+  padding-left: var(--space-5);
+  max-width: 38rem;
+}
+.steps > li {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+}
+
+.qr {
+  display: block;
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  /* QR codes need a plain light background to scan reliably. */
+  background: var(--color-bone);
+  box-shadow: inset 0 0 0 1px var(--color-sand-deep);
+}
+.qr img {
+  display: block;
+}
+
+.key {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.key code {
+  display: inline-block;
+  margin-top: var(--space-1);
+  font-size: var(--text-base);
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+  /* Wrap between the groups of four, never inside one. */
+  overflow-wrap: anywhere;
+  word-spacing: 0.2em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}

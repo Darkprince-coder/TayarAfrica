@@ -4,8 +4,9 @@ import { connection } from "next/server";
 import { cache } from "react";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { sessionClient } from "@/lib/supabase/server";
+import { appFactor, needsCode } from "./two-step";
 
-export type StaffUser = { id: string; email: string; fullName: string };
+export type StaffUser = { id: string; email: string; fullName: string; twoStep: boolean };
 
 /**
  * The signed-in team member, or a redirect to the login page. Call it at the top of every admin
@@ -18,13 +19,15 @@ export const requireStaff = cache(async (): Promise<StaffUser> => {
   const supabase = await sessionClient();
   const { data } = await supabase.auth.getUser();
   if (!data.user) redirect("/admin/login");
+  // Two-step login on, but only the password given so far.
+  if (await needsCode(supabase, data.user)) redirect("/admin/verify");
   const { data: row } = await supabase.from("staff").select("full_name, email").eq("id", data.user.id).maybeSingle();
   // Signed in but no longer (or never) on the team: sign out and stop.
   if (!row) {
     await supabase.auth.signOut();
     redirect("/admin/login?error=not-staff");
   }
-  return { id: data.user.id, email: row.email || data.user.email || "", fullName: row.full_name };
+  return { id: data.user.id, email: row.email || data.user.email || "", fullName: row.full_name, twoStep: Boolean(appFactor(data.user)) };
 });
 
 /** Site origin for links we build (invite and reset links), from the request when possible. */

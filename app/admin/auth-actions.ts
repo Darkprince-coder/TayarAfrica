@@ -2,7 +2,10 @@
 
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { revalidatePath } from "next/cache";
+import { audit } from "@/lib/admin/audit";
 import { requireStaff, siteOrigin } from "@/lib/admin/session";
+import { appFactor, cleanCode, passwordMatches } from "@/lib/admin/two-step";
 import { sessionClient } from "@/lib/supabase/server";
 
 export type FormState = { error?: string; ok?: string } | undefined;
@@ -25,10 +28,13 @@ export async function signIn(_: FormState, form: FormData): Promise<FormState> {
   if (!parsed.success) return { error: parsed.error.issues[0].message };
 
   const supabase = await sessionClient();
-  const { error } = await supabase.auth.signInWithPassword(parsed.data);
+  const { data, error } = await supabase.auth.signInWithPassword(parsed.data);
   // Same message whatever went wrong, so the form does not reveal which emails have accounts.
   if (error) return { error: "That email and password do not match. Try again, or reset your password." };
-  redirect(safeNext(form.get("next")));
+  const next = safeNext(form.get("next"));
+  // Two-step login on: the code from their app comes next.
+  if (appFactor(data.user)) redirect(`/admin/verify?next=${encodeURIComponent(next)}`);
+  redirect(next);
 }
 
 export async function requestReset(_: FormState, form: FormData): Promise<FormState> {
@@ -67,9 +73,8 @@ export async function changePassword(_: FormState, form: FormData): Promise<Form
     .safeParse({ current: form.get("current"), password: form.get("password"), confirm: form.get("confirm") });
   if (!parsed.success) return { error: parsed.error.issues[0].message };
 
+  if (!(await passwordMatches(me.email, parsed.data.current))) return { error: "Your current password is not right." };
   const supabase = await sessionClient();
-  const check = await supabase.auth.signInWithPassword({ email: me.email, password: parsed.data.current });
-  if (check.error) return { error: "Your current password is not right." };
   const { error } = await supabase.auth.updateUser({ password: parsed.data.password });
   if (error) return { error: error.message };
   return { ok: "Password changed." };
@@ -89,4 +94,71 @@ export async function signOut() {
   const supabase = await sessionClient();
   await supabase.auth.signOut();
   redirect("/admin/login");
+}
+
+// ─── Two-step login ───────────────────────────────────────────────────────────
+
+const WRONG_CODE = "That code did not work. Use the newest code in the app (they change every 30 seconds) and check that your phone's clock is set automatically.";
+
+/** After the password: the six-digit code from their authenticator app. */
+export async function verifyCode(_: FormState, form: FormData): Promise<FormState> {
+  const code = cleanCode(form.get("code"));
+  if (!code) return { error: "Enter the six-digit code from your authenticator app." };
+  const supabase = await sessionClient();
+  const { data } = await supabase.auth.getUser();
+  if (!data.user) redirect("/admin/login");
+  const factor = appFactor(data.user);
+  if (factor) {
+    const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId: factor.id, code });
+    if (error) return { error: WRONG_CODE };
+  }
+  redirect(safeNext(form.get("next")));
+}
+
+export type TwoStepSetup = { error: string } | { factorId: string; qr: string; secret: string };
+
+/** Step 1 of turning it on: a new app link to scan. Nothing changes until the first code is confirmed. */
+export async function startTwoStep(): Promise<TwoStepSetup> {
+  const me = await requireStaff();
+  if (me.twoStep) return { error: "Two-step login is already on." };
+  const supabase = await sessionClient();
+  // Clear any half-finished earlier attempt, so the new one can take its name.
+  const { data } = await supabase.auth.getUser();
+  for (const f of data.user?.factors ?? []) {
+    if (f.factor_type === "totp" && f.status !== "verified") await supabase.auth.mfa.unenroll({ factorId: f.id });
+  }
+  const { data: enrolled, error } = await supabase.auth.mfa.enroll({ factorType: "totp", issuer: "Tayari admin", friendlyName: "Authenticator app" });
+  if (error || !enrolled) return { error: `Could not start: ${error?.message ?? "unknown error"}` };
+  return { factorId: enrolled.id, qr: enrolled.totp.qr_code, secret: enrolled.totp.secret };
+}
+
+/** Step 2: the first code from the app proves it is set up; from now on sign-in asks for a code. */
+export async function confirmTwoStep(factorId: string, rawCode: string): Promise<FormState> {
+  const me = await requireStaff();
+  const code = cleanCode(rawCode);
+  if (!code) return { error: "Enter the six-digit code the app shows for Tayari admin." };
+  const supabase = await sessionClient();
+  const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId, code });
+  if (error) return { error: WRONG_CODE };
+  await audit(me, "turned on two-step login", me.email);
+  revalidatePath("/admin/account");
+  return { ok: "Two-step login is on. Next time you sign in, have your phone ready." };
+}
+
+/** Turning it off asks for a current code, so an unattended open laptop is not enough. */
+export async function turnOffTwoStep(_: FormState, form: FormData): Promise<FormState> {
+  const me = await requireStaff();
+  const code = cleanCode(form.get("code"));
+  if (!code) return { error: "Enter the six-digit code from your authenticator app." };
+  const supabase = await sessionClient();
+  const { data } = await supabase.auth.getUser();
+  const factor = data.user && appFactor(data.user);
+  if (!factor) return { ok: "Two-step login is already off." };
+  const check = await supabase.auth.mfa.challengeAndVerify({ factorId: factor.id, code });
+  if (check.error) return { error: WRONG_CODE };
+  const { error } = await supabase.auth.mfa.unenroll({ factorId: factor.id });
+  if (error) return { error: `Could not turn it off: ${error.message}` };
+  await audit(me, "turned off two-step login", me.email);
+  revalidatePath("/admin/account");
+  return { ok: "Two-step login is off. You can remove Tayari admin from the app." };
 }

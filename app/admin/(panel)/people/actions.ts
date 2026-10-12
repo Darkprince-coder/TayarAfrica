@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { audit } from "@/lib/admin/audit";
 import { requireStaff, siteOrigin } from "@/lib/admin/session";
 import { serviceClient } from "@/lib/supabase/admin";
 
@@ -10,10 +11,6 @@ export type LinkState = { error?: string; ok?: string; link?: string } | undefin
 /** Our own link to the confirm route, so links work without extra Supabase redirect settings. */
 async function confirmLink(hashedToken: string, type: "invite" | "recovery") {
   return `${await siteOrigin()}/admin/auth/confirm?token_hash=${encodeURIComponent(hashedToken)}&type=${type}&next=/admin/set-password`;
-}
-
-async function audit(actor: { id: string; email: string }, action: string, target: string) {
-  await serviceClient().from("audit_log").insert({ actor: actor.id, actor_email: actor.email, action, target });
 }
 
 /**
@@ -68,4 +65,27 @@ export async function removeMember(_: LinkState, form: FormData): Promise<LinkSt
   await audit(me, "removed", target?.email ?? id.data);
   revalidatePath("/admin/people");
   return { ok: `${target?.email ?? "They"} no longer have access.` };
+}
+
+/**
+ * For a teammate who lost or replaced their phone: turns their two-step login off so they can sign
+ * in with their password alone, then set it up again on the new phone. Logged.
+ */
+export async function resetTwoStepFor(_: LinkState, form: FormData): Promise<LinkState> {
+  const me = await requireStaff();
+  const id = z.uuid().safeParse(form.get("id"));
+  if (!id.success) return { error: "Unknown person." };
+
+  const db = serviceClient();
+  const { data: target } = await db.from("staff").select("email, full_name").eq("id", id.data).maybeSingle();
+  if (!target) return { error: "That person is not on the team." };
+  const { data, error } = await db.auth.admin.mfa.listFactors({ userId: id.data });
+  if (error) return { error: `Could not check their sign-in: ${error.message}` };
+  for (const f of data.factors.filter((f) => f.factor_type === "totp")) {
+    const { error: delError } = await db.auth.admin.mfa.deleteFactor({ id: f.id, userId: id.data });
+    if (delError) return { error: `Could not reset it: ${delError.message}` };
+  }
+  await audit(me, "reset two-step login for", target.email);
+  revalidatePath("/admin/people");
+  return { ok: `Done. ${target.full_name || target.email} can now sign in with their password alone, then turn two-step login on again in My account.` };
 }
