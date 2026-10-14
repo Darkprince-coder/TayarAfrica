@@ -52,6 +52,14 @@
   .mosaic[data-mirror] .tile:nth-child(6n + 1) {
     grid-column: 6 / -1;
   }
+  /* A row of three with only one or two places left: they share the full width. */
+  .tile:nth-child(6n + 4):last-child {
+    grid-column: 1 / -1;
+  }
+  .tile:nth-child(6n + 4):nth-last-child(2),
+  .tile:nth-child(6n + 5):last-child {
+    grid-column: span 6;
+  }
 }
 .bigCard {
   min-height: 100%;

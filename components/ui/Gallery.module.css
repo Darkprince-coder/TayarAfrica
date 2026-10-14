@@ -13,6 +13,13 @@
 .frame {
   height: 100%;
 }
+/* Phones and tablets: a lone last photo spans the row. */
+@media (max-width: 61.99rem) {
+  .item:last-child:nth-child(even) {
+    grid-column: 1 / -1;
+    aspect-ratio: var(--ratio-wide);
+  }
+}
 
 @media (min-width: 62rem) {
   .grid {
@@ -32,6 +39,21 @@
     aspect-ratio: var(--ratio-landscape);
   }
   .grid[data-count="2"] .item {
+    aspect-ratio: auto;
+  }
+  /* A single photo: nothing beside it to set the height, so it keeps its own wide shape. */
+  .grid[data-count="1"] .lead {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    aspect-ratio: var(--ratio-wide);
+  }
+  /* Rows after the lead hold three. One left over spans the row; two left over split it 2 + 1. */
+  .item:nth-child(3n + 1):last-child {
+    grid-column: 1 / -1;
+    aspect-ratio: var(--ratio-wide);
+  }
+  .item:nth-child(3n + 1):nth-last-child(2) {
+    grid-column: span 2;
     aspect-ratio: auto;
   }
 }

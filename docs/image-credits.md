@@ -65,3 +65,67 @@ Before launch, confirm the final photography (licensed, owned or commissioned) a
 ## Team portraits
 
 Supplied by the client (Oct 2026), originals in `assets-src/user-supplied-originals/team/`. Edinah's full-length photo is cropped to head and shoulders.
+
+## Destinations added in the admin (Cloudinary)
+
+Researched and loaded on 2026-10-14: the 8 places that were "on request" became full pages, and 8 new places were added. Photos are Pexels placeholders like the rest, uploaded at 2400px to Cloudinary (folder `tayari/destinations/<place>/`). Only photos whose Pexels description names the place were used (no zoo animals, no unclear locations). Replace with owned photos before launch.
+
+| Place | Use | Cloudinary file | Pexels photo |
+|---|---|---|---|
+| gorilla-trekking | gallery | `tayari/destinations/gorilla-trekking/pexels-36477999.jpg` | [36477999](https://www.pexels.com/photo/36477999/) |
+| gorilla-trekking | gallery | `tayari/destinations/gorilla-trekking/pexels-5416749.jpg` | [5416749](https://www.pexels.com/photo/5416749/) |
+| gorilla-trekking | gallery | `tayari/destinations/gorilla-trekking/pexels-36478037.jpg` | [36478037](https://www.pexels.com/photo/36478037/) |
+| gorilla-trekking | gallery | `tayari/destinations/gorilla-trekking/pexels-34303083.jpg` | [34303083](https://www.pexels.com/photo/34303083/) |
+| victoria-falls | gallery | `tayari/destinations/victoria-falls/pexels-23232507.jpg` | [23232507](https://www.pexels.com/photo/23232507/) |
+| victoria-falls | gallery | `tayari/destinations/victoria-falls/pexels-27878405.jpg` | [27878405](https://www.pexels.com/photo/27878405/) |
+| victoria-falls | gallery | `tayari/destinations/victoria-falls/pexels-3378996.jpg` | [3378996](https://www.pexels.com/photo/3378996/) |
+| chobe | gallery | `tayari/destinations/chobe/pexels-7235414.jpg` | [7235414](https://www.pexels.com/photo/7235414/) |
+| chobe | gallery | `tayari/destinations/chobe/pexels-39464982.jpg` | [39464982](https://www.pexels.com/photo/39464982/) |
+| chobe | gallery | `tayari/destinations/chobe/pexels-3184848.jpg` | [3184848](https://www.pexels.com/photo/3184848/) |
+| chobe | gallery | `tayari/destinations/chobe/pexels-39464987.jpg` | [39464987](https://www.pexels.com/photo/39464987/) |
+| kruger | gallery | `tayari/destinations/kruger/pexels-34408699.jpg` | [34408699](https://www.pexels.com/photo/34408699/) |
+| kruger | gallery | `tayari/destinations/kruger/pexels-7777971.jpg` | [7777971](https://www.pexels.com/photo/7777971/) |
+| cape-town | gallery | `tayari/destinations/cape-town/pexels-9890039.jpg` | [9890039](https://www.pexels.com/photo/9890039/) |
+| cape-town | gallery | `tayari/destinations/cape-town/pexels-32555593.jpg` | [32555593](https://www.pexels.com/photo/32555593/) |
+| cape-town | gallery | `tayari/destinations/cape-town/pexels-3677175.jpg` | [3677175](https://www.pexels.com/photo/3677175/) |
+| cape-town | gallery | `tayari/destinations/cape-town/pexels-34090440.jpg` | [34090440](https://www.pexels.com/photo/34090440/) |
+| egypt | gallery | `tayari/destinations/egypt/pexels-31133003.jpg` | [31133003](https://www.pexels.com/photo/31133003/) |
+| egypt | gallery | `tayari/destinations/egypt/pexels-37662644.jpg` | [37662644](https://www.pexels.com/photo/37662644/) |
+| egypt | gallery | `tayari/destinations/egypt/pexels-31730176.jpg` | [31730176](https://www.pexels.com/photo/31730176/) |
+| egypt | gallery | `tayari/destinations/egypt/pexels-18991528.jpg` | [18991528](https://www.pexels.com/photo/18991528/) |
+| egypt | gallery | `tayari/destinations/egypt/pexels-24429519.jpg` | [24429519](https://www.pexels.com/photo/24429519/) |
+| marrakech | gallery | `tayari/destinations/marrakech/pexels-35891424.jpg` | [35891424](https://www.pexels.com/photo/35891424/) |
+| marrakech | gallery | `tayari/destinations/marrakech/pexels-35787278.jpg` | [35787278](https://www.pexels.com/photo/35787278/) |
+| marrakech | gallery | `tayari/destinations/marrakech/pexels-36909829.jpg` | [36909829](https://www.pexels.com/photo/36909829/) |
+| ghana-senegal | gallery | `tayari/destinations/ghana-senegal/pexels-16136199.jpg` | [16136199](https://www.pexels.com/photo/16136199/) |
+| ghana-senegal | gallery | `tayari/destinations/ghana-senegal/pexels-33658298.jpg` | [33658298](https://www.pexels.com/photo/33658298/) |
+| ghana-senegal | gallery | `tayari/destinations/ghana-senegal/pexels-3522700.jpg` | [3522700](https://www.pexels.com/photo/3522700/) |
+| ghana-senegal | gallery | `tayari/destinations/ghana-senegal/pexels-36508969.jpg` | [36508969](https://www.pexels.com/photo/36508969/) |
+| ghana-senegal | gallery | `tayari/destinations/ghana-senegal/pexels-37277619.jpg` | [37277619](https://www.pexels.com/photo/37277619/) |
+| okavango-delta | cover | `tayari/destinations/okavango-delta/pexels-39464991.jpg` | [39464991](https://www.pexels.com/photo/39464991/) |
+| okavango-delta | gallery | `tayari/destinations/okavango-delta/pexels-6790638.jpg` | [6790638](https://www.pexels.com/photo/6790638/) |
+| sossusvlei | cover | `tayari/destinations/sossusvlei/pexels-7747727.jpg` | [7747727](https://www.pexels.com/photo/7747727/) |
+| sossusvlei | gallery | `tayari/destinations/sossusvlei/pexels-35220461.jpg` | [35220461](https://www.pexels.com/photo/35220461/) |
+| sossusvlei | gallery | `tayari/destinations/sossusvlei/pexels-19073607.jpg` | [19073607](https://www.pexels.com/photo/19073607/) |
+| sossusvlei | gallery | `tayari/destinations/sossusvlei/pexels-26968215.jpg` | [26968215](https://www.pexels.com/photo/26968215/) |
+| etosha | cover | `tayari/destinations/etosha/pexels-30970498.jpg` | [30970498](https://www.pexels.com/photo/30970498/) |
+| etosha | gallery | `tayari/destinations/etosha/pexels-26893479.jpg` | [26893479](https://www.pexels.com/photo/26893479/) |
+| etosha | gallery | `tayari/destinations/etosha/pexels-31042099.jpg` | [31042099](https://www.pexels.com/photo/31042099/) |
+| etosha | gallery | `tayari/destinations/etosha/pexels-34780756.jpg` | [34780756](https://www.pexels.com/photo/34780756/) |
+| kilimanjaro | cover | `tayari/destinations/kilimanjaro/pexels-15993990.jpg` | [15993990](https://www.pexels.com/photo/15993990/) |
+| kilimanjaro | gallery | `tayari/destinations/kilimanjaro/pexels-5109704.jpg` | [5109704](https://www.pexels.com/photo/5109704/) |
+| kilimanjaro | gallery | `tayari/destinations/kilimanjaro/pexels-15994011.jpg` | [15994011](https://www.pexels.com/photo/15994011/) |
+| kilimanjaro | gallery | `tayari/destinations/kilimanjaro/pexels-8427984.jpg` | [8427984](https://www.pexels.com/photo/8427984/) |
+| lalibela-simien | cover | `tayari/destinations/lalibela-simien/pexels-39129271.jpg` | [39129271](https://www.pexels.com/photo/39129271/) |
+| lalibela-simien | gallery | `tayari/destinations/lalibela-simien/pexels-12344991.jpg` | [12344991](https://www.pexels.com/photo/12344991/) |
+| lalibela-simien | gallery | `tayari/destinations/lalibela-simien/pexels-12344920.jpg` | [12344920](https://www.pexels.com/photo/12344920/) |
+| lalibela-simien | gallery | `tayari/destinations/lalibela-simien/pexels-7002325.jpg` | [7002325](https://www.pexels.com/photo/7002325/) |
+| lalibela-simien | gallery | `tayari/destinations/lalibela-simien/pexels-5680868.jpg` | [5680868](https://www.pexels.com/photo/5680868/) |
+| south-luangwa | cover | `tayari/destinations/south-luangwa/pexels-39135544.jpg` | [39135544](https://www.pexels.com/photo/39135544/) |
+| merzouga | cover | `tayari/destinations/merzouga/pexels-30320422.jpg` | [30320422](https://www.pexels.com/photo/30320422/) |
+| merzouga | gallery | `tayari/destinations/merzouga/pexels-29107888.jpg` | [29107888](https://www.pexels.com/photo/29107888/) |
+| merzouga | gallery | `tayari/destinations/merzouga/pexels-4877044.jpg` | [4877044](https://www.pexels.com/photo/4877044/) |
+| merzouga | gallery | `tayari/destinations/merzouga/pexels-29107895.jpg` | [29107895](https://www.pexels.com/photo/29107895/) |
+| madagascar | cover | `tayari/destinations/madagascar/pexels-32265190.jpg` | [32265190](https://www.pexels.com/photo/32265190/) |
+| madagascar | gallery | `tayari/destinations/madagascar/pexels-36139778.jpg` | [36139778](https://www.pexels.com/photo/36139778/) |
+| madagascar | gallery | `tayari/destinations/madagascar/pexels-6575229.jpg` | [6575229](https://www.pexels.com/photo/6575229/) |

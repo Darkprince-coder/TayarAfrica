@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 /** Kenya and Tanzania are too crowded at continent scale: they get a close-up in the map's corner. */
 const EAST_AFRICA_VIEW = viewFor([33.5, 2], [42, -7.5]);
 
-const GROUPS = ["Kenya", "Tanzania", "Uganda & Rwanda", "Southern Africa", "North Africa", "West Africa", "Central Africa"];
+const GROUPS = ["Kenya", "Tanzania", "Uganda & Rwanda", "East Africa", "Southern Africa", "North Africa", "West Africa", "Central Africa"];
 
 /** Which line of the map's list a place belongs to. */
 function groupOf(d: Destination): string {
