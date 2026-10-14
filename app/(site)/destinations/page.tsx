@@ -36,6 +36,8 @@ export default async function DestinationsPage() {
   const [destinations, site] = await Promise.all([getDestinations(), getSiteSettings()]);
   const kenya = destinations.filter((d) => d.listing === "page" && d.country === "Kenya");
   const tanzania = destinations.filter((d) => d.listing === "page" && d.country === "Tanzania");
+  // Full pages outside Kenya and Tanzania (switched to "Full page" in the admin) get their own section.
+  const further = destinations.filter((d) => d.listing === "page" && d.country !== "Kenya" && d.country !== "Tanzania");
   const onRequest = destinations.filter((d) => d.listing === "card");
 
   const covered = [...new Set(destinations.flatMap((d) => d.countryCodes))];
@@ -65,7 +67,7 @@ export default async function DestinationsPage() {
             id="map-title"
             eyebrow="The map"
             title="Every place we plan, *in one view.*"
-            lead="Point at a place to find it on the map. Full guides for Kenya and Tanzania; the rest we plan to order."
+            lead="Point at a place to find it on the map. Places marked on request we plan to order, around your dates."
             align="split"
           />
           <DestinationExplorer
@@ -82,19 +84,32 @@ export default async function DestinationsPage() {
         </Container>
       </Section>
 
-      <Section tone="bone" labelledBy="kenya-title">
-        <Container>
-          <SectionHeading id="kenya-title" eyebrow="Our base" title="Kenya, *our home ground.*" lead="The parks we know best, from the Mara to the coast." align="split" />
-          <DestinationMosaic items={kenya} />
-        </Container>
-      </Section>
-      <Section tone="sand" labelledBy="tanzania-title">
-        <Container>
-          <SectionHeading id="tanzania-title" eyebrow="Next door" title="Tanzania, *across the border.*" lead="The Serengeti, the crater and Zanzibar, easy to add to a Kenya trip." align="split" />
-          <DestinationMosaic items={tanzania} mirror />
-        </Container>
-      </Section>
-      <Section tone="bone" labelledBy="africa-title">
+      {kenya.length > 0 && (
+        <Section tone="bone" labelledBy="kenya-title">
+          <Container>
+            <SectionHeading id="kenya-title" eyebrow="Our base" title="Kenya, *our home ground.*" lead="The parks we know best, from the Mara to the coast." align="split" />
+            <DestinationMosaic items={kenya} />
+          </Container>
+        </Section>
+      )}
+      {tanzania.length > 0 && (
+        <Section tone="sand" labelledBy="tanzania-title">
+          <Container>
+            <SectionHeading id="tanzania-title" eyebrow="Next door" title="Tanzania, *across the border.*" lead="The Serengeti, the crater and Zanzibar, easy to add to a Kenya trip." align="split" />
+            <DestinationMosaic items={tanzania} mirror />
+          </Container>
+        </Section>
+      )}
+      {further.length > 0 && (
+        <Section tone="bone" labelledBy="further-title">
+          <Container>
+            <SectionHeading id="further-title" eyebrow="Further afield" title="Beyond East Africa, *in full.*" lead="Full guides to places further across the continent." align="split" />
+            <DestinationMosaic items={further} />
+          </Container>
+        </Section>
+      )}
+      {onRequest.length > 0 && (
+      <Section tone={further.length > 0 ? "sand" : "bone"} labelledBy="africa-title">
         <Container>
           <SectionHeading
             id="africa-title"
@@ -105,6 +120,7 @@ export default async function DestinationsPage() {
           <DestinationIndex items={onRequest} />
         </Container>
       </Section>
+      )}
       <CtaBand
         title="Not sure where to start?"
         text="Tell us when you can travel and what you enjoy. We will suggest places that fit."

@@ -63,7 +63,7 @@ export default async function DestinationPage({ params }: Props) {
             <div>
               <SectionHeading id="overview-title" eyebrow="Overview" title={`About ${destination.name}`} />
               <div className={styles.prose}>
-                {destination.longDescription.map((p, i) => (
+                {(destination.longDescription.length > 0 ? destination.longDescription : [destination.shortDescription]).map((p, i) => (
                   <Reveal key={i} delay={i * 100}>
                     <p>{p}</p>
                   </Reveal>
@@ -93,29 +93,35 @@ export default async function DestinationPage({ params }: Props) {
         </Container>
       </Section>
 
+      {(destination.highlights.length > 0 || destination.activities.length > 0) && (
       <Section tone="sand" labelledBy="highlights-title">
         <Container>
           <SectionHeading id="highlights-title" eyebrow="Highlights" title={`What stands out in ${destination.name}`} />
           <div className={styles.lists}>
-            <Reveal>
-              <h3 className={styles.listTitle}>Highlights</h3>
-              <ul role="list" className={styles.list}>
-                {destination.highlights.map((h) => (
-                  <li key={h}>{h}</li>
-                ))}
-              </ul>
-            </Reveal>
-            <Reveal delay={150}>
-              <h3 className={styles.listTitle}>Things to do</h3>
-              <ul role="list" className={styles.list}>
-                {destination.activities.map((a) => (
-                  <li key={a}>{a}</li>
-                ))}
-              </ul>
-            </Reveal>
+            {destination.highlights.length > 0 && (
+              <Reveal>
+                <h3 className={styles.listTitle}>Highlights</h3>
+                <ul role="list" className={styles.list}>
+                  {destination.highlights.map((h) => (
+                    <li key={h}>{h}</li>
+                  ))}
+                </ul>
+              </Reveal>
+            )}
+            {destination.activities.length > 0 && (
+              <Reveal delay={150}>
+                <h3 className={styles.listTitle}>Things to do</h3>
+                <ul role="list" className={styles.list}>
+                  {destination.activities.map((a) => (
+                    <li key={a}>{a}</li>
+                  ))}
+                </ul>
+              </Reveal>
+            )}
           </div>
         </Container>
       </Section>
+      )}
 
       {destination.gallery.length > 0 && (
         <Section tone="bone" labelledBy="gallery-title">
