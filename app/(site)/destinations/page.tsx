@@ -6,16 +6,18 @@ import { CtaBand } from "@/components/layout/CtaBand";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
 import { getDestinations, getSiteSettings } from "@/lib/content";
-import { destinationHref, regionLabel } from "@/lib/content/format";
+import { destinationHref, listSentence, regionLabel } from "@/lib/content/format";
 import type { Destination } from "@/lib/content/types";
 import { pageMeta } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const site = await getSiteSettings();
+  const [site, destinations] = await Promise.all([getSiteSettings(), getDestinations()]);
+  // Built from the published places, so it stays true when the team adds or removes one.
+  const countries = countryGroups(destinations).filter((c) => c !== "Kenya" && c !== "Tanzania");
   return pageMeta({
     path: "/destinations",
     title: "Destinations across Africa",
-    description: "Where we plan trips: Kenya's Amboseli, Maasai Mara, Samburu, Tsavo, Diani and Nairobi National Park; Tanzania's Serengeti, Ngorongoro and Zanzibar; and, on request, gorillas in Uganda and Rwanda, Victoria Falls, Chobe, Kruger, Cape Town, Egypt, Marrakech, Ghana and Senegal.",
+    description: `Where we plan trips: ${destinations.length} places across Africa, from Kenya and Tanzania to ${listSentence(countries)}.`,
     image: site.pageImages.destinations,
   });
 }
@@ -23,13 +25,17 @@ export async function generateMetadata(): Promise<Metadata> {
 /** Kenya and Tanzania are too crowded at continent scale: they get a close-up in the map's corner. */
 const EAST_AFRICA_VIEW = viewFor([33.5, 2], [42, -7.5]);
 
-const GROUPS = ["Kenya", "Tanzania", "Uganda & Rwanda", "East Africa", "Southern Africa", "North Africa", "West Africa", "Central Africa"];
+const REGION_ORDER: Destination["africaRegion"][] = ["east", "southern", "north", "west", "central"];
 
-/** Which line of the map's list a place belongs to. */
-function groupOf(d: Destination): string {
-  if (d.country === "Kenya" || d.country === "Tanzania") return d.country;
-  if (d.countryCodes.some((c) => c === "UG" || c === "RW")) return "Uganda & Rwanda";
-  return regionLabel(d.africaRegion);
+/**
+ * The map list's dropdowns: one per country (as written on each destination, so "Zambia & Zimbabwe"
+ * stays together). Kenya and Tanzania first, then the rest of Africa east, south, north and west.
+ */
+function countryGroups(destinations: Destination[]): string[] {
+  const first = new Map<string, Destination>();
+  destinations.forEach((d) => first.set(d.country, first.get(d.country) ?? d));
+  const rank = (c: string) => (c === "Kenya" ? -2 : c === "Tanzania" ? -1 : REGION_ORDER.indexOf(first.get(c)!.africaRegion));
+  return [...first.keys()].sort((a, b) => rank(a) - rank(b) || destinations.indexOf(first.get(a)!) - destinations.indexOf(first.get(b)!));
 }
 
 export default async function DestinationsPage() {
@@ -46,8 +52,9 @@ export default async function DestinationsPage() {
       id: d.slug,
       label: d.name,
       href: destinationHref(d),
-      note: d.listing === "page" ? (d.country === "Kenya" || d.country === "Tanzania" ? "" : d.country) : "On request",
-      group: groupOf(d),
+      note: d.listing === "page" ? "" : "On request",
+      group: d.country,
+      keywords: `${d.region} ${regionLabel(d.africaRegion)} ${d.tagline} ${d.highlights.join(" ")}`,
       points: d.coordinates,
     })),
   );
@@ -67,14 +74,14 @@ export default async function DestinationsPage() {
             id="map-title"
             eyebrow="The map"
             title="Every place we plan, *in one view.*"
-            lead="Point at a place to find it on the map. Places marked on request we plan to order, around your dates."
+            lead="Search for a country or a place, or open a country to see where we go. Point at a place to find it on the map."
             align="split"
           />
           <DestinationExplorer
             view={AFRICA_VIEW}
             map={<AfricaMap highlight={covered} label="Map of Africa with the countries we plan trips in highlighted" />}
             pins={pins}
-            groups={GROUPS}
+            groups={countryGroups(destinations)}
             inset={{
               view: EAST_AFRICA_VIEW,
               label: "Kenya & Tanzania",

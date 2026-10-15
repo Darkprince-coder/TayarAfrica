@@ -30,3 +30,8 @@
   gap: var(--space-4);
   margin-top: var(--space-4);
 }
+/* Inside the site frame: room for the navigation above, and not a full screen on its own. */
+.inSite {
+  min-height: 80svh;
+  padding-top: calc(var(--space-9) + var(--space-6));
+}

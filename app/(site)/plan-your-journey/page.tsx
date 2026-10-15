@@ -7,6 +7,7 @@ import { getDestinations, getPackages, getSiteSettings } from "@/lib/content";
 import { formatDuration } from "@/lib/content/format";
 import { DURATION_VALUES } from "@/lib/validation/options";
 import { pageMeta } from "@/lib/seo";
+import { earliestStartDate } from "@/lib/validation/common";
 
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getSiteSettings();
@@ -49,7 +50,7 @@ export default async function PlanYourJourneyPage({ searchParams }: Props) {
             initialPackage={packages.some((p) => p.slug === packageParam) ? packageParam : ""}
             initialDestination={destinations.some((d) => d.slug === destinationParam) ? destinationParam : ""}
             initialDuration={(DURATION_VALUES as string[]).includes(durationParam) ? durationParam : ""}
-            today={new Date().toISOString().slice(0, 10)}
+            today={earliestStartDate()}
             whatsapp={site.contact.whatsapp}
           />
         </Container>

@@ -44,7 +44,16 @@ export const isoDate = z
   .regex(/^\d{4}-\d{2}-\d{2}$/, "Please choose a valid date.")
   .refine((v) => !Number.isNaN(Date.parse(v)), "Please choose a valid date.");
 
-/** True when an ISO date (YYYY-MM-DD) is before today (UTC date). */
+/**
+ * The earliest start date anyone can pick, as YYYY-MM-DD. "Today" depends on where the traveller
+ * is: the server runs on UTC, which is already tomorrow during a US evening. Allowing one day
+ * before the UTC date covers every time zone, so nobody is told their own today is "in the past".
+ */
+export function earliestStartDate(now = new Date()): string {
+  return new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+}
+
+/** True when an ISO date (YYYY-MM-DD) is before the earliest date anyone could call today. */
 export function isPastDate(iso: string, now = new Date()): boolean {
-  return iso < now.toISOString().slice(0, 10);
+  return iso < earliestStartDate(now);
 }

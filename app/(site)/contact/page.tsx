@@ -147,7 +147,7 @@ export default async function ContactPage() {
               <address className={styles.address}>{contact.address}</address>
               <p className={styles.findCopy}>
                 Most trips start in Nairobi, and so do we, with a branch at Amboseli too. Call or message before you visit so the right person is in. If
-                you are in the USA, our client support team will help by phone and WhatsApp.
+                you are in the USA or anywhere else in the world, our client support team will help by phone and WhatsApp.
               </p>
               <Button href={directionsHref(contact.headOffice.directionsQuery)} variant="light" arrow target="_blank" rel="noopener noreferrer">
                 Get directions

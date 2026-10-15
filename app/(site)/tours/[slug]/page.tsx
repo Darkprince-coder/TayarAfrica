@@ -89,56 +89,67 @@ export default async function PackagePage({ params }: Props) {
               <section aria-labelledby="trip-overview">
                 <SectionHeading id="trip-overview" eyebrow="The trip" title="What this trip is like" />
                 <div className={styles.prose}>
-                  {trip.description.map((p, i) => (
+                  {(trip.description.length > 0 ? trip.description : [trip.shortDescription]).map((p, i) => (
                     <Reveal key={i} delay={i * 100}>
                       <p>{p}</p>
                     </Reveal>
                   ))}
                 </div>
-                <Reveal delay={150}>
-                  <ul role="list" className={styles.highlights}>
-                    {trip.highlights.map((h) => (
-                      <li key={h}>{h}</li>
-                    ))}
-                  </ul>
-                </Reveal>
-              </section>
-
-              <section aria-labelledby="trip-itinerary" className={styles.block}>
-                {trip.itinerary.length > 0 ? (
-                  <>
-                    <SectionHeading id="trip-itinerary" eyebrow="Itinerary" title="Day by day" lead="A sample route. Timings and stops are adjusted once your dates are confirmed." />
-                    <Timeline days={trip.itinerary} />
-                  </>
-                ) : (
-                  <>
-                    <SectionHeading id="trip-itinerary" eyebrow="How it works" title="How a custom tour comes together" />
-                    <Timeline days={customSteps} label="Step" />
-                  </>
+                {trip.highlights.length > 0 && (
+                  <Reveal delay={150}>
+                    <ul role="list" className={styles.highlights}>
+                      {trip.highlights.map((h) => (
+                        <li key={h}>{h}</li>
+                      ))}
+                    </ul>
+                  </Reveal>
                 )}
               </section>
 
-              <section aria-labelledby="trip-included" className={styles.block}>
-                <SectionHeading id="trip-included" eyebrow="The details" title="What is and is not included" />
-                <div className={styles.incl}>
-                  <Reveal className={styles.card}>
-                    <h3 className={styles.cardTitle}>Included</h3>
-                    <ul role="list" className={`${styles.ticks} ${styles.yes}`}>
-                      {trip.included.map((x) => (
-                        <li key={x}>{x}</li>
-                      ))}
-                    </ul>
-                  </Reveal>
-                  <Reveal delay={150} className={styles.card}>
-                    <h3 className={styles.cardTitle}>Not included</h3>
-                    <ul role="list" className={`${styles.ticks} ${styles.no}`}>
-                      {trip.excluded.map((x) => (
-                        <li key={x}>{x}</li>
-                      ))}
-                    </ul>
-                  </Reveal>
-                </div>
-              </section>
+              {/* Day by day when there is a plan; the custom-tour steps only for the made-to-order tour. */}
+              {(trip.itinerary.length > 0 || trip.custom) && (
+                <section aria-labelledby="trip-itinerary" className={styles.block}>
+                  {trip.itinerary.length > 0 ? (
+                    <>
+                      <SectionHeading id="trip-itinerary" eyebrow="Itinerary" title="Day by day" lead="A sample route. Timings and stops are adjusted once your dates are confirmed." />
+                      <Timeline days={trip.itinerary} />
+                    </>
+                  ) : (
+                    <>
+                      <SectionHeading id="trip-itinerary" eyebrow="How it works" title="How a custom tour comes together" />
+                      <Timeline days={customSteps} label="Step" />
+                    </>
+                  )}
+                </section>
+              )}
+
+              {(trip.included.length > 0 || trip.excluded.length > 0) && (
+                <section aria-labelledby="trip-included" className={styles.block}>
+                  <SectionHeading id="trip-included" eyebrow="The details" title="What is and is not included" />
+                  <div className={styles.incl}>
+                    {trip.included.length > 0 && (
+                      <Reveal className={styles.card}>
+                        <h3 className={styles.cardTitle}>Included</h3>
+                        <ul role="list" className={`${styles.ticks} ${styles.yes}`}>
+                          {trip.included.map((x) => (
+                            <li key={x}>{x}</li>
+                          ))}
+                        </ul>
+                      </Reveal>
+                    )}
+                    {trip.excluded.length > 0 && (
+                      <Reveal delay={150} className={styles.card}>
+                        <h3 className={styles.cardTitle}>Not included</h3>
+                        <ul role="list" className={`${styles.ticks} ${styles.no}`}>
+                          {trip.excluded.map((x) => (
+                            <li key={x}>{x}</li>
+                          ))}
+                        </ul>
+                      </Reveal>
+                    )}
+                  </div>
+                </section>
+              )}
 
               {visited.length > 0 && (
                 <section aria-labelledby="trip-places" className={styles.block}>
@@ -174,14 +185,18 @@ export default async function PackagePage({ params }: Props) {
                     <dt>Length</dt>
                     <dd>{formatDuration(trip.duration)}</dd>
                   </div>
-                  <div>
-                    <dt>Style</dt>
-                    <dd>{trip.experienceTypes.join(", ")}</dd>
-                  </div>
-                  <div>
-                    <dt>Places</dt>
-                    <dd>{trip.custom ? "Anywhere in Africa" : visited.map((d) => d.name).join(", ")}</dd>
-                  </div>
+                  {trip.experienceTypes.length > 0 && (
+                    <div>
+                      <dt>Style</dt>
+                      <dd>{trip.experienceTypes.join(", ")}</dd>
+                    </div>
+                  )}
+                  {(trip.custom || visited.length > 0) && (
+                    <div>
+                      <dt>Places</dt>
+                      <dd>{trip.custom ? "Anywhere in Africa" : visited.map((d) => d.name).join(", ")}</dd>
+                    </div>
+                  )}
                   {trip.requirements.length > 0 && (
                     <div>
                       <dt>Before you go</dt>

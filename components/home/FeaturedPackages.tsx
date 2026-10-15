@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { ImageFrame } from "@/components/ui/ImageFrame";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
-import { formatDuration, formatDurationShort, formatPrice } from "@/lib/content/format";
+import { formatDuration, formatDurationShort, formatPrice, numberWord } from "@/lib/content/format";
 import type { Destination, TravelPackage } from "@/lib/content/types";
 import styles from "./FeaturedPackages.module.css";
 
@@ -37,7 +37,7 @@ export function FeaturedPackages({ packages, destinations }: { packages: TravelP
       <Container>
         <SectionHeading
           id="tours-title"
-          eyebrow="Five places to start"
+          eyebrow={`${numberWord(set.length)} places to start`}
           title="Two days in Amboseli, *or two countries at once.*"
           lead="Each tour is a starting point. Change the pace, the stays or the length, and we will reshape it around you."
           align="split"
@@ -67,7 +67,7 @@ export function FeaturedPackages({ packages, destinations }: { packages: TravelP
                 </span>
               </Link>
               <div className={styles.leadBody}>
-                <p className={styles.route}>{route(lead, destinations)}</p>
+                {route(lead, destinations) && <p className={styles.route}>{route(lead, destinations)}</p>}
                 <h3 className={styles.leadTitle}>
                   <Link href={`/tours/${lead.slug}`}>{lead.title}</Link>
                 </h3>
@@ -77,7 +77,7 @@ export function FeaturedPackages({ packages, destinations }: { packages: TravelP
                     Request this trip
                   </Button>
                   <Button href={`/tours/${lead.slug}`} variant="link">
-                    See the day by day
+                    {lead.itinerary.length > 0 ? "See the day by day" : "See the trip"}
                   </Button>
                 </div>
               </div>
@@ -92,7 +92,7 @@ export function FeaturedPackages({ packages, destinations }: { packages: TravelP
                     <ImageFrame src={p.cover.src} alt="" focus={p.cover.focus} sizes="8rem" className={styles.thumbFrame} imageClassName={styles.zoom} />
                   </span>
                   <span className={styles.rowBody}>
-                    <span className={styles.route}>{route(p, destinations)}</span>
+                    {route(p, destinations) && <span className={styles.route}>{route(p, destinations)}</span>}
                     <span className={styles.rowTitle}>{p.title}</span>
                     <span className={styles.rowMeta}>
                       {formatDuration(p.duration)} · {formatPrice(p.price)}

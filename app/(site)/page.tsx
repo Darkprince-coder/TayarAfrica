@@ -29,15 +29,16 @@ export default async function HomePage() {
     getSiteSettings(),
   ]);
   const featured = allDestinations.filter((d) => d.featured);
+  // If no homepage photo is published (deleted or unpublished in the admin), fall back to the share
+  // photo from Site settings, so the homepage never loses its opening, heading and trip finder.
+  const heroSlide = slides[0] ?? { id: "fallback", image: { ...site.seo.ogImage, role: "hero" as const }, place: "", order: 0, active: true };
 
   return (
     <>
       <JsonLd data={organizationLd(site)} />
-      {slides[0] && (
-        <Hero slide={slides[0]} copy={site.hero}>
-          <TripFinder />
-        </Hero>
-      )}
+      <Hero slide={heroSlide} copy={site.hero}>
+        <TripFinder />
+      </Hero>
       <Intro image={site.homeImages.intro} />
       <FeaturedDestinations destinations={featured} />
       <FeaturedPackages packages={packages} destinations={allDestinations} />

@@ -4,14 +4,19 @@ import { CtaBand } from "@/components/layout/CtaBand";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container, Section, SectionHeading } from "@/components/ui/Section";
 import { getDestinations, getPackages, getSiteSettings } from "@/lib/content";
+import { formatPrice, listSentence } from "@/lib/content/format";
 import { pageMeta } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const site = await getSiteSettings();
+  const [site, tours] = await Promise.all([getSiteSettings(), getPackages()]);
+  // Built from the published tours, so names and the lowest price stay right after edits in the admin.
+  const set = tours.filter((t) => !t.custom);
+  const priced = set.filter((t) => t.price).sort((a, b) => a.price!.amount - b.price!.amount);
+  const cheapest = priced[0]?.price;
   return pageMeta({
     path: "/tours",
     title: "Tours across Africa",
-    description: "Safaris in Amboseli, the Maasai Mara, Samburu, the Serengeti and the Ngorongoro Crater, with prices from $380 per person, plus custom tours planned to order anywhere in Africa.",
+    description: `${listSentence(set.slice(0, 4).map((t) => t.title))}${set.length > 4 ? " and more" : ""}${cheapest ? `, ${formatPrice(cheapest).toLowerCase()} ${cheapest.basis}` : ""}, plus custom tours planned to order anywhere in Africa.`,
     image: site.pageImages.tours,
   });
 }

@@ -1,15 +1,26 @@
 import Link from "next/link";
 import { getSiteSettings } from "@/lib/content";
 import { flatNavLinks, legalLinks, primaryCta } from "@/lib/navigation";
-import { telHref, whatsappHref } from "@/lib/site";
+import { whatsappHref } from "@/lib/site";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui/Button";
 import { Motif } from "@/components/ui/Motif";
 import styles from "./Footer.module.css";
 
+const digits = (phone: string) => phone.replace(/\D/g, "");
+/** "Riara Road, Nairobi, Kenya" → "Kenya"; "Minnesota, USA" stays as it is. */
+const shortPlace = (place: string) => {
+  const parts = place.split(",").map((p) => p.trim()).filter(Boolean);
+  return parts.at(-1) === "USA" && parts.length > 1 ? parts.slice(-2).join(", ") : (parts.at(-1) ?? "");
+};
+
 export async function Footer() {
   const site = await getSiteSettings();
   const { contact } = site;
+  // One WhatsApp link per named person in Site settings > offices (the team's direct lines).
+  const people = contact.offices
+    .filter((o) => o.person?.trim() && digits(o.phone))
+    .map((o) => ({ name: o.person!.trim().split(/\s+/)[0], place: o.place, phone: digits(o.phone), emergency: digits(o.phone) === digits(contact.emergency) }));
 
   return (
     <footer className={styles.footer}>
@@ -42,18 +53,27 @@ export async function Footer() {
           <h2 className={styles.heading}>Talk to us</h2>
           <ul role="list" className={styles.list}>
             <li>
-              <a href={telHref(contact.phone)}>{contact.phone}</a>
-            </li>
-            <li>
-              <a href={whatsappHref(contact.whatsapp)} target="_blank" rel="noopener noreferrer">
-                WhatsApp, 24/7 for emergencies
-              </a>
-            </li>
-            <li>
               <a href={`mailto:${contact.email}`} className={styles.email}>
                 {contact.email}
               </a>
             </li>
+            {people.length > 0 && (
+              <li>
+                <span className={styles.subheading}>WhatsApp</span>
+                <ul role="list" className={styles.people}>
+                  {people.map((p) => (
+                    <li key={p.phone}>
+                      <a href={whatsappHref(p.phone)} target="_blank" rel="noopener noreferrer" aria-label={`WhatsApp ${p.name}, ${p.place}`}>
+                        {p.name}
+                      </a>
+                      <span className={styles.note}>
+                        {shortPlace(p.place)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            )}
             <li className={styles.muted}>
               {contact.location}
               <br />

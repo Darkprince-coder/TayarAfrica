@@ -45,7 +45,7 @@ export function TourSpreads({ tours, destinations }: { tours: TravelPackage[]; d
               <p className={styles.number} aria-hidden="true">
                 {pad(i + 1)}
               </p>
-              <p className={styles.route}>{route(p, destinations)}</p>
+              {route(p, destinations) && <p className={styles.route}>{route(p, destinations)}</p>}
               <h3 className={styles.title}>
                 <Link href={`/tours/${p.slug}`}>{p.title}</Link>
               </h3>
@@ -80,7 +80,7 @@ export function TourSpreads({ tours, destinations }: { tours: TravelPackage[]; d
                   Request this trip
                 </Button>
                 <Button href={`/tours/${p.slug}`} variant="link">
-                  See the day by day
+                  {p.itinerary.length > 0 ? "See the day by day" : "See the trip"}
                 </Button>
               </div>
             </Reveal>

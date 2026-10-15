@@ -13,14 +13,16 @@ export const regionLabel = (key: AfricaRegion) => AFRICA_REGIONS.find((r) => r.k
 
 const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
 
-/** "2 days, 1 night", or "Flexible length" for made-to-order tours. */
+/** "2 days, 1 night", "1 day" for a day trip, or "Flexible length" for made-to-order tours. */
 export function formatDuration(duration: TravelPackage["duration"]): string {
-  return duration ? `${plural(duration.days, "day")}, ${plural(duration.nights, "night")}` : "Flexible length";
+  if (!duration) return "Flexible length";
+  return duration.nights > 0 ? `${plural(duration.days, "day")}, ${plural(duration.nights, "night")}` : plural(duration.days, "day");
 }
 
 /** Short form for tight spaces: "2D / 1N". */
 export function formatDurationShort(duration: TravelPackage["duration"]): string {
-  return duration ? `${duration.days}D / ${duration.nights}N` : "Flexible";
+  if (!duration) return "Flexible";
+  return duration.nights > 0 ? `${duration.days}D / ${duration.nights}N` : `${duration.days}D`;
 }
 
 const money = (amount: number, currency: string) =>
@@ -46,4 +48,15 @@ export function formatPriceLine(price: TravelPackage["price"]): string {
 /** Full destinations get their own page; "on request" ones go straight to a trip request. */
 export function destinationHref(d: Pick<Destination, "slug" | "listing">): string {
   return d.listing === "page" ? `/destinations/${d.slug}` : `/plan-your-journey?destination=${d.slug}`;
+}
+
+/** "A, B and C". */
+export function listSentence(items: string[]): string {
+  if (items.length <= 1) return items[0] ?? "";
+  return `${items.slice(0, -1).join(", ")} and ${items.at(-1)}`;
+}
+
+/** 5 → "Five", for headings; numbers outside 2–12 fall back to digits. */
+export function numberWord(n: number): string {
+  return ["", "", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"][n] || String(n);
 }
