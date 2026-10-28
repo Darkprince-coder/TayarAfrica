@@ -32,6 +32,8 @@ export const siteConfig = {
     email: "tourstayari@gmail.com",
     phone: "+254 710 368 954",
     whatsapp: "254710368954",
+    // Edinah (USA office), in the strip above the navigation.
+    topPhone: "+1 (763) 496-7625",
     location: "Riara Road, Nairobi, Kenya",
     /** Full street address of the head office. */
     address: "Junction Heights Apartments, #E3, Riara Road, Nairobi, Kenya",

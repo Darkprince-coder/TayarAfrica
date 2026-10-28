@@ -27,7 +27,8 @@ Before launch, confirm the final photography (licensed, owned or commissioned) a
 | `public/images/destinations/samburu/cover.jpg` | [29435755](https://www.pexels.com/photo/29435755/) |
 | `public/images/destinations/samburu/gallery-01.jpg` | [18490333](https://www.pexels.com/photo/18490333/) |
 | `public/images/destinations/samburu/gallery-02.jpg` | [31020848](https://www.pexels.com/photo/31020848/) |
-| `public/images/destinations/diani-beach/cover.jpg` | [3086257](https://www.pexels.com/photo/3086257/) |
+| `public/images/destinations/diani-beach/cover.jpg` | [11025285](https://www.pexels.com/photo/11025285/) |
+| `public/images/about/game-drive.jpg` | [30980273](https://www.pexels.com/photo/30980273/) |
 | `public/images/destinations/diani-beach/gallery-01.jpg` | [29578085](https://www.pexels.com/photo/29578085/) |
 | `public/images/destinations/diani-beach/gallery-02.jpg` | [33629184](https://www.pexels.com/photo/33629184/) |
 | `public/images/destinations/lamu/cover.jpg` | [30282791](https://www.pexels.com/photo/30282791/) |

@@ -222,8 +222,10 @@ export interface SiteContact {
   email: string;
   /** Main number (Kenya HQ). */
   phone: string;
-  /** Digits only, for wa.me links. */
+  /** Digits only, for wa.me links. Also the floating WhatsApp button on every page. */
   whatsapp: string;
+  /** Number in the thin strip above the navigation on every page (hidden when empty). */
+  topPhone?: string;
   /** Short location line, e.g. "Riara Road, Nairobi, Kenya". */
   location: string;
   /** Full street address of the head office. */

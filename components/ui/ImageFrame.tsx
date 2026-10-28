@@ -32,7 +32,8 @@ export function ImageFrame({
   ratio,
   sizes,
   priority,
-  quality = 75,
+  // Photography sells the trips: 85 keeps fine detail (fur, grass, water) that 75 softens, for little extra weight.
+  quality = 85,
   rounded,
   className,
   imageClassName,

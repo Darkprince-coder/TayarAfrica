@@ -1,0 +1,129 @@
+/* Bottom left, so it never collides with Back to top (bottom right). */
+.dock {
+  position: fixed;
+  left: max(var(--gutter), env(safe-area-inset-left));
+  bottom: calc(1.25rem + env(safe-area-inset-bottom));
+  z-index: 45; /* above content, below the navigation and the open mobile menu */
+}
+
+/* Pages with a fixed mobile action bar: sit above it. */
+:global(body:has([data-mobile-bar])) .dock {
+  bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+@media (min-width: 62rem) {
+  :global(body:has([data-mobile-bar])) .dock {
+    bottom: calc(1.25rem + env(safe-area-inset-bottom));
+  }
+}
+
+.button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: var(--color-whatsapp);
+  color: var(--color-on-whatsapp);
+  border-radius: 50%;
+  box-shadow: var(--shadow-lift);
+  text-decoration: none;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+/* A soft ring that breathes out every few seconds: noticeable, never busy. */
+.button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-whatsapp);
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .button::before {
+    animation: pulse 3.2s var(--ease-out) 1.5s infinite;
+  }
+}
+@keyframes pulse {
+  0% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  55%,
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+
+@media (hover: hover) {
+  .button:hover {
+    background: var(--color-whatsapp-deep);
+    transform: translateY(-2px);
+  }
+}
+.button:active {
+  transform: scale(0.96);
+}
+
+/* "Talk to us" chat bubble above the button, shown once per visit. */
+.bubble {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.85rem);
+  width: max-content;
+  max-width: min(16rem, calc(100vw - 2 * var(--gutter)));
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.7rem 0.95rem 0.75rem;
+  background: var(--color-bone);
+  color: var(--color-ink);
+  border-radius: 0.9rem 0.9rem 0.9rem 0.25rem;
+  box-shadow: var(--shadow-lift);
+  font-size: var(--text-sm);
+  line-height: 1.35;
+  text-decoration: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px) scale(0.96);
+  transform-origin: bottom left;
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-cine),
+    visibility 0s linear var(--dur-base);
+}
+/* The little tail pointing at the button. */
+.bubble::after {
+  content: "";
+  position: absolute;
+  left: 1.3rem;
+  top: 100%;
+  border: 0.45rem solid transparent;
+  border-top-color: var(--color-bone);
+  border-bottom: 0;
+}
+.bubble strong {
+  font-weight: 700;
+}
+.bubble span {
+  color: var(--color-text-muted);
+}
+.bubbleShown {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button:hover,
+  .button:active,
+  .bubble {
+    transform: none;
+  }
+}

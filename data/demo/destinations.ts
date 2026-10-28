@@ -167,7 +167,7 @@ export const destinations: Destination[] = [
       summary: "Warm and swimmable most of the year; the drier, sunnier months are the most reliable for beach days.",
       bestMonths: "Dec – Mar, Jul – Oct",
     },
-    cover: img("destinations/diani-beach/cover.jpg", "A couple walking hand in hand along the shore on the Kenyan south coast", "cover"),
+    cover: img("destinations/diani-beach/cover.jpg", "A wide white sand beach and clear blue water on the Kenyan coast", "cover"),
     gallery: [
       img("destinations/diani-beach/gallery-01.jpg", "A beach umbrella and sun loungers on white sand on the Kenyan coast", "gallery"),
       img("destinations/diani-beach/gallery-02.jpg", "A red boat on the tidal flats of the Kenyan coast", "gallery"),

@@ -100,6 +100,11 @@ main:focus {
   }
 }
 
+/* The phone strip above the navigation is showing: everything that clears the nav clears it too. */
+:root:has([data-topbar]) {
+  --topbar-height: 2.125rem;
+}
+
 /* For pages without a full-bleed hero: clears the fixed navigation. */
 .nav-offset {
   padding-top: var(--nav-height);

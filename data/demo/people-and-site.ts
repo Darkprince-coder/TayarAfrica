@@ -109,7 +109,7 @@ export const siteSettings: SiteSettings = {
     ogImage: img("og/default.jpg", "Tayari Africa Tours Consultants: safaris and tours across Africa", "og"),
   },
   homeImages: {
-    intro: img("destinations/ngorongoro/gallery-01.jpg", "Safari vehicles on a red dirt road across a wide crater floor", "story", { desktop: "40% 50%", mobile: "40% 50%" }),
+    intro: img("about/game-drive.jpg", "Guests in an open safari vehicle watching a lion in the long grass", "story", { desktop: "60% 50%", mobile: "60% 50%" }),
     story: img("about/story-01.jpg", "A hot-air balloon floating above open plains at sunrise", "story", { desktop: "22% 50%", mobile: "22% 50%" }),
     cta: img("about/story-02.jpg", "A giraffe and acacia trees on the plains under a dramatic evening sky", "story", { desktop: "46% 50%", mobile: "46% 50%" }),
   },

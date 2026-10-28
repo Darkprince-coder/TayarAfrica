@@ -7,12 +7,14 @@ import { Logo } from "@/components/layout/Logo";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 import { isActive, isGroupActive, isOverlayRoute, navItems, primaryCta } from "@/lib/navigation";
+import { telHref } from "@/lib/site";
+import { Flag } from "./Flag";
 import { NavDropdown } from "./NavDropdown";
 import styles from "./Navigation.module.css";
 
 const FOCUSABLE = "a[href], button:not([disabled])";
 
-export function Navigation({ phone, whatsapp }: { phone: string; whatsapp: string }) {
+export function Navigation({ phone, whatsapp, topPhone }: { phone: string; whatsapp: string; topPhone?: string }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   // The menu is "open" only for the page it was opened on, so navigating always closes it.
@@ -80,6 +82,15 @@ export function Navigation({ phone, whatsapp }: { phone: string; whatsapp: strin
   return (
     <>
       <header ref={headerRef} className={cn(styles.header, solid ? styles.solid : styles.clear)}>
+        {topPhone && (
+          <div className={styles.topbar} data-topbar>
+            <a href={telHref(topPhone)} className={styles.topPhone}>
+              <Flag phone={topPhone} className={styles.flag} />
+              <span className="visually-hidden">Call us: </span>
+              {topPhone}
+            </a>
+          </div>
+        )}
         <div className={styles.bar}>
           <Logo tone={solid ? "dark" : "light"} />
 

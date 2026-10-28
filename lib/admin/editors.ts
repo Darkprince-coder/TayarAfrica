@@ -261,7 +261,8 @@ export const SETTINGS_FIELDS: Field[] = [
   { kind: "group", name: "contact", label: "Contact details", fields: [
     { kind: "text", name: "email", label: "Email", required: true },
     { kind: "text", name: "phone", label: "Main phone", required: true },
-    { kind: "text", name: "whatsapp", label: "WhatsApp number (digits only, with country code)", required: true, placeholder: "254710368954" },
+    { kind: "text", name: "whatsapp", label: "WhatsApp number (digits only, with country code)", required: true, placeholder: "254710368954", hint: "Also the green WhatsApp button on every page." },
+    { kind: "text", name: "topPhone", label: "Phone at the top of every page (optional)", placeholder: "+1 (763) 496-7625", hint: "Shown with its country flag (USA or Kenya). Leave empty to hide the strip." },
     { kind: "text", name: "emergency", label: "24/7 emergency number", required: true },
     { kind: "text", name: "location", label: "Short location line", required: true, placeholder: "Riara Road, Nairobi, Kenya" },
     { kind: "text", name: "address", label: "Head office address", required: true },

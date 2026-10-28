@@ -24,6 +24,9 @@
   --color-ember: #b4501e; /* primary CTA — white text ~5:1 */
   --color-ember-hover: #983f13;
   --color-gold: #c19a3b; /* logo gold: fine detail on dark surfaces, never large fills */
+  --color-whatsapp: #25d366; /* WhatsApp's own green, only for the WhatsApp button */
+  --color-whatsapp-deep: #1da851;
+  --color-on-whatsapp: #ffffff;
   --color-gold-bright: #e3c47c; /* gold for italic accents over photography */
   --color-acacia: #2f6c46; /* logo green, deepened to read as text on light (5.8:1 on bone) */
   --color-acacia-light: #9fc2a4; /* logo green lifted for dark surfaces (6.3:1 on forest) */
@@ -94,7 +97,10 @@
   --dur-slow: 900ms;
 
   /* Layout */
-  --nav-height: 4.5rem;
+  /* The phone strip above the navigation; 0 when it is switched off in Site settings. */
+  --topbar-height: 0rem;
+  /* Everything fixed at the top (strip + bar): what page content must clear. */
+  --nav-height: calc(4.5rem + var(--topbar-height));
   --z-nav: 50;
   --z-menu: 60;
   --z-loader: 100;
