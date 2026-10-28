@@ -11,7 +11,7 @@ const { booking } = siteSettings;
 const { contact } = siteConfig;
 const company = siteConfig.legalName;
 const methods = booking.paymentMethods.join(", ").replace(/, ([^,]*)$/, " or $1");
-const UPDATED = "2026-10-09";
+const UPDATED = "2026-10-28";
 
 export const legalPages: LegalPage[] = [
   {
@@ -36,11 +36,30 @@ export const legalPages: LegalPage[] = [
         ],
       },
       {
+        heading: "Information on this website",
+        paragraphs: [
+          "We work to keep the descriptions, seasons and prices on this website accurate, but things change: lodges close for renovation, parks change their fees, and mistakes can happen. If anything on the website differs from your written quote, the quote is what counts.",
+        ],
+      },
+      {
         heading: "Confirming your booking",
         paragraphs: [
           `Your booking is confirmed only when you have accepted our written quote and we have received a deposit of ${booking.depositPercent}% of the trip price. We then confirm in writing.`,
           `You can pay by ${methods}. We send payment details with your quote. The remaining balance is due ${booking.balanceDue}, unless your quote says otherwise.`,
           "A quote is valid for the period stated on it. After that, prices and availability may change.",
+        ],
+      },
+      {
+        heading: "Who can book",
+        paragraphs: [
+          "The person who makes a booking must be 18 or older and must have the agreement of everyone they are booking for.",
+          "Travellers under 18 are welcome on our trips when they travel with a parent or legal guardian, or with another adult who has the written consent of a parent or guardian. Some lodges, camps and activities set their own minimum ages; we tell you about these when we plan your trip.",
+        ],
+      },
+      {
+        heading: "Messages count as writing",
+        paragraphs: [
+          "Quotes, confirmations and other messages we send by email or WhatsApp count as being in writing. When you accept a quote by email or WhatsApp, that is your written acceptance.",
         ],
       },
       {
@@ -54,10 +73,18 @@ export const legalPages: LegalPage[] = [
         heading: "Your responsibilities",
         paragraphs: ["Before you travel, please make sure that:"],
         list: [
-          "your passport is valid and you have any visas you need (a passport is required for cross-border trips such as Kenya to Tanzania)",
-          "you have suitable travel insurance, including medical cover",
-          "you have checked the health advice for the countries you visit",
+          "your passport is valid for at least six months after your trip ends, with blank pages for stamps (most countries we visit ask for this, and a passport is required for cross-border trips such as Kenya to Tanzania)",
+          "you have any visas or electronic travel authorisations you need before you travel",
+          "you have the vaccinations and certificates the countries on your route require (for example a yellow fever certificate at some borders), and you have asked a doctor about malaria prevention",
+          "you have checked your own government's travel advice for the countries you will visit",
+          "you have travel insurance that covers cancellation, interruption of your trip, medical treatment and emergency evacuation",
           "the names and details you give us match your travel documents",
+        ],
+      },
+      {
+        heading: "If entry is refused",
+        paragraphs: [
+          "We are happy to point you to the official sources, but entry and health rules are set by each country and can change at short notice. We cannot accept responsibility if a traveller is refused boarding or entry because of missing or incorrect documents, and our normal cancellation terms then apply.",
         ],
       },
       {
@@ -74,8 +101,26 @@ export const legalPages: LegalPage[] = [
         ],
       },
       {
+        heading: "Links to other services",
+        paragraphs: [
+          "This website links to services we do not run, such as WhatsApp, Google Maps, Instagram, Facebook and the websites of lodges and parks. Their own terms and privacy policies apply when you use them.",
+        ],
+      },
+      {
+        heading: "Our photos and text",
+        paragraphs: [
+          "The text, photos, maps and logo on this website belong to Tayari or to the photographers and partners who license them to us. Please do not copy or reuse them without our written permission.",
+        ],
+      },
+      {
         heading: "Law",
-        paragraphs: ["These terms are governed by the laws of Kenya."],
+        paragraphs: ["These terms are governed by the laws of Kenya.", "If any part of these terms is found to be invalid, the rest still applies."],
+      },
+      {
+        heading: "Changes to these terms",
+        paragraphs: [
+          "We may update these terms from time to time. The version on this page on the day you confirm your booking is the one that applies to your trip.",
+        ],
       },
     ],
   },
@@ -97,6 +142,18 @@ export const legalPages: LegalPage[] = [
         heading: "How to cancel",
         paragraphs: [
           `Tell us in writing, by email to ${contact.email} or on WhatsApp to ${contact.phone}. The date we receive your message is the date we use to work out your refund.`,
+        ],
+      },
+      {
+        heading: "Changing your dates instead",
+        paragraphs: [
+          "If you would rather move your trip than cancel it, tell us as early as you can. Where the lodges and providers allow it, we treat this as a change, not a cancellation, and carry your deposit over to the new dates. Any extra costs from providers, or a change in price, will be in your updated quote.",
+        ],
+      },
+      {
+        heading: "No-shows and unused services",
+        paragraphs: [
+          "If you do not arrive for your trip, or leave it early, there is no refund for the days or services you do not use, such as nights, game drives, meals or transfers. This is one reason we recommend travel insurance that covers cancellation and interruption.",
         ],
       },
       {
@@ -132,7 +189,9 @@ export const legalPages: LegalPage[] = [
       },
       {
         heading: "What we collect",
-        paragraphs: ["When you send a trip request or a message, we collect what you give us:"],
+        paragraphs: [
+          "When you send a trip request or a message, we collect what you give us:",
+        ],
         list: [
           "your name, email address and phone or WhatsApp number",
           "your nationality and the country you live in",
@@ -155,15 +214,40 @@ export const legalPages: LegalPage[] = [
         ],
       },
       {
+        heading: "Where it is stored",
+        paragraphs: [
+          "Trip requests and messages sent through this website are stored by our database and website hosting providers, whose servers are in the United States. They process the information only to run the website for us. By sending a request, you understand that your information is stored outside Kenya.",
+        ],
+      },
+      {
+        heading: "Keeping it safe",
+        paragraphs: [
+          "Only members of the Tayari team can see trip requests. Each person has their own account, can turn on two-step sign-in, and every connection to this website is encrypted. No system is perfectly secure, but we take reasonable care to protect your information.",
+          "We never ask for card numbers or payment account details through this website.",
+        ],
+      },
+      {
         heading: "How long we keep it",
         paragraphs: [
           "We keep requests and booking records for as long as we need them to plan and run your trip and to meet our legal and accounting duties, then delete them.",
         ],
       },
       {
+        heading: "Children",
+        paragraphs: [
+          "This website is not meant for children to use on their own. We do not knowingly collect information from anyone under 18 except through a parent or guardian planning a trip for their family. If you think a child has sent us their details, contact us and we will delete them.",
+        ],
+      },
+      {
+        heading: "Messages from us",
+        paragraphs: [
+          "We contact you about your request and your trip. You can ask us to stop at any time by replying by email or on WhatsApp. After that we only contact you where we must for a booking you have already made.",
+        ],
+      },
+      {
         heading: "Cookies and analytics",
         paragraphs: [
-          "If we use website analytics, it helps us understand which pages are useful. It does not tell us who you are.",
+          "This website does not use advertising or tracking cookies. It keeps a few small settings in your browser, for example so the opening animation plays only once per visit. If we add website analytics such as Google Analytics, we will update this page first.",
         ],
       },
       {
@@ -171,6 +255,10 @@ export const legalPages: LegalPage[] = [
         paragraphs: [
           `You can ask to see the information we hold about you, correct it, or ask us to delete it, under Kenya's Data Protection Act, 2019. Write to ${contact.email} and we will reply.`,
         ],
+      },
+      {
+        heading: "Changes to this policy",
+        paragraphs: ["We may update this policy from time to time. The date at the top of this page shows when it last changed."],
       },
     ],
   },
