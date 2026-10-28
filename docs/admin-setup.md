@@ -37,7 +37,7 @@ Supabase > **Authentication**:
   (accounts are invite-only).
 - **URL Configuration > Site URL**: `http://localhost:3000` for now (the live address later).
 - **URL Configuration > Redirect URLs**: add `http://localhost:3000/admin/auth/confirm` (and the
-  live address later, e.g. `https://tayariafricatoursconsultants.com/admin/auth/confirm`).
+  live address later, e.g. `https://tayariafrica.com/admin/auth/confirm`).
 - **Emails > Templates > Reset password**: replace the link in the template with
 
   ```
@@ -113,5 +113,5 @@ days, no pausing, and more room. Recommended once real booking requests come in.
 ## Later (with the domain)
 
 - Resend: verify the domain, then Supabase > Authentication > Emails > **SMTP Settings** with
-  Resend's SMTP details, sender `no-reply@tayariafricatoursconsultants.com`.
+  Resend's SMTP details, sender `no-reply@tayariafrica.com`.
 - Add the live URL to Site URL and Redirect URLs.

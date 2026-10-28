@@ -78,7 +78,7 @@ Done: submissions saved in the admin with a status. To do: Email alert to the te
 client emails until then) and a "request received" email to the visitor, sent with Resend.
 
 ## 9. Launch
-Vercel hosting, domain `tayariafricatoursconsultants.com` and email DNS, GA4, SEO, performance and accessibility
+Vercel hosting, domain `tayariafrica.com` and email DNS, GA4, SEO, performance and accessibility
 checks, legal approval, real photography swapped in.
 
 Done on the test deploy (tayari-africa-tours.vercel.app, noindex until the domain): canonical addresses, share

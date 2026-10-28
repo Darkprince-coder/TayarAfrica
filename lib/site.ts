@@ -28,7 +28,8 @@ export const siteConfig = {
   indexable: process.env.VERCEL_ENV === "production" && !/(^|\.)(vercel\.app|localhost)$/.test(new URL(siteUrl).hostname),
   locale: "en",
   contact: {
-    email: "info@tayariafricatoursconsultants.com",
+    // Temporary: the partners' shared Gmail until a mailbox on tayariafrica.com is set up.
+    email: "tourstayari@gmail.com",
     phone: "+254 710 368 954",
     whatsapp: "254710368954",
     location: "Riara Road, Nairobi, Kenya",
