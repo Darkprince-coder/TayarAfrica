@@ -110,8 +110,15 @@ long random string) to Vercel's Environment Variables so only Vercel's scheduler
 The free plan has **no backups**. Supabase Pro (about $25 a month) adds daily backups kept for 7
 days, no pausing, and more room. Recommended once real booking requests come in.
 
-## Later (with the domain)
+## Email (Resend)
 
-- Resend: verify the domain, then Supabase > Authentication > Emails > **SMTP Settings** with
-  Resend's SMTP details, sender `no-reply@tayariafrica.com`.
-- Add the live URL to Site URL and Redirect URLs.
+1. resend.com (shared Tayari Gmail): **Domains** > add `tayariafrica.com`, copy its DNS records into
+   Vercel > Domains > tayariafrica.com, press Verify. Optional but good for Gmail: a TXT record
+   `_dmarc` with `v=DMARC1; p=none;`.
+2. **API Keys** > create one with sending access. Vercel > Environment Variables:
+   `RESEND_API_KEY` (optional `INQUIRY_ALERT_TO`, comma-separated), then redeploy. The site then
+   emails the team for every new request (to the contact email in Site settings), and the People
+   page emails invite and reset links as well as showing them to copy.
+3. Forgot password on the sign-in page is sent by Supabase: Authentication > Emails > **SMTP
+   Settings**: enable custom SMTP, host `smtp.resend.com`, port `465`, username `resend`, password
+   = a Resend API key, sender `no-reply@tayariafrica.com`, name "Tayari Africa Tours".
