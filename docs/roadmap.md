@@ -84,5 +84,10 @@ checks, legal approval, real photography swapped in.
 Done on the test deploy (tayari-africa-tours.vercel.app, noindex until the domain): canonical addresses, share
 previews, schema.org data, sitemap and robots; accessibility and best practices 100 in Lighthouse; logo intro only
 when a visit starts on the homepage; Tours as editorial spreads, Destinations as mosaic + index with an East Africa
-map close-up, About mission/vision as statements. To do: domain (indexing then switches on by itself), Resend,
-GA4 and Search Console, Supabase Pro and Vercel Pro (commercial use, backups), client approvals and real photos.
+map close-up, About mission/vision as statements.
+
+Live on tayariafrica.com (2026-10-28): www redirects to it, indexing on, Search Console verified as a Domain
+property on tourstayari@gmail.com with the sitemap submitted (41 pages read). Phone strip, floating WhatsApp
+button, legal texts extended (drafts awaiting client approval). To do: official mailbox (then Site settings email),
+Resend, GA4 (ID in Vercel, then update the privacy page's cookies paragraph), Supabase Pro and Vercel Pro
+(commercial use, backups), client approval of the legal pages and real photos.
