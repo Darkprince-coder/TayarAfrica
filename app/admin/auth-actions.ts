@@ -42,9 +42,11 @@ export async function requestReset(_: FormState, form: FormData): Promise<FormSt
   const parsed = email.safeParse(form.get("email"));
   if (!parsed.success) return { error: parsed.error.issues[0].message };
   const supabase = await sessionClient();
-  await supabase.auth.resetPasswordForEmail(parsed.data, {
+  const { error } = await supabase.auth.resetPasswordForEmail(parsed.data, {
     redirectTo: `${await siteOrigin()}/admin/auth/confirm`,
   });
+  // Visible in Vercel's logs (rate limits, SMTP trouble); the visitor still sees the neutral answer below.
+  if (error) console.error("[auth] reset email failed", error.status, error.code, error.message);
   // Always the same answer, whether or not the email has an account.
   return { ok: "If that email belongs to a team account, a reset link is on its way. It works once and expires after an hour." };
 }
