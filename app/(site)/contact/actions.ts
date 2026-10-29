@@ -1,5 +1,7 @@
 "use server";
 
+import { after } from "next/server";
+import { sendInquiryAlert } from "@/lib/inquiries/alert";
 import { allowRequest, clientKey, submittedTooFast } from "@/lib/inquiries/guard";
 import { inquiryStore } from "@/lib/inquiries/store";
 import type { SubmitResult } from "@/lib/inquiries/types";
@@ -21,10 +23,9 @@ export async function submitContact(input: unknown): Promise<SubmitResult> {
   }
 
   try {
-    const { reference } = await inquiryStore.save(
-      { kind: "contact", payload: { fullName: data.fullName, email: data.email, phone: data.phone || null, message: data.message } },
-      data.idempotencyKey,
-    );
+    const payload = { fullName: data.fullName, email: data.email, phone: data.phone || null, message: data.message };
+    const { reference, created } = await inquiryStore.save({ kind: "contact", payload }, data.idempotencyKey);
+    if (created) after(() => sendInquiryAlert({ kind: "contact", reference, payload }));
     return { ok: true, reference };
   } catch (error) {
     console.error("[contact] save failed", error instanceof Error ? error.message : error);

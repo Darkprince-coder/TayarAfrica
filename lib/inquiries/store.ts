@@ -31,12 +31,13 @@ export const mockInquiryStore: InquiryStore = {
 
     const reference = referenceFor(idempotencyKey, record.kind);
     // Same key twice (double click, retry after a slow response) returns the same request.
-    if (!records.has(reference)) {
+    const created = !records.has(reference);
+    if (created) {
       records.set(reference, { ...record, reference, status: "new", createdAt: new Date().toISOString() });
       // Log only non-personal facts.
       console.info(`[mock-inquiry] saved ${record.kind} ${reference}`);
     }
-    return { reference };
+    return { reference, created };
   },
 };
 
@@ -48,11 +49,13 @@ export const supabaseInquiryStore: InquiryStore = {
   async save(record, idempotencyKey) {
     const db = serviceClient();
     const reference = referenceFor(idempotencyKey, record.kind);
-    const { error } = await db
+    const { data, error } = await db
       .from("inquiries")
-      .upsert({ reference, kind: record.kind, payload: record.payload, idempotency_key: idempotencyKey }, { onConflict: "idempotency_key", ignoreDuplicates: true });
+      .upsert({ reference, kind: record.kind, payload: record.payload, idempotency_key: idempotencyKey }, { onConflict: "idempotency_key", ignoreDuplicates: true })
+      .select("reference");
     if (error) throw new Error(`Saving inquiry failed: ${error.message}`);
-    return { reference };
+    // A duplicate is skipped, so no row comes back.
+    return { reference, created: (data?.length ?? 0) > 0 };
   },
 };
 

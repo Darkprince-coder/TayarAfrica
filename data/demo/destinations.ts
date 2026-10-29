@@ -264,7 +264,7 @@ export const destinations: Destination[] = [
         "Wildlife is good all year. January to March is calving season in the south; June to October is dry, with the herds moving north.",
       bestMonths: "Jun – Oct, Jan – Mar",
     },
-    cover: img("destinations/serengeti/cover.jpg", "A herd of zebras grazing on the Serengeti plains", "cover", { desktop: "50% 60%", mobile: "45% 60%" }),
+    cover: img("destinations/serengeti/cover.jpg", "A wildebeest herd grazing beneath a lone acacia on the Serengeti plains", "cover", { desktop: "50% 60%", mobile: "68% 60%" }),
     gallery: [
       img("destinations/serengeti/gallery-01.jpg", "Elephants and zebras grazing together in the Serengeti", "gallery"),
       img("destinations/serengeti/gallery-02.jpg", "Hot-air balloons drifting over acacia savannah", "gallery"),
@@ -356,7 +356,7 @@ export const destinations: Destination[] = [
     highlights: ["Mountain gorilla trekking", "Chimpanzee tracking", "Permits arranged for you"],
     activities: [],
     bestTime: null,
-    cover: img("destinations/gorilla-trekking/cover.jpg", "A mountain gorilla sitting in thick green forest", "cover"),
+    cover: img("destinations/gorilla-trekking/cover.jpg", "A silverback mountain gorilla resting with his family in the forest", "cover"),
     gallery: [],
     featured: true,
     order: 11,

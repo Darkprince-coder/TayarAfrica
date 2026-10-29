@@ -22,5 +22,6 @@ export type InquiryRecord = {
  * implementation replaces it without touching the forms or the actions.
  */
 export interface InquiryStore {
-  save(record: Omit<InquiryRecord, "reference" | "status" | "createdAt">, idempotencyKey: string): Promise<{ reference: string }>;
+  /** `created` is false when the same request was already saved (double send), so alerts go out once. */
+  save(record: Omit<InquiryRecord, "reference" | "status" | "createdAt">, idempotencyKey: string): Promise<{ reference: string; created: boolean }>;
 }

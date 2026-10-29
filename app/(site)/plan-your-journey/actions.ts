@@ -1,6 +1,8 @@
 "use server";
 
 import { getDestinationBySlug, getPackageBySlug } from "@/lib/content";
+import { after } from "next/server";
+import { sendInquiryAlert } from "@/lib/inquiries/alert";
 import { allowRequest, clientKey, submittedTooFast } from "@/lib/inquiries/guard";
 import { inquiryStore } from "@/lib/inquiries/store";
 import type { SubmitResult } from "@/lib/inquiries/types";
@@ -37,32 +39,29 @@ export async function submitInquiry(input: unknown): Promise<SubmitResult> {
   }
 
   try {
-    const { reference } = await inquiryStore.save(
-      {
-        kind: "trip",
-        payload: {
-          packageSlug: data.packageSlug || null,
-          destinationSlug: data.destinationSlug || null,
-          experienceTypes: data.experienceTypes,
-          accommodation: data.accommodation,
-          travelers: data.travelers,
-          startDate: data.startDate,
-          flexibleDates: data.flexibleDates,
-          arrival: data.arrival,
-          pickupPoint: data.arrival === "pickup" ? data.pickupPoint : null,
-          departureCity: data.arrival === "flights" ? data.departureCity : null,
-          duration: data.duration,
-          message: data.message,
-          fullName: data.fullName,
-          email: data.email,
-          phone: data.phone,
-          nationality: data.nationality,
-          country: data.country,
-          contactPreference: data.contactPreference,
-        },
-      },
-      data.idempotencyKey,
-    );
+    const payload = {
+      packageSlug: data.packageSlug || null,
+      destinationSlug: data.destinationSlug || null,
+      experienceTypes: data.experienceTypes,
+      accommodation: data.accommodation,
+      travelers: data.travelers,
+      startDate: data.startDate,
+      flexibleDates: data.flexibleDates,
+      arrival: data.arrival,
+      pickupPoint: data.arrival === "pickup" ? data.pickupPoint : null,
+      departureCity: data.arrival === "flights" ? data.departureCity : null,
+      duration: data.duration,
+      message: data.message,
+      fullName: data.fullName,
+      email: data.email,
+      phone: data.phone,
+      nationality: data.nationality,
+      country: data.country,
+      contactPreference: data.contactPreference,
+    };
+    const { reference, created } = await inquiryStore.save({ kind: "trip", payload }, data.idempotencyKey);
+    // Email the team once the visitor already has their answer; a double send is not emailed twice.
+    if (created) after(() => sendInquiryAlert({ kind: "trip", reference, payload }));
     return { ok: true, reference };
   } catch (error) {
     // Details stay in the server log; the visitor only ever sees a friendly message.

@@ -13,7 +13,7 @@ Before launch, confirm the final photography (licensed, owned or commissioned) a
 | `public/images/hero/hero-dusk.jpg` | [26990522](https://www.pexels.com/photo/26990522/) (homepage hero) |
 | `public/images/hero/hero-01.jpg` | [26924191](https://www.pexels.com/photo/26924191/) |
 | `public/images/hero/hero-02.jpg` | [23831844](https://www.pexels.com/photo/23831844/) |
-| `public/images/hero/hero-03.jpg` | [13292007](https://www.pexels.com/photo/13292007/) |
+| `public/images/hero/hero-03.jpg` | [18914964](https://www.pexels.com/photo/18914964/) |
 | `public/images/hero/hero-04.jpg` | [33965621](https://www.pexels.com/photo/33965621/) |
 | `public/images/destinations/maasai-mara/cover.jpg` | [10822356](https://www.pexels.com/photo/10822356/) |
 | `public/images/destinations/maasai-mara/gallery-01.jpg` | [18960157](https://www.pexels.com/photo/18960157/) |
@@ -40,7 +40,7 @@ Before launch, confirm the final photography (licensed, owned or commissioned) a
 | `public/images/tours/amboseli-safari/cover.jpg` | [26924196](https://www.pexels.com/photo/26924196/) |
 | `public/images/about/story-01.jpg` | [37475786](https://www.pexels.com/photo/37475786/) |
 | `public/images/about/story-02.jpg` | [12925483](https://www.pexels.com/photo/12925483/) |
-| `public/images/destinations/serengeti/cover.jpg` | [5574041](https://www.pexels.com/photo/5574041/) |
+| `public/images/destinations/serengeti/cover.jpg` | [29833434](https://www.pexels.com/photo/29833434/) |
 | `public/images/destinations/serengeti/gallery-01.jpg` | [9185432](https://www.pexels.com/photo/9185432/) |
 | `public/images/destinations/serengeti/gallery-02.jpg` | [20179673](https://www.pexels.com/photo/20179673/) |
 | `public/images/destinations/ngorongoro/cover.jpg` | [2862070](https://www.pexels.com/photo/2862070/) |
@@ -50,7 +50,8 @@ Before launch, confirm the final photography (licensed, owned or commissioned) a
 | `public/images/destinations/zanzibar/gallery-01.jpg` | [5859000](https://www.pexels.com/photo/5859000/) |
 | `public/images/destinations/zanzibar/gallery-02.jpg` | [17931812](https://www.pexels.com/photo/17931812/) |
 | `public/images/destinations/nairobi-national-park/cover.jpg` | [6156855](https://www.pexels.com/photo/6156855/) |
-| `public/images/destinations/gorilla-trekking/cover.jpg` | [34303083](https://www.pexels.com/photo/34303083/) |
+| `public/images/destinations/gorilla-trekking/cover.jpg` | [36478037](https://www.pexels.com/photo/36478037/) |
+| `public/images/destinations/gorilla-trekking/gallery-03.jpg` | [38294728](https://www.pexels.com/photo/38294728/) |
 | `public/images/destinations/victoria-falls/cover.jpg` | [23232507](https://www.pexels.com/photo/23232507/) |
 | `public/images/destinations/kruger/cover.jpg` | [34408699](https://www.pexels.com/photo/34408699/) |
 | `public/images/destinations/cape-town/cover.jpg` | [8470660](https://www.pexels.com/photo/8470660/) |
@@ -75,7 +76,6 @@ Researched and loaded on 2026-10-14: the 8 places that were "on request" became 
 |---|---|---|---|
 | gorilla-trekking | gallery | `tayari/destinations/gorilla-trekking/pexels-36477999.jpg` | [36477999](https://www.pexels.com/photo/36477999/) |
 | gorilla-trekking | gallery | `tayari/destinations/gorilla-trekking/pexels-5416749.jpg` | [5416749](https://www.pexels.com/photo/5416749/) |
-| gorilla-trekking | gallery | `tayari/destinations/gorilla-trekking/pexels-36478037.jpg` | [36478037](https://www.pexels.com/photo/36478037/) |
 | gorilla-trekking | gallery | `tayari/destinations/gorilla-trekking/pexels-34303083.jpg` | [34303083](https://www.pexels.com/photo/34303083/) |
 | victoria-falls | gallery | `tayari/destinations/victoria-falls/pexels-23232507.jpg` | [23232507](https://www.pexels.com/photo/23232507/) |
 | victoria-falls | gallery | `tayari/destinations/victoria-falls/pexels-27878405.jpg` | [27878405](https://www.pexels.com/photo/27878405/) |

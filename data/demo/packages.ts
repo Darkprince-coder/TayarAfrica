@@ -233,7 +233,7 @@ export const packages: TravelPackage[] = [
     excluded: commonExcluded,
     cover: img("tours/pan-african-custom-tours/cover.jpg", "A traveller looking out over Victoria Falls from a viewpoint", "cover"),
     gallery: [
-      img("destinations/gorilla-trekking/cover.jpg", "A mountain gorilla sitting in thick green forest", "gallery"),
+      img("destinations/gorilla-trekking/cover.jpg", "A silverback mountain gorilla resting with his family in the forest", "gallery"),
       img("destinations/egypt/cover.jpg", "The Pyramids of Giza with camel riders crossing the sand", "gallery"),
       img("destinations/zanzibar/cover.jpg", "Palm trees and a thatched villa above a turquoise beach in Zanzibar", "gallery"),
     ],
