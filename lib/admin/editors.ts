@@ -165,7 +165,7 @@ export const EDITORS: EditorDef[] = [
       { kind: "text", name: "role", label: "Job title", required: true, max: 80 },
       { kind: "text", name: "location", label: "Where they work", required: true, placeholder: "Maryland, USA" },
       { kind: "text", name: "group", label: "Branch", required: true, hint: "Group heading on the site, e.g. “In Kenya”, “In the USA”." },
-      { kind: "textarea", name: "bio", label: "Short bio", max: 600, rows: 4, hint: "Two or three sentences." },
+      { kind: "textarea", name: "bio", label: "Bio", max: 1200, rows: 8, hint: "A few short paragraphs. Leave an empty line between paragraphs." },
       image("portrait", "Portrait", "portrait", "A head-and-shoulders photo works best. It is shown in a 4:5 frame."),
       order,
     ],

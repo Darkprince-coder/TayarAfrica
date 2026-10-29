@@ -38,7 +38,17 @@ export function TeamGroups({ team, showBio = false }: { team: TeamMember[]; show
                   <span className={styles.name}>{m.name}</span>
                   <span className={styles.role}>{m.role}</span>
                   <span className={styles.place}>{m.location}</span>
-                  {showBio && <span className={styles.bio}>{m.bio}</span>}
+                  {/* A blank line in the bio (CMS) starts a new paragraph. */}
+                  {showBio &&
+                    m.bio
+                      .split(/\n\s*\n/)
+                      .map((para) => para.trim())
+                      .filter(Boolean)
+                      .map((para, i) => (
+                        <span key={i} className={styles.bio}>
+                          {para}
+                        </span>
+                      ))}
                 </span>
               </Reveal>
             ))}
