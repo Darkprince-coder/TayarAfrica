@@ -91,11 +91,12 @@ export const siteSettings: SiteSettings = {
   booking: {
     depositPercent: 30,
     paymentMethods: ["M-Pesa", "bank transfer", "WorldRemit", "Zelle"],
-    balanceDue: "on arrival",
+    balanceDue: "45 days before arrival",
     cancellation: [
-      { when: "7 days or more before your trip starts", refund: "Full refund of your deposit" },
-      { when: "3 to 6 days before", refund: "50% of your deposit refunded" },
-      { when: "Within 48 hours of the start", refund: "No refund" },
+      { when: "61 days or more before arrival", refund: "We keep the 30% deposit and refund any balance paid, or you change your dates for free" },
+      { when: "31 to 60 days before arrival", refund: "50% of the total booking is charged" },
+      { when: "15 to 30 days before arrival", refund: "75% of the total booking is charged" },
+      { when: "14 days or less, or no-show", refund: "The full booking is charged, with no refund" },
     ],
   },
   hero: {
@@ -106,7 +107,7 @@ export const siteSettings: SiteSettings = {
   seo: {
     defaultTitle: `${siteConfig.name} | Safaris and tours across Africa`,
     defaultDescription: siteConfig.description,
-    ogImage: img("og/default.jpg", "Tayari Africa Tours Consultants: safaris and tours across Africa", "og"),
+    ogImage: img("og/default.jpg", "Zebras and wildebeest in tall golden grass on the Maasai Mara plains", "og"),
   },
   homeImages: {
     intro: img("about/game-drive.jpg", "Guests in an open safari vehicle watching a lion in the long grass", "story", { desktop: "60% 50%", mobile: "60% 50%" }),

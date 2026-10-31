@@ -54,7 +54,7 @@ export function BookingProcess({ booking }: { booking: BookingPolicy }) {
               ))}
             </dl>
             <p className={styles.policyLinks}>
-              Full details in our <Link href="/cancellation">Cancellation Policy</Link> and <Link href="/terms">Terms of Service</Link>.
+              Full details in our <Link href="/cancellation">Cancellation and Refund Policy</Link> and <Link href="/terms">Terms of Service</Link>.
             </p>
           </Reveal>
         </div>

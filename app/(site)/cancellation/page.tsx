@@ -8,8 +8,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const site = await getSiteSettings();
   return pageMeta({
     path: "/cancellation",
-    title: "Cancellation Policy",
-    description: "What happens if you need to cancel a trip booked with Tayari Africa Tours Consultants, and how refunds work.",
+    title: "Cancellation and Refund Policy",
+    description: "Cancellation fees, payment terms, date changes and refunds for trips booked with Tayari Africa Tours Consultants.",
     image: site.pageImages.legal,
   });
 }

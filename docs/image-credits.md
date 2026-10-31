@@ -2,7 +2,7 @@
 
 Placeholder photography, downloaded from [Pexels](https://www.pexels.com). Pexels photos are free to use commercially and do not require attribution ([Pexels licence](https://www.pexels.com/license/)). Source pages are listed so each photo can be traced, credited or replaced.
 
-Files were resized to at most 2400px wide and recompressed (progressive JPEG) with `sharp`. The social share image `og/default.jpg` is a crop of `hero/hero-01.jpg`.
+Files were resized to at most 2400px wide and recompressed (progressive JPEG) with `sharp`. The social share image `og/default.jpg` is a 1200x630 crop of the homepage hero chosen in the admin (Cloudinary).
 
 Team portraits are deliberately NOT stock photos: use real photographs of the real team.
 

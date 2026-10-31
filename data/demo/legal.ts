@@ -3,15 +3,14 @@ import { siteConfig } from "@/lib/site";
 import { siteSettings } from "./people-and-site";
 
 /**
- * DRAFT legal texts, written from the client brief and from what this website actually does.
- * They must be reviewed and approved by the client (ideally with a lawyer) before launch; until
- * then each page shows a draft notice. Booking numbers come from siteSettings.booking.
+ * Legal texts approved by the client (2026-10-31); the Cancellation and Refund Policy is the
+ * client's own wording. The live copies are edited in the admin. Booking numbers come from siteSettings.booking.
  */
 const { booking } = siteSettings;
 const { contact } = siteConfig;
 const company = siteConfig.legalName;
 const methods = booking.paymentMethods.join(", ").replace(/, ([^,]*)$/, " or $1");
-const UPDATED = "2026-10-28";
+const UPDATED = "2026-10-31";
 
 export const legalPages: LegalPage[] = [
   {
@@ -19,7 +18,7 @@ export const legalPages: LegalPage[] = [
     title: "Terms of Service",
     summary: "How a trip request becomes a booking, how payment works, and what each of us is responsible for.",
     updated: UPDATED,
-    draft: true,
+    draft: false,
     sections: [
       {
         heading: "Who we are",
@@ -45,7 +44,7 @@ export const legalPages: LegalPage[] = [
         heading: "Confirming your booking",
         paragraphs: [
           `Your booking is confirmed only when you have accepted our written quote and we have received a deposit of ${booking.depositPercent}% of the trip price. We then confirm in writing.`,
-          `You can pay by ${methods}. We send payment details with your quote. The remaining balance is due ${booking.balanceDue}, unless your quote says otherwise.`,
+          `You can pay by ${methods}. We send payment details with your quote. The balance is due ${booking.balanceDue}. If you book within 45 days of travel, the full amount is due when you book.`,
           "A quote is valid for the period stated on it. After that, prices and availability may change.",
         ],
       },
@@ -65,8 +64,8 @@ export const legalPages: LegalPage[] = [
       {
         heading: "Cancelling or changing your trip",
         paragraphs: [
-          "If you need to cancel, the refund depends on how close to the start of your trip you tell us. The full rules are in our Cancellation Policy.",
-          "If you want to change your trip after booking, ask us. We will do our best, but changes depend on availability and may change the price.",
+          "If you need to cancel or move your dates, the fees and rules are in our Cancellation and Refund Policy. Cancellations and changes must be made in writing, by email.",
+          "For other changes after booking, ask us. We will do our best, but changes depend on availability and may change the price.",
         ],
       },
       {
@@ -126,52 +125,47 @@ export const legalPages: LegalPage[] = [
   },
   {
     slug: "cancellation",
-    title: "Cancellation Policy",
-    summary: "What happens if you need to cancel, and how refunds work.",
+    title: "Cancellation and Refund Policy",
+    summary: "At Tayari Africa Tours, we understand travel plans can change. Our policy is designed to be fair to our guests while protecting the small lodges and camps we work with.",
     updated: UPDATED,
-    draft: true,
+    draft: false,
     sections: [
+      { heading: "1. How to cancel", paragraphs: [`All cancellations and changes must be made in writing, by email to ${contact.email}. A cancellation takes effect on the date we receive it.`] },
       {
-        heading: "How refunds work",
-        paragraphs: [
-          `To confirm a trip you pay a ${booking.depositPercent}% deposit, and the balance is due ${booking.balanceDue}. If you cancel, the refund depends on how long before the start of your trip you tell us:`,
-        ],
-        list: booking.cancellation.map((c) => `${c.when}: ${c.refund.charAt(0).toLowerCase()}${c.refund.slice(1)}.`),
-      },
-      {
-        heading: "How to cancel",
-        paragraphs: [
-          `Tell us in writing, by email to ${contact.email} or on WhatsApp to ${contact.phone}. The date we receive your message is the date we use to work out your refund.`,
+        heading: "2. Cancellation fees",
+        paragraphs: ["What we charge depends on how long before your arrival date you cancel:"],
+        list: [
+          "61 days or more before arrival: we keep the deposit (30%) and refund any balance paid in full. Or you can change your dates for free instead.",
+          "31 to 60 days before arrival: 50% of the total booking is charged.",
+          "15 to 30 days before arrival: 75% of the total booking is charged.",
+          "0 to 14 days before arrival, or no-show: 100% of the total booking is charged, with no refund.",
         ],
       },
       {
-        heading: "Changing your dates instead",
-        paragraphs: [
-          "If you would rather move your trip than cancel it, tell us as early as you can. Where the lodges and providers allow it, we treat this as a change, not a cancellation, and carry your deposit over to the new dates. Any extra costs from providers, or a change in price, will be in your updated quote.",
+        heading: "3. Payment terms",
+        paragraphs: ["How bookings are paid:"],
+        list: [
+          `A ${booking.depositPercent}% deposit is required to confirm every booking.`,
+          `The balance is due ${booking.balanceDue}.`,
+          "Bookings made within 45 days of travel are paid in full (100%) at the time of booking.",
         ],
       },
+      { heading: "4. Early departure and unused services", paragraphs: ["There is no refund for early departure, late arrival, or unused nights or game drives."] },
       {
-        heading: "No-shows and unused services",
+        heading: "5. Date changes",
+        paragraphs: ["One free date change is allowed if you ask more than 30 days before arrival. It is subject to availability and to any difference in rates, and the new dates must be within 12 months."],
+      },
+      {
+        heading: "6. Refunds",
+        paragraphs: ["Where a refund applies, we process it within 14 working days to the original payment method, minus bank charges and a 5% administration fee."],
+      },
+      {
+        heading: "7. Force majeure",
         paragraphs: [
-          "If you do not arrive for your trip, or leave it early, there is no refund for the days or services you do not use, such as nights, game drives, meals or transfers. This is one reason we recommend travel insurance that covers cancellation and interruption.",
+          "Tayari Africa Tours cannot be held liable for circumstances beyond our control, including natural disasters, pandemics, government travel restrictions or park closures. In such events, we will offer a credit voucher for future travel, valid for 12 months.",
         ],
       },
-      {
-        heading: "Costs we cannot get back",
-        paragraphs: [
-          "Some costs paid on your behalf, such as certain park permits and domestic flights, may not be refundable by the provider. If your trip includes any, we will tell you before you pay.",
-        ],
-      },
-      {
-        heading: "Refund payments",
-        paragraphs: ["We return refunds by the method you paid with, where possible. Transfer charges from banks or payment services may apply."],
-      },
-      {
-        heading: "If we cancel",
-        paragraphs: [
-          "If we have to cancel your trip for reasons within our control, you get a full refund of what you have paid us. If something outside anyone's control stops the trip, such as severe weather or official travel restrictions, we will offer new dates or the closest alternative we can arrange.",
-        ],
-      },
+      { heading: "Travel insurance", paragraphs: ["We strongly recommend that all travellers buy comprehensive travel insurance covering cancellation, medical care and baggage."] },
     ],
   },
   {
@@ -179,7 +173,7 @@ export const legalPages: LegalPage[] = [
     title: "Privacy Policy",
     summary: "What we collect when you contact us or request a trip, why, and your rights.",
     updated: UPDATED,
-    draft: true,
+    draft: false,
     sections: [
       {
         heading: "Who looks after your information",
