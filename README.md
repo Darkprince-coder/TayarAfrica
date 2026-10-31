@@ -4,7 +4,7 @@ A Pan-African tour consultancy website built for a client — Tayari Africa Tour
 
 **Live:** [tayariafrica.com](https://tayariafrica.com)
 
-> Client project — built end to end by me, from the Supabase schema and admin CMS through to the public site.
+> Client project — I directed the full build end to end (requirements, product decisions, design direction, and testing), using AI-assisted development to implement it.
 
 ## Features
 
